@@ -1,13 +1,11 @@
-import Layout from './components/Layout';
+import components from './components'
+import styles from './styles'
 import React, { useEffect } from 'react';
-import './App.css';
 import { connect } from 'react-redux';
 import service from './service';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
-
 const { setUserData } = usersActions.usersActions;
 const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
 
@@ -28,27 +26,22 @@ function App(props: any) {
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const useStyles = makeStyles((theme) => ({
-    title: {
-      color: 'blue',
-      fontSize: '2.5rem'
-    }
-  }));
-  const classes = useStyles();
+  const { Layout } = components;
+  const { appStyle } = styles;
 
   useEffect(() => {
     const token = login.default.getToken();
     if (token) {
       getUserUseToken(token).then((userDataUseToken) => {
-        if (userDataUseToken.success) {
+        if (userDataUseToken && userDataUseToken.success) {
           setUserData(userDataUseToken.data)
         }
       })
+      return () => {
+        setUserData(Object);
+      }
     }
-    return () => {
-      setUserData(Object);
-    }
-  }, [getUserUseToken, login.default, setUserData]);
+  }, [getUserUseToken, setUserData, login.default]);
 
   useEffect(() => {
     function handleResize() {
@@ -58,23 +51,26 @@ function App(props: any) {
     return () => window.removeEventListener('resize', handleResize);
   }, [setWindowDimensions, getWindowDimensions]);
 
+  const classes = appStyle()
 
-  if (!login.default.getToken()) {
+  if (!userData.email) {
     return (
-      <div className="App">
+      <div className={classes.App}>
         <CssBaseline />
-        <h1 className={classes.title}>please log in/sign up to continue</h1>
-        <h2>width: {windowDimensions.width}</h2>
-        <h2>height: {windowDimensions.height}</h2>
+        <Layout>
+          <h1 className={classes.title}>please log in/ sign up to continue</h1>
+          <h2>width: {windowDimensions.width}</h2>
+          <h2>height: {windowDimensions.height}</h2>
+        </Layout>
       </div>
     );
   }
 
   return (
-    <div className="App">
+    <div className={classes.App}>
       <CssBaseline />
       <Layout>
-        <h1 className={classes.title}>{userData.name} profile page</h1>
+        <h1 className={classes.title}>{userData.email} profile page</h1>
       </Layout>
     </div>
   );
