@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const cors = require('cors');
 const db = require('./DB')
 const hrRouter = require('./routes/hrRouter')
+const jobOfferRouter = require('./routes/jobOfferRouter')
 const registerRouter = require('./routes/registerRouter')
 const passport = require('passport')
 const passportFunc = require('./config/passport')
@@ -31,7 +32,8 @@ app.listen(PORT, () => {
 
 app.use(passport.initialize());
 app.use('/register', registerRouter);
-app.use('/hr', hrRouter);
+app.use('/hrs', hrRouter);
+app.use('/jobOffers', jobOfferRouter);
 
 
 if (process.env.NODE_ENV === 'production') {

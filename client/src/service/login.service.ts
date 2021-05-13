@@ -27,7 +27,7 @@ class LogIn {
     }
     async getUserUseToken(token: string) {
         try {
-            return await fetch(`${API}/Users/useToken`, {
+            return await fetch(`${API}/register/useToken`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

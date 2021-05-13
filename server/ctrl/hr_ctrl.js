@@ -39,7 +39,7 @@ async function getHr(req, res) {
  */
 async function updateHr(req, res) {
     const dataToUpdate = req.body.user;
-    const email = req.body.user.email;
+    const email = dataToUpdate.email;
     try {
         await hrCollection.findOneAndUpdate({ email }, dataToUpdate, (err, hr) => {
             err ? res.status(400).json({ success: false, error: err }) :
@@ -74,8 +74,8 @@ async function getAllHrs(req, res) {
             err ? res.status(400).json({ success: false, error: err }) :
                 !hrArray ? res.status(404).json({ success: false, message: 'hr Array not found' }) :
                 !(hrArray.length > 0) ?
-                res.status(400).json({ success: false, data: results, message: ':( no hrs to display' }) :
-                res.status(200).json({ success: true, data: hr, message: 'get hrArray successfully' })
+                res.status(400).json({ success: false, data: [], message: ':( no hrs to display' }) :
+                res.status(200).json({ success: true, data: hrArray, message: 'get hrArray successfully' })
         })
     } catch (err) { console.error(err) } finally {}
 }
