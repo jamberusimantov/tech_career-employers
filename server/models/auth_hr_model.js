@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const hr = new Schema({
+const auth_hr = new Schema({
         email: {
             type: String,
             required: true
@@ -12,14 +12,6 @@ const hr = new Schema({
         },
         name: {
             type: String,
-            required: true
-        },
-        section: {
-            type: String,
-            required: true,
-        },
-        isAuth: {
-            type: Boolean,
             required: true
         },
         token: String,
@@ -42,7 +34,13 @@ const hr = new Schema({
             type: Date,
             default: Date.now,
         },
+        isAuth: {
+            type: Boolean
+        },
+        section: {
+            type: String,
+        },
     },
     //  { timestamps: true }
 )
-module.exports = mongoose.model('hr', hr)
+module.exports = mongoose.model('auth_hr', auth_hr)

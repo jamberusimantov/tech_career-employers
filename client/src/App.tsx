@@ -21,7 +21,6 @@ const mapStateToProps = (state: any) => {
 }
 
 
-
 function App(props: any) {
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
@@ -33,7 +32,7 @@ function App(props: any) {
     const token = login.default.getToken();
     if (token) {
       getUserUseToken(token).then((userDataUseToken) => {
-        if (userDataUseToken && userDataUseToken.success) {
+        if (userDataUseToken.success) {
           setUserData(userDataUseToken.data)
         }
       })
@@ -41,7 +40,7 @@ function App(props: any) {
         setUserData(Object);
       }
     }
-  }, [getUserUseToken, setUserData, login.default]);
+  }, [getUserUseToken, login.default, setUserData]);
 
   useEffect(() => {
     function handleResize() {
@@ -61,6 +60,15 @@ function App(props: any) {
           <h1 className={classes.title}>please log in/ sign up to continue</h1>
           <h2>width: {windowDimensions.width}</h2>
           <h2>height: {windowDimensions.height}</h2>
+
+          <button onClick={() => {
+            login.default.loginUser({
+              password: '123456',
+              email: 'jamber.simantov@walla.co.il'
+            })
+              .then(res => res.success && login.default.setTokenLocal(res.token))
+          }}>login as lorem ipsum</button>
+
         </Layout>
       </div>
     );

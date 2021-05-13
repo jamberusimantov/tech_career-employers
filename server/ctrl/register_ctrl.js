@@ -1,4 +1,5 @@
 const hrCollection = require('../models/hr_model')
+const hrToAuthCollection = require('../models/auth_hr_model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const keys = require('../config/keys')
@@ -9,7 +10,7 @@ const validateRegisterInput = require('../validation/register')
 const validateLoginInput = require('../validation/login')
 
 /** 
- * signup hr to website
+ * signup hr to website- auth hr collection
  * @param {*} req 
  * @param {*} res 
  */
@@ -31,7 +32,7 @@ async function registerHr(req, res) {
                     bcrypt.hash(hr.password, salt, (err, hash) => {
                         if (err) { throw err }
                         hr.password = hash;
-                        hrCollection.insertMany(hr, (err) => {
+                        hrToAuthCollection.insertMany(hr, (err) => {
                             err ? res.status(400).json({ success: false, error: err }) :
                                 res.status(201).json({
                                     success: true,
@@ -76,7 +77,8 @@ async function loginHr(req, res) {
                         //sign token
                     jwt.sign(payload, keys.secretOrKey, { expiresIn: 31556926 }, async(err, token) => {
                         if (err) { throw err }
-                        await hrCollection.findByIdAndUpdate(requestedHr._id, { token: `bearer ${token}` }, (err, userItem) => {
+                        const dataToUpdate = { isActive: true, token: `bearer ${token}` };
+                        await hrCollection.findByIdAndUpdate(requestedHr._id, dataToUpdate, (err, userItem) => {
                             err ? res.status(400).json({ success: false, error: err }) :
                                 res.json({
                                     success: true,
@@ -98,23 +100,51 @@ async function loginHr(req, res) {
 
 }
 /** 
+ * approve hr from auth hr collection and push to hr collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function approveHr(req, res) {
+    const { _id, isAuth, section } = req.body.user
+    const dataToUpdate = { isAuth, section };
+    const auth = data => {
+        data.section = section
+        return data;
+    }
+    try {
+        await hrToAuthCollection.findByIdAndUpdate(_id, dataToUpdate, async(err, hr) => {
+            err ? res.status(400).json({ success: false, error: err }) :
+                !hr ? res.status(404).json({ success: false, message: 'user isn\'t found on auth collection' }) :
+                isAuth && await hrCollection.insertMany(auth(hr), (err) => {
+                    err ? res.status(400).json({ success: false, error: err }) :
+                        res.status(201).json({
+                            success: true,
+                            message: `${hr.email} approved  and moved to hr collection successfully`
+                        })
+                })
+        })
+    } catch (err) { console.error(err) } finally {}
+
+}
+/** 
  * get user by token from hr collection
  * @param {*} req 
  * @param {*} res 
  */
 async function useToken(req, res) {
-    const token = req.body.token
-    const dataToUpdate = { isActive: true };
+    const token = req.headers.authorization
     try {
-        await hrCollection.findOneAndUpdate({ token }, dataToUpdate, (err, hr) => {
-            const filteredPrivateProps = () => {
-                const { notifications, messages, name, email, friends, pictures, date } = hr
-                return { notifications, messages, name, email, friends, pictures, date }
-            }
-            err ? res.status(400).json({ success: false, error: err }) :
-                !hr ? res.status(404).json({ success: false, message: 'user isn\'t authorized' }) :
-                res.status(200).json({ success: true, data: filteredPrivateProps(), message: 'authorize hr successfully' })
-        })
+        if (token) {
+            await hrCollection.findOne({ token }, (err, hr) => {
+                const filteredPrivateProps = () => ({ notifications, messages, name, email, friends, pictures, date } = hr)
+                err ? res.status(400).json({ success: false, error: err }) :
+                    !hr ? res.status(404).json({ success: false, message: 'user isn\'t authorized' }) :
+                    res.status(200).json({ success: true, data: filteredPrivateProps(), message: 'authorize hr successfully' })
+            })
+        } else {
+            res.status(400).json({ success: false, message: 'bad token' })
+        }
+
     } catch (err) { console.error(err) } finally {}
 
 }
@@ -122,4 +152,5 @@ module.exports = {
     registerHr,
     loginHr,
     useToken,
+    approveHr,
 }
