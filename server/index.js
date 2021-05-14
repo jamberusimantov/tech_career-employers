@@ -8,11 +8,11 @@ const db = require('./DB')
 const hrRouter = require('./routes/hrRouter')
 const jobOfferRouter = require('./routes/jobOfferRouter')
 const registerRouter = require('./routes/registerRouter')
+// const studentRouter = require('./routes/studentRouter')
 const passport = require('passport')
 const passportFunc = require('./config/passport')
 
 const path = require('path');
-
 const app = express()
 const PORT = process.env.PORT || 4201
 
@@ -29,12 +29,11 @@ app.listen(PORT, () => {
     console.log(`${chalk.green('tech_career-employers-team2')} ${chalk.yellow('live and up on port')} ${chalk.red(PORT)}`);
 })
 
-
 app.use(passport.initialize());
 app.use('/register', registerRouter);
 app.use('/hrs', hrRouter);
 app.use('/jobOffers', jobOfferRouter);
-
+// app.use('/student', studentRouter);
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files

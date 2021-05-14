@@ -3,9 +3,8 @@ const chalk = require('chalk')
 const dotenv = require('dotenv');
 dotenv.config();
 const dbConnection = process.env.dbConnection
-
 mongoose
-    .connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false })
     .then(() => {
         console.log(chalk.green('mongoDB connected'))
     })
