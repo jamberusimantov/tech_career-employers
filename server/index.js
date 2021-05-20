@@ -5,9 +5,9 @@ const express = require('express');
 const chalk = require('chalk');
 const cors = require('cors');
 const db = require('./DB')
-const hrRouter = require('./routes/hrRouter')
-const jobOfferRouter = require('./routes/jobOfferRouter')
-const registerRouter = require('./routes/registerRouter')
+const hrRouter = require('./api/hr/hrRouter')
+const jobOfferRouter = require('./api/jobOffer/jobOfferRouter')
+const register_router = require('./api/register/register_router')
 const passport = require('passport')
 const passportFunc = require('./config/passport')
 
@@ -31,7 +31,7 @@ app.listen(PORT, () => {
 
 
 app.use(passport.initialize());
-app.use('/register', registerRouter);
+app.use('/register', register_router);
 app.use('/hrs', hrRouter);
 app.use('/jobOffers', jobOfferRouter);
 

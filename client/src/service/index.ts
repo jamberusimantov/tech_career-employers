@@ -1,4 +1,4 @@
-import * as app from './app.service'
+import * as app from '../app.utils'
 import * as login from './login.service'
 import * as hr from './hr.service'
 import * as jobOffer from './jobOffer.service'

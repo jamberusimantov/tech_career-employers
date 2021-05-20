@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const auth_hr = new Schema({
+const student = new Schema({
         email: {
             type: String,
             required: true
@@ -14,6 +14,12 @@ const auth_hr = new Schema({
             type: String,
             required: true
         },
+        phone: {
+            type: String,
+            required: true
+        },
+        section: String,
+        isAuth: Boolean,
         token: String,
         company: String,
         about: String,
@@ -34,13 +40,7 @@ const auth_hr = new Schema({
             type: Date,
             default: Date.now,
         },
-        isAuth: {
-            type: Boolean
-        },
-        section: {
-            type: String,
-        },
     },
     //  { timestamps: true }
 )
-module.exports = mongoose.model('auth_hr', auth_hr)
+module.exports = mongoose.model('student', student)

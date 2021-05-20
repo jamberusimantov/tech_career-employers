@@ -4,8 +4,9 @@ const useStyle = makeStyles((theme: any) => ({
     App: {
         textAlign: 'center',
         height:'100vh',
-        padding:0,
+        padding:'1vh',
         margin:0,
+        boxSizing:'border-box',
     },
     title: {
         color: 'red',

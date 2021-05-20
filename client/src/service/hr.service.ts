@@ -1,4 +1,4 @@
-import { API } from './app.service'
+import { API } from '../app.utils'
 
 export async function getHrById(Id: string) {
     try {

@@ -14,14 +14,12 @@ const hr = new Schema({
             type: String,
             required: true
         },
-        section: {
+        phone: {
             type: String,
-            required: true,
-        },
-        isAuth: {
-            type: Boolean,
             required: true
         },
+        section: String,
+        isAuth: Boolean,
         token: String,
         company: String,
         about: String,
