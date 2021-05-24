@@ -25,7 +25,7 @@ function App(props: any) {
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const { Layout } = components;
+  const  { Layout }  = components;
   const { appStyle } = styles;
 
   useEffect(() => {
@@ -56,20 +56,7 @@ function App(props: any) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        <Layout>
-          <h1 className={classes.title}>please log in/ sign up to continue</h1>
-          <h2>width: {windowDimensions.width}</h2>
-          <h2>height: {windowDimensions.height}</h2>
-
-          <button onClick={() => {
-            login.default.loginUser({
-              password: '123456',
-              email: 'jamber.simantov@walla.co.il'
-            })
-              .then(res => res.success && login.default.setTokenLocal(res.token))
-          }}>login as lorem ipsum</button>
-
-        </Layout>
+        <Layout/>
       </div>
     );
   }
@@ -77,9 +64,7 @@ function App(props: any) {
   return (
     <div className={classes.App}>
       <CssBaseline />
-      <Layout>
-        <h1 className={classes.title}>{userData.email} profile page</h1>
-      </Layout>
+      <Layout/>
     </div>
   );
 }

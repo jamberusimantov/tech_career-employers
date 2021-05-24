@@ -1,4 +1,4 @@
-import Layout from './Layout'
+import Layout from './Layout1/Layout'
 
 const components = {
     Layout,
