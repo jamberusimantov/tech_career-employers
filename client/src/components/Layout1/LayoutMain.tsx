@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './LayoutMain.css'
 
 import { Layout, Menu, Breadcrumb } from 'antd';
+import 'antd/dist/antd.css';
+
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
