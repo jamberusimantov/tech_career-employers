@@ -2,8 +2,10 @@
     float: left;
     width: 120px;
     height:31px;
-    margin: 16px 24px 16px 0;
-    
+    margin: 8px 12px 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .ant-row-rtl .logo {
@@ -14,6 +16,15 @@
   .site-layout-background {
     background: #fff;
   }
+  .ant-layout-header.header{
+    background: #fff;
+  }
+
+.ant-layout ant-layout-rtl{
+  width: 100%;
+  height: 100vh;
+}
+
 
   /* #components-layout-demo-top-side .logo {
     float: left;

@@ -17,7 +17,10 @@ function LayoutMain() {
   return (
     <Layout>
       <Header className="header">
-        <img src="/img/Logo.png" alt="" className="logo"/>
+        <div className="imgdiv">
+         <img src="/img/Logo.png" alt="" className="logo"/> 
+        </div>
+        
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
@@ -66,7 +69,7 @@ function LayoutMain() {
             </Menu>
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            Content
+            Content here
           </Content>
         </Layout>
       </Content>
