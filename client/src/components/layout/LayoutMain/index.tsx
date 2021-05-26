@@ -1,6 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./LayoutMain.css";
+
+import "./style.css";
+
+import {Link} from 'react-router-dom';
+//Pages
+import AdminRouter from "../../../AdminRouter"
+
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
@@ -22,9 +26,10 @@ function LayoutMain() {
         </div>
         
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
+          <Menu.Item key="2"><Link to="/">דף הבית</Link></Menu.Item>
+          <Menu.Item key="3">סטודנטים</Menu.Item>
+          <Menu.Item key="3">מגייסים</Menu.Item>
+          <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: "0 50px" }}>
@@ -69,7 +74,12 @@ function LayoutMain() {
             </Menu>
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            Content here
+          
+
+                      {/* Admin Router */}
+                          <AdminRouter/>
+
+
           </Content>
         </Layout>
       </Content>

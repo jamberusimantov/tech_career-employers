@@ -10,6 +10,7 @@ interface CoursesDataType {
   isNoWorking: number;
   isWorking: number;
 }
+
 interface GraduatesDataType {
   key: React.Key,
   company: string,
@@ -112,7 +113,7 @@ export const graduatesColumns: any[] = [
 
 export const graduatesData: GraduatesDataType[] = [
   {
-    key: '1',
+    key: '4',
     company: 'Microsoft',
     uploadedBy: 'קרן',
     passion: ['Backend-End Development'],
@@ -120,7 +121,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '1',
+    key: '5',
     company: 'e-Bay',
     uploadedBy: 'נופר',
     passion: ['Backend-End Development'],
@@ -128,7 +129,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '2',
+    key: '6',
     company: 'Wix',
     uploadedBy: 'אדוה',
     passion: ['Front-End Development'],
@@ -136,7 +137,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '3',
+    key: '7',
     company: 'AT & T',
     uploadedBy: 'יוסי',
     passion: ['Front-End Development'],
@@ -144,7 +145,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '4',
+    key: '8',
     company: 'Amazon',
     uploadedBy: 'ניר',
     passion: ['Backend-End Development'],

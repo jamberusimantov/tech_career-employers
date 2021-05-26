@@ -5,6 +5,7 @@ import styled from "styled-components";
 function CardsDetails() {
     return (
         <div>
+            
         </div>
     )
 }
