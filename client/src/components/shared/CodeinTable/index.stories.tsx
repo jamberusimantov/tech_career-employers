@@ -1,9 +1,9 @@
 import CodeinTable from './index';
-import {coursesColumns,coursesData} from '../CodeinTable/mock'
+import { coursesColumns, coursesData } from './mock'
 
 export default {
-    title:'CodeinTable',
+    title: 'CodeinTable',
     component: CodeinTable
 }
 
-export const Default = ()=><CodeinTable columns={coursesColumns} data={coursesData}/> ;
+export const Default = () => <CodeinTable columns={coursesColumns} data={coursesData} />;
