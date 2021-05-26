@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./LayoutMain.css";
+import "./style.css";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
