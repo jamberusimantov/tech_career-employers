@@ -22,6 +22,7 @@ const mapStateToProps = (state: any) => {
 
 
 function App(props: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
@@ -55,7 +56,7 @@ function App(props: any) {
   if (!userData.email) {
     return (
       <div className={classes.App}>
-        {/* <CssBaseline /> */}
+        <CssBaseline />
         <LayoutMain/>
       </div>
     );
