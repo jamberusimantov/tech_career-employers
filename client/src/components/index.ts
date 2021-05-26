@@ -1,7 +1,7 @@
-import Layout from './Layout1/Layout'
+import LayoutMain from './Layout1/LayoutMain'
 
 const components = {
-    Layout,
+    LayoutMain,
 }
 
 export default components
