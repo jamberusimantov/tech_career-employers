@@ -5,6 +5,9 @@ import AdminPage from './pages/admin-page/AdminPage'
 //Home page
 import Home from './pages/Home/Home'
 
+//HR page
+import HR from './pages/hr-page/Hr'
+
 import {
     Switch,
     Route
@@ -17,6 +20,9 @@ function AdminRouter() {
           <Switch>
               <Route exact path="/">
             <Home/>
+          </Route>
+          <Route path="/hr">
+            <HR/>
           </Route>
           <Route path="/admin">
             <AdminPage/>

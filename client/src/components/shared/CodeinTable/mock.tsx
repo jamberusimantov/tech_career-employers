@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
 
 interface CoursesDataType {
   key: React.Key;
   courses: string;
   courseCompletionDate: Object;
-  numberOfGraduates: string;
+  numberOfGraduates: number;
   cycle: string;
   isNoWorking: number;
   isWorking: number;
@@ -18,6 +16,13 @@ interface GraduatesDataType {
   passion: [string],
   uploadDate: Object,
   emailTo: string,
+}
+
+function numbersOfGraduates (text: string){
+
+   // eslint-disable-next-line jsx-a11y/anchor-is-valid
+  return <a>{text}</a >
+
 }
 
 export const coursesColumns: any[] = [
@@ -40,7 +45,8 @@ export const coursesColumns: any[] = [
     title: 'מס בוגרים',
     dataIndex: 'numberOfGraduates',
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    render: (text: string) => <a>{text}</a >,
+
+    render: numbersOfGraduates,
   },
   {
     title: 'שם הקורס',
@@ -53,7 +59,7 @@ export const coursesData: CoursesDataType[] = [
     key: '1',
     courses: 'קורס פיתוח תוכנה',
     courseCompletionDate: Date(),
-    numberOfGraduates: 'drop down names',
+    numberOfGraduates: 5,
     cycle: 'ט"ה',
     isNoWorking: 5,
     isWorking: 55555555
@@ -62,7 +68,7 @@ export const coursesData: CoursesDataType[] = [
     key: '2',
     courses: 'בדיקות תוכנה QA',
     courseCompletionDate: Date(),
-    numberOfGraduates: 'drop down names',
+    numberOfGraduates: 5,
     cycle: 'ק"ר',
     isNoWorking: 5,
     isWorking: 55555555
@@ -71,7 +77,7 @@ export const coursesData: CoursesDataType[] = [
     key: '3',
     courses: 'סייבר',
     courseCompletionDate: Date(),
-    numberOfGraduates: 'drop down names',
+    numberOfGraduates: 5,
     cycle: 'ש"ח',
     isNoWorking: 5,
     isWorking: 55555555
@@ -153,5 +159,3 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
 ];
-
-

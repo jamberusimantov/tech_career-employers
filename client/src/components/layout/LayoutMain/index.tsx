@@ -2,7 +2,9 @@
 import "./style.css";
 
 import {Link} from 'react-router-dom';
+
 //Pages
+
 import AdminRouter from "../../../AdminRouter"
 
 
@@ -26,9 +28,9 @@ function LayoutMain() {
         </div>
         
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="2"><Link to="/">דף הבית</Link></Menu.Item>
+          <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
           <Menu.Item key="3">סטודנטים</Menu.Item>
-          <Menu.Item key="3">מגייסים</Menu.Item>
+          <Menu.Item key="2">מגייסים</Menu.Item>
           <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
         </Menu>
       </Header>
@@ -74,7 +76,7 @@ function LayoutMain() {
             </Menu>
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-          
+            
 
                       {/* Admin Router */}
                           <AdminRouter/>
