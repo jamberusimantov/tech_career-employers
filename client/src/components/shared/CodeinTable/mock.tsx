@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 interface CoursesDataType {
   key: React.Key;
-  courses: string;
+  courses: Object;
   courseCompletionDate: Object;
   numberOfGraduates: number;
   cycle: string;
@@ -18,10 +21,61 @@ interface GraduatesDataType {
   emailTo: string,
 }
 
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const studentNames = (
+
+
+
+<Menu>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        אלמיטו
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        שמואל
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        ישראל
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        חמודי
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        ספיר
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        משה
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        רוי
+      </a>
+    </Menu.Item>
+  </Menu>
+
+);
+
+
 function numbersOfGraduates (text: string){
 
-   // eslint-disable-next-line jsx-a11y/anchor-is-valid
-  return <a>{text}</a >
+  return <Dropdown overlay={studentNames}>
+  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+   {text} <DownOutlined />
+  </a>
+</Dropdown>
 
 }
 
@@ -51,6 +105,21 @@ export const coursesColumns: any[] = [
   {
     title: 'שם הקורס',
     dataIndex: 'courses',
+    filters: [
+      {
+        text: 'קורס פיתוח תוכנה',
+        value: 'קורס פיתוח תוכנה',
+      },
+      {
+        text: 'סייבר',
+        value: 'סייבר',
+      },
+      
+    ],
+    // specify the condition of filtering result
+    // here is that finding the name started with `value`
+    onFilter: (value: any, record: { name: string | any[]; }) => record.courses.indexOf(value) === 0,
+  
   },
 ];
 
