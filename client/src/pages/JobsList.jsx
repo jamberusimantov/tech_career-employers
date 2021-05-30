@@ -11,9 +11,11 @@ export default function JobsList() {
         <JobCard />
         <JobCard />
         <JobCard />
-        
+
       </Cards>
-      <JobsDetails></JobsDetails>
+      <JobsDetails>
+
+      </JobsDetails>
     </Container>
   );
 }

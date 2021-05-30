@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./LayoutMain.css";
+// import "./LayoutMain.css";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
@@ -9,6 +9,7 @@ import {
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
+import JobCards from "../../../pages/CompanyZone/JobCards";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -18,9 +19,9 @@ function LayoutMain() {
     <Layout>
       <Header className="header">
         <div className="imgdiv">
-         <img src="/img/Logo.png" alt="" className="logo"/> 
+          <img src="/img/Logo.png" alt="" className="logo" />
         </div>
-        
+
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
@@ -69,7 +70,15 @@ function LayoutMain() {
             </Menu>
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            Content here
+            <JobCards />
+            {/* <JobCards />
+            <JobCards />
+            <JobCards />
+            <JobCards />
+            <JobCards />
+            <JobCards />
+            <JobCards /> */}
+
           </Content>
         </Layout>
       </Content>

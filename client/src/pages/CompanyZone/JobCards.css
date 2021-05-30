@@ -1,0 +1,43 @@
+/* .jobCards-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap:wrap;
+
+} */
+.site-card-border-less-wrapper{
+    /* display: flex;
+    flex-direction: row; */
+    /* display: grid; */
+    /* width: 200px; */
+}
+.ant-card {
+    justify-content: center;
+    align-items:center;
+    background-color:  #bdbdbd;
+    border-radius: 5px;
+}
+.ant-card-body{
+    text-align: left;
+    font-size: 20px;
+}
+
+.site-card-border-less-wrapper .applicans{
+    text-align: right;
+    position: relative;
+    bottom: 100px;
+    left: 75%;
+    /* font-size: 20px; */
+}
+
+.site-card-border-less-wrapper .number{
+    position: relative;
+    bottom: 40px;
+    float: right;
+    font-size: 50px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 80px;
+    text-align: center;
+
+}

@@ -25,7 +25,7 @@ function App(props: any) {
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const  { LayoutMain }  = components;
+  const { LayoutMain } = components;
   const { appStyle } = styles;
 
   useEffect(() => {
@@ -52,19 +52,19 @@ function App(props: any) {
 
   const classes = appStyle()
 
-  if (!userData.email) {
-    return (
-      <div className={classes.App}>
-        <CssBaseline />
-        <LayoutMain/>
-      </div>
-    );
-  }
+  // if (!userData.email) {
+  //   return (
+  //     <div className={classes.App}>
+  //       <CssBaseline />
+  //       <LayoutMain/>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={classes.App}>
       <CssBaseline />
-      <LayoutMain/>
+      <LayoutMain />
     </div>
   );
 }
