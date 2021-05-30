@@ -1,9 +1,13 @@
-const register_ctrl = require('./register_ctrl')
-const register_router = require('express').Router()
+const registerRouter = require('express').Router()
+const registerCtrl = require('./register_ctrl')
 
-register_router.post(`/signUp/:Role`, register_ctrl.registerUser)
-register_router.post('/auth/:Role', register_ctrl.approveUser)
-register_router.post('/login/:Role', register_ctrl.loginUser)
-register_router.post('/useToken/:Role', register_ctrl.useToken)
+registerRouter.post(`/register/:Role`, registerCtrl.registerUser)
+registerRouter.put(`/signUp/:Role`, registerCtrl.signUpUser)
+registerRouter.post('/login/:Role', registerCtrl.loginUser)
 
-module.exports = register_router;
+
+
+
+registerRouter.post('/useToken/:Role', registerCtrl.useToken)
+    // registerRouter.get(`/signUp/:Role/:Token`, registerCtrl.)
+module.exports = registerRouter;

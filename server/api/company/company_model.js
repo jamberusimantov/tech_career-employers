@@ -1,22 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const hr = new Schema({
-        email: {
+const company = new Schema({
+        name: {
             type: String,
             required: true
         },
-        password: String,
-        company: String,
-        name: String,
+        field: String,
+        info: String,
         phone: String,
-        token: String,
-        isAuth: Boolean,
-        isActive: Boolean,
-        isCompanyFirstUser: {
-            type: Boolean,
-            default: false
-        },
+        address: String,
         img: {
             _id: Object,
             data: Buffer,
@@ -32,4 +25,4 @@ const hr = new Schema({
     },
     //  { timestamps: true }
 )
-module.exports = mongoose.model('hr', hr)
+module.exports = mongoose.model('company', company)
