@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./LayoutMain.css";
 
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Button } from "antd";
 import "antd/dist/antd.css";
 import {
   UserOutlined,
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
+import AddCompany from "../../pages/AddCompany";
+import HrRegFlow from "../../pages/HrRegFlow";
+import CompanyPage from "../../pages/CompanyPage";
+import SpecificJob from "../../pages/SpecificJob";
+import AddJob from "../../pages/AddJob";
+import CompanyList from "../../pages/CompanyList";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 function LayoutMain() {
+  const [currentStep, setCurrentStep] = useState(4);
+
   return (
     <Layout>
       <Header className="header">
@@ -69,7 +77,20 @@ function LayoutMain() {
             </Menu>
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            Content here
+          <Button type={ currentStep == 4 ? 'primary' : 'default'} onClick={() => setCurrentStep(4)} style={{ marginRight: 10 }}>Company List</Button>
+          <Button type={ currentStep == 2 ? 'primary' : 'default'} onClick={() => setCurrentStep(2)} style={{ marginRight: 10 }}>Add Company</Button>
+          <Button type={ currentStep == 1 ? 'primary' : 'default'} onClick={() => setCurrentStep(1)} style={{ marginRight: 10 }}>Add Recruiter</Button>
+          {currentStep == 1 ?
+            <HrRegFlow></HrRegFlow> : ""
+          }
+          {currentStep == 2 ?
+          <AddCompany></AddCompany> : ""
+        }
+                  {currentStep == 4 ?
+
+          <CompanyList></CompanyList>: ""
+        }
+          
           </Content>
         </Layout>
       </Content>

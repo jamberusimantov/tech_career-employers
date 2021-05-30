@@ -24,6 +24,18 @@ class LogIn {
         })
             .then(data => data.json())
     }
+
+    async signUpHr(credentials: { name: string, password: string, password1: string, email: string }) {
+        return await fetch(`${API}/register/signUp/hr`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user: credentials })
+        })
+            .then(data => data.json())
+    }
+    
     async approveHr(credentials: { _id: string, isAuth: boolean, section: string }) {
         return await fetch(`${API}/register/auth`, {
             method: 'POST',
@@ -34,9 +46,9 @@ class LogIn {
         })
             .then(data => data.json())
     }
-    async getUserUseToken(token: string) {
+    async getUserUseToken(token: string, type = "hr") {
         try {
-            return await fetch(`${API}/register/useToken`, {
+            return await fetch(`${API}/register/useToken/${type}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
