@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import "./LayoutMain.css";
+import "./style.css";
 
 import { Layout, Menu, Breadcrumb, Button } from "antd";
 import "antd/dist/antd.css";
@@ -9,12 +9,12 @@ import {
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
-import AddCompany from "../../pages/AddCompany";
-import HrRegFlow from "../../pages/HrRegFlow";
-import CompanyPage from "../../pages/CompanyPage";
-import SpecificJob from "../../pages/SpecificJob";
-import AddJob from "../../pages/AddJob";
-import CompanyList from "../../pages/CompanyList";
+import AddCompany from "../../../pages/AddCompany";
+import HrRegFlow from "../../../pages/HrRegFlow";
+import CompanyPage from "../../../pages/CompanyPage";
+import SpecificJob from "../../../pages/SpecificJob";
+import AddJob from "../../../pages/AddJob";
+import CompanyList from "../../../pages/CompanyList";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
