@@ -5,7 +5,7 @@ const { authToken } = require('../../utils/register.utils')
 const { getDoc, updateDoc, deleteDoc, getAllDocs, getAllDocsByQuery, filteredPrivateProps, postDoc } = DB
 
 /** 
- * get all jobOffers from jobOffer Collection
+ * Update Company Logo
  * @param {*} req 
  * @param {*} res 
  */
@@ -52,7 +52,7 @@ async function updateCompanyLogo(req, res) {
 }
 
 /** 
- * get all jobOffers from jobOffer Collection
+ * get jobs by company id
  * @param {*} req 
  * @param {*} res 
  */
@@ -95,7 +95,7 @@ async function updateCompanyLogo(req, res) {
  }
 
 /** 
- * get all jobOffers from jobOffer Collection
+ * get all companies
  * @param {*} req 
  * @param {*} res 
  */
@@ -130,7 +130,7 @@ async function updateCompanyLogo(req, res) {
 }
 
 /**
- * post jobOffer to jobOffer collection
+ * post add company
  * @param {*} req 
  * @param {*} res 
  */
@@ -164,7 +164,7 @@ async function updateCompanyLogo(req, res) {
 }
 
 /** 
- * delete jobOffer  by id from jobOffer collection
+ * delete company by id
  * @param {*} req 
  * @param {*} res 
  */
@@ -209,7 +209,7 @@ async function updateCompanyLogo(req, res) {
 }
 
 /**
- * get jobOffer by id from jobOffer collection
+ * get company by id
  * @param {*} req 
  * @param {*} res 
  */
@@ -253,7 +253,7 @@ async function updateCompanyLogo(req, res) {
 }
 
 /**
- * update jobOffer by id to jobOffer collection
+ * update company by id
  * @param {*} req 
  * @param {*} res 
  */
