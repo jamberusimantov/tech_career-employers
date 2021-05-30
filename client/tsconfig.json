@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "../App.test.tsx",
+    "src/components/Register.tsx"
   ]
 }

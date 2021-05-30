@@ -6,6 +6,10 @@ import service from './service';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
+import Login from './components/Login';
+import Register from './components/Register';
+import RegistrationForm from './components/RegistrationForm';
+
 const { setUserData } = usersActions.usersActions;
 const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
 
@@ -25,7 +29,7 @@ function App(props: any) {
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const  { LayoutMain }  = components;
+  const { LayoutMain } = components;
   const { appStyle } = styles;
 
   useEffect(() => {
@@ -56,7 +60,10 @@ function App(props: any) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        <LayoutMain/>
+        <LayoutMain />
+        <Login />
+        {/* <Register /> */}
+        <RegistrationForm />
       </div>
     );
   }
@@ -64,7 +71,7 @@ function App(props: any) {
   return (
     <div className={classes.App}>
       <CssBaseline />
-      <LayoutMain/>
+      <LayoutMain />
     </div>
   );
 }
