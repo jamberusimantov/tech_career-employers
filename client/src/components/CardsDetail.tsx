@@ -5,7 +5,7 @@ import styled from "styled-components";
 function CardsDetail() {
     return (
         <div>
-            
+            jobs details
         </div>
     )
 }
