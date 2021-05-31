@@ -54,23 +54,16 @@ async function getManyHrs(req, res) {
         success: false,
         message: requiredQuery('getManyHrs')
     })
+    const getDocSuccessCb = (data)=> successHandler(data,'got')
+    const getDocFailCb = () => failHandler('list',res)
     const request = async(data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('getManyHrs')
         })
-        const getRes = await getManyDocs(hrCollection, hr, getHrsSuccess, getHrsFail)
+        const getRes = await getManyDocs(hrCollection, hr, getDocSuccessCb, getDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
-    const getHrsSuccess = data => res.status(200).json({
-        success: true,
-        data: filteredPrivateProps(data),
-        message: success('getManyHrs')
-    })
-    const getHrsFail = () => res.status(400).json({
-        success: false,
-        message: failure('getManyHrs')
-    })
     try {
         authRequest(token, request, res)
     } catch (error) {

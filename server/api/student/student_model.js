@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const student = new Schema({
-        email: {
+        phone: {
             type: String,
             required: true
         },
-        password: {
+        email: {
             type: String,
             required: true
         },
@@ -14,33 +14,40 @@ const student = new Schema({
             type: String,
             required: true
         },
-        phone: {
+        password: {
             type: String,
             required: true
         },
-        section: String,
-        isAuth: Boolean,
+        isAuth: {
+            type: Boolean,
+            default: false
+        },
+        dateOfBirth:Date,
+        country: String,
+        city: String,
+        street: String,
+        specialty: String,
+        isWorking: Boolean,  // optional
+        workCompany: String, // optional
+        linkedInLink: String,
+        githubLink:String,
+        personalWebLink:String,
         token: String,
-        company: String,
-        about: String,
-        isActive: Boolean,
-        friends: [{ _id: String, name: String }],
-        notifications: { notifications: [], new: [] },
-        messages: { messages: [], new: [] },
-        tags: Object,
-        pictures: [{
-            _id: Object,
+        section: String,
+        projects:[{projectName:String, aboutIt:String}],
+        education:[{trainingPlace:String, years:String}],
+        picture: {
+            _id: String,
             data: Buffer,
             name: String,
             contentType: String,
             size: Number,
             path: String,
-        }],
+        },
         date: {
             type: Date,
             default: Date.now,
         },
     },
-    //  { timestamps: true }
 )
 module.exports = mongoose.model('student', student)
