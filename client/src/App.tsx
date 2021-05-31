@@ -22,10 +22,11 @@ const mapStateToProps = (state: any) => {
 
 
 function App(props: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const  { Layout }  = components;
+  const  { LayoutMain }  = components;
   const { appStyle } = styles;
 
   useEffect(() => {
@@ -56,7 +57,8 @@ function App(props: any) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        <Layout/>
+        
+        <LayoutMain/>
       </div>
     );
   }
@@ -64,7 +66,7 @@ function App(props: any) {
   return (
     <div className={classes.App}>
       <CssBaseline />
-      <Layout/>
+      <LayoutMain/>
     </div>
   );
 }

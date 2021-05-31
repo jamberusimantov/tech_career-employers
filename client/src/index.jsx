@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import { createStore, compose } from 'redux'
 import rootReducer from './redux/reducers'
+import { ConfigProvider } from 'antd';
 
 const enhancers = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -24,7 +25,10 @@ ReactDOM.render(
 
   <Provider store={store}>
     <BrowserRouter>
+    <ConfigProvider direction="rtl">
+
       <App />
+    </ConfigProvider>
     </BrowserRouter>
   </Provider>
   , document.getElementById('root')
