@@ -6,6 +6,7 @@ export default function JobsList() {
   return (
     <Container>
       <Cards>
+        
         <JobCard />
         <JobCard />
         <JobCard />
