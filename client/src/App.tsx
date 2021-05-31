@@ -30,9 +30,12 @@ function App(props: any) {
   const { appStyle } = styles;
 
   useEffect(() => {
-    const token = login.default.getToken();
+    // const token = login.default.getToken();
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI0ZWUwNmYxZDkyNTVhMDA1ZjEyM2UiLCJuYW1lIjoibGlvciIsImVtYWlsIjoibGlvcmltYXppc2dAZ21haWwuY29tIiwiaWF0IjoxNjIyNDcwMjAwLCJleHAiOjE3MDg4NzAyMDB9.PBTGtUiskSoEAoS-z5zEqRQsbsAVf_u0DiNNC9lMSOI'
     if (token) {
       getUserUseToken(token).then((userDataUseToken) => {
+        console.log(userDataUseToken);
+        
         if (userDataUseToken.success) {
           setUserData(userDataUseToken.data)
         }
