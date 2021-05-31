@@ -44,7 +44,7 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
         const collection = collections[role]
         jwt.sign(payload, keys.secretOrKey, tokenOptions, async(err, token) => {
             if (err) throw new Error(`error on sign token ${err}`)
-            const dataToUpdate = { _id, isActive: true, token: `Bearer ${token}` };
+            const dataToUpdate = !emailVerification ? { _id, isActive: true, token: `Bearer ${token}` } : { _id, token: `Bearer ${token}` }
             const updateDocSuccessCb = async(data) => {
                 const link = new URL(`http://localhost:4201/registration/signUp/${role}/Bearer ${token}`)
                 if (!emailVerification) return res.status(200).json({
