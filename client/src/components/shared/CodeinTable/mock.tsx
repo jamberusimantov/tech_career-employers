@@ -118,7 +118,7 @@ export const coursesColumns: any[] = [
     ],
     // specify the condition of filtering result
     // here is that finding the name started with `value`
-    onFilter: (value: any, record: { name: string | any[]; }) => record.courses.indexOf(value) === 0,
+    // onFilter: (value: any, record: { name: string | any[]; }) => record.courses.indexOf(value) === 0,
   
   },
 ];
