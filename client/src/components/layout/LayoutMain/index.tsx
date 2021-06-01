@@ -5,8 +5,9 @@ import {Link} from 'react-router-dom';
 
 //Pages
 
-import AdminRouter from "../../../AdminRouter"
 
+import HrRegForm from "../../"
+import AdminRouter from "../../../AdminRouter"
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
