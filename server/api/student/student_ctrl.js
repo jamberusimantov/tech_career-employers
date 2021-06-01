@@ -40,11 +40,7 @@ async function getStudent(req, res) {
     if(dataHandler(student,res) !== true) return
     const getDocSuccessCb = (data)=> successHandler(data,res,'got')
     const getDocFailCb = () => failHandler('student',res)
-    const request = async(data) => {
-        if (!data) return res.status(400).json({
-            success: false,
-            message: unauthorizedToken('getStudent')
-        })
+    const request = async() => {
         const getRes = await getDoc(studentCollection, student, getDocSuccessCb, getDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error);
     }
@@ -69,10 +65,6 @@ async function updateStudentById(req, res) {
     const updateDocSuccessCb = (data)=> successHandler(data,res,'updated')
     const updateDocFailCb = () => failHandler(_id,res)
     const request = async(data) => {
-        if (!data) return res.status(400).json({
-            success: false,
-            message: unauthorizedToken('updateHrByUrlId')
-        })
         const getRes = await updateDoc(studentCollection, student, updateDocSuccessCb, updateDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
@@ -94,10 +86,6 @@ async function updateStudentById(req, res) {
     if(idChecker(_id,res) !== true) return
     if(tokenChecker(token,res) !== true) return
     const request = async(data) => {
-        if (!data) return res.status(400).json({
-            success: false,
-            message: unauthorizedToken('deleteStudentByUrlId')
-        })
         const getRes = await deleteDoc(studentCollection, student, deleteDocSuccessCb, deleteDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
@@ -120,7 +108,6 @@ async function getAllStudents(req, res) {
     const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
     const getAllDocsFailCb = () => failHandler('list',res)
     const request = async(data) => {
-        if  (dataHandler(data,res) !== true) return
         const getRes = await getManyDocs(studentCollection, undefined, getAllDocsSuccessCb, getAllDocsFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
@@ -140,15 +127,9 @@ async function getAllStudents(req, res) {
 async function getManyStudents(req, res) {
     const token = req.headers.authorization
     const student = req.body.student;
-    studentCollection.drop(function(err, delOK) {
-        if (err) throw err;
-        if (delOK) console.log("Collection deleted");
-        return res.send({success:true})
-    })
     if(tokenChecker(token,res) !== true) return
     if(dataHandler(student,res,'getAllHrs') !== true) return
-    const request = async(data) => {
-        if  (dataHandler(data,res) !== true) return
+    const request = async() => {
         const getRes = await getManyDocs(studentCollection, student, getAllDocsSuccessCb, getAllDocsFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
