@@ -1,9 +1,11 @@
 const hrCollection = require('./hr_model')
 const DB = require('../../utils/DB.utils')
 const register = require('../../utils/register.utils')
-const authRequest = require('../../utils/register.utils').authToken
+const {authRequest} = register
 const { getDoc, updateDoc, deleteDoc, filteredPrivateProps, getManyDocs, msgs } = DB
 const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId, } = msgs
+const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
+
 /** 
  * get all hrs from hr collection
  * @param {*} req 
@@ -11,27 +13,14 @@ const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corru
  */
 async function getAllHrs(req, res) {
     const token = req.headers.authorization
-    if (!token) return res.status(400).json({
-        success: false,
-        message: requiredToken('getAllHrs')
-    })
+    if(tokenChecker(token,res) !== true) return
+    const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
+    const getAllDocsFailCb = () => failHandler('list',res)
     const request = async(data) => {
-        if (!data) return res.status(400).json({
-            success: false,
-            message: unauthorizedToken('getAllHrs')
-        })
-        const getRes = await getManyDocs(hrCollection, undefined, getHrsSuccess, getHrsFail)
+        if  (dataHandler(data,res) !== true) return
+        const getRes = await getManyDocs(hrCollection, undefined, getAllDocsSuccessCb, getAllDocsFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
-    const getHrsSuccess = data => res.status(200).json({
-        success: true,
-        data: filteredPrivateProps(data),
-        message: success('getAllHrs')
-    })
-    const getHrsFail = () => res.status(400).json({
-        success: false,
-        message: failure('getAllHrs')
-    })
     try {
         authRequest(token, request, res)
     } catch (error) {

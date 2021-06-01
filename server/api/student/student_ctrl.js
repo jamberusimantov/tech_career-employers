@@ -1,8 +1,10 @@
 const studentCollection = require('./student_model')
 const DB = require('../../utils/DB.utils')
-const { authToken } = require('../../utils/register.utils')
-const { getDoc, updateDoc, deleteDoc, getAllDocs} = DB
-const {idChecker,tokenChecker,successHandler,failHandler,queryHandler} = require('../../utils/ctrl.utils')
+const register = require('../../utils/register.utils')
+const {authRequest} = register
+const { getDoc, updateDoc, deleteDoc, getManyDocs, msgs } = DB
+const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
+
 
 /**
  * Get student by id from student collection
@@ -83,11 +85,13 @@ async function deleteStudentById(req, res) {
     if(tokenChecker(token,res) !== true) return
     const deleteDocSuccessCb = (data)=> successHandler(data,res,'deleted')
     const deleteDocFailCb = () => failHandler(_id,res)
+    const request = async(data) => {
+        if  (dataHandler(data,res) !== true) return
+        const getRes = await getManyDocs(studentCollection, undefined, deleteDocSuccessCb, deleteDocFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
        try {
-        authToken(token, async() => {
-            const getRes = await deleteDoc(studentCollection, query, deleteDocSuccessCb, deleteDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
+        authRequest(token, request, res)
     } catch (err) {
         res.status(400).json({ success: false, error: err })
     }
@@ -102,14 +106,41 @@ async function getAllStudents(req, res) {
     if(tokenChecker(token,res) !== true) return
     const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
     const getAllDocsFailCb = () => failHandler('list',res)
+    const request = async(data) => {
+        if  (dataHandler(data,res) !== true) return
+        const getRes = await getManyDocs(studentCollection, undefined, getAllDocsSuccessCb, getAllDocsFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
     try {
-        authToken(token, async() => {
-            const getRes = await getAllDocs(studentCollection, getAllDocsSuccessCb, getAllDocsFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
+        authRequest(token, request, res)
+
     } catch (error) {
         res.status(400).json({ success: false, error })
     }
+}
+
+/** 
+ * get many hrs from hr collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+ async function getManyStudents(req, res) {
+    const token = req.headers.authorization
+    const student = req.body.student;
+    if(tokenChecker(token,res) !== true) return
+    if(dataHandler(student,res,'getAllHrs') !== true) return
+    const request = async(data) => {
+        if  (dataHandler(data,res) !== true) return
+        const getRes = await getManyDocs(studentCollection, student, getAllDocsSuccessCb, getAllDocsFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
+    const getAllDocsFailCb = () => failHandler('list',res)
+    try {
+        authRequest(token, request, res)
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    } finally {}
 }
 
 module.exports = {
@@ -117,5 +148,6 @@ module.exports = {
     getStudent,
     updateStudentById,
     deleteStudentById,
-    getAllStudents
+    getAllStudents,
+    getManyStudents
 };

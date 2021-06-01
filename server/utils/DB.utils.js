@@ -2,6 +2,7 @@ async function getManyDocs(collection, query = {}, successCb = () => {}, failCb 
     try {
         await collection.find(query, (error, collectionArray) => {
             if (error) throw new Error(`error on getManyDocs: ${error}`);
+            console.log(collectionArray);
             !collectionArray ? failCb() : successCb(collectionArray)
         })
     } catch (error) {

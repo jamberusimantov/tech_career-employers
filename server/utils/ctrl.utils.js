@@ -44,6 +44,15 @@ const queryHandler = (query,res)=>{
     return true
 }
 
+const dataHandler = (data,res,msg)=>{
+    if (!data) return res.status(400).json({
+        success: false,
+        message: unauthorizedToken(msg)
+    })
+    return true
+
+}
 
 
-module.exports= {idChecker,tokenChecker,successHandler,failHandler,queryHandler}
+
+module.exports= {dataHandler,idChecker,tokenChecker,successHandler,failHandler,queryHandler}
