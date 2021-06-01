@@ -26,24 +26,25 @@ function App(props: any) {
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const  { LayoutMain }  = components;
+  const { LayoutMain } = components;
   const { appStyle } = styles;
 
   useEffect(() => {
-    // const token = login.default.getToken();
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI0ZWUwNmYxZDkyNTVhMDA1ZjEyM2UiLCJuYW1lIjoibGlvciIsImVtYWlsIjoibGlvcmltYXppc2dAZ21haWwuY29tIiwiaWF0IjoxNjIyNDcwMjAwLCJleHAiOjE3MDg4NzAyMDB9.PBTGtUiskSoEAoS-z5zEqRQsbsAVf_u0DiNNC9lMSOI'
-    if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
-        console.log(userDataUseToken);
+    login.default.loginUser({
+      "email": "test2@gmail.com",
+      "password":"123123123"},
+      'student').then(res => res.success && login.default.setTokenLocal(res.token))
+    const userHandler = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const res = await getUserUseToken(token, 'student');
+        setUserData(res)
+        console.log(res);
         
-        // if (userDataUseToken.success) {
-        //   setUserData(userDataUseToken.data)
-        // }
-      })
-      return () => {
-        setUserData(Object);
       }
     }
+    
+      userHandler()
   }, [getUserUseToken, login.default, setUserData]);
 
   useEffect(() => {
@@ -56,12 +57,12 @@ function App(props: any) {
 
   const classes = appStyle()
 
-  if (!userData.email) {
+  if (!userData) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        
-        <LayoutMain/>
+
+        <LayoutMain />
       </div>
     );
   }
@@ -69,7 +70,7 @@ function App(props: any) {
   return (
     <div className={classes.App}>
       <CssBaseline />
-      <LayoutMain/>
+      <LayoutMain />
     </div>
   );
 }

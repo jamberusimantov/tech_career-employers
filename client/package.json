@@ -64,7 +64,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://127.0.0.1:4200",
+  "proxy": {"target":"http://localhost:4201"},
   "devDependencies": {
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
