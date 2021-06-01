@@ -6,7 +6,7 @@ import service from './service';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
-import Login from './components/Login';
+import Login from './components/Login/Login';
 import Register from './components/Register';
 import RegistrationForm from './components/RegistrationForm';
 
@@ -26,6 +26,7 @@ const mapStateToProps = (state: any) => {
 
 
 function App(props: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
@@ -60,10 +61,8 @@ function App(props: any) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        <LayoutMain />
-        <Login />
-        {/* <Register /> */}
-        <RegistrationForm />
+        
+        <LayoutMain/>
       </div>
     );
   }

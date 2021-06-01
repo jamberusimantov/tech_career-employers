@@ -1,7 +1,8 @@
 const jobOfferCollection = require('./jobOffer_model')
 const DB = require('../../utils/DB.utils')
-const { authToken } = require('../../utils/register.utils')
-const { getDoc, postDoc, updateDoc, deleteDoc, getAllDocs, filteredPrivateProps } = DB
+const authRequest = require('../../utils/register.utils').authToken
+const { getDoc, updateDoc, deleteDoc, postDocs, getManyDocs, msgs } = DB
+const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId } = msgs
 /** 
  * get all jobOffers from jobOffer Collection
  * @param {*} req 
@@ -11,26 +12,190 @@ async function getAllJobOffers(req, res) {
     const token = req.headers.authorization
     if (!token) return res.status(400).json({
         success: false,
-        message: 'auth token is required on getAllJobOffers'
+        message: requiredToken('getAllJobOffers')
     })
-    const getAllDocsSuccessCb = data => res.status(200).json({
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getAllJobOffers')
+        })
+        const getRes = await getManyDocs(jobOfferCollection, undefined, getJobOffersSuccess, getJobOffersFail)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const getJobOffersSuccess = data => res.status(200).json({
         success: true,
-        data: filteredPrivateProps(data),
-        message: 'get all jobOffers successfully'
+        data: data,
+        message: success('getAllJobOffers')
     })
-    const getAllDocsFailCb = () => res.status(400).json({
+    const getJobOffersFail = () => res.status(400).json({
         success: false,
-        message: 'jobOffers list not found'
+        message: failure('getAllJobOffers')
     })
     try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth on getAllJobOffers'
-            })
-            const getRes = await getAllDocs(jobOfferCollection, getAllDocsSuccessCb, getAllDocsFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
+        authRequest(token, request, res)
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    } finally {}
+}
+/** 
+ * get many jobOffers from jobOffer Collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getManyJobOffers(req, res) {
+    const token = req.headers.authorization
+    const jobOffer = req.body.jobOffer
+    if (!token) return res.status(400).json({
+        success: false,
+        message: requiredToken('getManyJobOffers')
+    })
+    if (!jobOffer) return res.status(400).json({
+        success: false,
+        message: requiredQuery('getManyJobOffers')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getManyJobOffers')
+        })
+        const getRes = await getManyDocs(jobOfferCollection, jobOffer, getJobOffersSuccess, getJobOffersFail)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const getJobOffersSuccess = data => res.status(200).json({
+        success: true,
+        data: data,
+        message: success('getManyJobOffers')
+    })
+    const getJobOffersFail = () => res.status(400).json({
+        success: false,
+        message: failure('getManyJobOffers')
+    })
+    try {
+        authRequest(token, request, res)
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    } finally {}
+}
+/**
+ * get jobOffer from jobOffer collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getJobOffer(req, res) {
+    const token = req.headers.authorization
+    const jobOffer = req.body.jobOffer
+    if (!token) return res.status(400).json({
+        success: false,
+        message: requiredToken('getJobOffer')
+    })
+    if (!jobOffer) return res.status(400).json({
+        success: false,
+        message: requiredQuery('getJobOffer')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getJobOffer')
+        })
+        const getRes = await getDoc(jobOfferCollection, jobOffer, getJobOfferSuccess, getJobOfferFail)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const getJobOfferSuccess = data => res.status(200).json({
+        success: true,
+        data: data,
+        message: success('getJobOffer')
+    })
+    const getJobOfferFail = () => res.status(400).json({
+        success: false,
+        message: failure('getJobOffer')
+    })
+    try {
+        authRequest(token, request, res)
+    } catch (error) {
+        return res.status(400).json({ success: false, error })
+    } finally {}
+}
+/**
+ * get jobOffer by id from jobOffer collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getJobOfferByUrlId(req, res) {
+    const token = req.headers.authorization
+    const _id = req.params.Id;
+    const jobOffer = { _id }
+    if (!token) return res.status(400).json({
+        success: false,
+        message: requiredToken('getJobOfferByUrlId')
+    })
+    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+        success: false,
+        message: corruptId('getJobOfferByUrlId')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getJobOfferByUrlId')
+        })
+        const getRes = await getDoc(jobOfferCollection, jobOffer, getJobOfferSuccess, getJobOfferFail)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const getJobOfferSuccess = data => res.status(200).json({
+        success: true,
+        data: filteredPrivateProps(data),
+        message: success('getJobOfferByUrlId')
+    })
+    const getJobOfferFail = () => res.status(400).json({
+        success: false,
+        message: failure('getJobOfferByUrlId')
+    })
+    try {
+        authRequest(token, request, res)
+    } catch (error) {
+        return res.status(400).json({ success: false, error })
+    } finally {}
+}
+/**
+ * update jobOffer by id to jobOffer collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function updateJobOfferByUrlId(req, res) {
+    const token = req.headers.authorization
+    const jobOffer = req.body.jobOffer
+    const _id = req.params.Id;
+    if (!token) return res.status(400).json({
+        success: false,
+        message: requiredToken('updateJobOfferByUrlId')
+    })
+    if (!jobOffer) return res.status(400).json({
+        success: false,
+        message: requiredQuery('updateJobOfferByUrlId')
+    })
+    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+        success: false,
+        message: corruptId('updateJobOfferByUrlId')
+    })
+    company._id = _id;
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('updateJobOfferByUrlId')
+        })
+        const updateRes = await updateDoc(jobOfferCollection, dataToUpdate, updateJobOfferSuccess, updateJobOfferFail)
+        if (updateRes && updateRes.error) throw new Error(updateRes.error)
+    }
+    const updateJobOfferSuccess = data => res.status(201).json({
+        success: true,
+        data: filteredPrivateProps(data),
+        message: success('updateJobOfferByUrlId')
+    })
+    const updateJobOfferFail = () => res.status(400).json({
+        success: false,
+        message: failure('updateJobOfferByUrlId')
+    })
+    try {
+        authToken(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
@@ -43,83 +208,36 @@ async function getAllJobOffers(req, res) {
 async function deleteJobOfferByUrlId(req, res) {
     const token = req.headers.authorization
     const _id = req.params.Id;
-    if (!_id) return res.status(400).json({
-        success: false,
-        message: 'id is required on deleteJobOffer'
-    })
-    if (_id.length !== 24) return res.status(400).json({
-        success: false,
-        message: 'corrupt id on deleteJobOffer'
-    })
-    const query = { _id };
+    const jobOffer = { _id };
     if (!token) return res.status(400).json({
         success: false,
-        message: 'auth token is required on deleteJobOffer'
+        message: requiredToken('deleteJobOfferByUrlId')
     })
-    const deleteDocSuccessCb = data => res.status(200).json({
+    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+        success: false,
+        message: corruptId('deleteJobOfferByUrlId')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('deleteJobOfferByUrlId')
+        })
+        const deleteRes = await deleteDoc(jobOfferCollection, jobOffer, deleteJobOfferSuccess, deleteJobOfferFail)
+        if (deleteRes && deleteRes.error) throw new Error(deleteRes.error)
+    }
+    const deleteJobOfferSuccess = data => res.status(200).json({
         success: true,
-        message: `delete jobOffer: ${data._id} successfully`
+        message: success('deleteJobOfferByUrlId')
     })
 
-    const deleteDocFailCb = () => res.status(400).json({
+    const deleteJobOfferFail = () => res.status(400).json({
         success: false,
-        message: `jobOffer: ${_id} not found`
+        message: failure('deleteJobOfferByUrlId')
     })
     try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth on deleteJobOffer '
-            })
-            const deleteRes = await deleteDoc(jobOfferCollection, query, deleteDocSuccessCb, deleteDocFailCb)
-            if (deleteRes && deleteRes.error) throw new Error(deleteRes.error)
-        }, res)
+        authRequest(token, request, res)
     } catch (err) {
         res.status(400).json({ success: false, error: err })
-    } finally {}
-
-}
-/**
- * get jobOffer by id from jobOffer collection
- * @param {*} req 
- * @param {*} res 
- */
-async function getJobOfferByUrlId(req, res) {
-    const token = req.headers.authorization
-    const _id = req.params.Id;
-    if (!_id) return res.status(400).json({
-        success: false,
-        message: 'id is required on getJobOffer'
-    })
-    if (_id.length !== 24) return res.status(400).json({
-        success: false,
-        message: 'corrupt id on getJobOffer'
-    })
-    const query = { _id };
-    if (!token) return res.status(400).json({
-        success: false,
-        message: 'auth token is required on getJobOffer'
-    })
-    const getDocSuccessCb = data => res.status(200).json({
-        success: true,
-        data: filteredPrivateProps(data),
-        message: `get  jobOffer: ${data._id} successfully`
-    })
-    const getDocFailCb = () => res.status(400).json({
-        success: false,
-        message: `jobOffer: ${_id} not found`
-    })
-    try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth on getJobOffer'
-            })
-            const getRes = await getDoc(jobOfferCollection, query, getDocSuccessCb, getDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
-    } catch (error) {
-        return res.status(400).json({ success: false, error })
     } finally {}
 }
 /**
@@ -129,89 +247,40 @@ async function getJobOfferByUrlId(req, res) {
  */
 async function postJobOffer(req, res) {
     const token = req.headers.authorization
-    const dataToPost = req.body.dataToPost
-    const { uploadedBy } = dataToPost
-    if (!uploadedBy) return res.status(400).json({
-        success: false,
-        message: 'uploadedBy is required on postJobOffer'
-    })
+    const jobOffer = req.body.jobOffer
     if (!token) return res.status(400).json({
         success: false,
         message: 'auth token is required on postJobOffer'
     })
-    const postDocSuccessCb = () => res.status(201).json({
+    if (!jobOffer) return res.status(400).json({
+        success: false,
+        message: 'query data is required on postJobOffer'
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: 'token not auth on postJobOffer'
+        })
+        const postRes = await postDoc(jobOfferCollection, jobOffer, postJobOfferSuccess)
+        if (postRes && postRes.error) throw new Error(postRes.error)
+    }
+    const postJobOfferSuccess = () => res.status(201).json({
         success: true,
         message: ` post JobOffer by: ${uploadedBy} successfully`
     })
     try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth'
-            })
-            const postRes = await postDoc(jobOfferCollection, dataToPost, postDocSuccessCb)
-            if (postRes && postRes.error) throw new Error(postRes.error)
-        }, res)
+        authRequest(token, request, res)
     } catch (err) {
         res.status(400).json({ success: false, error })
     } finally {}
-
-
-
 }
-/**
- * update jobOffer by id to jobOffer collection
- * @param {*} req 
- * @param {*} res 
- */
-async function updateJobOfferByUrlId(req, res) {
-    const token = req.headers.authorization
-    const dataToUpdate = req.body.dataToUpdate
-    const _id = req.params.Id;
-    if (!_id) return res.status(400).json({
-        success: false,
-        message: 'id is required on updateJobOffer'
-    })
-    if (_id.length !== 24) return res.status(400).json({
-        success: false,
-        message: 'corrupt id on updateJobOffer'
-    })
-    if (!token) return res.status(400).json({
-        success: false,
-        message: 'auth token is required on updateJobOffer'
-    })
-    if (!dataToUpdate) return res.status(400).json({
-        success: false,
-        message: 'dataToUpdate is required on updateJobOffer'
-    })
-    dataToUpdate._id = _id;
-    const updateDocSuccessCb = data => res.status(201).json({
-        success: true,
-        data: filteredPrivateProps(data),
-        message: ` update jobOffer: ${data._id} successfully`
-    })
-    const updateDocFailCb = () => res.status(400).json({
-        success: false,
-        message: `update jobOffer: ${_id} failed`
-    })
-    try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth'
-            })
-            const updateRes = await updateDoc(jobOfferCollection, dataToUpdate, updateDocSuccessCb, updateDocFailCb)
-            if (updateRes && updateRes.error) throw new Error(updateRes.error)
-        }, res)
-    } catch (error) {
-        res.status(400).json({ success: false, error })
-    } finally {}
 
-}
 module.exports = {
     getAllJobOffers,
+    getManyJobOffers,
+    getJobOffer,
     getJobOfferByUrlId,
-    postJobOffer,
     updateJobOfferByUrlId,
-    deleteJobOfferByUrlId
+    deleteJobOfferByUrlId,
+    postJobOffer,
 }

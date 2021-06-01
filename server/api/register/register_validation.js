@@ -1,34 +1,45 @@
 const Validator = require('validator')
 const isEmpty = require('is-empty')
 
-function validateRegisterInput(data) {
-    let errors = {}
-        // Convert empty fields to an empty string so we can use validator
-    data.phone = !isEmpty(data.phone) ? data.phone : '';
-    data.name = !isEmpty(data.name) ? data.name : '';
+const validateInitialUserRegistration = (data, role) => {
+    const errors = {}
     data.email = !isEmpty(data.email) ? data.email : '';
-    data.password = !isEmpty(data.password) ? data.password : '';
-    data.password1 = !isEmpty(data.password1) ? data.password1 : '';
-
-
-    //phone checks 
-    if (Validator.isEmpty(data.phone)) {
-        errors.phone = "phone field is required"
-    }
-
-    //Name checks 
-    if (Validator.isEmpty(data.name)) {
-        errors.name = "Name field is required"
-    }
-
-    // Email checks
     if (Validator.isEmpty(data.email)) {
         errors.email = "Email field is required"
     } else if (!Validator.isEmail(data.email)) {
         errors.email = "Email is invalid"
     }
-
-    // password checks
+    if (role !== 'hr') return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+    data.company = !isEmpty(data.company) ? data.company : '';
+    if (Validator.isEmpty(data.company)) {
+        errors.company = "company field is required"
+    }
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+const validateRegisterInput = (data) => {
+    let errors = {}
+    data.phone = !isEmpty(data.phone) ? data.phone : '';
+    data.name = !isEmpty(data.name) ? data.name : '';
+    data.email = !isEmpty(data.email) ? data.email : '';
+    data.password = !isEmpty(data.password) ? data.password : '';
+    data.password1 = !isEmpty(data.password1) ? data.password1 : '';
+    if (Validator.isEmpty(data.phone)) {
+        errors.phone = "phone field is required"
+    }
+    if (Validator.isEmpty(data.name)) {
+        errors.name = "Name field is required"
+    }
+    if (Validator.isEmpty(data.email)) {
+        errors.email = "Email field is required"
+    } else if (!Validator.isEmail(data.email)) {
+        errors.email = "Email is invalid"
+    }
     if (Validator.isEmpty(data.password)) {
         errors.password = 'Password field is required'
     }
@@ -41,31 +52,47 @@ function validateRegisterInput(data) {
     if (!Validator.equals(data.password, data.password1)) {
         errors.password1 = 'Passwords must match'
     }
-
     return {
         errors,
         isValid: isEmpty(errors)
     }
 }
-
-function validateLoginInput(data) {
+const validateCompanyRegisterInput = (data) => {
     let errors = {}
-        // Convert empty fields to an empty string so we can use validator
+    data.field = !isEmpty(data.field) ? data.field : '';
+    data.info = !isEmpty(data.info) ? data.info : '';
+    data.phone = !isEmpty(data.phone) ? data.phone : '';
+    data.address = !isEmpty(data.address) ? data.address : '';
+
+    if (Validator.isEmpty(data.phone)) {
+        errors.phone = "phone field is required"
+    }
+    if (Validator.isEmpty(data.address)) {
+        errors.address = "address field is required"
+    }
+    if (Validator.isEmpty(data.info)) {
+        errors.info = "info field is required"
+    }
+    if (Validator.isEmpty(data.field)) {
+        errors.field = "field field is required"
+    }
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+const validateLoginInput = (data) => {
+    let errors = {}
     data.email = !isEmpty(data.email) ? data.email : '';
     data.password = !isEmpty(data.password) ? data.password : '';
-
-    // Email checks
     if (Validator.isEmpty(data.email)) {
         errors.email = "Email field is required"
     } else if (!Validator.isEmail(data.email)) {
         errors.email = "Email is invalid"
     }
-
-    // password checks
     if (Validator.isEmpty(data.password)) {
         errors.password = 'Password field is required'
     }
-
     return {
         errors,
         isValid: isEmpty(errors)
@@ -73,6 +100,8 @@ function validateLoginInput(data) {
 }
 
 module.exports = {
+    validateInitialUserRegistration,
     validateRegisterInput,
+    validateCompanyRegisterInput,
     validateLoginInput
 }

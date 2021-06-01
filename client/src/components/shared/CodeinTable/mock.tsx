@@ -1,15 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 interface CoursesDataType {
   key: React.Key;
-  courses: string;
+  courses: Object;
   courseCompletionDate: Object;
-  numberOfGraduates: string;
+  numberOfGraduates: number;
   cycle: string;
   isNoWorking: number;
   isWorking: number;
 }
+
 interface GraduatesDataType {
   key: React.Key,
   company: string,
@@ -17,6 +19,64 @@ interface GraduatesDataType {
   passion: [string],
   uploadDate: Object,
   emailTo: string,
+}
+
+
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const studentNames = (
+
+
+
+<Menu>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        אלמיטו
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        שמואל
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        ישראל
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        חמודי
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        ספיר
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        משה
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        רוי
+      </a>
+    </Menu.Item>
+  </Menu>
+
+);
+
+
+function numbersOfGraduates (text: string){
+
+  return <Dropdown overlay={studentNames}>
+  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+   {text} <DownOutlined />
+  </a>
+</Dropdown>
+
 }
 
 export const coursesColumns: any[] = [
@@ -39,11 +99,27 @@ export const coursesColumns: any[] = [
     title: 'מס בוגרים',
     dataIndex: 'numberOfGraduates',
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    render: (text: string) => <a>{text}</a >,
+
+    render: numbersOfGraduates,
   },
   {
     title: 'שם הקורס',
     dataIndex: 'courses',
+    filters: [
+      {
+        text: 'קורס פיתוח תוכנה',
+        value: 'קורס פיתוח תוכנה',
+      },
+      {
+        text: 'סייבר',
+        value: 'סייבר',
+      },
+      
+    ],
+    // specify the condition of filtering result
+    // here is that finding the name started with `value`
+    // onFilter: (value: any, record: { name: string | any[]; }) => record.courses.indexOf(value) === 0,
+  
   },
 ];
 
@@ -52,7 +128,7 @@ export const coursesData: CoursesDataType[] = [
     key: '1',
     courses: 'קורס פיתוח תוכנה',
     courseCompletionDate: Date(),
-    numberOfGraduates: 'drop down names',
+    numberOfGraduates: 5,
     cycle: 'ט"ה',
     isNoWorking: 5,
     isWorking: 55555555
@@ -61,7 +137,7 @@ export const coursesData: CoursesDataType[] = [
     key: '2',
     courses: 'בדיקות תוכנה QA',
     courseCompletionDate: Date(),
-    numberOfGraduates: 'drop down names',
+    numberOfGraduates: 5,
     cycle: 'ק"ר',
     isNoWorking: 5,
     isWorking: 55555555
@@ -70,7 +146,7 @@ export const coursesData: CoursesDataType[] = [
     key: '3',
     courses: 'סייבר',
     courseCompletionDate: Date(),
-    numberOfGraduates: 'drop down names',
+    numberOfGraduates: 5,
     cycle: 'ש"ח',
     isNoWorking: 5,
     isWorking: 55555555
@@ -112,7 +188,7 @@ export const graduatesColumns: any[] = [
 
 export const graduatesData: GraduatesDataType[] = [
   {
-    key: '1',
+    key: '4',
     company: 'Microsoft',
     uploadedBy: 'קרן',
     passion: ['Backend-End Development'],
@@ -120,7 +196,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '1',
+    key: '5',
     company: 'e-Bay',
     uploadedBy: 'נופר',
     passion: ['Backend-End Development'],
@@ -128,7 +204,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '2',
+    key: '6',
     company: 'Wix',
     uploadedBy: 'אדוה',
     passion: ['Front-End Development'],
@@ -136,7 +212,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '3',
+    key: '7',
     company: 'AT & T',
     uploadedBy: 'יוסי',
     passion: ['Front-End Development'],
@@ -144,7 +220,7 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
   {
-    key: '4',
+    key: '8',
     company: 'Amazon',
     uploadedBy: 'ניר',
     passion: ['Backend-End Development'],
@@ -152,5 +228,3 @@ export const graduatesData: GraduatesDataType[] = [
     emailTo: 'send email link',
   },
 ];
-
-
