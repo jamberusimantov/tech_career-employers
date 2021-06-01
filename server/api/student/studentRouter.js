@@ -1,6 +1,16 @@
 const studentRouter = require('express').Router()
 const student_ctrl = require('./student_ctrl')
 
+studentRouter.get('/all', student_ctrl.getAllStudents)
+studentRouter.post('/many', student_ctrl.getManyStudents)
+studentRouter.post('/single', student_ctrl.getStudent)
+studentRouter.put('/student/:Id', student_ctrl.updateStudentById)
+studentRouter.delete('/student/:Id', student_ctrl.deleteStudentByUrlId)
+studentRouter.get('/student/:Id', student_ctrl.getStudentByUrlId)
+
+module.exports = studentRouter;
+
+
 /**
  * @swagger
  * components:
@@ -143,11 +153,3 @@ const student_ctrl = require('./student_ctrl')
  *                  $ref:'#/components/schemas/Student'
  *         description: The user ID                    
  */
-studentRouter.get('/all', student_ctrl.getAllStudents)
-studentRouter.post('/many', student_ctrl.getManyStudents)
-studentRouter.post('/student', student_ctrl.getStudent)
-studentRouter.put('/student', student_ctrl.updateStudentById)
-studentRouter.delete('/student', student_ctrl.deleteStudentByUrlId)
-studentRouter.get('/student/:Id', student_ctrl.getStudentByUrlId)
-
-module.exports = studentRouter;

@@ -5,7 +5,6 @@ const {authRequest} = register
 const { getDoc, updateDoc, deleteDoc, getManyDocs, msgs } = DB
 const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
 
-
 /**
  * Get student by id from student collection
  * @param {*} req 
@@ -14,19 +13,20 @@ const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandle
 async function getStudentByUrlId(req, res) {
     const token = req.headers.authorization
     const _id = req.params.Id;
+    const student = { _id }
     if(idChecker(_id,res) !== true) return
     if(tokenChecker(token,res) !== true) return
-    const query = { _id }
     const getDocSuccessCb = (data)=> successHandler(data,res,'got')
-    const getDocFailCb = () => failHandler('user',res)
+    const getDocFailCb = () => failHandler(_id,res)
+    const request = async() => {
+        const getRes = await getDoc(studentCollection, student, getDocSuccessCb, getDocFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error);
+    }
     try {
-        authToken(token, async() => {
-            const getRes = await getDoc(studentCollection, query, getDocSuccessCb, getDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error);
-        }, res)
-    } catch (err) {
+        authRequest(token, request, res)
+    } catch (error) {
         res.status(400).json({ success: false, error })
-    } 
+    } finally {}
 }
 /**
  * get student from student collection
@@ -35,20 +35,24 @@ async function getStudentByUrlId(req, res) {
  */
 async function getStudent(req, res) {
     const token = req.headers.authorization
-    const query = req.body?.user;
-    if(queryHandler(query,res) !== true) return
-    const {email}  = query
+    const student = req.body.student;
     if(tokenChecker(token,res) !== true) return
+    if(dataHandler(student,res) !== true) return
     const getDocSuccessCb = (data)=> successHandler(data,res,'got')
-    const getDocFailCb = () => failHandler(email,res)
+    const getDocFailCb = () => failHandler('student',res)
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getStudent')
+        })
+        const getRes = await getDoc(studentCollection, student, getDocSuccessCb, getDocFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error);
+    }
     try {
-        authToken(token, async() => {
-            const getRes = await getDoc(studentCollection, query, getDocSuccessCb, getDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error);
-        }, res)
+        authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    }
+    } finally {}
 }
 /**
  * update student from student collection
@@ -57,20 +61,26 @@ async function getStudent(req, res) {
  */
 async function updateStudentById(req, res) {
     const token = req.headers.authorization
-    const query = req.body.user;
-    const { _id } = query;
-    if(idChecker(_id,res) !== true) return
+    const student = req.body.student;
+    const _id = req.params.Id;
     if(tokenChecker(token,res) !== true) return
+    if(idChecker(_id,res) !== true) return
+    student._id = _id;
     const updateDocSuccessCb = (data)=> successHandler(data,res,'updated')
     const updateDocFailCb = () => failHandler(_id,res)
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('updateHrByUrlId')
+        })
+        const getRes = await updateDoc(studentCollection, student, updateDocSuccessCb, updateDocFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
     try {
-        authToken(token, async() => {
-            const getRes = await updateDoc(studentCollection, query, updateDocSuccessCb, updateDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
+        authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    } 
+    } finally {}
 }
 /** 
  * delete student from student collection
@@ -86,7 +96,7 @@ async function updateStudentById(req, res) {
     const request = async(data) => {
         if (!data) return res.status(400).json({
             success: false,
-            message: unauthorizedToken('deleteHrByUrlId')
+            message: unauthorizedToken('deleteStudentByUrlId')
         })
         const getRes = await deleteDoc(studentCollection, student, deleteDocSuccessCb, deleteDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
@@ -97,7 +107,7 @@ async function updateStudentById(req, res) {
         authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    } finally {}
+    } 
 }
 /** 
  * get all students from student collection
