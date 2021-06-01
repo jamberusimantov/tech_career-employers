@@ -6,6 +6,10 @@ import service from './service';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
+import Login from './components/Login/Login';
+import Register from './components/Register';
+import RegistrationForm from './components/RegistrationForm';
+
 const { setUserData } = usersActions.usersActions;
 const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
 
@@ -22,10 +26,11 @@ const mapStateToProps = (state: any) => {
 
 
 function App(props: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
-  const { Layout } = components;
+  const { LayoutMain } = components;
   const { appStyle } = styles;
 
   useEffect(() => {
@@ -56,20 +61,8 @@ function App(props: any) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        <Layout>
-          <h1 className={classes.title}>please log in/ sign up to continue</h1>
-          <h2>width: {windowDimensions.width}</h2>
-          <h2>height: {windowDimensions.height}</h2>
-
-          <button onClick={() => {
-            login.default.loginUser({
-              password: '123456',
-              email: 'jamber.simantov@walla.co.il'
-            })
-              .then(res => res.success && login.default.setTokenLocal(res.token))
-          }}>login as lorem ipsum</button>
-
-        </Layout>
+        
+        <LayoutMain/>
       </div>
     );
   }
@@ -77,9 +70,7 @@ function App(props: any) {
   return (
     <div className={classes.App}>
       <CssBaseline />
-      <Layout>
-        <h1 className={classes.title}>{userData.email} profile page</h1>
-      </Layout>
+      <LayoutMain />
     </div>
   );
 }

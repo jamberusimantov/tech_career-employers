@@ -1,8 +1,7 @@
-const { response } = require("express");
-async function getAllDocs(collection, successCb = () => {}, failCb = () => {}) {
+async function getManyDocs(collection, query = {}, successCb = () => {}, failCb = () => {}) {
     try {
-        await collection.find((error, collectionArray) => {
-            if (error) throw new Error(`error on getAllDocs: ${error}`);
+        await collection.find(query, (error, collectionArray) => {
+            if (error) throw new Error(`error on getManyDocs: ${error}`);
             !collectionArray ? failCb() : successCb(collectionArray)
         })
     } catch (error) {
@@ -20,10 +19,10 @@ async function getDoc(collection, query, successCb = () => {}, failCb = () => {}
         return { success: false, error };
     } finally {}
 }
-async function postDoc(collection, doc, successCb = () => {}) {
+async function postDocs(collection, docs, successCb = () => {}) {
     try {
-        await collection.insertMany(doc, (error) => {
-            if (error) throw new Error(`error on postDoc: ${error}`);
+        await collection.insertMany(docs, (error) => {
+            if (error) throw new Error(`error on postDocs: ${error}`);
             successCb();
         })
     } catch (error) {
@@ -58,30 +57,30 @@ async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
     const methods = {
-        strict: newObj => {
-            newObj.password = undefined;
-            newObj.token = undefined;
-            newObj.messages = undefined;
-            newObj.notifications = undefined;
-            newObj.phone = undefined;
-            newObj.tags = undefined
-            return newObj;
+        strict: user => {
+            user.password = undefined;
+            user.token = undefined;
+            user.messages = undefined;
+            user.notifications = undefined;
+            user.phone = undefined;
+            user.tags = undefined
+            return user;
         },
-        self: newObj => {
-            newObj.password = undefined;
-            newObj.token = undefined;
-            return newObj;
+        self: user => {
+            user.password = undefined;
+            user.token = undefined;
+            return user;
         },
-        fallbackMethod: newObj => {
-            newObj.password = undefined;
-            newObj.token = undefined;
-            newObj.messages = undefined;
-            newObj.notifications = undefined;
-            return newObj;
+        fallbackMethod: user => {
+            user.password = undefined;
+            user.token = undefined;
+            user.messages = undefined;
+            user.notifications = undefined;
+            return user;
         }
     }
     const newObj = new Object(userItem)
-    const setObject = () => methods[method] ? methods[method](newObj) : methods.fallbackMethod
+    const setObject = () => methods[method] ? methods[method](newObj) : methods.fallbackMethod(newObj)
     if (userItem instanceof Array) {
         let results = [];
         userItem.forEach(user => {
@@ -91,12 +90,23 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
     }
     if (typeof userItem === 'object') return setObject(userItem)
 }
+const msgs = {
+    requiredToken: serviceName => `required auth token on ${serviceName}`,
+    requiredQuery: serviceName => `required query data on ${serviceName}`,
+    unauthorizedToken: serviceName => `unauthorized token on ${serviceName}`,
+    unauthorizedCredentials: serviceName => `unauthorized credentials on ${serviceName}`,
+    corruptId: serviceName => `corrupt id on ${serviceName}`,
+    success: serviceName => `success on ${serviceName}`,
+    failure: serviceName => `failure on ${serviceName}`,
+    err: (serviceName, error) => `error on ${serviceName}: ${error}`,
+}
 
 module.exports = {
-    getAllDocs,
+    getManyDocs,
     getDoc,
-    postDoc,
+    postDocs,
     updateDoc,
     deleteDoc,
-    filteredPrivateProps
+    filteredPrivateProps,
+    msgs
 }
