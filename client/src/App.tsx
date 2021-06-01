@@ -36,9 +36,9 @@ function App(props: any) {
       getUserUseToken(token).then((userDataUseToken) => {
         console.log(userDataUseToken);
         
-        if (userDataUseToken.success) {
-          setUserData(userDataUseToken.data)
-        }
+        // if (userDataUseToken.success) {
+        //   setUserData(userDataUseToken.data)
+        // }
       })
       return () => {
         setUserData(Object);

@@ -70,7 +70,7 @@ const studentNames = (
 
 
 function numbersOfGraduates (text: string){
-
+  
   return <Dropdown overlay={studentNames}>
   <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
    {text} <DownOutlined />
@@ -80,28 +80,6 @@ function numbersOfGraduates (text: string){
 }
 
 export const coursesColumns: any[] = [
-  {
-    title: 'סגירת השמות',
-    dataIndex: 'isWorking',
-  },
-  {
-    title: 'מס מחפשי עבודה',
-    dataIndex: 'isNoWorking',
-  },
-  {
-    title: 'מס מועסקים',
-    dataIndex: 'cycle',
-  }, {
-    title: 'מועד סיום',
-    dataIndex: 'courseCompletionDate',
-  },
-  {
-    title: 'מס בוגרים',
-    dataIndex: 'numberOfGraduates',
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-
-    render: numbersOfGraduates,
-  },
   {
     title: 'שם הקורס',
     dataIndex: 'courses',
@@ -114,12 +92,38 @@ export const coursesColumns: any[] = [
         text: 'סייבר',
         value: 'סייבר',
       },
-      
+      {
+        text: 'בודק תוכנה',
+        value: 'בודק תוכנה',
+      }, 
     ],
     // specify the condition of filtering result
     // here is that finding the name started with `value`
     // onFilter: (value: any, record: { name: string | any[]; }) => record.courses.indexOf(value) === 0,
   
+  },
+  {
+   title: 'מועד סיום',
+   dataIndex: 'courseCompletionDate',
+  },
+  {
+    title: 'מס בוגרים',
+    dataIndex: 'numberOfGraduates',
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+  
+    render: numbersOfGraduates,
+  },
+  {
+    title: 'מס מועסקים',
+    dataIndex: 'cycle',
+  },
+  {
+    title: 'מס מחפשי עבודה',
+    dataIndex: 'isNoWorking',
+  },
+ {
+   title: 'סגירת השמות',
+   dataIndex: 'isWorking',
   },
 ];
 
@@ -155,9 +159,24 @@ export const coursesData: CoursesDataType[] = [
 
 export const graduatesColumns: any[] = [
   {
-    title: 'הגישו קו"ח',
-    dataIndex: 'name',
-    // render: (text: string) => <a>{text}</a>,
+    title: 'חברה',
+    dataIndex: 'company',
+  },
+  {
+    title: 'מגייסת',
+    dataIndex: 'uploadedBy',
+  },
+  {
+    title: 'תפקיד',
+    dataIndex: 'passion',
+  },
+  {
+    title: 'ת. פתיחת משרה',
+    dataIndex: 'uploadDate',
+  },
+  {
+    title: 'סטטוס',
+    dataIndex: 'age',
   },
   {
     title: 'שאל את המגייסת?',
@@ -167,22 +186,9 @@ export const graduatesColumns: any[] = [
       <a href="mailto: abc@example.com">{text}</a>,
   },
   {
-    title: 'סטטוס',
-    dataIndex: 'age',
-  },
-  {
-    title: 'ת. פתיחת משרה',
-    dataIndex: 'uploadDate',
-  },
-  {
-    title: 'תפקיד',
-    dataIndex: 'passion',
-  }, {
-    title: 'מגייסת',
-    dataIndex: 'uploadedBy',
-  }, {
-    title: 'חברה',
-    dataIndex: 'company',
+    title: 'הגישו קו"ח',
+    dataIndex: 'name',
+    // render: (text: string) => <a>{text}</a>,
   },
 ];
 
