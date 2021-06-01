@@ -77,24 +77,27 @@ async function updateStudentById(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-async function deleteStudentById(req, res) {
+ async function deleteStudentByUrlId(req, res) {
     const token = req.headers.authorization
-    const query = req.body.user;
-    const { _id } = query;
+    const _id = req.params.Id;
+    const student = { _id }
     if(idChecker(_id,res) !== true) return
     if(tokenChecker(token,res) !== true) return
-    const deleteDocSuccessCb = (data)=> successHandler(data,res,'deleted')
-    const deleteDocFailCb = () => failHandler(_id,res)
     const request = async(data) => {
-        if  (dataHandler(data,res) !== true) return
-        const getRes = await getManyDocs(studentCollection, undefined, deleteDocSuccessCb, deleteDocFailCb)
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('deleteHrByUrlId')
+        })
+        const getRes = await deleteDoc(studentCollection, student, deleteDocSuccessCb, deleteDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
-       try {
+    const deleteDocSuccessCb = (data)=> successHandler(data,res,'deleted')
+    const deleteDocFailCb = () => failHandler(_id,res)
+    try {
         authRequest(token, request, res)
-    } catch (err) {
-        res.status(400).json({ success: false, error: err })
-    }
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    } finally {}
 }
 /** 
  * get all students from student collection
@@ -124,9 +127,14 @@ async function getAllStudents(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
- async function getManyStudents(req, res) {
+async function getManyStudents(req, res) {
     const token = req.headers.authorization
     const student = req.body.student;
+    studentCollection.drop(function(err, delOK) {
+        if (err) throw err;
+        if (delOK) console.log("Collection deleted");
+        return res.send({success:true})
+    })
     if(tokenChecker(token,res) !== true) return
     if(dataHandler(student,res,'getAllHrs') !== true) return
     const request = async(data) => {
@@ -147,7 +155,7 @@ module.exports = {
     getStudentByUrlId,
     getStudent,
     updateStudentById,
-    deleteStudentById,
+    deleteStudentByUrlId,
     getAllStudents,
     getManyStudents
 };

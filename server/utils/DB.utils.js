@@ -57,39 +57,42 @@ async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {
     } finally {}
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
+    const newObj = new Object(userItem)
     const methods = {
-        strict: user => {
-            user.password = undefined;
-            user.token = undefined;
-            user.messages = undefined;
-            user.notifications = undefined;
-            user.phone = undefined;
-            user.tags = undefined
-            return user;
+        strict: newObj => {
+            newObj.password = undefined;
+            newObj.token = undefined;
+            newObj.messages = undefined;
+            newObj.notifications = undefined;
+            newObj.phone = undefined;
+            newObj.tags = undefined
+            return newObj;
         },
-        self: user => {
-            user.password = undefined;
-            user.token = undefined;
-            return user;
+        self: newObj => {
+            newObj.password = undefined;
+            newObj.token = undefined;
+            return newObj;
         },
-        fallbackMethod: user => {
-            user.password = undefined;
-            user.token = undefined;
-            user.messages = undefined;
-            user.notifications = undefined;
-            return user;
+        fallbackMethod: newObj => {
+            newObj.password = undefined;
+            newObj.token = undefined;
+            newObj.messages = undefined;
+            newObj.notifications = undefined;
+            return newObj;
         }
     }
-    const newObj = new Object(userItem)
-    const setObject = () => methods[method] ? methods[method](newObj) : methods.fallbackMethod(newObj)
+
+    const setObject = (user) => methods[method] ? methods[method](user) : methods.fallbackMethod
+    
+    if (typeof newObj === 'object') return setObject(newObj)
     if (userItem instanceof Array) {
         let results = [];
         userItem.forEach(user => {
             results.push(setObject(user))
         })
+        console.log(results);
         return results;
     }
-    if (typeof userItem === 'object') return setObject(userItem)
 }
 const msgs = {
     requiredToken: serviceName => `required auth token on ${serviceName}`,

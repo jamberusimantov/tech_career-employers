@@ -5,6 +5,7 @@ const {authRequest} = register
 const { getDoc, updateDoc, deleteDoc, filteredPrivateProps, getManyDocs, msgs } = DB
 const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId, } = msgs
 const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
+const { Mongoose } = require('mongoose')
 
 /** 
  * get all hrs from hr collection
@@ -198,30 +199,18 @@ async function deleteHrByUrlId(req, res) {
     const token = req.headers.authorization
     const _id = req.params.Id;
     const hr = { _id }
-    if (!token) return res.status(400).json({
-        success: false,
-        message: requiredToken('deleteHrByUrlId')
-    })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
-        success: false,
-        message: corruptId('deleteHrByUrlId')
-    })
+    if(idChecker(_id,res) !== true) return
+    if(tokenChecker(token,res) !== true) return
     const request = async(data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('deleteHrByUrlId')
         })
-        const getRes = await deleteDoc(hrCollection, hr, deleteHrSuccess, deleteHrFail)
+        const getRes = await deleteDoc(hrCollection, hr, deleteDocSuccessCb, deleteDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
-    const deleteHrSuccess = data => res.status(200).json({
-        success: true,
-        message: success('deleteHrByUrlId')
-    })
-    const deleteHrFail = () => res.status(400).json({
-        success: false,
-        message: failure('deleteHrByUrlId')
-    })
+    const deleteDocSuccessCb = (data)=> successHandler(data,res,'deleted')
+    const deleteDocFailCb = () => failHandler(_id,res)
     try {
         authRequest(token, request, res)
     } catch (error) {
