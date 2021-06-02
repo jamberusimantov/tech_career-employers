@@ -1,11 +1,9 @@
 import React from 'react'
 
-function Hr() {
+export default function Students() {
     return (
         <div>
-            <h1>Hr page</h1> 
+            <h1>Students page</h1>
         </div>
     )
 }
-
-export default Hr

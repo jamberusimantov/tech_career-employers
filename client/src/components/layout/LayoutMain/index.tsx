@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 //Pages
 
-import AdminRouter from "../../../AdminRouter"
+import PagesRouter from "../../../PagesRouter"
 
 
 import { Layout, Menu, Breadcrumb } from "antd";
@@ -27,12 +27,12 @@ function LayoutMain() {
          <img src="/img/Logo.png" alt="" className="logo"/> 
         </div>
         
-        <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
+        {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
           <Menu.Item key="3">סטודנטים</Menu.Item>
           <Menu.Item key="2">מגייסים</Menu.Item>
           <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
-        </Menu>
+        </Menu> */}
       </Header>
       <Content style={{ padding: "0 50px" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
@@ -79,7 +79,7 @@ function LayoutMain() {
             
 
                       {/* Admin Router */}
-                          <AdminRouter/>
+                          <PagesRouter />
 
 
           </Content>
