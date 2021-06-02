@@ -3,7 +3,9 @@ const studentsCollection = require('../api/student/student_model');
 const DB = require('../utils/DB.utils');
 const { getDoc } = DB;
 const authRequest = async(token, cb = () => {}, res) => {
-    const getDocSuccessCb = data => cb(data);
+    const getDocSuccessCb = data => {
+        cb(data);
+    }
     const getDocSuccessCbInner = getDocSuccessCb
     const getDocFailCb = async() => await getDoc(studentsCollection, query, getDocSuccessCbInner, getDocFailCbInner)
     const getDocFailCbInner = () => res.status(400).json({
