@@ -1,21 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 
-import { Table, Button,Pagination } from 'antd';
+import { Table, Button,Pagination,Input,Modal } from 'antd';
+
 import { LoadingOutlined } from '@ant-design/icons';
+
 
 import '../../../App.css';
 
 
+
 const CodeinTable = (props: any): any => {
+ 
+
+
+
 
   const { columns, getData } = props;
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-redeclare
   const [data, setData] = useState([])
-
 
   function itemRender(current: any, type:any, originalElement: any) {
     if (type === 'prev') {
@@ -28,8 +33,6 @@ const CodeinTable = (props: any): any => {
     }
     return originalElement;
   }
-
-
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -53,13 +56,13 @@ const CodeinTable = (props: any): any => {
   }, [])
 
   return (
-    
+
     <div className="codein-table-wrapper">
 
+
+
       <div>
-
         <Button icon={loading ? <LoadingOutlined /> : ""} type="primary">רענן</Button>
-
       </div>
 
       <Table
@@ -67,8 +70,11 @@ const CodeinTable = (props: any): any => {
         loading={loading}
         columns={columns}
         dataSource={data}
+
       />
+
         <Pagination total={100} itemRender={itemRender} />
+
     </div>
 
   );
