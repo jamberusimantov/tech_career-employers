@@ -5,15 +5,7 @@ async function getManyDocs(collection, query, successCb = () => {}, failCb = () 
     }]
     if (query) options.unshift(query)
     try {
-<<<<<<< HEAD
-        await collection.find(query, (error, collectionArray) => {
-            if (error) throw new Error(`error on getManyDocs: ${error}`);
-            console.log(collectionArray);
-            !collectionArray ? failCb() : successCb(collectionArray)
-        })
-=======
         await collection.find(...options)
->>>>>>> f4d0b8448a7cc1459ae32cecf9b32e6d6f4c0236
     } catch (error) {
         return { success: false, error }
     } finally {}
@@ -90,17 +82,8 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
             return newObj;
         }
     }
-<<<<<<< HEAD
-
-    const setObject = (user) => methods[method] ? methods[method](user) : methods.fallbackMethod
-    
-    if (typeof newObj === 'object') return setObject(newObj)
-    if (userItem instanceof Array) {
-=======
-    const newObj = new Object(userItem)
     const setObject = obj => methods[method] ? methods[method](obj) : methods.fallbackMethod(obj)
     if (newObj instanceof Array) {
->>>>>>> f4d0b8448a7cc1459ae32cecf9b32e6d6f4c0236
         let results = [];
         newObj.forEach(user => {
             results.push(setObject(user))
@@ -108,10 +91,7 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
         console.log(results);
         return results;
     }
-<<<<<<< HEAD
-=======
     if (typeof userItem === 'object') return setObject(newObj)
->>>>>>> f4d0b8448a7cc1459ae32cecf9b32e6d6f4c0236
 }
 const msgs = {
     requiredToken: serviceName => `required auth token on ${serviceName}`,
