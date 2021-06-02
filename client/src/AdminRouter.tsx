@@ -1,12 +1,13 @@
+import React from 'react';
 
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
 
-//Home page
-import Home from './pages/Home/Home'
+//Home pages
+import Home from './pages/home-page/Home'
+import HrRegister from './pages/hr-page/Hr-Register'
+import Student from './pages/student-page/Student'
 
-//HR page
-import HR from './pages/hr-page/Hr'
 
 import {
     Switch,
@@ -19,10 +20,13 @@ function AdminRouter() {
     return (
           <Switch>
               <Route exact path="/">
-            <Home/>
+            {/* <Home/> */}
           </Route>
           <Route path="/hr">
-            <HR/>
+            <HrRegister/>
+          </Route>
+          <Route path="/student">
+            <Student/>
           </Route>
           <Route path="/admin">
             <AdminPage/>

@@ -28,9 +28,11 @@ function App(props: any) {
   useEffect(() => {
     if (token) {
       getUserUseToken(token).then((userDataUseToken) => {
-        if (userDataUseToken.success) {
-          setUserData(userDataUseToken.data)
-        }
+        console.log(userDataUseToken);
+        
+        // if (userDataUseToken.success) {
+        //   setUserData(userDataUseToken.data)
+        // }
       })
       return () => {
         setUserData(Object);
@@ -43,6 +45,8 @@ function App(props: any) {
   if (!userData.email) {
     return (
       <div className={classes.App}>
+              <h1>akuo</h1>
+
         <LayoutMain />
       </div>
     );
