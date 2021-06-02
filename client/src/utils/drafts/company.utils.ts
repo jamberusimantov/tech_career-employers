@@ -1,4 +1,4 @@
-import { getDoc, getManyDocs, getDocById, updateDocById, deleteDocById } from './DB.utils';
+import { getDoc, getManyDocs, getDocById, updateDocById, deleteDocById } from '../DB.utils';
 const requiredId = (serviceName: string) => `required Id on ${serviceName}`;
 const err = (serviceName: string, error: string) => `error on ${serviceName}: ${error}`;
 const collection = 'companies'
@@ -43,3 +43,10 @@ export const deleteCompanyById = async (_id: string, token?: string) => {
     catch (error) { return { success: false, error: err('deleteCompanyById', error) } }
     finally { }
 }
+
+  // getCompany({ name: 'facebook' }, token).then(data => console.log(data))
+  // getManyCompanies(token, { field: 'internet' }).then(data => console.log(data))
+  // getManyCompanies(token).then(data => console.log(data))
+  // getCompanyById('60b72bef59a5dcdfa2c218cc', token).then(data => console.log(data))
+  // updateCompanyById({info:'big brother reality internet 4'},"60b72bef59a5dcdfa2c218cc",token).then(data => console.log(data))
+  // deleteCompanyById('60b72c1359a5dcdfa2c218cd',token).then(data => console.log(data))
