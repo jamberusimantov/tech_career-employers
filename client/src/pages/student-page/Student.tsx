@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Hr() {
+function Student() {
     return (
         <div>
-            <h1>Hr Page</h1> 
+            <h1>Student page</h1>
         </div>
     )
 }
 
-export default Hr
+export default Student
