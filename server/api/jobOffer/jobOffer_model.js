@@ -16,23 +16,23 @@ const jobOffer = new Schema({
         },
         company: {
             type: String,
-            required: true
+            // required: true
         },
         location: {
             type: String,
-            required: true
+            // required: true
         },
         jobDescription: {
             type: String,
-            required: true
+            // required: true
         },
         workRequirements: {
             type: String,
-            required: true
+            // required: true
         },
         minYearsOfExperience: {
             type: Number,
-            required: true
+            // required: true
         },
         numOfPeopleApplied: {
             type: Number,
