@@ -1,7 +1,6 @@
 const jobOfferRouter = require('express').Router()
 const jobOffer_ctrl = require('./jobOffer_ctrl')
 
-jobOfferRouter.get('/all', jobOffer_ctrl.getAllJobOffers)
 jobOfferRouter.post('/many', jobOffer_ctrl.getManyJobOffers)
 jobOfferRouter.post('/single', jobOffer_ctrl.getJobOffer)
 

@@ -1,47 +1,10 @@
 const jobOfferCollection = require('./jobOffer_model')
 const DB = require('../../utils/DB.utils')
+const mongoose = require('mongoose')
 const authRequest = require('../../utils/register.utils').authToken
 const { getDoc, updateDoc, deleteDoc, postDocs, getManyDocs, msgs } = DB
 const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId } = msgs
-/** 
- * get all jobOffers from jobOffer Collection
- * @param {*} req 
- * @param {*} res 
- */
-async function getAllJobOffers(req, res) {
-    const token = req.headers.authorization
-    if (!token) return res.status(400).json({
-        success: false,
-        message: requiredToken('getAllJobOffers')
-    })
-    const request = async(data) => {
-        if (!data) return res.status(400).json({
-            success: false,
-            message: unauthorizedToken('getAllJobOffers')
-        })
-        const getRes = await getManyDocs(jobOfferCollection, undefined, getJobOffersSuccess, getJobOffersFail)
-        if (getRes && getRes.error) throw new Error(getRes.error)
-    }
-    const getJobOffersSuccess = data => res.status(200).json({
-        success: true,
-        data: data,
-        message: success('getAllJobOffers')
-    })
-    const getJobOffersFail = () => res.status(400).json({
-        success: false,
-        message: failure('getAllJobOffers')
-    })
-    try {
-        authRequest(token, request, res)
-    } catch (error) {
-        res.status(400).json({ success: false, error })
-    } finally {}
-}
-/** 
- * get many jobOffers from jobOffer Collection
- * @param {*} req 
- * @param {*} res 
- */
+
 async function getManyJobOffers(req, res) {
     const token = req.headers.authorization
     const jobOffer = req.body.jobOffer
@@ -128,7 +91,7 @@ async function getJobOfferByUrlId(req, res) {
         success: false,
         message: requiredToken('getJobOfferByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('getJobOfferByUrlId')
     })
@@ -172,7 +135,7 @@ async function updateJobOfferByUrlId(req, res) {
         success: false,
         message: requiredQuery('updateJobOfferByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('updateJobOfferByUrlId')
     })
@@ -213,7 +176,7 @@ async function deleteJobOfferByUrlId(req, res) {
         success: false,
         message: requiredToken('deleteJobOfferByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('deleteJobOfferByUrlId')
     })
@@ -261,22 +224,21 @@ async function postJobOffer(req, res) {
             success: false,
             message: 'token not auth on postJobOffer'
         })
-        const postRes = await postDoc(jobOfferCollection, jobOffer, postJobOfferSuccess)
+        const postRes = await postDocs(jobOfferCollection, jobOffer, postJobOfferSuccess)
         if (postRes && postRes.error) throw new Error(postRes.error)
     }
     const postJobOfferSuccess = () => res.status(201).json({
         success: true,
-        message: ` post JobOffer by: ${uploadedBy} successfully`
+        message: ` post JobOffer by: ${JobOffer.uploadedBy} successfully`
     })
     try {
         authRequest(token, request, res)
-    } catch (err) {
+    } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
 }
 
 module.exports = {
-    getAllJobOffers,
     getManyJobOffers,
     getJobOffer,
     getJobOfferByUrlId,

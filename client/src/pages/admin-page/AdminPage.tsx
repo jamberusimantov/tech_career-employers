@@ -2,11 +2,12 @@ import React from 'react'
 
 
 //Table
-import CodeinTable from '../../components/shared/CodeinTable'
+// import CodeinTable from '../../components/shared/CodeinTable/index'
+import CodeinTable from '../../components/Shared/CodeinTable'
 
 import { Checkbox } from 'antd';
 //Data for table from local data
-import {coursesColumns,coursesData,graduatesColumns,graduatesData} from '../../components/shared/CodeinTable/mock'
+import {coursesColumns,coursesData,graduatesColumns,graduatesData} from '../../components/Shared/CodeinTable/mock'
 
 function AdminPage() {
 

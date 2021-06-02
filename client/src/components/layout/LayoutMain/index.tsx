@@ -1,10 +1,9 @@
 
 import "./style.css";
-
+import AdminRouter from '../../../AdminRouter'
 import {Link} from 'react-router-dom';
 
 
-import AdminRouter from "../../../AdminRouter"
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
@@ -43,7 +42,6 @@ function LayoutMain() {
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             
 
-                      {/* Admin Router */}
                           <AdminRouter/>
 
 
