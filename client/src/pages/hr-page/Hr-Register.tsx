@@ -1,33 +1,66 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Radio } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Typography, Divider } from 'antd';
+import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
+import {
+  Form,
+  Input,
+  Button,
+  Radio,
+  Select,
+  Cascader,
+  DatePicker,
+  InputNumber,
+  TreeSelect,
+  Switch,
+} from 'antd';
 
-const { Title, Paragraph, Text, Link } = Typography;
-const HrRegForm = () => {
-    const [form] = Form.useForm()
-    const onFinish = () => { }
-    return (
-        <>
-        <Title>Reqruiter Registration</Title>
-        <Form form={form}
-            name="register"
-            onFinish={onFinish}>
-            <Form.Item
-                name="email"
-                label="E-mail"
-                style={{ width: "400px" }}>
-                <Input />
-            </Form.Item>
-            <Form.Item
-                name="password"
-                label="Password"
-                style={{ width: "400px" }}>
-                <Input.Password />
-            </Form.Item>
-        </Form>
-        </>
-    )
-}
+type SizeType = Parameters<typeof Form>[0]['size'];
 
-export default HrRegForm
+
+const FormSizeDemo = () => {
+    const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
+    const onFormLayoutChange = ({ size }: { size: SizeType }) => {
+      setComponentSize(size);
+    };
+
+  return (
+    <>
+      <Form
+        labelCol={{
+          span: 4,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        layout="horizontal"
+        initialValues={{
+          size: componentSize,
+        }}
+       
+      >
+        
+        <Form.Item label="אימייל">
+          <Input />
+        </Form.Item>
+        <Form.Item label="שם מלא">
+          <Input />
+        </Form.Item>
+        <Form.Item label="טלפון">
+          <Input />
+        </Form.Item>
+        <Form.Item label="סיסמה">
+          <Input />
+        </Form.Item>
+        <Form.Item label="וודא סיסמה">
+          <Input />
+        </Form.Item>
+        <Form.Item label="שם ארגון">
+          <Input />
+        </Form.Item>
+       
+      </Form>
+    </>
+  );
+};
+
+export default FormSizeDemo 

@@ -3,10 +3,10 @@
 import AdminPage from './pages/admin-page/AdminPage'
 
 //Home page
-import Home from './pages/Home/Home'
+// import Home from './pages/Home/Home'
 
 //HR page
-import HR from './pages/hr-page/Hr'
+import HR from './pages/hr-page/Hr-Register'
 
 import {
     Switch,
@@ -19,7 +19,7 @@ function AdminRouter() {
     return (
           <Switch>
               <Route exact path="/">
-            <Home/>
+            {/* <Home/> */}
           </Route>
           <Route path="/hr">
             <HR/>
