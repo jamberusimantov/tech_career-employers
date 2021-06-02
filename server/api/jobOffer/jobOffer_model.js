@@ -45,6 +45,10 @@ const jobOffer = new Schema({
         notes: {
             type: String,
         },
+        isHidden: {
+            type: Boolean,
+            default: true,
+        },
         status: {
             type: String,
             default: 'OPEN',

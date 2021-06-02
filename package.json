@@ -15,6 +15,7 @@
         "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "dependencies": {
+        "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
         "chalk": "^4.1.0",
         "cors": "^2.8.5",

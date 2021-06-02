@@ -2,21 +2,26 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const company = new Schema({
-        logo: {
-            type: String
-        },
-        address: {
+        name: {
             type: String,
             required: true
         },
-        site: {
-            type: String,
-            required: true
+        field: String,
+        info: String,
+        phone: String,
+        address: String,
+        img: {
+            _id: Object,
+            data: Buffer,
+            name: String,
+            contentType: String,
+            size: Number,
+            path: String,
         },
-        about: {
-            type: String,
-            required: true
-        }
+        date: {
+            type: Date,
+            default: Date.now,
+        },
     },
     //  { timestamps: true }
 )

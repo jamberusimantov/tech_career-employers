@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const student = new Schema({
+      name:{
+        type: String,
+        required: true
+      },
         email: {
             type: String,
             required: true
@@ -10,14 +14,36 @@ const student = new Schema({
             type: String,
             required: true
         },
-        name: {
-            type: String,
-            required: true
-        },
         phone: {
             type: String,
             required: true
         },
+        // courseName: {
+        //     type: String,
+        //     required: true
+        // },
+
+        // courseCompletionDate:{
+        //     type: String,
+        //     required: true
+        // },
+
+        // numberOfGraduates:{
+        //     type: Number,
+        //     required: true
+        // },
+        // cycle: {
+        //     type: String,
+        //     required: true
+        // },
+        // isWorking:{
+        //     type: Boolean,
+        //     required: true
+        // },
+        // role:{
+        //     type: String,
+        //     required: true
+        // },
         section: String,
         isAuth: Boolean,
         token: String,
@@ -41,6 +67,5 @@ const student = new Schema({
             default: Date.now,
         },
     },
-    //  { timestamps: true }
 )
 module.exports = mongoose.model('student', student)

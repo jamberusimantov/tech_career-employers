@@ -1,48 +1,69 @@
 const hrCollection = require('./hr_model')
 const DB = require('../../utils/DB.utils')
-const { authToken } = require('../../utils/register.utils')
-const { getDoc, updateDoc, deleteDoc, getAllDocs, filteredPrivateProps } = DB
+const register = require('../../utils/register.utils')
+const {authRequest} = register
+const { getDoc, updateDoc, deleteDoc, filteredPrivateProps, getManyDocs, msgs } = DB
+const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId, } = msgs
+const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
+const { Mongoose } = require('mongoose')
 
-/**
- * get hr by id from hr collection
+/** 
+ * get all hrs from hr collection
  * @param {*} req 
  * @param {*} res 
  */
-async function getHrByUrlId(req, res) {
+async function getAllHrs(req, res) {
     const token = req.headers.authorization
-    const _id = req.params.Id;
-    if (!_id) return res.status(400).json({
-        success: false,
-        message: 'id is required on getHrById'
-    })
-    if (_id.length !== 24) return res.status(400).json({
-        success: false,
-        message: 'corrupt id on getHrById'
-    })
-    const query = { _id };
+    if(tokenChecker(token,res) !== true) return
+    const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
+    const getAllDocsFailCb = () => failHandler('list',res)
+    const request = async(data) => {
+        if  (dataHandler(data,res) !== true) return
+        const getRes = await getManyDocs(hrCollection, undefined, getAllDocsSuccessCb, getAllDocsFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    try {
+        authRequest(token, request, res)
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    } finally {}
+}
+/** 
+ * get many hrs from hr collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getManyHrs(req, res) {
+    const token = req.headers.authorization
+    const hr = req.body.hr;
     if (!token) return res.status(400).json({
         success: false,
-        message: 'auth token is required on getHrById'
+        message: requiredToken('getManyHrs')
     })
-    const getDocSuccessCb = data => res.status(200).json({
+    if (!hr) return res.status(400).json({
+        success: false,
+        message: requiredQuery('getManyHrs')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getManyHrs')
+        })
+        const getRes = await getManyDocs(hrCollection, hr, getHrsSuccess, getHrsFail)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const getHrsSuccess = data => res.status(200).json({
         success: true,
         data: filteredPrivateProps(data),
-        message: `get hr: ${data._id} successfully`
+        message: success('getManyHrs')
     })
-    const getDocFailCb = () => res.status(400).json({
+    const getHrsFail = () => res.status(400).json({
         success: false,
-        message: `hr: ${_id} not found`
+        message: failure('getManyHrs')
     })
     try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth on getHrById'
-            })
-            const getRes = await getDoc(hrCollection, query, getDocSuccessCb, getDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error);
-        }, res)
-    } catch (err) {
+        authRequest(token, request, res)
+    } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
 }
@@ -53,34 +74,74 @@ async function getHrByUrlId(req, res) {
  */
 async function getHr(req, res) {
     const token = req.headers.authorization
-    const query = req.body.user;
-    const { email } = query
-    if (!query) return res.status(400).json({
-        success: false,
-        message: 'query data is required on getHr'
-    })
+    const hr = req.body.hr;
     if (!token) return res.status(400).json({
         success: false,
-        message: 'auth token is required on getHr'
+        message: requiredToken('getHr')
     })
-    const getDocSuccessCb = data => res.status(200).json({
+    if (!hr) return res.status(400).json({
+        success: false,
+        message: requiredQuery('getHr')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getHr')
+        })
+        const getRes = await getDoc(hrCollection, hr, getHrSuccess, getHrFail)
+        if (getRes && getRes.error) throw new Error(getRes.error);
+    }
+    const getHrSuccess = data => res.status(200).json({
         success: true,
         data: filteredPrivateProps(data),
-        message: `get hr: ${data.email} successfully`
+        message: success('getHr')
     })
-    const getDocFailCb = () => res.status(400).json({
+    const getHrFail = () => res.status(400).json({
         success: false,
-        message: `hr: ${email} not found`
+        message: failure('getHr')
     })
     try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth on getHr'
-            })
-            const getRes = await getDoc(hrCollection, query, getDocSuccessCb, getDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error);
-        }, res)
+        authRequest(token, request, res)
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    } finally {}
+}
+/**
+ * get hr by id from hr collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function getHrByUrlId(req, res) {
+    const token = req.headers.authorization
+    const _id = req.params.Id;
+    const hr = { _id }
+    if (!token) return res.status(400).json({
+        success: false,
+        message: requiredToken('getHrByUrlId')
+    })
+    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+        success: false,
+        message: corruptId('getHrByUrlId')
+    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('getHrByUrlId')
+        })
+        const getRes = await getDoc(hrCollection, hr, getHrSuccess, getHrFail)
+        if (getRes && getRes.error) throw new Error(getRes.error);
+    }
+    const getHrSuccess = data => res.status(200).json({
+        success: true,
+        data: filteredPrivateProps(data),
+        message: success('getHrByUrlId')
+    })
+    const getHrFail = () => res.status(400).json({
+        success: false,
+        message: failure('getHrByUrlId')
+    })
+    try {
+        authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
@@ -90,39 +151,41 @@ async function getHr(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-async function updateHrById(req, res) {
+async function updateHrByUrlId(req, res) {
     const token = req.headers.authorization
-    const query = req.body.user;
-    const { _id } = query;
-    if (!_id) return res.status(400).json({
-        success: false,
-        message: 'id is required on getHrById'
-    })
-    if (_id.length !== 24) return res.status(400).json({
-        success: false,
-        message: 'corrupt id on getHrById'
-    })
+    const hr = req.body.hr;
+    const _id = req.params.Id;
     if (!token) return res.status(400).json({
         success: false,
-        message: 'auth token is required on updateHr'
+        message: requiredToken('updateHrByUrlId')
     })
-    const updateDocSuccessCb = data => res.status(200).json({
-        success: true,
-        message: `update hr: ${data.email} successfully`
-    })
-    const updateDocFailCb = () => res.status(400).json({
+    if (!hr) return res.status(400).json({
         success: false,
-        message: `hr: ${email} not found`
+        message: requiredQuery('updateHrByUrlId')
+    })
+    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+        success: false,
+        message: corruptId('updateHrByUrlId')
+    })
+    hr._id = _id;
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('updateHrByUrlId')
+        })
+        const getRes = await updateDoc(hrCollection, hr, updateHrSuccess, updateHrFail)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const updateHrSuccess = data => res.status(200).json({
+        success: true,
+        message: success('updateHrByUrlId')
+    })
+    const updateHrFail = () => res.status(400).json({
+        success: false,
+        message: failure('updateHrByUrlId')
     })
     try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth'
-            })
-            const getRes = await updateDoc(hrCollection, query, updateDocSuccessCb, updateDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
+        authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
@@ -132,81 +195,33 @@ async function updateHrById(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-async function deleteHrById(req, res) {
+async function deleteHrByUrlId(req, res) {
     const token = req.headers.authorization
-    const query = req.body.user;
-    const { _id } = query;
-    if (!_id) return res.status(400).json({
-        success: false,
-        message: 'id is required on getHrById'
-    })
-    if (_id.length !== 24) return res.status(400).json({
-        success: false,
-        message: 'corrupt id on getHrById'
-    })
-    if (!token) return res.status(400).json({
-        success: false,
-        message: 'auth token is required on getJobOffer'
-    })
-    const deleteDocSuccessCb = data => res.status(200).json({
-        success: true,
-        message: `delete hr: ${data.email} successfully`
-    })
-    const deleteDocFailCb = () => res.status(400).json({
-        success: false,
-        message: `hr: ${email} not found`
-    })
-    try {
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth'
-            })
-            const getRes = await deleteDoc(hrCollection, query, deleteDocSuccessCb, deleteDocFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
-    } catch (err) {
-        res.status(400).json({ success: false, error: err })
-    } finally {}
-}
-/** 
- * get all hrs from hr collection
- * @param {*} req 
- * @param {*} res 
- */
-async function getAllHrs(req, res) {
-    const token = req.headers.authorization
-    const getAllDocsSuccessCb = data => res.status(200).json({
-        success: true,
-        data: filteredPrivateProps(data),
-        message: 'get all hrs successfully'
-    })
-    const getAllDocsFailCb = () => res.status(400).json({
-        success: false,
-        message: 'hr list not found'
-    })
-    try {
-        if (!token) return res.status(400).json({
+    const _id = req.params.Id;
+    const hr = { _id }
+    if(idChecker(_id,res) !== true) return
+    if(tokenChecker(token,res) !== true) return
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
             success: false,
-            message: 'auth token is required'
+            message: unauthorizedToken('deleteHrByUrlId')
         })
-        authToken(token, async(data) => {
-            if (!data) return res.status(400).json({
-                success: false,
-                message: 'token not auth'
-            })
-            const getRes = await getAllDocs(hrCollection, getAllDocsSuccessCb, getAllDocsFailCb)
-            if (getRes && getRes.error) throw new Error(getRes.error)
-        }, res)
+        const getRes = await deleteDoc(hrCollection, hr, deleteDocSuccessCb, deleteDocFailCb)
+        if (getRes && getRes.error) throw new Error(getRes.error)
+    }
+    const deleteDocSuccessCb = (data)=> successHandler(data,res,'deleted')
+    const deleteDocFailCb = () => failHandler(_id,res)
+    try {
+        authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
 }
-
 module.exports = {
-    getHrByUrlId,
+    getAllHrs,
+    getManyHrs,
     getHr,
-    updateHrById,
-    deleteHrById,
-    getAllHrs
+    getHrByUrlId,
+    updateHrByUrlId,
+    deleteHrByUrlId,
 };

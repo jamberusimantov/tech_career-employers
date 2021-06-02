@@ -1,8 +1,8 @@
-const { response } = require("express");
-async function getAllDocs(collection, successCb = () => {}, failCb = () => {}) {
+async function getManyDocs(collection, query = {}, successCb = () => {}, failCb = () => {}) {
     try {
-        await collection.find((error, collectionArray) => {
-            if (error) throw new Error(`error on getAllDocs: ${error}`);
+        await collection.find(query, (error, collectionArray) => {
+            if (error) throw new Error(`error on getManyDocs: ${error}`);
+            console.log(collectionArray);
             !collectionArray ? failCb() : successCb(collectionArray)
         })
     } catch (error) {
@@ -30,7 +30,7 @@ async function getDoc(collection, query, successCb = () => {}, failCb = () => {}
         return { success: false, error };
     } finally {}
 }
-async function postDoc(collection, doc, successCb = () => {}) {
+async function postDocs(collection, docs, successCb = () => {}) {
     try {
         await collection.insertMany(doc, (error, data) => {
             if (error) throw new Error(`error on postDoc: ${error}`);
@@ -67,6 +67,7 @@ async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {
     } finally {}
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
+    const newObj = new Object(userItem)
     const methods = {
         strict: newObj => {
             newObj.password = undefined;
@@ -90,24 +91,37 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
             return newObj;
         }
     }
-    const newObj = new Object(userItem)
-    const setObject = () => methods[method] ? methods[method](newObj) : methods.fallbackMethod
+
+    const setObject = (user) => methods[method] ? methods[method](user) : methods.fallbackMethod
+    
+    if (typeof newObj === 'object') return setObject(newObj)
     if (userItem instanceof Array) {
         let results = [];
         userItem.forEach(user => {
             results.push(setObject(user))
         })
+        console.log(results);
         return results;
     }
-    if (typeof userItem === 'object') return setObject(userItem)
+}
+const msgs = {
+    requiredToken: serviceName => `required auth token on ${serviceName}`,
+    requiredQuery: serviceName => `required query data on ${serviceName}`,
+    unauthorizedToken: serviceName => `unauthorized token on ${serviceName}`,
+    unauthorizedCredentials: serviceName => `unauthorized credentials on ${serviceName}`,
+    corruptId: serviceName => `corrupt id on ${serviceName}`,
+    success: serviceName => `success on ${serviceName}`,
+    failure: serviceName => `failure on ${serviceName}`,
+    err: (serviceName, error) => `error on ${serviceName}: ${error}`,
 }
 
 module.exports = {
-    getAllDocs,
     getAllDocsByQuery,
+    getManyDocs,
     getDoc,
-    postDoc,
+    postDocs,
     updateDoc,
     deleteDoc,
-    filteredPrivateProps
+    filteredPrivateProps,
+    msgs
 }
