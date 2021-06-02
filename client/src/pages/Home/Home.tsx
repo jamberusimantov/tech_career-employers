@@ -4,7 +4,7 @@ import { Input,Space } from 'antd'
 import { Layout, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
 import "./Home.css";
-import ButtonToggle from "../Home/Button";
+import LoginModal from "../Home/LoginModal";
 import Slider from "./Slider";
 import About from "./About"
 import Coops from "./Coops"
@@ -29,7 +29,7 @@ export default function Home() {
         <Header className="header">
 
           <div className="headerlist">
-            <ButtonToggle />
+            <LoginModal />
 
             <Menu theme="light" mode="horizontal" defaultSelectedKeys={["4"]}>
               <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
@@ -51,9 +51,6 @@ export default function Home() {
               <h1 className="h1topic">
                 טק קריירה - הדרך שלך להייטק !
               </h1>
-
-
-
               <Slider />
             </Content>
           </Layout>
