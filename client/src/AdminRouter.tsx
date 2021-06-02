@@ -5,7 +5,7 @@ import AdminPage from './pages/admin-page/AdminPage'
 
 //Home pages
 import Home from './pages/home-page/Home'
-import HR from './pages/hr-page/Hr'
+import HrRegister from './pages/hr-page/Hr-Register'
 import Student from './pages/student-page/Student'
 
 
@@ -23,7 +23,7 @@ function AdminRouter() {
             {/* <Home/> */}
           </Route>
           <Route path="/hr">
-            <HR/>
+            <HrRegister/>
           </Route>
           <Route path="/student">
             <Student/>

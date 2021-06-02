@@ -1,6 +1,6 @@
 
 import "./style.css";
-
+import AdminRouter from '../../../AdminRouter'
 import {Link} from 'react-router-dom';
 
 
@@ -42,8 +42,7 @@ function LayoutMain() {
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             
 
-                      {/* Admin Router */}
-                          {/* <AdminRouter/> */}
+                          <AdminRouter/>
 
 
           </Content>

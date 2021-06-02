@@ -59,7 +59,7 @@ function App(props: any) {
 
 
 
-
+// ספר המתכונים של סימן טוב 
 
   //1. post User to db by admin
   // registerUser({ company: 'google', email: 'jamber@google.com' }, 'hr')
@@ -143,6 +143,8 @@ function App(props: any) {
   if (!userData.email) {
     return (
       <div className={classes.App}>
+              <h1>akuo</h1>
+
         <LayoutMain />
       </div>
     );
@@ -150,6 +152,7 @@ function App(props: any) {
 
   return (
     <div className={classes.App}>
+      <h1>akuo</h1>
       <LayoutMain />
     </div>
   );
