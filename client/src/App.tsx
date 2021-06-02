@@ -8,7 +8,7 @@ import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
 
 import PagesRouter from './PagesRouter'
-import Header from './components/layout/LayoutMain/header/Header'
+import Header from './components/Layout/LayoutMain/header/Header'
 const { setUserData } = usersActions.usersActions;
 const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
 
