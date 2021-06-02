@@ -1,44 +1,57 @@
 import React, { useState } from 'react'
-import { Card, Col, Row } from 'antd';
+import { Card, Button, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import './JobCards.css'
-// import { Card } from 'antd';
+import JobEditPage from './JobEditPage';
+import JobCardsHeader from './JobCardsHeader';
+import { Link } from "react-router-dom";
 
 
 export default function JobCards() {
-    // return (
-    //     <div className="site-card-wrapper">
-    //         <Row gutter={16}>
-    //             <Col span={8}>
-    //                 <Card title="Card title" bordered={false}>
-    //                     Card One
-    //     </Card>
-    //             </Col>
-    //             <Col span={8}>
-    //                 <Card title="Card title" bordered={false}>
-    //                     Card Two
-    //     </Card>
-    //             </Col>
-    //             <Col span={8}>
-    //                 <Card title="Card title" bordered={false}>
-    //                     Card Three
-    //     </Card>
-    //             </Col>
-    //         </Row>
-    //     </div>
-    // )
+
+    // const [jobEditPage, setJobEditPage] = useState(false);
+
+
+    const menu = (
+        <Menu>
+            <Menu.Item>
+                <a href="#"> כותרת</a>
+            </Menu.Item>
+            <Menu.Item>
+                <a href="#"> תאריך</a>
+            </Menu.Item>
+            <Menu.Item>
+                <a href="#"> מיקום</a>
+            </Menu.Item>
+        </Menu>
+    );
 
     return (
+        <div>
+            <JobCardsHeader />
+            < div className="site-card-border-less-wrapper">
+                <div className="navBtn">
+                    <Button>ערוך</Button>
+                    <Dropdown overlay={menu}>
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            מיון משרות   <DownOutlined />
+                        </a>
+                    </Dropdown>
+                    <div className="addNewJobBtn">
+                        <Button>הוסף משרה חדשה</Button>
+                    </div>
+                </div>
 
-        < div className="site-card-border-less-wrapper">
-            <Card title="JOB TITLE" bordered={true} style={{ width: 400 }}>
-                <p>Location</p>
-                <p>Open since</p>
-                <span className="applicans">Applicans</span>
-                <span className="number"> 1 </span>
-            </Card>
-        </div>
-
-
+                <Card title="פרטי משרה" bordered={true} style={{ width: 400 }}>
+                    <p>תפקיד</p>
+                    <p>מיקום</p>
+                    <p>זמינות</p>
+                    <span className="applicans">פניות</span>
+                    <span className="number"> 1 </span>
+                    <Link to="/JobEditPage"><Button className="readMoreBtn" type="primary">קרא עוד</Button></Link>
+                </Card>
+            </div>
+        </div >
 
     );
 }

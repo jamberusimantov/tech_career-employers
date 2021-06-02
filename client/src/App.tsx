@@ -6,6 +6,8 @@ import service from './service';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
+import JobsList from './pages/JobsList';
+import AppRouter from './routes/Route';
 const { setUserData } = usersActions.usersActions;
 const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
 
@@ -65,6 +67,7 @@ function App(props: any) {
     <div className={classes.App}>
       <CssBaseline />
       <LayoutMain />
+
     </div>
   );
 }

@@ -1,43 +1,40 @@
-/* .jobCards-container{
+.navBtn{
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    flex-wrap:wrap;
-
-} */
-.site-card-border-less-wrapper{
-    /* display: flex;
-    flex-direction: row; */
-    /* display: grid; */
-    /* width: 200px; */
+    justify-content: space-evenly;
+    padding: 20px;
 }
 .ant-card {
     justify-content: center;
     align-items:center;
-    background-color:  #bdbdbd;
-    border-radius: 5px;
+    background-color:  #fafafa;
+    border-radius: 15px;
+    border: 1px dotted blue;
 }
-.ant-card-body{
-    text-align: left;
+.ant-card-body p {
+    text-align: right;
     font-size: 20px;
+    line-height: 0.8;
 }
 
 .site-card-border-less-wrapper .applicans{
-    text-align: right;
     position: relative;
-    bottom: 100px;
-    left: 75%;
-    /* font-size: 20px; */
+    bottom: 120px;
+    right: 60%;
+    font-size: 20px;
 }
 
-.site-card-border-less-wrapper .number{
+.number{
     position: relative;
     bottom: 40px;
-    float: right;
+    float: left;
     font-size: 50px;
     border: 2px solid #000;
     border-radius: 50%;
-    width: 80px;
-    text-align: center;
-
+    width: 90px;
+    background-color: #fff;
+}
+.readMoreBtn{
+    position: relative;
+    top: 15px;
+    left: 35%;
 }

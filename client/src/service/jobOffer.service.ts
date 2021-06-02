@@ -1,4 +1,5 @@
 import { API } from '../app.utils'
+import loginService from './login.service';
 
 export async function getAllJobOffers() {
     try {
@@ -20,19 +21,16 @@ export async function getJobOffer(Id: string) {
     finally { }
 }
 export async function postJobOffer(credentials: any) {
-    const { email } = credentials;
     try {
-        if (email) {
-            const res = await fetch(`${API}/jobOffers/JobOffer`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ dataToPost: credentials })
-            })
-            return res.json();
-        }
-        return 'email required'
+        const res = await fetch(`${API}/jobOffers/JobOffer`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': loginService.getToken()
+            },
+            body: JSON.stringify({ dataToPost: credentials })
+        })
+        return res.json();
     }
     catch (err) { console.error(err) }
     finally { }
@@ -44,7 +42,8 @@ export async function updateJobOffer(credentials: any) {
             const res = await fetch(`${API}/jobOffers/JobOffer/${Id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'authorization': loginService.getToken()
                 },
                 body: JSON.stringify({ dataToUpdate: credentials })
             })

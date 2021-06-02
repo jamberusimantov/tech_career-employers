@@ -9,6 +9,16 @@ async function getAllDocs(collection, successCb = () => {}, failCb = () => {}) {
         return { success: false, error }
     } finally {}
 }
+async function getAllDocsByQuery(collection, query, successCb = () => {}, failCb = () => {}) {
+    try {
+        await collection.find(query, (error, collectionArray) => {
+            if (error) throw new Error(`error on getAllDocs: ${error}`);
+            !collectionArray ? failCb() : successCb(collectionArray)
+        })
+    } catch (error) {
+        return { success: false, error }
+    } finally {}
+}
 async function getDoc(collection, query, successCb = () => {}, failCb = () => {}) {
 
     try {
@@ -22,9 +32,9 @@ async function getDoc(collection, query, successCb = () => {}, failCb = () => {}
 }
 async function postDoc(collection, doc, successCb = () => {}) {
     try {
-        await collection.insertMany(doc, (error) => {
+        await collection.insertMany(doc, (error, data) => {
             if (error) throw new Error(`error on postDoc: ${error}`);
-            successCb();
+            successCb(data);
         })
     } catch (error) {
         return { success: false, error };
@@ -94,6 +104,7 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
 
 module.exports = {
     getAllDocs,
+    getAllDocsByQuery,
     getDoc,
     postDoc,
     updateDoc,

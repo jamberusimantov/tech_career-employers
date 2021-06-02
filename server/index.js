@@ -12,16 +12,22 @@ const passport = require('passport')
 const passportFunc = require('./config/passport')
 
 const path = require('path');
+const companyRouter = require('./api/company/companyRouter');
 
 const app = express()
 const PORT = process.env.PORT || 4201
+const bodyParser = require('body-parser');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 app.set('view engine', 'ejs')
 app.set('trust proxy', true);
-
+app.use('/', express.static(path.join(__dirname, './uploads'), { etag: false }));
 db.on('error', () => {
     console.log(chalk.red('Connection error'))
 })
@@ -34,6 +40,7 @@ app.use(passport.initialize());
 app.use('/register', register_router);
 app.use('/hrs', hrRouter);
 app.use('/jobOffers', jobOfferRouter);
+app.use('/company', companyRouter);
 
 
 if (process.env.NODE_ENV === 'production') {

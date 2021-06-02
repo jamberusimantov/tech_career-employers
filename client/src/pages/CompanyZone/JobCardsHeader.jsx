@@ -1,10 +1,16 @@
 import React from 'react'
+import { Typography } from 'antd';
+import './JobCardsHeader.css';
 
 export default function JobCardsHeader() {
-    return (
-        <div>
-            <div className="logo"><img src="./client/public/img/checkpoint.png" /></div>
+    const { Title } = Typography;
 
+    return (
+        <div className="headerContainer">
+            <Title>דף חברה</Title>
+            <div className="logo">
+                <img src="/img/checkpoint.png" alt="Checkpoint" />
+            </div>
         </div>
     )
 }
