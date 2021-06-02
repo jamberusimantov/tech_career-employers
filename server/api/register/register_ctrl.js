@@ -61,6 +61,8 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
                 res.status(200).json({
                     success: true,
                     data: {
+                        token: `Bearer ${token}`,
+                        link:link,
                         name: data.name,
                         email: data.email
                     },

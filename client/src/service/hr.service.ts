@@ -3,7 +3,7 @@ import { API } from '../app.utils'
 export async function getHrById(Id: string) {
     try {
         if (Id.length === 24) {
-            const res = await fetch(`${API}/hr/${Id}`)
+            const res = await fetch(`${API}/hrs/hr/${Id}`)
             return res.json();
         }
         return 'bad id, check id '
@@ -11,6 +11,7 @@ export async function getHrById(Id: string) {
     catch (err) { console.error(err) }
     finally { }
 }
+
 export async function getHr(credentials: any) {
     const { email } = credentials;
     try {

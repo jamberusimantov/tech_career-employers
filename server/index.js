@@ -10,7 +10,7 @@ const registerRouter = require('./api/register/register_router')
 const hrRouter = require('./api/hr/hr_router')
 const companyRouter = require('./api/company/company_router')
 const jobOfferRouter = require('./api/jobOffer/jobOffer_router')
-    // const studentsRouter = require('./api/students/students_router')
+const studentsRouter = require('./api/student/studentRouter')
 
 const passport = require('passport')
 const passportFunc = require('./config/passport')
@@ -39,7 +39,7 @@ app.use('/registration', registerRouter);
 app.use('/hrs', hrRouter);
 app.use('/companies', companyRouter);
 app.use('/jobOffers', jobOfferRouter);
-// app.use('/students', studentsRouter);
+app.use('/students', studentsRouter);
 
 
 if (process.env.NODE_ENV === 'production') {
