@@ -67,7 +67,7 @@ export async function getAllStudents() {
 
 export async function getManyStudents(){
     try {
-        return await (await axios.get(`${API}/students/all`,headers)).data.data
+        return await (await axios.post(`${API}/students/all`,headers)).data.data
     }
     catch (err) { console.error(err) }
 }

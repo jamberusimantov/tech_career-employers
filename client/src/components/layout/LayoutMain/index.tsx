@@ -4,7 +4,7 @@ import "./style.css";
 import {Link} from 'react-router-dom';
 
 
-import AdminRouter from "../../../AdminRouter"
+import PagesRouter from "../../../PagesRouter"
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
@@ -26,12 +26,12 @@ function LayoutMain() {
          <img src="/img/Logo.png" alt="" className="logo"/> 
         </div>
         
-        <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
+        {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
           <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
           <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
           <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
-        </Menu>
+        </Menu> */}
       </Header>
       <Content style={{ padding: "0 50px" }}>
       
@@ -44,7 +44,7 @@ function LayoutMain() {
             
 
                       {/* Admin Router */}
-                          <AdminRouter/>
+                          <PagesRouter />
 
 
           </Content>

@@ -1,11 +1,12 @@
 import { API } from '../app.utils'
-
+import axios from 'axios'
 class LogIn {
     logList: any[] = [];
     token = 'token';
+    
 
-    async loginUser(credentials: { email: string, password: string }) {
-        return await fetch(`${API}/register/login`, {
+    async loginUser(credentials: { email: string, password: string },role:string) {
+        return await fetch(`${API}/registration/login/${role}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,6 +25,29 @@ class LogIn {
         })
             .then(data => data.json())
     }
+
+    async register(){
+        const body:any = {
+            "user":{
+                "email": "test1@gmail.com",
+                "password": "123123123",
+                "password1": "123123123",
+                "name" : "test1",
+                "phone" : "055555555"
+            }
+        }
+        // const headers:any = {
+        //     headers: {
+        //       authorization: localStorage.getItem('token')
+        //     }
+        //   }
+        try {
+            return await (await axios.post('http://localhost:4201/registration/register/student',body)).data;
+        } catch (error) {
+            
+        }
+    }
+
     async approveHr(credentials: { _id: string, isAuth: boolean, section: string }) {
         return await fetch(`${API}/register/auth`, {
             method: 'POST',
@@ -34,18 +58,19 @@ class LogIn {
         })
             .then(data => data.json())
     }
-    async getUserUseToken(token: string) {
+    async getUserUseToken(token: string, role:string) {
+        const data = {
+            "user":{
+                "token": localStorage.getItem('token')
+            }
+        }
+        const headers = {
+            headers: {
+                Authorization: token
+            }
+          }
         try {
-            return await fetch(`${API}/register/useToken`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': token
-                },
-            })
-                .then(data => {
-                    return data.json()
-                })
+            return await(await axios.post(`http://localhost:4201/registration/useToken/${role}`,data,headers)).data
         }
         catch (err) { console.error(err) }
         finally { }
