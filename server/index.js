@@ -5,9 +5,13 @@ const express = require('express');
 const chalk = require('chalk');
 const cors = require('cors');
 const db = require('./DB')
-const hrRouter = require('./api/hr/hrRouter')
-const jobOfferRouter = require('./api/jobOffer/jobOfferRouter')
-const register_router = require('./api/register/register_router')
+
+const registerRouter = require('./api/register/register_router')
+const hrRouter = require('./api/hr/hr_router')
+const companyRouter = require('./api/company/company_router')
+const jobOfferRouter = require('./api/jobOffer/jobOffer_router')
+const studentsRouter = require('./api/student/studentRouter')
+
 const passport = require('passport')
 const passportFunc = require('./config/passport')
 
@@ -37,10 +41,15 @@ app.listen(PORT, () => {
 
 
 app.use(passport.initialize());
-app.use('/register', register_router);
+app.use('/registration', registerRouter);
 app.use('/hrs', hrRouter);
+app.use('/companies', companyRouter);
 app.use('/jobOffers', jobOfferRouter);
+<<<<<<< HEAD
 app.use('/company', companyRouter);
+=======
+app.use('/students', studentsRouter);
+>>>>>>> d0f8f22a1042fb1baf21a895996fc069eed221d8
 
 
 if (process.env.NODE_ENV === 'production') {

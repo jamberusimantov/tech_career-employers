@@ -2,7 +2,7 @@ const hrsCollection = require('../api/hr/hr_model');
 const studentsCollection = require('../api/student/student_model');
 const DB = require('../utils/DB.utils');
 const { getDoc } = DB;
-const authToken = async(token, cb = () => {}, res) => {
+const authRequest = async(token, cb = () => {}, res) => {
     const getDocSuccessCb = data => cb(data);
     const getDocSuccessCbInner = getDocSuccessCb
     const getDocFailCb = async() => await getDoc(studentsCollection, query, getDocSuccessCbInner, getDocFailCbInner)
@@ -24,5 +24,5 @@ const authToken = async(token, cb = () => {}, res) => {
 }
 
 module.exports = {
-    authToken,
+    authRequest,
 }

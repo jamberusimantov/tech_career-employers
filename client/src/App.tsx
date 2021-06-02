@@ -24,6 +24,7 @@ const mapStateToProps = (state: any) => {
 
 
 function App(props: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
   const { login, app: { getWindowDimensions } } = service
   const { getUserUseToken } = login.default
@@ -31,12 +32,15 @@ function App(props: any) {
   const { appStyle } = styles;
 
   useEffect(() => {
-    const token = login.default.getToken();
+    // const token = login.default.getToken();
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI0ZWUwNmYxZDkyNTVhMDA1ZjEyM2UiLCJuYW1lIjoibGlvciIsImVtYWlsIjoibGlvcmltYXppc2dAZ21haWwuY29tIiwiaWF0IjoxNjIyNDcwMjAwLCJleHAiOjE3MDg4NzAyMDB9.PBTGtUiskSoEAoS-z5zEqRQsbsAVf_u0DiNNC9lMSOI'
     if (token) {
       getUserUseToken(token).then((userDataUseToken) => {
-        if (userDataUseToken.success) {
-          setUserData(userDataUseToken.data)
-        }
+        console.log(userDataUseToken);
+        
+        // if (userDataUseToken.success) {
+        //   setUserData(userDataUseToken.data)
+        // }
       })
       return () => {
         setUserData(Object);
@@ -54,6 +58,7 @@ function App(props: any) {
 
   const classes = appStyle()
 
+<<<<<<< HEAD
   // if (!userData.email) {
   //   return (
   //     <div className={classes.App}>
@@ -62,6 +67,17 @@ function App(props: any) {
   //     </div>
   //   );
   // }
+=======
+  if (!userData.email) {
+    return (
+      <div className={classes.App}>
+        <CssBaseline />
+        
+        <LayoutMain/>
+      </div>
+    );
+  }
+>>>>>>> d0f8f22a1042fb1baf21a895996fc069eed221d8
 
   return (
     <div className={classes.App}>
