@@ -8,14 +8,12 @@ import { Checkbox } from 'antd';
 //Data for table from local data
 import {coursesColumns,coursesData,graduatesColumns,graduatesData} from '../../components/shared/CodeinTable/mock'
 
-
-
 function AdminPage() {
 
     function changeShowTable(e: { target: { checked: any; }; }) {
         console.log(`checked = ${e.target.checked}`);
       }
-
+      
 
     return (
         <div>
