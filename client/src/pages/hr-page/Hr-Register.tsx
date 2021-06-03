@@ -1,9 +1,11 @@
 import React from 'react'
 
 function Hr() {
+    
     return (
         <div>
-            <h1>Hr test</h1> 
+            <h1>Hr page</h1> 
+            
         </div>
     )
 }

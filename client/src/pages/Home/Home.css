@@ -1,0 +1,72 @@
+/* @font-face {
+    font-family: "site-font";
+    src: local('Azonix'),url(./fonts/Azonix.otf);
+  } */
+    
+    
+  .tcLogo1{
+    width:120px;
+    height:60px;
+}
+
+.tcLogo{
+    width:150px;
+    height:120px;
+}
+
+.header{
+background-color: #fff;
+position: sticky;
+
+}
+
+
+.headerlist{
+background-color: rgb(255, 255, 255);
+display:flex;
+align-items: center;
+position: relative;
+justify-content: space-between;
+
+}
+
+.listItems{
+display:flex;
+align-items: center;
+
+}
+
+.links{
+color:#000;
+font-weight: lighter;
+font-size: 20px;
+
+}
+
+.ant-layout {
+display: flex;
+flex: auto;
+flex-direction: column;
+min-height: 0;
+background: #ffffff;
+}
+
+.site-layout-background{
+width:100%;
+height:78vh;
+display:flex;
+justify-content:center;
+flex-direction:column;
+align-items: center;
+background-color: #fff;
+
+}
+
+.h1topic{
+font-size: 60px;
+direction: rtl;
+}
+
+.signin{
+  direction: ltr;
+}
