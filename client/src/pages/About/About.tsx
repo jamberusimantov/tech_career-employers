@@ -1,5 +1,5 @@
 import React from 'react'
-import './About.css'
+import '../aboutUs/About.css'
 
 export default function About() {
     return (
@@ -23,4 +23,3 @@ export default function About() {
         </div>
     )
 }
-

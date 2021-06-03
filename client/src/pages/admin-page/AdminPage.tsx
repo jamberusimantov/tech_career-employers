@@ -7,14 +7,15 @@ import CodeinTable from "../../components/shared/CodeinTable";
 
 import { Checkbox } from "antd";
 //Data for table from local data
+
+
+import "./AdminPage.css";
 import {
   coursesColumns,
   coursesData,
   graduatesColumns,
   graduatesData,
 } from "../../components/shared/CodeinTable/mock";
-
-import "./AdminPage.css";
 
 function AdminPage() {
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
@@ -49,11 +50,9 @@ function AdminPage() {
 
   function changeShowCoursesTable(e: { target: { checked: any } }) {
     setShowCoursesTable(!showCoursesTable);
-
   }
 
   function changeShowGraduatesTable(e: { target: { checked: any } }) {
-
     setShowGraduatesTable(!showGraduatesTable);
   }
 

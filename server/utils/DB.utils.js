@@ -1,10 +1,11 @@
-async function getManyDocs(collection, query = {}, successCb = () => {}, failCb = () => {}) {
+async function getManyDocs(collection, query, successCb = () => {}, failCb = () => {}) {
+    const options = [(error, collectionArray) => {
+        if (error) throw new Error(`error on getManyDocs: ${error}`);
+        !collectionArray ? failCb() : successCb(collectionArray)
+    }]
+    if (query) options.unshift(query)
     try {
-        await collection.find(query, (error, collectionArray) => {
-            if (error) throw new Error(`error on getManyDocs: ${error}`);
-            console.log(collectionArray);
-            !collectionArray ? failCb() : successCb(collectionArray)
-        })
+        await collection.find(...options)
     } catch (error) {
         return { success: false, error }
     } finally {}
@@ -81,22 +82,21 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
             return newObj;
         }
     }
-
-    const setObject = (user) => methods[method] ? methods[method](user) : methods.fallbackMethod
-    
-    if (typeof newObj === 'object') return setObject(newObj)
-    if (userItem instanceof Array) {
+    const setObject = obj => methods[method] ? methods[method](obj) : methods.fallbackMethod(obj)
+    if (newObj instanceof Array) {
         let results = [];
-        userItem.forEach(user => {
+        newObj.forEach(user => {
             results.push(setObject(user))
         })
         console.log(results);
         return results;
     }
+    if (typeof userItem === 'object') return setObject(newObj)
 }
 const msgs = {
     requiredToken: serviceName => `required auth token on ${serviceName}`,
     requiredQuery: serviceName => `required query data on ${serviceName}`,
+    unSignUser: serviceName => `unSign user on ${serviceName}, finish sign up`,
     unauthorizedToken: serviceName => `unauthorized token on ${serviceName}`,
     unauthorizedCredentials: serviceName => `unauthorized credentials on ${serviceName}`,
     corruptId: serviceName => `corrupt id on ${serviceName}`,

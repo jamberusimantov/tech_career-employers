@@ -1,23 +1,21 @@
 
 import "./style.css";
-
+import AdminRouter from '../../../AdminRouter'
 import {Link} from 'react-router-dom';
 
-//Pages
-
-import AdminRouter from "../../../AdminRouter"
 
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+
+// import {
+//   UserOutlined,
+//   LaptopOutlined,
+//   NotificationOutlined,
+// } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 function LayoutMain() {
   return (
@@ -30,7 +28,11 @@ function LayoutMain() {
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
           <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
+<<<<<<< HEAD
           <Menu.Item key="2"><Link to="/hr">מגייסים</Link></Menu.Item>
+=======
+          <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
+>>>>>>> 6be4cc1981429c1dc59f2af633d6de1c2e7dfa92
           <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
         </Menu>
       </Header>
@@ -44,16 +46,15 @@ function LayoutMain() {
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             
 
-                      {/* Admin Router */}
                           <AdminRouter/>
 
 
           </Content>
         </Layout>
       </Content>
-      <Footer style={{ textAlign: "center" }}>
+      {/* <Footer style={{ textAlign: "center" }}>
         Ant Design ©2018 Created by Ant UED
-      </Footer>
+      </Footer> */}
     </Layout>
   );
 }

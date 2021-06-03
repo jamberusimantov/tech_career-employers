@@ -2,9 +2,15 @@
     width:50%;
     height:40vh;
     background-color: rgba(137, 43, 226, 0.13);
+<<<<<<< HEAD
     /* background-repeat: no-repeat; */
     /* overflow: hidden; */
 
+=======
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display:flex;
+>>>>>>> 6be4cc1981429c1dc59f2af633d6de1c2e7dfa92
 }
 
 img{
@@ -14,5 +20,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6be4cc1981429c1dc59f2af633d6de1c2e7dfa92
 }
