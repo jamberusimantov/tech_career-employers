@@ -24,7 +24,7 @@ const mapStateToProps = (state: any) => {
 function App(props: any) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { windowDimensions, setWindowDimensions, setUserData, userData } = props
-  const { login, app: { getWindowDimensions }, jobOffer:{postJobOffer}} = service
+  const { login, app: { getWindowDimensions }, jobOffer: { postJobOffer }} = service
   const { registerUser, signUpUser, loginUser, getUserUseToken, setTokenLocal } = login
   const { LayoutMain } = components;
   const { appStyle } = styles;
@@ -36,21 +36,26 @@ function App(props: any) {
   // getCompanyById('60b72bef59a5dcdfa2c218cc', token).then(data => console.log(data))
   // updateCompanyById({info:'big brother reality internet 2'},"60b72bef59a5dcdfa2c218cc",token).then(data => console.log(data))
   // deleteCompanyById('60b72c1359a5dcdfa2c218cd',token).then(data => console.log(data))
-  
+
   // getCompany({ name: 'facebook' }, token).then(data => console.log(data))
   // getManyCompanies(token, { field: 'internet' }).then(data => console.log(data))
   // getManyCompanies(token).then(data => console.log(data))
   // getCompanyById('60b72bef59a5dcdfa2c218cc', token).then(data => console.log(data))
   // updateCompanyById({info:'big brother reality internet 2'},"60b72bef59a5dcdfa2c218cc",token).then(data => console.log(data))
   // deleteCompanyById('60b72c1359a5dcdfa2c218cd',token).then(data => console.log(data))
-  
+
   // getHr({ email: "lior@king.com" }, token).then(data => console.log(data))
   // getManyHrs(token, { company: 'google' }).then(data => console.log(data))
   // getManyHrs(token).then(data => console.log(data))
   // getHrById("60b61267ac39f113dedb0439", token).then(data => console.log(data))
   // updateHrById({phone:'1800bootstrapON'},"60b61267ac39f113dedb0439",token).then(data => console.log(data))
   // deleteCompanyById('60b72c1359a5dcdfa2c218cd',token).then(data => console.log(data))
-  
+
+  // getStudent({ email: "lior@king.com" }, token).then(data => console.log(data))
+  // getManyStudents(token, { company: 'google' }).then(data => console.log(data))
+  // getManyStudents(token).then(data => console.log(data))
+  // getStudentById("60b61267ac39f113dedb0439", token).then(data => console.log(data))
+  // updateStudentById({phone:'1800bootstrapON'},"60b61267ac39f113dedb0439",token).then(data => console.log(data))  
 
 
 
@@ -59,7 +64,7 @@ function App(props: any) {
 
 
 
-// ספר המתכונים של סימן טוב 
+  // ספר המתכונים של סימן טוב 
 
   //1. post User to db by admin
   // registerUser({ company: 'google', email: 'jamber@google.com' }, 'hr')
@@ -116,46 +121,53 @@ function App(props: any) {
 
 
   useEffect(() => {
-    if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
-        console.log(userDataUseToken);
-        
-        // if (userDataUseToken.success) {
-        //   setUserData(userDataUseToken.data)
-        // }
-      })
-      return () => {
-        setUserData(Object);
+    const user = {
+      email: "test2@gmail.com",
+      password: "123123"
+    }
+    let token = false
+    const loginHandler = async()=>{
+      token = await loginUser(user, 'student')
+
+    }
+    
+      if (token) {
+        getUserUseToken(token).then((userDataUseToken) => {
+          console.log(userDataUseToken);
+
+          // if (userDataUseToken.success) {
+          //   setUserData(userDataUseToken.data)
+          // }
+        })
+        return () => {
+          setUserData(Object);
+        }
       }
+    }, [getUserUseToken, login, setUserData]);
+
+    useEffect(() => {
+      function handleResize() {
+        setWindowDimensions(getWindowDimensions())
+      }
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, [setWindowDimensions, getWindowDimensions]);
+
+    const classes = appStyle()
+
+    if (!userData.email) {
+      return (
+        <div className={classes.App}>
+          <LayoutMain />
+        </div>
+      );
     }
-  }, [getUserUseToken, login, setUserData]);
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions())
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [setWindowDimensions, getWindowDimensions]);
-
-  const classes = appStyle()
-
-  if (!userData.email) {
     return (
       <div className={classes.App}>
-              <h1>akuo</h1>
-
         <LayoutMain />
       </div>
     );
   }
-
-  return (
-    <div className={classes.App}>
-      <h1>akuo</h1>
-      <LayoutMain />
-    </div>
-  );
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
