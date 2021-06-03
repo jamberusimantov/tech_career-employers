@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-import { Button, Input, Modal } from "antd";
+import { Button, Input, Modal,Checkbox } from "antd";
 
 //Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
-import { Checkbox } from "antd";
 //Data for table from local data
 
 

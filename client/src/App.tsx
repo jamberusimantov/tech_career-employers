@@ -17,7 +17,7 @@ const mapStateToProps = (state: any) => {
 }
 
 
-function App(props: any) {
+export default function App(props: any) {
   const { setUserData, userData } = props
   const { login } = service
   const { getUserUseToken } = login
@@ -26,38 +26,45 @@ function App(props: any) {
   const token = login.getToken();
 
   useEffect(() => {
-    if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
-        console.log(userDataUseToken);
-        
-        // if (userDataUseToken.success) {
-        //   setUserData(userDataUseToken.data)
-        // }
-      })
-      return () => {
-        setUserData(Object);
-      }
+    const user = {
+      email: "test2@gmail.com",
+      password: "123123"
     }
-  }, [getUserUseToken, login, setUserData, token]);
+    let token = false
+    const loginHandler = async()=>{
+      // token = await loginUser(user, 'student')
 
-  const classes = appStyle()
+    }
+    
+      if (token) {
+        getUserUseToken(token).then((userDataUseToken) => {
+          console.log(userDataUseToken);
 
-  if (!userData.email) {
+          // if (userDataUseToken.success) {
+          //   setUserData(userDataUseToken.data)
+          // }
+        })
+        return () => {
+          setUserData(Object);
+        }
+      }
+    }, [getUserUseToken, login, setUserData]);
+
+
+    const classes = appStyle()
+
+    // if (!userData.email) {
+    //   return (
+    //     <div className={classes.App}>
+    //       <LayoutMain />
+    //     </div>
+    //   );
+    // }
+
     return (
       <div className={classes.App}>
-              <h1>akuo</h1>
-
         <LayoutMain />
       </div>
     );
   }
 
-  return (
-    <div className={classes.App}>
-      <h1>{userData.email}</h1>
-      <LayoutMain />
-    </div>
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
