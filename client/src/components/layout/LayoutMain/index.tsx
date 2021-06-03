@@ -44,7 +44,7 @@ function LayoutMain() {
 
             {/* Admin Router */}
             <AdminRouter />
-            <Login />
+           
 
           </Content>
         </Layout>

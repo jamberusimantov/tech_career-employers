@@ -6,6 +6,10 @@ import  LogInFromServiceComponent  from '../../service/login.service';
 
 
 const Login = () => {
+    // interface UserInf {
+    //     userEmail: String;
+    //     userPassword: String;
+    // }
     const [password, setPassword] = useState('')
     const [mail, setMail] = useState('')
     const [error, setError] = useState ('')
@@ -18,19 +22,19 @@ const Login = () => {
 
     async function serverCheck() {
     
-         const emailValue = mail
+         const emailValue: String = mail 
         
-        const passWordValue = password
+        const passWordValue: String = password
 
-        const userInfo = {logInfo:{userEmail:emailValue, userPassword:passWordValue}}
+        const userInfo: any = {userEmail:emailValue, userPassword:passWordValue}
 
         console.log(JSON.stringify(userInfo));
 
-      const logAproved = await loginService.loginUser(userInfo).then((res)=> {
+      const logApproved = await loginService.loginUser(userInfo).then((res)=> {
            console.log(res.success);
             return res.success})
        
-    if (logAproved) {
+    if (logApproved) {
         
         setError("good")
     }
