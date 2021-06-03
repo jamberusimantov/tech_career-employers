@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import service from './utils';
 import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
+import { getAllStudents } from './service/students.service';
 
 const { setUserData } = usersActions.usersActions;
 const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
@@ -30,7 +31,7 @@ function App(props: any) {
   const { appStyle } = styles;
   const token = login.getToken();
 
-  postJobOffer({ uploadedBy: 'google' }, token).then(data => console.log(data))
+  // postJobOffer({ uploadedBy: 'google' }, token).then(data => console.log(data))
   // getManyCompanies(token, { field: 'internet' }).then(data => console.log(data))
   // getManyCompanies(token).then(data => console.log(data))
   // getCompanyById('60b72bef59a5dcdfa2c218cc', token).then(data => console.log(data))
@@ -103,32 +104,42 @@ function App(props: any) {
   // signUpUser({ company, user }, 'hr', token).then(data => console.log(data))
 
   //4.login user to db
-  // const user = {
-  //   email: "jamber@google.com",
-  //   password: "123456"
-  // }
-  // loginUser(user, 'hr').then(data => {
-  //   data && data.token && setTokenLocal(data.token)
-  //   console.log(data)
-  // })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  
+  
+
+  const user = {
+    email:"Moshe@gmail.com",
+    password: "123123"
+  }
+  loginUser(user, 'student').then(data => {
+    data && data.token && setTokenLocal(data.token)
+    localStorage.setItem('token', `Bearer ${data.token}`)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    getAllStudents()
+    .then(res=>console.log(res))
+    // console.log(getAllTest)
+  })
+  // getUserUseToken(token).then(data => console.log(data))
 
 
 
 
-  useEffect(() => {
-    if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
-        console.log(userDataUseToken);
+  // useEffect(() => {
+  //   if (token) {
+  //     getUserUseToken(token).then((userDataUseToken) => {
+  //       console.log(userDataUseToken);
         
-        // if (userDataUseToken.success) {
-        //   setUserData(userDataUseToken.data)
-        // }
-      })
-      return () => {
-        setUserData(Object);
-      }
-    }
-  }, [getUserUseToken, login, setUserData]);
+  //       if (userDataUseToken.success) {
+  //         setUserData(userDataUseToken.data)
+  //       }
+  //     })
+  //     return () => {
+  //       setUserData(Object);
+  //     }
+  //   }
+  // }, [getUserUseToken, login, setUserData]);
 
   useEffect(() => {
     function handleResize() {
@@ -143,7 +154,7 @@ function App(props: any) {
   if (!userData.email) {
     return (
       <div className={classes.App}>
-              <h1>akuo</h1>
+              {/* <h1>akuo</h1> */}
 
         <LayoutMain />
       </div>
