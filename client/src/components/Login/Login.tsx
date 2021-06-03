@@ -2,23 +2,31 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Login.css';
+import  LogInFromServiceComponent  from '../../service/login.service';
+
 
 const Login = () => {
+    const [password, setPassword] = useState('')
+    const [mail, setMail] = useState('')
     const [error, setError] = useState ('')
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
-    };
+    const loginService =  LogInFromServiceComponent;
+    
+    //this function has bean quite 
+    // const onFinish = (values: any) => {
+    //     console.log('Received values of form: ', values);
+    // };
 
     async function serverCheck() {
     
-        const emailValue = document.getElementById("emailInput").value
+         const emailValue = mail
         
-        const passWordValue = document.getElementById("passwordInput").value
+        const passWordValue = password
 
         const userInfo = {logInfo:{userEmail:emailValue, userPassword:passWordValue}}
+
         console.log(JSON.stringify(userInfo));
 
-      const logAproved = await loginUser(userInfo).then((res)=> {
+      const logAproved = await loginService.loginUser(userInfo).then((res)=> {
            console.log(res.success);
             return res.success})
        
@@ -35,16 +43,17 @@ const Login = () => {
     return (
 
         <div className="loginContainer">
-            <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={onFinish}>
+            {/* <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={onFinish}> */} {/* this line have onFinish function from ant dissing maybe i don't need it*/}
+            <Form name="normal_login" className="login-form" initialValues={{ remember: true }}>
             <div></div>
         
         <div>            
         <Form.Item label="בבקשה להקליד מייל" name="username" rules={[{ required: true, message: 'בבקשה להקליד מייל' }]}>
-           <Input id="emailInput" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="מייל" />
+           <Input onChange={e => setMail(e.target.value)} value={mail} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="מייל" />
         </Form.Item>
                     
         <Form.Item label="בבקשה להקליד סיסמה" name="password" rules={[{ required: true, message: 'בבקשה להקליד ססימה' }]}>
-            <Input id="passwordInput" prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="סיסמה"/>
+            <Input onChange={e => setPassword(e.target.value)} value={password} prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="סיסמה"/>
             <span className="errorMessage">{error}</span>
         </Form.Item>
 
