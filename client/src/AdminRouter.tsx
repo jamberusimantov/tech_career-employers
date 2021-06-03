@@ -6,7 +6,7 @@ import AdminPage from './pages/admin-page/AdminPage'
 import Home from './pages/home/Home'
 
 //HR page
-import HR from './pages/hr-page/Hr'
+import HR from './pages/hr-page/Hr-Register'
 
 import Student from './pages/student-page/Student'
 import {

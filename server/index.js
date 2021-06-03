@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+var nodemailer = require('nodemailer');
 const express = require('express');
 const chalk = require('chalk');
 const cors = require('cors');
@@ -20,6 +21,29 @@ const path = require('path');
 const app = express()
 const PORT = process.env.PORT || 4201
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -29,9 +53,38 @@ app.set('trust proxy', true);
 db.on('error', () => {
     console.log(chalk.red('Connection error'))
 })
+
+
+
+
+
+
+
+
 app.listen(PORT, () => {
     console.log(`${chalk.green('tech_career-employers-team2')} ${chalk.yellow('live and up on port')} ${chalk.red(PORT)}`);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.use(passport.initialize());
