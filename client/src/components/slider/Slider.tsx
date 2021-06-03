@@ -1,6 +1,9 @@
 import React from "react";
 import { Carousel } from "antd";
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6be4cc1981429c1dc59f2af633d6de1c2e7dfa92
 import "./Slider.css";
 
 export default function Slider() {
@@ -16,4 +19,8 @@ export default function Slider() {
       </Carousel>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6be4cc1981429c1dc59f2af633d6de1c2e7dfa92

@@ -96,17 +96,18 @@ async function registerUser(req, res) {
         success: false,
         message: unsupportedRole('registerUser')
     })
-    const getUserSuccess = data => res.status(400).json({
+    const getUserSuccess = () => res.status(400).json({
         success: false,
         message: duplicateItem(`register ${role}`)
     })
     const company = { name: user.company }
+
     const getUserFail = async() => {
         if (role !== 'hr') return await getCompanySuccess()
         const companyFromDB = await getDoc(companiesCollection, company, getCompanySuccess, getCompanyFail);
         if (companyFromDB && companyFromDB.error) throw new Error(companyFromDB.error)
     }
-    const getCompanySuccess = async(data) => {
+    const getCompanySuccess = async() => {
         const postRes = await postDocs(collection, user, postUserSuccess)
         if (postRes && postRes.error) throw new Error(postRes.error)
     }
@@ -257,21 +258,23 @@ async function loginUser(req, res) {
     })
     const { errors, isValid } = validateLoginInput(user)
     if (!isValid) return res.status(400).json(errors)
-    const getDocSuccessCb = (data) => {
+    const getDocSuccessCb = async(data) => {
         const { _id, name, email } = data;
         const passwordFromDB = data.password;
         if (!data.isAuth) return res.status(400).json({
             success: false,
             message: 'unsigned user on loginUser'
         })
-        bcrypt.compare(password, passwordFromDB).then((isMatch) => {
+        const salt = await bcrypt.genSalt(10);
+        const passwordHash = await bcrypt.hash(password, salt);
+        const isMatch = await bcrypt.compare(passwordFromDB, passwordHash);
+ 
             if (!isMatch) return res.status(400).json({
                 success: false,
                 message: unauthorizedCredentials('loginUser')
             })
             const payload = { _id, name, email }
             signToken(req, res, payload, success('loginUser'))
-        })
     }
     const getDocFailCb = () => res.status(400).json({
         success: false,
