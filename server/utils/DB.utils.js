@@ -25,7 +25,7 @@ async function postDocs(collection, docs, successCb = () => {}) {
     try {
         await collection.insertMany(docs, (error) => {
             if (error) throw new Error(`error on postDocs: ${error}`);
-            successCb();
+            successCb(docs);
         })
     } catch (error) {
         return { success: false, error };

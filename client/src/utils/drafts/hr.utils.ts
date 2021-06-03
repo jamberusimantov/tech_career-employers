@@ -1,4 +1,4 @@
-import { getDoc, getManyDocs, getDocById, updateDocById, deleteDocById } from './DB.utils';
+import { getDoc, getManyDocs, getDocById, updateDocById, deleteDocById } from '../DB.utils';
 const requiredId = (serviceName: string) => `required Id on ${serviceName}`;
 const err = (serviceName: string, error: string) => `error on ${serviceName}: ${error}`;
 const collection = 'hrs'
@@ -43,3 +43,13 @@ export const deleteHrById = async (_id: string, token?: string) => {
     catch (error) { return { success: false, error: err('deleteHrById', error) } }
     finally { }
 }
+
+
+  // getHr({ email: "lior@king.com" }, token).then(data => console.log(data))
+  // getManyHrs(token, { company: 'google' }).then(data => console.log(data))
+  // getManyHrs(token).then(data => console.log(data))
+  // getHrById("60b61267ac39f113dedb0439", token).then(data => console.log(data))
+  // updateHrById({phone:'1800bootstrapON'},"60b61267ac39f113dedb0439",token).then(data => console.log(data))
+  // deleteCompanyById('60b72c1359a5dcdfa2c218cd',token).then(data => console.log(data))
+
+

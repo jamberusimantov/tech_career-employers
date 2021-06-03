@@ -4,9 +4,10 @@ import Cards from '../../components/student-cards/Cards'
 function Student() {
     return (
         <div>
-            <Cards/>
+            <h1>Student page</h1> 
+            <h1>Student page</h1>
         </div>
     )
 }
 
-export default Student
+export default Student;
