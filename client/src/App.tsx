@@ -17,7 +17,7 @@ const mapStateToProps = (state: any) => {
 }
 
 
-function App(props: any) {
+export default function App(props: any) {
   const { setUserData, userData } = props
   const { login } = service
   const { getUserUseToken } = login
@@ -53,13 +53,13 @@ function App(props: any) {
 
     const classes = appStyle()
 
-    if (!userData.email) {
-      return (
-        <div className={classes.App}>
-          <LayoutMain />
-        </div>
-      );
-    }
+    // if (!userData.email) {
+    //   return (
+    //     <div className={classes.App}>
+    //       <LayoutMain />
+    //     </div>
+    //   );
+    // }
 
     return (
       <div className={classes.App}>
