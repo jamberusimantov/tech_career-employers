@@ -45,11 +45,7 @@ app.use('/registration', registerRouter);
 app.use('/hrs', hrRouter);
 app.use('/companies', companyRouter);
 app.use('/jobOffers', jobOfferRouter);
-<<<<<<< HEAD
-app.use('/company', companyRouter);
-=======
 app.use('/students', studentsRouter);
->>>>>>> d0f8f22a1042fb1baf21a895996fc069eed221d8
 
 
 if (process.env.NODE_ENV === 'production') {

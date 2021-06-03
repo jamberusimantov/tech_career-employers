@@ -37,7 +37,7 @@ function App(props: any) {
     if (token) {
       getUserUseToken(token).then((userDataUseToken) => {
         console.log(userDataUseToken);
-        
+
         // if (userDataUseToken.success) {
         //   setUserData(userDataUseToken.data)
         // }
@@ -58,26 +58,15 @@ function App(props: any) {
 
   const classes = appStyle()
 
-<<<<<<< HEAD
-  // if (!userData.email) {
-  //   return (
-  //     <div className={classes.App}>
-  //       <CssBaseline />
-  //       <LayoutMain/>
-  //     </div>
-  //   );
-  // }
-=======
   if (!userData.email) {
     return (
       <div className={classes.App}>
         <CssBaseline />
-        
-        <LayoutMain/>
+
+        <LayoutMain />
       </div>
     );
   }
->>>>>>> d0f8f22a1042fb1baf21a895996fc069eed221d8
 
   return (
     <div className={classes.App}>

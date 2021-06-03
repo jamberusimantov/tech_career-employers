@@ -1,4 +1,4 @@
-async function getManyDocs(collection, query = {}, successCb = () => {}, failCb = () => {}) {
+async function getManyDocs(collection, query = {}, successCb = () => { }, failCb = () => { }) {
     try {
         await collection.find(query, (error, collectionArray) => {
             if (error) throw new Error(`error on getManyDocs: ${error}`);
@@ -7,9 +7,9 @@ async function getManyDocs(collection, query = {}, successCb = () => {}, failCb 
         })
     } catch (error) {
         return { success: false, error }
-    } finally {}
+    } finally { }
 }
-async function getAllDocsByQuery(collection, query, successCb = () => {}, failCb = () => {}) {
+async function getAllDocsByQuery(collection, query, successCb = () => { }, failCb = () => { }) {
     try {
         await collection.find(query, (error, collectionArray) => {
             if (error) throw new Error(`error on getAllDocs: ${error}`);
@@ -17,9 +17,9 @@ async function getAllDocsByQuery(collection, query, successCb = () => {}, failCb
         })
     } catch (error) {
         return { success: false, error }
-    } finally {}
+    } finally { }
 }
-async function getDoc(collection, query, successCb = () => {}, failCb = () => {}) {
+async function getDoc(collection, query, successCb = () => { }, failCb = () => { }) {
 
     try {
         await collection.findOne(query, (error, doc) => {
@@ -28,38 +28,32 @@ async function getDoc(collection, query, successCb = () => {}, failCb = () => {}
         })
     } catch (error) {
         return { success: false, error };
-    } finally {}
+    } finally { }
 }
-async function postDocs(collection, docs, successCb = () => {}) {
+async function postDocs(collection, docs, successCb = () => { }) {
     try {
-<<<<<<< HEAD
-        await collection.insertMany(doc, (error, data) => {
-            if (error) throw new Error(`error on postDoc: ${error}`);
-            successCb(data);
-=======
         await collection.insertMany(docs, (error) => {
             if (error) throw new Error(`error on postDocs: ${error}`);
             successCb();
->>>>>>> d0f8f22a1042fb1baf21a895996fc069eed221d8
         })
     } catch (error) {
         return { success: false, error };
-    } finally {}
+    } finally { }
 }
-async function updateDoc(collection, doc, successCb = () => {}, failCb = () => {}) {
+async function updateDoc(collection, doc, successCb = () => { }, failCb = () => { }) {
     const { _id } = doc;
     if (!_id) throw new Error('id is required on updateDoc');
     const query = { _id }
     try {
-        await collection.findOneAndUpdate(query, doc, async(error, docFromDb) => {
+        await collection.findOneAndUpdate(query, doc, async (error, docFromDb) => {
             if (error) throw new Error(`error on updateDoc: ${error}`);
             !docFromDb ? failCb() : successCb(docFromDb);
         })
     } catch (error) {
         return { success: false, error };
-    } finally {}
+    } finally { }
 }
-async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {}) {
+async function deleteDoc(collection, doc, successCb = () => { }, failCb = () => { }) {
     const { _id } = doc;
     if (!_id) throw new Error('id is required on deleteDoc');
     const query = { _id }
@@ -70,7 +64,7 @@ async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {
         })
     } catch (error) {
         return { success: false, error };
-    } finally {}
+    } finally { }
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
     const newObj = new Object(userItem)
@@ -99,7 +93,7 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
     }
 
     const setObject = (user) => methods[method] ? methods[method](user) : methods.fallbackMethod
-    
+
     if (typeof newObj === 'object') return setObject(newObj)
     if (userItem instanceof Array) {
         let results = [];
@@ -122,12 +116,7 @@ const msgs = {
 }
 
 module.exports = {
-<<<<<<< HEAD
-    getAllDocs,
-    getAllDocsByQuery,
-=======
     getManyDocs,
->>>>>>> d0f8f22a1042fb1baf21a895996fc069eed221d8
     getDoc,
     postDocs,
     updateDoc,
