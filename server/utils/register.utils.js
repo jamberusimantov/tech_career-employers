@@ -21,7 +21,7 @@ const authRequest = async(token, cb = () => {}, res) => {
         const getRes = await getDoc(hrsCollection, query, getDocSuccessCb, getDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error);
     } catch (error) {
-        return res.status(400).json({ success: false, error })
+        res.status(400).json({ success: false, error })
     } finally {}
 }
 
