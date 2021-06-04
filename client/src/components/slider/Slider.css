@@ -2,10 +2,9 @@
     width:50%;
     height:40vh;
     background-color: rgba(137, 43, 226, 0.13);
+    /* background-repeat: no-repeat; */
+    /* overflow: hidden; */
     background-repeat: no-repeat;
-    overflow: hidden;
-    display:flex;
-     background-repeat: no-repeat;
     overflow: hidden;
     display:flex;
 }
@@ -16,6 +15,4 @@ height: 40vh ;
 display: flex;
 justify-content: center;
 align-items: center;
-
 }
-

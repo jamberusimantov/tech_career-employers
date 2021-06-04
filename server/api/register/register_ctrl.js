@@ -268,7 +268,7 @@ async function loginUser(req, res) {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const isMatch = await bcrypt.compare(passwordFromDB, passwordHash);
- 
+     
             if (!isMatch) return res.status(400).json({
                 success: false,
                 message: unauthorizedCredentials('loginUser')

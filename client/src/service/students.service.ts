@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const headers = {
     headers: {
-      authorization: localStorage.getItem('token')
+      Authorization: localStorage.getItem('token')
     }
   }
 export async function getStudentById(Id: string) {
@@ -58,9 +58,13 @@ export async function deleteStudent(credentials: any) {
     catch (err) { console.error(err) }
     finally { }
 }
+
+
 export async function getAllStudents() {
     try {
         return await (await axios.get(`${API}/students/all`,headers)).data.data
+     
+               
     }
     catch (err) { console.error(err) }
 }
