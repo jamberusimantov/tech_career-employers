@@ -3,10 +3,13 @@ import React from 'react';
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
 
-//Home pages
-import Home from './pages/home-page/Home'
-import  HrRegister from './pages/hr-page/Hr-Register'
+
+//Home page
+import Home from './pages/home/Home'
+//HR page
+import HrRegister from './pages/hr-page/Hr-Register'
 import  CompanyRegister from './pages/hr-page/Company-register'
+
 import Student from './pages/student-page/Student'
 
 import {
@@ -23,8 +26,7 @@ function AdminRouter() {
             <Home/>
           </Route>
           <Route path="/hr">
-            <HrRegister/>
-            {/* <CompanyRegister/> */}
+          <HrRegister/>
           </Route>
           <Route path="/student">
             <Student/>

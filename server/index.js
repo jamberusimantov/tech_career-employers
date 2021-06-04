@@ -21,28 +21,6 @@ const app = express()
 const PORT = process.env.PORT || 4201
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -53,37 +31,9 @@ db.on('error', () => {
     console.log(chalk.red('Connection error'))
 })
 
-
-
-
-
-
-
-
 app.listen(PORT, () => {
     console.log(`${chalk.green('tech_career-employers-team2')} ${chalk.yellow('live and up on port')} ${chalk.red(PORT)}`);
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.use(passport.initialize());
