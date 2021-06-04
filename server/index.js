@@ -33,7 +33,6 @@ app.listen(PORT, () => {
     console.log(`${chalk.green('tech_career-employers-team2')} ${chalk.yellow('live and up on port')} ${chalk.red(PORT)}`);
 })
 
-
 app.use(passport.initialize());
 app.use('/registration', registerRouter);
 app.use('/hrs', hrRouter);

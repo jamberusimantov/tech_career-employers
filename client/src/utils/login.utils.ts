@@ -1,6 +1,5 @@
 import { API } from '../app.utils';
 import Http from './http.utils';
-
 class LogIn {
     token = 'token';
     logList: any[] = [];
@@ -61,55 +60,56 @@ export default new LogIn();
 
 
 
-  //1. post User to db by admin
-  // registerUser({ company: 'google', email: 'jamber@google.com' }, 'hr')
-  // .then(data => {console.log(data.data.link)}); 
+//   //1. post User to db by admin
+//   // registerUser({ company: 'google', email: 'jamber@google.com' }, 'hr')
+//   // .then(data => {console.log(data.data.link)}); 
 
 
-  //2.get User Use Token
-  // const path = window.location.pathname
-  // const token = path.substr(path.lastIndexOf('/'))
-  // getUserUseToken(token)
-  //   .then(async (userData) => {
-  //     const { data: { company, isCompanyFirstUser } } = userData
-  //     if (company) {
-  //       console.log(`get Company by name: ${company}`);
-  //       const dbCompany = await getCompany({ name: company }, token)
-  //       if (!isCompanyFirstUser) {
-  //         console.log('company already exist');
-  //         return { dbCompany, userData }
-  //       }
-  //       console.log('company awaiting for signUp');
-  //       return { dbCompany, userData }
-  //     }
-  //     return {userData}
-  //   }).then(data => console.log(data))
+//   //2.get User Use Token
+//   // const path = window.location.pathname
+//   // const token = path.substr(path.lastIndexOf('/'))
+//   // getUserUseToken(token)
+//   //   .then(async (userData) => {
+//   //     const { data: { company, isCompanyFirstUser } } = userData
+//   //     if (company) {
+//   //       console.log(`get Company by name: ${company}`);
+//   //       const dbCompany = await getCompany({ name: company }, token)
+//   //       if (!isCompanyFirstUser) {
+//   //         console.log('company already exist');
+//   //         return { dbCompany, userData }
+//   //       }
+//   //       console.log('company awaiting for signUp');
+//   //       return { dbCompany, userData }
+//   //     }
+//   //     return {userData}
+//   //   }).then(data => console.log(data))
 
 
-  //3. update user to db by user regFlow 
-  // const user = {
-  //   email: "jamber@google.com",
-  //   name: "siman tov the 3RD ",
-  //   phone: "1800codeit",
-  //   password: "123456",
-  //   password1: "123456"
-  // }
-  // const company = {
-  //   field: 'internet',
-  //   info: 'best workplace by far',
-  //   phone: 'no need to call, we hear everything ;)',
-  //   address: '3260, herzel blvd, lod',
-  // }
-  // signUpUser({ company, user }, 'hr', token).then(data => console.log(data))
+//   //3. update user to db by user regFlow 
+//   // const user = {
+//   //   email: "jamber@google.com",
+//   //   name: "siman tov the 3RD ",
+//   //   phone: "1800codeit",
+//   //   password: "123456",
+//   //   password1: "123456"
+//   // }
+//   // const company = {
+//   //   field: 'internet',
+//   //   info: 'best workplace by far',
+//   //   phone: 'no need to call, we hear everything ;)',
+//   //   address: '3260, herzel blvd, lod',
+//   // }
+//   // signUpUser({ company, user }, 'hr', token).then(data => console.log(data))
 
-  //4.login user to db
-  // const user = {
-  //   email: "jamber@google.com",
-  //   password: "123456"
-  // }
-  // loginUser(user, 'hr').then(data => {
-  //   data && data.token && setTokenLocal(data.token)
-  //   console.log(data)
-  // })
+//   //4.login user to db
+//   const user = {
+//     email: "jamber@google.com",
+//     password: "123456"
+//   }
+  
+//   login.login.loginUser(user, 'hr').then((data:{token:string}) => {
+//     data?.token && login.login.setTokenLocal(data?.token)
+//     console.log(data)
+//   })
 
 

@@ -8,7 +8,7 @@ const {
     validateCompanyRegisterInput,
     validateLoginInput
 } = register_validation;
-
+const emailer = require('../../email/email');
 const DB = require('../../utils/DB.utils')
 const register = require('../../utils/register.utils')
 const bcrypt = require('bcryptjs')
@@ -47,26 +47,35 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
             if (err) throw new Error(`error on sign token ${err}`)
             const dataToUpdate = !emailVerification ? { _id, isActive: true, token: `Bearer ${token}` } : { _id, token: `Bearer ${token}` }
             const updateDocSuccessCb = async(data) => {
-                const link = new URL(`${baseApi}/signUp/${role}/${token}`)
+                const client = process.env.NODE_ENV === 'production' ?
+                    'https://mernusers.herokuapp.com' : 'http://localhost:3000'
+                const link = new URL(`${client}/signUp/${role}/${token}`)
                 if (!emailVerification) return res.status(200).json({
-                        success: true,
-                        token,
-                        data: {
-                            email: data.email
-                        },
-                        message: success(`signToken, ${message}`)
-                    })
-                    //פה שליחת מייל למשתמש
-                    // const sendEmail =
-                    //פה שליחת מייל למשתמש
+                    success: true,
+                    token,
+                    data: {
+                        email: data.email
+                    },
+                    message: success(`signToken, ${message}`)
+                })
+                const emailResponse = await emailer(data.email, link)
+                if (emailResponse.error) return res.status(404).json({
+                    success: false,
+                    error: emailResponse.error
+                })
+                if (emailResponse.rejected.length) return res.status(404).json({
+                    success: false,
+                    error: `rejected ${emailResponse.rejected.length} emails on send email`,
+                    data: emailResponse.rejected,
+                })
+
                 res.status(200).json({
                     success: true,
                     data: {
-                        link,
-                        name: data.name,
-                        email: data.email
+                        email: emailResponse.accepted,
+                        emailResponse: emailResponse.response,
                     },
-                    message: success(`signToken, sendEmail to ${data.email}`)
+                    message: success(`signToken, sendEmail to ${emailResponse.accepted}`)
                 })
             }
             const updateDocFailCb = () => res.status(400).json({

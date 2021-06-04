@@ -23,30 +23,39 @@ function App(props: any) {
   const { getUserUseToken } = login
   const { LayoutMain } = components;
   const { appStyle } = styles;
-  const token = login.getToken();
-
+  
+  // const user = {
+  //   email: "jamber@google.com",
+  //   password: "123456"
+  // }
+  
+  
+  // useEffect(() => {
+  //   login.loginUser(user, 'hr').then((data: any) => {
+  //     data.token && login.setTokenLocal(data.token)
+  //     console.log(data)
+  //   })
+  // }, []);
+  
   useEffect(() => {
+    const token = login.getToken();
     if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
-        console.log(userDataUseToken);
-        
-        // if (userDataUseToken.success) {
-        //   setUserData(userDataUseToken.data)
-        // }
+      getUserUseToken(token).then((data) => {
+        data.success && setUserData(data.data);
+
       })
       return () => {
         setUserData(Object);
       }
     }
-  }, [getUserUseToken, login, setUserData, token]);
+  }, [getUserUseToken, login, setUserData]);
 
   const classes = appStyle()
 
   if (!userData.email) {
     return (
       <div className={classes.App}>
-              <h1>akuo</h1>
-
+        <h1>no user </h1>
         <LayoutMain />
       </div>
     );
