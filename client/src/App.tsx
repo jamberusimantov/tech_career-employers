@@ -3,30 +3,25 @@ import styles from './styles'
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import service from './utils';
-import windowDimensionsActions from './redux/actions/windowDimensions.actions';
 import usersActions from './redux/actions/user.actions';
 import { getAllStudents } from './service/students.service';
 
 const { setUserData } = usersActions.usersActions;
-const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setWindowDimensions: (size: Object) => { dispatch(setWindowDimensions(size)) },
   setUserData: (data: Object) => { dispatch(setUserData(data)) },
 })
 const mapStateToProps = (state: any) => {
   return {
-    windowDimensions: state.windowDimensions,
     userData: state.user.userData,
   };
 }
 
 
-function App(props: any) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { windowDimensions, setWindowDimensions, setUserData, userData } = props
-  const { login, app: { getWindowDimensions }, jobOffer:{postJobOffer}} = service
-  const { registerUser, signUpUser, loginUser, getUserUseToken, setTokenLocal } = login
+export default function App(props: any) {
+  const { setUserData, userData } = props
+  const { login } = service
+  const { getUserUseToken } = login
   const { LayoutMain } = components;
   const { appStyle } = styles;
   const token = login.getToken();
@@ -141,32 +136,38 @@ function App(props: any) {
   //   }
   // }, [getUserUseToken, login, setUserData]);
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions())
+
     }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [setWindowDimensions, getWindowDimensions]);
+    
+      if (token) {
+        getUserUseToken(token).then((userDataUseToken) => {
+          console.log(userDataUseToken);
 
-  const classes = appStyle()
+          // if (userDataUseToken.success) {
+          //   setUserData(userDataUseToken.data)
+          // }
+        })
+        return () => {
+          setUserData(Object);
+        }
+      }
+    }, [getUserUseToken, login, setUserData]);
 
-  if (!userData.email) {
+
+    const classes = appStyle()
+
+    // if (!userData.email) {
+    //   return (
+    //     <div className={classes.App}>
+    //       <LayoutMain />
+    //     </div>
+    //   );
+    // }
+
     return (
       <div className={classes.App}>
-              {/* <h1>akuo</h1> */}
-
         <LayoutMain />
       </div>
     );
   }
 
-  return (
-    <div className={classes.App}>
-      <h1>akuo</h1>
-      <LayoutMain />
-    </div>
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)

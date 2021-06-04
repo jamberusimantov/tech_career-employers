@@ -3,16 +3,15 @@ import React from 'react';
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
 
+
 //Home page
 import Home from './pages/home/Home'
-
 //HR page
-import HR from './pages/hr-page/Hr-Register'
-//Home pages
+
 import HrRegister from './pages/hr-page/Hr-Register'
 
-
 import Student from './pages/student-page/Student'
+
 import {
     Switch,
     Route

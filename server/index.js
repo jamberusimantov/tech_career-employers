@@ -1,7 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-var nodemailer = require('nodemailer');
 const express = require('express');
 const chalk = require('chalk');
 const cors = require('cors');

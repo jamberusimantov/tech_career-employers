@@ -2,48 +2,19 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const student = new Schema({
-      name:{
+    email: {
         type: String,
         required: true
-      },
-        email: {
-            type: String,
-            required: true
-        },
-        password: {
-            type: String,
-            required: true
-        },
-        phone: {
-            type: String,
-            required: true
-        },
-        // courseName: {
-        //     type: String,
-        //     required: true
-        // },
-
-        // courseCompletionDate:{
-        //     type: String,
-        //     required: true
-        // },
-
-        // numberOfGraduates:{
-        //     type: Number,
-        //     required: true
-        // },
-        // cycle: {
-        //     type: String,
-        //     required: true
-        // },
-        // isWorking:{
-        //     type: Boolean,
-        //     required: true
-        // },
-        // role:{
-        //     type: String,
-        //     required: true
-        // },
+    },
+        name:String,
+        password:String,
+        phone: String,
+        courseName: String,
+        courseCompletionDate:String,
+        numberOfGraduates:Number,
+        cycle: String,
+        isWorking:Boolean,
+        role:String,
         section: String,
         isAuth: Boolean,
         token: String,
