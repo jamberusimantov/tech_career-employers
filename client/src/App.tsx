@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import service from './utils';
 import usersActions from './redux/actions/user.actions';
+import { getAllStudents } from './service/students.service';
 
 const { setUserData } = usersActions.usersActions;
 const mapDispatchToProps = (dispatch: any) => ({
@@ -18,6 +19,7 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
   const { appStyle } = styles;
   const token = login.getToken();
 
+
   useEffect(() => {
       const loginHandler = async()=>{
         if(token){
@@ -26,6 +28,7 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
             login.setTokenLocal(token)
             await setUserData(userFromToken)
           }
+
         }
       }
       

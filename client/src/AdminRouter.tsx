@@ -3,9 +3,13 @@ import React from 'react';
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
 
-//Home pages
-import Home from './pages/home-page/Home'
+
+//Home page
+import Home from './pages/home/Home'
+//HR page
+
 import HrRegister from './pages/hr-page/Hr-Register'
+
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'
 
@@ -16,6 +20,7 @@ import {
 
 
 function AdminRouter() {
+
 
   return (
     <Switch>
@@ -36,6 +41,7 @@ function AdminRouter() {
       </Route>
     </Switch>
   )
+
 }
 
 export default AdminRouter;

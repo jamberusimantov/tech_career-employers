@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Input,Space } from 'antd'
 import { Layout, Breadcrumb } from "antd";
 import "antd/dist/antd.css";
-import "./Home.css";
+// import "./Home.css";
 // import LoginModal from "../Home/LoginModal";
 import Slider from "../../components/slider/Slider";
 import About from "../../components/about/About"
