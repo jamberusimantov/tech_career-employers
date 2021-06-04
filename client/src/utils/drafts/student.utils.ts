@@ -1,9 +1,9 @@
-import { API } from '../app.utils'
+import { API } from '../../app.utils'
 import axios from 'axios'
 
 const headers = {
     headers: {
-      authorization: localStorage.getItem('token')
+      authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }
 export async function getStudentById(Id: string) {
@@ -53,7 +53,7 @@ export async function deleteStudent(credentials: any) {
 }
 export async function getAllStudents() {
     try {
-        return await (await axios.get(`${API}/students/all`,headers)).data.data
+        return await (await axios.get(`${API}/students/all`,headers)).data
     }
     catch (err) { console.error(err) }
 }

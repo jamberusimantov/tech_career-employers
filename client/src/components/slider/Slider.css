@@ -5,9 +5,6 @@
     background-repeat: no-repeat;
     overflow: hidden;
     display:flex;
-     background-repeat: no-repeat;
-    overflow: hidden;
-    display:flex;
 }
 
 img{
@@ -18,4 +15,3 @@ justify-content: center;
 align-items: center;
 
 }
-
