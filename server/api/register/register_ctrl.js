@@ -261,6 +261,7 @@ async function loginUser(req, res) {
     const getDocSuccessCb = async(data) => {
         const { _id, name, email } = data;
         const passwordFromDB = data.password;
+        console.log(data);
         if (!data.isAuth) return res.status(400).json({
             success: false,
             message: 'unsigned user on loginUser'

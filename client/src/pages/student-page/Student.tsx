@@ -4,8 +4,7 @@ import Cards from '../../components/student-cards/Cards'
 function Student() {
     return (
         <div>
-            <h1>Student page</h1> 
-            <h1>Student page</h1>
+            <Cards/>
         </div>
     )
 }
