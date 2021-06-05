@@ -25,6 +25,7 @@ const columns = [
     title: 'מס בוגרים',
     dataIndex: 'numberOfGraduates',
     key: 'numberOfGraduates',
+    
   },
   {
     title: 'מס מועסקים',
