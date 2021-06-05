@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {getStudentById} from '../../utils/student.utils'
+import {getStudentById} from '../../utils/drafts/student.utils'
 
 const AboutStudent = () => {
     const [user, setUser] = useState({})
