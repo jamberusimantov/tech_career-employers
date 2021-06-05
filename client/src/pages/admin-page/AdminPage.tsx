@@ -1,29 +1,14 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 
 import { Button, Input, Modal,Checkbox } from "antd";
 
 //Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
-//Data for table from local data
 
-import {getAllStudents} from '../../service/students.service'
+import {getAllCourses ,getStudentById} from './admin.service'
 
-// courseCompletionDate: "21/05"
-// courseName: "Full Stack"
-// cycle: "20/21"
-// date: "2021-05-31T14:09:25.865Z"
-// email: "Moshe@gmail.com"
-// friends: []
-// isActive: true
-// isAuth: true
-// isWorking: false
-// name: "Moshe Yaso"
-// numberOfGraduates: 23
-// pictures: []
-// programmingLang: (8) ["HTML", "CSS", "Java Script", "React", "Type Script", "Bootstrap", "MongoDB", "NodeJs"]
-// role: "Student"
-// specialty: "Java Script"
+
 
 const columns = [
   {
@@ -43,29 +28,25 @@ const columns = [
   },
   {
     title: 'מס מועסקים',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'graduatesWorking',
+    key: 'graduatesWorking',
   },
   {
     title: 'מס מחפשי עבודה',
-    dataIndex: 'isWorking',
-    key: 'isWorking',
+    dataIndex: 'graduatesNotWorking',
+    key: 'graduatesNotWorking',
   },
   {
     title: 'סגירת השמות',
-    dataIndex: 'role',
-    key: 'role',
+    dataIndex: 'graduatesWorking',
+    key: 'graduatesWorking',
   },
 ];
 
 
 function AdminPage() {
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [loading, setLoading] = useState(false)
-  // eslint-disable-next-line @typescript-eslint/no-redeclare
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [dataStudent, setDataStudent] = useState([])
+
   
   
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
@@ -105,26 +86,8 @@ function AdminPage() {
   function changeShowGraduatesTable(e: { target: { checked: any } }) {
     setShowGraduatesTable(!showGraduatesTable);
   }
-  async function fetchData() {
-    
-    try {
-      setLoading(true);
-      await getAllStudents().then(res => {setDataStudent(res);console.log(res);
-      })
-      
-    } catch (error) {
-      console.log(error);
-      
-    } finally {
-      setLoading(false);
-    }
-  }
-  
-  
-  useEffect(() => {
-    fetchData()
-  }, [])
-  
+
+
   return (
     <div className="admin-page">
       <div className="modal-admin-page">
@@ -170,7 +133,7 @@ function AdminPage() {
         {!showCoursesTable ? (
           " "
         ) : (
-          <CodeinTable  columns={columns} dataSource={dataStudent} />
+          <CodeinTable  columns={columns} getData={getAllCourses} />
         )}
         {/* {!showGraduatesTable ? (
           " "

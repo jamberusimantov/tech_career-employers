@@ -5,7 +5,7 @@ import AdminPage from './pages/admin-page/AdminPage'
 
 
 //Home page
-import Home from './pages/home/Home'
+import Home from './pages/Home/Home'
 //HR page
 
 import HrRegister from './pages/hr-page/Hr-Register'
