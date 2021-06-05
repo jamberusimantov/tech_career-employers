@@ -5,7 +5,7 @@ import AdminPage from './pages/admin-page/AdminPage'
 
 
 //Home page
-import Home from './pages/home/Home'
+import Home from './pages/Home/Home'
 //HR page
 import HrRegister from './pages/hr-page/Hr-Register'
 import  CompanyRegister from './pages/hr-page/Company-register'
@@ -25,7 +25,7 @@ function AdminRouter() {
               <Route exact path="/">
             <Home/>
           </Route>
-          <Route path="/hr">
+          <Route path="/signUp/hr">
           <HrRegister/>
           </Route>
           <Route path="/student">
