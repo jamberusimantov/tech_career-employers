@@ -50,3 +50,4 @@ export const postJobOffer = async (doc: object, token: string) => {
     catch (error) { return { success: false, error: err('getJobOffer', error) } }
     finally { }
 }
+

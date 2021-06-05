@@ -6,7 +6,7 @@ import AdminPage from './pages/admin-page/AdminPage'
 import Home from './pages/Home/Home'
 
 //HR page
-import HR from './pages/hr-page/Hr'
+import LinkdInRouter from './components/LinkdIn'
 
 import {
     Switch,
@@ -21,8 +21,8 @@ function AdminRouter() {
               <Route exact path="/">
             <Home/>
           </Route>
-          <Route path="/hr">
-            <HR/>
+          <Route path="/recruiter">
+            <LinkdInRouter/>
           </Route>
           <Route path="/admin">
             <AdminPage/>

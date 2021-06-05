@@ -29,22 +29,22 @@ function LayoutMain() {
         
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
-          <Menu.Item key="3">סטודנטים</Menu.Item>
-          <Menu.Item key="2">מגייסים</Menu.Item>
+          <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
+          <Menu.Item key="2"><Link to="/recruiter">מגייסים</Link></Menu.Item>
           <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: "0 50px" }}>
-        <Breadcrumb style={{ margin: "16px 0" }}>
+        {/* <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
         <Layout
           className="site-layout-background"
           style={{ padding: "24px 0" }}
         >
-          <Sider className="site-layout-background" width={200}>
+          {/* <Sider className="site-layout-background" width={200}>
             <Menu
               mode="inline"
               defaultSelectedKeys={["1"]}
@@ -74,7 +74,7 @@ function LayoutMain() {
                 <Menu.Item key="12">option12</Menu.Item>
               </SubMenu>
             </Menu>
-          </Sider>
+          </Sider> */}
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             
 

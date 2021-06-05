@@ -1,58 +1,35 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
+import { Card, Avatar } from "antd";
+import { Link } from "react-router-dom";
+// import {
+//   EditOutlined,
+//   EllipsisOutlined,
+//   SettingOutlined,
+// } from "@ant-design/icons";
 
+const { Meta } = Card;
 
 export default function JobCard() {
-    return (
-        <Container>
-            <Avatar>
-                <img src="/favicon.png" alt="" />
-
-            </Avatar>
-            <Content>
-                <h1>sdsdbb</h1>
-                <h3>dsdvbb</h3>
-                <h3>dsdvbb</h3>
-                <p>cxbdfsnsgmsg</p>
-
-            </Content>
-
-
-        </Container>
-       
-    )
+  return (
+    <div style={{textAlign:"left"}}>
+      <Link to="/recruiter/checkpoint">
+        <Card style={{ padding: 5, cursor: "pointer"}}>
+          <Meta
+            avatar={<Avatar size="large" src="/img/checkpoint.png" />}
+            title="Full Stack Developer"
+             description="Check Point "
+          />
+          {/* <Avatar src="/img/checkpoint.png" />
+          <div>
+            <h3>full stack</h3>
+            <p>HoneyBook</p>
+            <p>Tel Aviv</p>
+          </div> */}
+          <p>Tel Aviv</p>
+          <p>Aplicants 5</p>
+        </Card>
+      </Link>
+    </div>
+  );
 }
-
-const Container = styled.div`
-height: 130px;
-width: calc(420px + 2vw);
-background-color: gray;
-font-size: 14px;
-font-family: Arial, Helvetica, sans-serif;
-line-height: 5px;
-cursor: pointer;
-padding: 8px;
-display: flex;
-
-&:hover{
-    background-color: #beb9b9;
-}
-
-img{
-    width: 70px;
-    height: 70px;
-    margin-right: 1rem;
-}
-
-
-
-
-`
-const Avatar=styled.div`
-
-
-`
-const Content=styled.div`
-
-
-`
