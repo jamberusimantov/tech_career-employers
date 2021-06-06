@@ -8,7 +8,11 @@ import HrRegisterForm from './pages/hr-page/Hr-Register'
 import CompanyRegister from './pages/hr-page/Company-register'
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'
+
+import LinkdInRouter from './components/LinkdIn'
+
 import StuSteps from './components/steps/StuSteps'
+
 
 import {
   Switch,
@@ -27,6 +31,9 @@ function AdminRouter() {
       <Route path="/signUp/hr">
         <HrRegisterForm />
       </Route>
+     < Route path="/recruiter">
+            <LinkdInRouter/>
+          </Route>
       <Route path="/signUp/company">
         <CompanyRegister />
       </Route>
