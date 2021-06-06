@@ -1,88 +1,65 @@
-  
-import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import './Login.css';
-import  LogInFromServiceComponent  from '../../service/login.service';
+import React from 'react'
+import { Form, Input, Button} from 'antd';
+import { connect } from 'react-redux';
+import usersActions from '../../redux/actions/user.actions';
+import LogIn from '../../utils/login.utils';
 
+const { loginUser,setTokenLocal } = LogIn
+const { setUserData } = usersActions.usersActions;
+const mapDispatchToProps = (dispatch: any) => ({
+  setUserData: (data: Object) => { dispatch(setUserData(data)) }})
+const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
+const Login = (): any => {
+    const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
+    const tailLayout = { wrapperCol: { offset: 8, span: 16 } }
 
-const Login = () => {
-    // interface UserInf {
-    //     userEmail: String;
-    //     userPassword: String;
-    // }
-    const [password, setPassword] = useState('')
-    const [mail, setMail] = useState('')
-    const [error, setError] = useState ('')
-    const loginService =  LogInFromServiceComponent;
-    
-    //this function has bean quite 
-    // const onFinish = (values: any) => {
-    //     console.log('Received values of form: ', values);
-    // };
+    const onFinish = async (values: any) => { 
+        const email:any =  values.email
+        const password:any =  values.password
+        const resFromLogin = await loginUser({email,password},'student')
+        if(resFromLogin.success){
+            const token = resFromLogin.token
+            setTokenLocal(token)
+            setUserData(token)
+            window.location.reload();
 
-    async function serverCheck() {
-    
-         const emailValue: String = mail 
-        
-        const passWordValue: String = password
+        }else{alert('failed!')}
 
-        const userInfo: any = {userEmail:emailValue, userPassword:passWordValue}
-
-        console.log(JSON.stringify(userInfo));
-
-      const logApproved = await loginService.loginUser(userInfo).then((res)=> {
-           console.log(res.success);
-            return res.success})
-       
-    if (logApproved) {
-        
-        setError("good")
     }
-    else {
-        setError("Please check your password or email")
-    }
-    
-        }
+    const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) }
 
     return (
+        <Form
+            {...layout}
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+        >
+            <Form.Item
+                label="אימייל"
+                name="email"
+                rules={[{ required: true, message: 'הכנס אימייל!' }]}
+            >
+                <Input />
+            </Form.Item>
 
-        <div className="loginContainer">
-            {/* <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={onFinish}> */} {/* this line have onFinish function from ant dissing maybe i don't need it*/}
-            <Form name="normal_login" className="login-form" initialValues={{ remember: true }}>
-            <div></div>
-        
-        <div>            
-        <Form.Item label="בבקשה להקליד מייל" name="username" rules={[{ required: true, message: 'בבקשה להקליד מייל' }]}>
-           <Input onChange={e => setMail(e.target.value)} value={mail} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="מייל" />
-        </Form.Item>
-                    
-        <Form.Item label="בבקשה להקליד סיסמה" name="password" rules={[{ required: true, message: 'בבקשה להקליד ססימה' }]}>
-            <Input onChange={e => setPassword(e.target.value)} value={password} prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="סיסמה"/>
-            <span className="errorMessage">{error}</span>
-        </Form.Item>
+            <Form.Item
+                label="סיסמא"
+                name="password"
+                rules={[{ required: true, message: 'הכנס סיסמא!' }]}
+            >
+                <Input.Password />
+            </Form.Item>
 
-        <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>זכור אותי</Checkbox>
-                </Form.Item>
 
-                <a className="login-form-forgot" href="#">שכחתי סיסמה</a>
-        </Form.Item>
-
-        <Form.Item>
-                <Button onClick={serverCheck} type="primary" htmlType="submit" className="login-form-button">הכנס</Button>
-                        {/* Or <a href="">register now!</a> */}
-        </Form.Item>
-                    </div>
-
-                <div></div>
-
-    </Form>
-        </div>
-    )
-}
+            <Form.Item  {...tailLayout} >
+                <Button type="primary" htmlType="submit"> התחבר </Button>
+            </Form.Item>
+        </Form>
+    );
+};
 
 
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login) 

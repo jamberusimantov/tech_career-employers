@@ -1,15 +1,11 @@
 import React from 'react';
-
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
-
-
 //Home page
 import Home from './pages/Home/Home'
 //HR page
-import HrRegister from './pages/hr-page/Hr-Register'
-import  CompanyRegister from './pages/hr-page/Company-register'
-
+import HrRegisterForm from './pages/hr-page/Hr-Register'
+import CompanyRegister from './pages/hr-page/Company-register'
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'
 
@@ -28,13 +24,16 @@ function AdminRouter() {
         <Home />
       </Route>
       <Route path="/signUp/hr">
-        <HrRegister />
+        <HrRegisterForm />
+      </Route>
+      <Route path="/signUp/company">
+        <CompanyRegister />
       </Route>
       <Route path="/student">
         <Student />
       </Route>
       <Route path="/studentPage/:id">
-       <SpecificStudent/>
+        <SpecificStudent />
       </Route>
       <Route path="/admin">
         <AdminPage />
