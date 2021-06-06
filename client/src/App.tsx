@@ -21,6 +21,8 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
   useEffect(() => {
       const loginHandler = async()=>{
+        console.log(token);
+        
         if(token){
           const userFromToken = await getUserUseToken(token)
           if (userFromToken.success) {
