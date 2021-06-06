@@ -21,19 +21,6 @@ const student = new Schema({
         specialty:String,
         programmingLang:Array,
         role:{type:String, default: 'Student'},
-        steps:{type:Number, default: 1},
-        pictures: [{
-            _id: Object,
-            data: Buffer,
-            name: String,
-            contentType: String,
-            size: Number,
-            path: String,
-        }],
-        date: {
-            type: Date,
-            default: Date.now,
-        },
     },
 )
 module.exports = mongoose.model('student', student)

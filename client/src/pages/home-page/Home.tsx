@@ -4,6 +4,7 @@ import About from "../../components/about/About"
 
 import Coops from "../../components/coops/Coops"
 // import "antd/dist/antd.css";
+
 const { Header, Content, Footer } = Layout;
 
 export default function Home() {
