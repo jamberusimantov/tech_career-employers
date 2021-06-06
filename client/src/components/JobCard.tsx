@@ -16,7 +16,7 @@ export default function JobCard({title,company,location,applicants,id}:any) {
       <Link to={`/recruiter/${id}`}>
         <Card style={{ padding: 5, cursor: "pointer"}}>
           <Meta
-            // avatar={<Avatar size="large" src="/img/checkpoint.png" />}
+            avatar={<Avatar src="/img/checkpoint.png" size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}  />}
             title={title}
              description={company}
           />
@@ -34,7 +34,7 @@ export default function JobCard({title,company,location,applicants,id}:any) {
 const Container = styled.div`
 text-align: left;
 &:hover{
-  background-color: gray !important;
+  /* background-color: gray !important; */
 
 }
 `

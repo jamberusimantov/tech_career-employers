@@ -11,6 +11,7 @@ function CardsDetals5() {
       <TopSection>
         <div>
           <div>
+            {/* <DribbbleOutlined /> */}
             <span>Zencity</span>
             <span> -Rehovot</span>
           </div>
