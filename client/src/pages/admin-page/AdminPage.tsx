@@ -1,31 +1,53 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import { Button, Input, Modal,Checkbox } from "antd";
 
 //Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
+import service from '../../utils';
 
-import {getAllCourses ,getStudentById} from './admin.service'
+import './AdminPage.css'
+
+import {getAllCourses } from './admin.service'
+
+import {getStudent} from '../../utils/drafts/student.utils'
 
 
-
-const columns = [
+const coursesColumns = [
   {
     title: 'שם הקורס',
     dataIndex: 'courseName',
     key: 'courseName',
-  },
+    filters: [
+      {
+        text: 'Full-Stack',
+        value: 'Full-Stack',
+      },
+      {
+        text: 'QA',
+        value: 'QA',
+      },
+      {
+        text: 'Cyber',
+        value: 'Cyber',
+      },
+    ],
+    onFilter: (value: any, record: { courseName: string | any[]; }) => record.courseName.indexOf(value) === 0,
+    // sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
+    sortDirections: ['descend'],  },
   {
     title: 'מועד הסיום',
     dataIndex: 'courseCompletionDate',
     key: 'courseCompletionDate',
+    // sorter:  sortByName,
+		// onFilter: filterByName,
   },
   {
     title: 'מס בוגרים',
     dataIndex: 'numberOfGraduates',
     key: 'numberOfGraduates',
-    
+
   },
   {
     title: 'מס מועסקים',
@@ -45,10 +67,65 @@ const columns = [
 ];
 
 
+
+export const graduatesColumns: any[] = [
+  {
+    title: 'חברה',
+    dataIndex: 'company',
+  },
+  {
+    title: 'מגייסת',
+    dataIndex: 'uploadedBy',
+  },
+  {
+    title: 'תפקיד',
+    dataIndex: 'passion',
+  },
+  {
+    title: 'ת. פתיחת משרה',
+    dataIndex: 'uploadDate',
+  },
+  {
+    title: 'סטטוס',
+    dataIndex: 'age',
+  },
+  {
+    title: 'שאל את המגייסת?',
+    dataIndex: 'emailTo',
+    render: (text: string) =>
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a href="mailto: abc@example.com">{text}</a>,
+  },
+  {
+    title: 'הגישו קו"ח',
+    dataIndex: 'name',
+    // render: (text: string) => <a>{text}</a>,
+  },
+];
+
+
 function AdminPage() {
 
 
+  const [searchValueInTable, setSearchValueInTable] = useState('');
+
+
+  const { login } = service
+
+  const { registerUser } = login
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   
+  const [hrEmail,setHrEmail]=useState('');
+  const [companyName,setCompanyName]=useState('');
+  const [studentEmail,setStudentEmail]=useState('');
+
+  const registerHr ={
+    credentials:{
+      email:hrEmail,
+      company:companyName
+    }
+  }
   
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
@@ -60,10 +137,6 @@ function AdminPage() {
     setIsModalVisibleStudent(true);
   };
   
-  const handleOkStudent = () => {
-    setIsModalVisibleStudent(false);
-  };
-  
   const handleCancelStudent = () => {
     setIsModalVisibleStudent(false);
   };
@@ -72,9 +145,6 @@ function AdminPage() {
     setIsModalVisibleHr(true);
   };
   
-  const handleOkHr = () => {
-    setIsModalVisibleHr(false);
-  };
   
   const handleCancelHr = () => {
     setIsModalVisibleHr(false);
@@ -87,23 +157,57 @@ function AdminPage() {
   function changeShowGraduatesTable(e: { target: { checked: any } }) {
     setShowGraduatesTable(!showGraduatesTable);
   }
+  
+  const onRegisterModalOk=async () => {
+    
+    setIsModalVisibleHr(false);
+   await registerUser(registerHr.credentials,'hr');
+    console.log(registerHr.credentials);
+  }
+
+const onRegisterModalOkStudent= async ()=>{
+  setIsModalVisibleStudent(false);
+  console.log(studentEmail);
+  await getStudent(studentEmail,'student')
+  
+  
+}
+
+
+
+
+  function sortByName(a: { courseCompletionDate: { toLowerCase: () => number; }; }, b: { courseCompletionDate: { toLowerCase: () => number; }; }) {
+    return a.courseCompletionDate.toLowerCase() - b.courseCompletionDate.toLowerCase();
+  }
+  
+  // function filterByName(value: any, record: { courseCompletionDate: string | any[]; }) {
+  //   return record.courseCompletionDate.indexOf(value) !== -1;
+  // }
 
 
   return (
     <div className="admin-page">
+      <Input.Search
+       placeholder="חפש"
+       value={searchValueInTable}
+       />
+
       <div className="modal-admin-page">
+
+
+
+
         <Button type="primary" onClick={showModalStudent}>
           רישום סטודנט
         </Button>
         <Modal
           title="רישום סטודנט"
           visible={isModalVisibleStudent}
-          onOk={handleOkStudent}
+          onOk={onRegisterModalOkStudent}
           onCancel={handleCancelStudent}
         >
           <p>אימייל</p>
-          <Input placeholder="אימייל סטודנט" />
-          <Button>שליחה</Button>
+          <Input onChange={(e)=>{setStudentEmail(e.target.value)}} placeholder="אימייל סטודנט" />
         </Modal>
 
         <Button type="primary" onClick={showModalHr}>
@@ -112,13 +216,13 @@ function AdminPage() {
         <Modal
           title="רישום מגייס"
           visible={isModalVisibleHr}
-          onOk={handleOkHr}
+          onOk={onRegisterModalOk}
           onCancel={handleCancelHr}
         >
           <p>אימייל</p>
-          <Input placeholder="אימייל" />
-          <Input placeholder="שם חברה" />
-          <Button>שליחה</Button>
+          <Input onChange={(e)=>{setHrEmail(e.target.value)}} placeholder="אימייל" />
+          <p>שם חברה</p>
+          <Input onChange={(e)=>{setCompanyName(e.target.value)}} placeholder="שם חברה" />
         </Modal>
       </div>
 
@@ -134,13 +238,13 @@ function AdminPage() {
         {!showCoursesTable ? (
           " "
         ) : (
-          <CodeinTable  columns={columns} getData={getAllCourses} />
+          <CodeinTable columns={coursesColumns} getData={getAllCourses} />
         )}
-        {/* {!showGraduatesTable ? (
+        {!showGraduatesTable ? (
           " "
         ) : (
-          <CodeinTable columns={graduatesColumns} data={graduatesData} />
-        )} */}
+          <CodeinTable columns={graduatesColumns}  />
+        )}
       </div>
     </div>
   );
