@@ -15,6 +15,88 @@ export default function JobsList() {
   //   .then(data => props.popBooks(data))
 
   // }, []);
+  const CardsData = [
+    {
+      title:"Full-Stack developer",
+      company:"Checkpoint",
+      location:"Tel Aviv",
+      applicants: "applicants 7",
+      id:1
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"Microsoft",
+      location:"Tel Aviv",
+      applicants: "applicants 23",
+      id:2
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"Google",
+      location:"Herzeliya",
+      applicants: "applicants 12",
+      id:3
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"Ebay",
+      location:"Tel Aviv",
+      applicants: "applicants 41",
+      id:4
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"Zencity",
+      location:"Reẖovot",
+      applicants: "applicants 31",
+      id:5
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"HoneyBook",
+      location:"Ra'ananna",
+      applicants: "applicants 12",
+      id:6
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"Fiverr",
+      location:"Herzeliya",
+      applicants: "applicants 18",
+      id:7
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"RapidAPI",
+      location:"Herzeliya",
+      applicants: "applicants 3",
+      id:8
+
+
+    },
+    {
+      title:"Full-Stack developer",
+      company:"Revuze",
+      location:"Herzeliya",
+      applicants: "applicants 5",
+      id:9
+
+
+    }
+  ]
 
   return (
     <Container>
@@ -29,6 +111,12 @@ export default function JobsList() {
         </Col>
 
         <Col span={8} pull={16} style={{ overflowY: "scroll", height: "100%" }} className="allCardsCol">
+          {CardsData.map((item) =>{ return(
+            <JobCard title={item.title} company={item.company} location={item.location} applicants={item.applicants} id={item.id}/>
+          )
+
+          })}
+          {/* <JobCard />
           <JobCard />
           <JobCard />
           <JobCard />
@@ -45,9 +133,7 @@ export default function JobsList() {
           <JobCard />
           <JobCard />
           <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
+          <JobCard /> */}
         </Col>
       </Row>
     </Container>

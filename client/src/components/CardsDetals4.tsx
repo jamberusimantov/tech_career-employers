@@ -4,21 +4,21 @@ import { Button } from "antd";
 import Title from "./Title";
 import "./";
 
-function CardsDetail() {
+function CardsDetals4() {
   return (
     <Container>
       <Title title="Full-Stack developer" />
       <TopSection>
         <div>
           <div>
-            <span>checkPoint</span>
+            <span>Ebay</span>
             <span> -Tel Aviv</span>
           </div>
           <div>
             <span>active</span>
-            <span> -applicants</span>
+            <span> -applicants 41</span>
           </div>
-          <div>last date to apply : 23/6/2021</div>
+          <div>last date to apply : 23/4/2021</div>
         </div>
 
         <Button type="primary">apply job</Button>
@@ -26,15 +26,21 @@ function CardsDetail() {
 
       <SecondSection>
         <TherdSection>
-
           <p className="jobDescription">
-            At DeePathology.ai, we are developing next generation tools for AI
-            in Pathology, that unleash massive AI creation, and radically
-            optimize accuracy and time utilization in pharma and diagnostics.
+            With more than a billion active listings, tens of millions of daily
+            transactions, conducted by tens of millions of sellers / hundreds of
+            millions of buyers, across more than 30 countries, and 22 different
+            currencies, comprised of a product catalog staggering in diversity -
+            eBay is a marketplace like no other that has ever existed If you’re
+            interested in joining a purpose driven community that is dedicated
+            to creating an ambitious and inclusive workplace, join eBay – a
+            company you can be proud to be a part of.
             <br />
-            Our STUDIO platform lets Pathologists create AI solutions by
-            themselves, leveraging Active Learning, Interactive/Online Learning
-            and more.
+            In this role you will be a part of eBay’s global Seller Insights
+            group in support of dramatically elevating the capabilities of all
+            of eBay’s Selling. Ensuring eBay’s tens of millions of sellers have
+            access to world class, supremely intelligent tools, analytics and
+            API’s to support their needs to operate and grow.
           </p>
           <p>
             As a Full Stack Engineer, you will work on both the frontend and
@@ -45,14 +51,20 @@ function CardsDetail() {
         <div>
           <h4>Minimum Qualifications:</h4>
           <ul>
-            <li>Must: 3+ Years experience in Angular or Vue or React</li>
+            <li>4+ years of hands-on knowledge of Java application development, testing and frameworks (Spring Boot)</li>
             <li>
               {" "}
               Hands-on experience with HTML5, CSS3, JavaScript, Typescript.
             </li>
+            <li>Experience with NoSQL DBs (Elasticsearch , Redis , MongoDB , etc.)</li>
             <li>Good knowledge of Python.</li>
             <li>"Let's make this happen!" attitude</li>
+            <li>BSc in computer science/software engineering or other relevant education</li>
+            <li>At least 1 year experience with NodeJS</li>
+            <li>Take ownership and help drive the team and group efforts</li>
             <li>Team player, self learning abilities, independence.</li>
+            <li>Proficiency with fundamental front end languages such as Json, XML, AJAX HTML, React, Angular, CSS and JavaScript.</li>
+            <li>Familiarity with database technology NoSql –an advantage</li>
           </ul>
         </div>
       </SecondSection>
@@ -60,7 +72,7 @@ function CardsDetail() {
   );
 }
 
-export default CardsDetail;
+export default CardsDetals4;
 
 const Container = styled.div`
   height: 100vh;

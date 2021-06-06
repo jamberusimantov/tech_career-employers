@@ -10,19 +10,19 @@ import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
-export default function JobCard() {
+export default function JobCard({title,company,location,applicants,id}:any) {
   return (
     <Container>
-      <Link to="/recruiter/checkpoint">
+      <Link to={`/recruiter/${id}`}>
         <Card style={{ padding: 5, cursor: "pointer"}}>
           <Meta
-            avatar={<Avatar size="large" src="/img/checkpoint.png" />}
-            title="Full Stack Developer"
-             description="Check Point "
+            // avatar={<Avatar size="large" src="/img/checkpoint.png" />}
+            title={title}
+             description={company}
           />
          
-          <p>Tel Aviv</p>
-          <p>Aplicants 5</p>
+          <p>{location}</p>
+          <p>{applicants}</p>
         </Card>
       </Link>
     </Container>
