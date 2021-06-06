@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import React, { useEffect } from 'react'
 import usersActions from '../../redux/actions/user.actions';
 import { useState } from 'react';
-import logIn from "../../utils/login.utils";
+// import logIn from "../../utils/login.utils";
 import { getHrById } from '../../utils/drafts/hr.utils'
 import "antd/dist/antd.css";
 import { Form, Input, Button, Typography } from "antd";
-const { signUpUser } = logIn;
+// const { signUpUser } = logIn;
 const { Title } = Typography;
 type SizeType = Parameters<typeof Form>[0]["size"];
 // {success: true, data: {…}, message: "success on getHrByUrlId"}
