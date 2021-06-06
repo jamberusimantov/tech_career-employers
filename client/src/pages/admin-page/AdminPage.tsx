@@ -57,6 +57,7 @@ function AdminPage() {
   
   const [hrEmail,setHrEmail]=useState('');
   const [companyName,setCompanyName]=useState('');
+
   const registerHr ={
     credentials:{
       email:hrEmail,
@@ -101,14 +102,14 @@ function AdminPage() {
   function changeShowGraduatesTable(e: { target: { checked: any } }) {
     setShowGraduatesTable(!showGraduatesTable);
   }
+  
+  const onRegisterModalOk=async () => {
+    
+    setIsModalVisibleHr(false);
+   await registerUser(registerHr.credentials,'hr');
+    console.log(registerHr.credentials);
+  }
 
-  useEffect(() => {
-
-    const testAlmito=async ()=>{
-     await registerUser(registerHr.credentials,'hr')
-    }
-    testAlmito()
-  },[])
 
   return (
     <div className="admin-page">
@@ -133,13 +134,13 @@ function AdminPage() {
         <Modal
           title="רישום מגייס"
           visible={isModalVisibleHr}
-          onOk={handleOkHr}
+          onOk={onRegisterModalOk}
           onCancel={handleCancelHr}
         >
           <p>אימייל</p>
           <Input onChange={(e)=>{setHrEmail(e.target.value)}} placeholder="אימייל" />
+          <p>שם חברה</p>
           <Input onChange={(e)=>{setCompanyName(e.target.value)}} placeholder="שם חברה" />
-          <Button>שליחה</Button>
         </Modal>
       </div>
 
