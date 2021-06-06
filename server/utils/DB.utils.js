@@ -25,7 +25,7 @@ async function postDocs(collection, docs, successCb = () => {}) {
     try {
         await collection.insertMany(docs, (error) => {
             if (error) throw new Error(`error on postDocs: ${error}`);
-            successCb();
+            successCb(docs);
         })
     } catch (error) {
         return { success: false, error };
@@ -58,36 +58,37 @@ async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {
     } finally {}
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
+    const newObj = new Object(userItem)
     const methods = {
-        strict: user => {
-            user.password = undefined;
-            user.token = undefined;
-            user.messages = undefined;
-            user.notifications = undefined;
-            user.phone = undefined;
-            user.tags = undefined
-            return user;
+        strict: newObj => {
+            newObj.password = undefined;
+            newObj.token = undefined;
+            newObj.messages = undefined;
+            newObj.notifications = undefined;
+            newObj.phone = undefined;
+            newObj.tags = undefined
+            return newObj;
         },
-        self: user => {
-            user.password = undefined;
-            user.token = undefined;
-            return user;
+        self: newObj => {
+            newObj.password = undefined;
+            newObj.token = undefined;
+            return newObj;
         },
-        fallbackMethod: user => {
-            user.password = undefined;
-            user.token = undefined;
-            user.messages = undefined;
-            user.notifications = undefined;
-            return user;
+        fallbackMethod: newObj => {
+            newObj.password = undefined;
+            newObj.token = undefined;
+            newObj.messages = undefined;
+            newObj.notifications = undefined;
+            return newObj;
         }
     }
-    const newObj = new Object(userItem)
     const setObject = obj => methods[method] ? methods[method](obj) : methods.fallbackMethod(obj)
     if (newObj instanceof Array) {
         let results = [];
         newObj.forEach(user => {
             results.push(setObject(user))
         })
+        console.log(results);
         return results;
     }
     if (typeof userItem === 'object') return setObject(newObj)

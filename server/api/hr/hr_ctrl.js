@@ -186,17 +186,11 @@ async function deleteHrByUrlId(req, res) {
             success: false,
             message: unauthorizedToken('deleteHrByUrlId')
         })
-        const getRes = await deleteDoc(hrCollection, hr, deleteHrSuccess, deleteHrFail)
+        const getRes = await deleteDoc(hrCollection, hr, deleteDocSuccessCb, deleteDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
-    const deleteHrSuccess = data => res.status(200).json({
-        success: true,
-        message: success('deleteHrByUrlId')
-    })
-    const deleteHrFail = () => res.status(400).json({
-        success: false,
-        message: failure('deleteHrByUrlId')
-    })
+    const deleteDocSuccessCb = (data)=> successHandler(data,res,'deleted')
+    const deleteDocFailCb = () => failHandler(_id,res)
     try {
         authRequest(token, request, res)
     } catch (error) {
