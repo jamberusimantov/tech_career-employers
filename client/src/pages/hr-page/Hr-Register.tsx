@@ -9,7 +9,6 @@ import "antd/dist/antd.css";
 import { Form, Input, Button, Typography } from "antd";
 // const { signUpUser } = logIn;
 const { Title } = Typography;
-type SizeType = Parameters<typeof Form>[0]["size"];
 // {success: true, data: {…}, message: "success on getHrByUrlId"}
 // data:
 // company: "jamberTech"
@@ -61,11 +60,8 @@ const onFinish = async (values: any) => {
   const phone: any = values.phone
   const password: any = values.password
   const companyName: any = values.companyName
-
 }
 const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) }
-
-
 
 return (
   <>

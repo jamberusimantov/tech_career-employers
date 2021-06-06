@@ -6,8 +6,10 @@ import Home from './pages/Home/Home'
 //HR page
 import HrRegisterForm from './pages/hr-page/Hr-Register'
 import CompanyRegister from './pages/hr-page/Company-register'
+import RegisterIndex from './pages/hr-page/RegisterIndex'
 import Student from './pages/student-page/Student'
-import SpecificStudent from './components/specificStudent/SpecificStudent'
+import SpecificStudent from './components/specificStudent/SpecificStudent'  
+import HrSteps from './components/steps/HrSteps'
 
 import {
   Switch,
@@ -24,10 +26,9 @@ function AdminRouter() {
         <Home />
       </Route>
       <Route path="/signUp/hr">
-        <HrRegisterForm />
+       <HrSteps/>
       </Route>
       <Route path="/signUp/company">
-        <CompanyRegister />
       </Route>
       <Route path="/student">
         <Student />
