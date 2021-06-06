@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
 import {
   Form,
   Input,
@@ -12,16 +12,17 @@ import {
   InputNumber,
   TreeSelect,
   Switch,
-} from 'antd';
+} from "antd";
 
-type SizeType = Parameters<typeof Form>[0]['size'];
-
+type SizeType = Parameters<typeof Form>[0]["size"];
 
 const FormSizeDemo = () => {
-    const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
-    const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-      setComponentSize(size);
-    };
+  const [componentSize, setComponentSize] = useState<SizeType | "default">(
+    "default"
+  );
+  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
+    setComponentSize(size);
+  };
 
   return (
     <>
@@ -36,9 +37,7 @@ const FormSizeDemo = () => {
         initialValues={{
           size: componentSize,
         }}
-       
       >
-        
         <Form.Item label="אימייל">
           <Input />
         </Form.Item>
@@ -57,10 +56,9 @@ const FormSizeDemo = () => {
         <Form.Item label="שם ארגון">
           <Input />
         </Form.Item>
-       
       </Form>
     </>
   );
 };
 
-export default FormSizeDemo 
+export default FormSizeDemo;

@@ -8,7 +8,6 @@ import Home from './pages/home-page/Home'
 import HrRegister from './pages/hr-page/Hr-Register'
 import Student from './pages/student-page/Student'
 
-
 import {
     Switch,
     Route
@@ -20,7 +19,7 @@ function AdminRouter() {
     return (
           <Switch>
               <Route exact path="/">
-            {/* <Home/> */}
+            <Home/>
           </Route>
           <Route path="/hr">
             <HrRegister/>
@@ -31,6 +30,10 @@ function AdminRouter() {
           <Route path="/admin">
             <AdminPage/>
           </Route>
+          <Route path="/student">
+            <Student/>
+          </Route>
+          
         </Switch>
     )
 }

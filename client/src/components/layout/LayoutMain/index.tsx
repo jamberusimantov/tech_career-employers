@@ -1,7 +1,7 @@
 
 import "./style.css";
 import AdminRouter from '../../../AdminRouter'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,9 +22,9 @@ function LayoutMain() {
     <Layout>
       <Header className="header">
         <div className="imgdiv">
-         <img src="/img/Logo.png" alt="" className="logo"/> 
+          <img src="/img/Logo.png" alt="" className="logo" />
         </div>
-        
+
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
           <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
@@ -33,18 +33,14 @@ function LayoutMain() {
         </Menu>
       </Header>
       <Content style={{ padding: "0 50px" }}>
-      
+
         <Layout
           className="site-layout-background"
           style={{ padding: "24px 0" }}
         >
-        
+
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            
-
-                          <AdminRouter/>
-
-
+            <AdminRouter />
           </Content>
         </Layout>
       </Content>

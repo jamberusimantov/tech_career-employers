@@ -29,6 +29,7 @@ app.set('trust proxy', true);
 db.on('error', () => {
     console.log(chalk.red('Connection error'))
 })
+
 app.listen(PORT, () => {
     console.log(`${chalk.green('tech_career-employers-team2')} ${chalk.yellow('live and up on port')} ${chalk.red(PORT)}`);
 })
@@ -39,7 +40,6 @@ app.use('/hrs', hrRouter);
 app.use('/companies', companyRouter);
 app.use('/jobOffers', jobOfferRouter);
 app.use('/students', studentsRouter);
-
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
