@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import JobCard from "../components/JobCard";
 import "../components/";
-import { getManyJobOffers } from "../utils/jobOffer.utils";
+import { getManyJobOffers } from "../utils/drafts/jobOffer.utils";
 import { Input, Row, Col } from "antd";
 import RecruiterRouter from "./LinkdInRouter";
 
