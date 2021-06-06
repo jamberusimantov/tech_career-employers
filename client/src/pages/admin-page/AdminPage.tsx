@@ -11,6 +11,7 @@ import './AdminPage.css'
 
 import {getAllCourses } from './admin.service'
 
+import {getStudent} from '../../utils/drafts/student.utils'
 
 
 const coursesColumns = [
@@ -117,6 +118,7 @@ function AdminPage() {
   
   const [hrEmail,setHrEmail]=useState('');
   const [companyName,setCompanyName]=useState('');
+  const [studentEmail,setStudentEmail]=useState('');
 
   const registerHr ={
     credentials:{
@@ -133,10 +135,6 @@ function AdminPage() {
   
   const showModalStudent = () => {
     setIsModalVisibleStudent(true);
-  };
-  
-  const handleOkStudent = () => {
-    setIsModalVisibleStudent(false);
   };
   
   const handleCancelStudent = () => {
@@ -167,6 +165,17 @@ function AdminPage() {
     console.log(registerHr.credentials);
   }
 
+const onRegisterModalOkStudent= async ()=>{
+  setIsModalVisibleStudent(false);
+  console.log(studentEmail);
+  await getStudent(studentEmail,'student')
+  
+  
+}
+
+
+
+
   function sortByName(a: { courseCompletionDate: { toLowerCase: () => number; }; }, b: { courseCompletionDate: { toLowerCase: () => number; }; }) {
     return a.courseCompletionDate.toLowerCase() - b.courseCompletionDate.toLowerCase();
   }
@@ -183,8 +192,6 @@ function AdminPage() {
        value={searchValueInTable}
        />
 
-
-
       <div className="modal-admin-page">
 
 
@@ -196,12 +203,11 @@ function AdminPage() {
         <Modal
           title="רישום סטודנט"
           visible={isModalVisibleStudent}
-          onOk={handleOkStudent}
+          onOk={onRegisterModalOkStudent}
           onCancel={handleCancelStudent}
         >
           <p>אימייל</p>
-          <Input placeholder="אימייל סטודנט" />
-          <Button>שליחה</Button>
+          <Input onChange={(e)=>{setStudentEmail(e.target.value)}} placeholder="אימייל סטודנט" />
         </Modal>
 
         <Button type="primary" onClick={showModalHr}>
