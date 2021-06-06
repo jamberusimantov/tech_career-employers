@@ -12,7 +12,7 @@ const { Meta } = Card;
 
 export default function JobCard() {
   return (
-    <div style={{textAlign:"left"}}>
+    <Container>
       <Link to="/recruiter/checkpoint">
         <Card style={{ padding: 5, cursor: "pointer"}}>
           <Meta
@@ -20,16 +20,21 @@ export default function JobCard() {
             title="Full Stack Developer"
              description="Check Point "
           />
-          {/* <Avatar src="/img/checkpoint.png" />
-          <div>
-            <h3>full stack</h3>
-            <p>HoneyBook</p>
-            <p>Tel Aviv</p>
-          </div> */}
+         
           <p>Tel Aviv</p>
           <p>Aplicants 5</p>
         </Card>
       </Link>
-    </div>
+    </Container>
+  
   );
 }
+
+
+const Container = styled.div`
+text-align: left;
+&:hover{
+  background-color: gray !important;
+
+}
+`
