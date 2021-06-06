@@ -43,7 +43,7 @@ function LayoutMain() {
         <div>
           <Menu theme="light" mode="horizontal" style={{ textAlign: "center" }} >
             <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/student">מועמדים</Link></Menu.Item>
             <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
             <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
           </Menu>

@@ -9,6 +9,7 @@ import CompanyRegister from './pages/hr-page/Company-register'
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'
 import StuSteps from './components/steps/StuSteps'
+import StudentPersonal from './pages/personal-page/Student-Personal'
 
 import {
   Switch,
@@ -41,6 +42,9 @@ function AdminRouter() {
       </Route>
       <Route path="/admin">
         <AdminPage />
+      </Route>
+      <Route path="/privatestudent">
+        <StudentPersonal />
       </Route>
     </Switch>
   )
