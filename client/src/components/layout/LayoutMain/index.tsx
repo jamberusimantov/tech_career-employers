@@ -27,6 +27,7 @@ function LayoutMain() {
   }, [isLoggedIn])
 
   return (
+
     <Layout>
       <Header className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
@@ -46,13 +47,16 @@ function LayoutMain() {
             <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
             <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
             <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
-            <Menu.Item key="4"><Link to="/recruiter">משרות</Link></Menu.Item>
+            <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
           </Menu>
         </div>
 
         <div className="imgdiv">
           <img src="/img/Logo.png" alt="" className="logo" />
         </div>
+
+
+
 
         {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
           <Menu.Item key="4">
@@ -73,10 +77,11 @@ function LayoutMain() {
         </Menu> */}
       </Header>
       <Content style={{ padding: "0 50px" }}>
+
         <Layout
           className="site-layout-background"
-          style={{ padding: "24px 0" }}
-        >
+          style={{ padding: "24px 0" }}>
+ 
 
 
 
@@ -88,13 +93,14 @@ function LayoutMain() {
           className="site-layout-background"
           style={{ padding: "24px 0" }}> */}
 
+
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
           </Content>
         </Layout>
       </Content>
       {/* <Footer style={{ textAlign: "center" }}>
-        Ant Design ©2018 Created by Ant UED
+        Ant Design ©️2018 Created by Ant UED
       </Footer> */}
     </Layout>
   );
