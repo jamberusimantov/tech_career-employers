@@ -17,7 +17,7 @@ const passport = require('passport')
 const passportFunc = require('./config/passport')
 const path = require('path');
 const app = express()
-const PORT = process.env.PORT || 4201
+const PORT = process.env.PORT || 4201;
 
 
 app.use(express.json());

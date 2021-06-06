@@ -128,7 +128,7 @@ async function getManyStudents(req, res) {
     const token = req.headers.authorization
     const student = req.body.student;
     if(tokenChecker(token,res) !== true) return
-    if(dataHandler(student,res,'getAllHrs') !== true) return
+    if(dataHandler(student,res,'getManyStudents') !== true) return
     const request = async() => {
         const getRes = await getManyDocs(studentCollection, student, getAllDocsSuccessCb, getAllDocsFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)

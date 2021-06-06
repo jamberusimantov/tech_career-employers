@@ -4,10 +4,10 @@ import './About.css'
 export default function About() {
     return (
         <div className="aboutMainDiv">
-             <img className="tcLogo" src="./images/logotech.png" alt="" />
-              <div className="texttext">
-                  <h1> מי אנחנו ?</h1>
-                 
+            <img className="tcLogo" src="./images/logotech.png" alt="" />
+            <div className="texttext">
+                <h2> מי אנחנו ?</h2>
+                <p>
                 טק-קריירה הינה עמותה חברתית שקמה בשנת 2002 במטרה לשנות מהותית את
                 מצבה הכלכלי והחברתי של קהילת יוצאי אתיופיה בישראל באמצעות
                 השתלבות בתפקידים מקצועיים בעולם ההייטק.<br /> הפעילות העיקרית של
@@ -19,8 +19,8 @@ export default function About() {
                 90% השמה, באמצעות מודל הכשרה יחודי.<br /> העמותה ממוקמת במרכז לוד, עם
                 כיתות ומשרדים במתחם טלרד ודירות שכורות לסטודנטים בשכונות
                 הסמוכות.
-                </div>
+                </p>
+            </div>
         </div>
     )
 }
-
