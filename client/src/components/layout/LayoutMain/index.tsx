@@ -52,14 +52,8 @@ function LayoutMain() {
         <div className="imgdiv">
           <img src="/img/Logo.png" alt="" className="logo" />
         </div>
-
-
-
-
-
       </Header>
       <Content style={{ padding: "0 50px" }}>
-
         <Layout
           className="site-layout-background"
           style={{ padding: "24px 0" }}>

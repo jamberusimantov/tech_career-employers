@@ -2,16 +2,14 @@ import React from 'react';
 
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
-
-
 //Home page
-import Home from './pages/Home/Home'
+import Home from './pages/home-page/Home'
 //HR page
-
 import HrRegister from './pages/hr-page/Hr-Register'
 
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'
+import StuSteps from './components/steps/StuSteps'
 
 import {
   Switch,
@@ -35,6 +33,9 @@ function AdminRouter() {
       </Route>
       <Route path="/studentPage/:id">
        <SpecificStudent/>
+      </Route>
+      <Route path="/studentReg">
+       <StuSteps/>
       </Route>
       <Route path="/admin">
         <AdminPage />
