@@ -2,17 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const student = new Schema({
-    email: {
-        type: String,
-        required: true
-    },
+    email: {type: String,required: true},
         name:String,
         password:String,
         phone: String,
+        courseId:String,
+        isGraduated: Boolean,
         courseName: String,
-        courseCompletionDate:String,
-        numberOfGraduates:Number,
-        cycle: String,
         isWorking:Boolean,
         isAuth: Boolean,
         token: String,
