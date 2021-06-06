@@ -1,47 +1,13 @@
 const jobOfferCollection = require('./jobOffer_model')
 const DB = require('../../utils/DB.utils')
-const authRequest = require('../../utils/register.utils').authToken
-const { getDoc, updateDoc, deleteDoc, postDocs, getManyDocs, msgs } = DB
+const mongoose = require('mongoose')
+const authRequest = require('../../utils/register.utils').authRequest
+const { getDoc, updateDoc, deleteDoc, postDocs, getManyDocs, msgs, filteredPrivateProps } = DB
 const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId } = msgs
-/** 
- * get all jobOffers from jobOffer Collection
- * @param {*} req 
- * @param {*} res 
- */
-async function getAllJobOffers(req, res) {
-    const token = req.headers.authorization
-    if (!token) return res.status(400).json({
-        success: false,
-        message: requiredToken('getAllJobOffers')
-    })
-    const request = async(data) => {
-        if (!data) return res.status(400).json({
-            success: false,
-            message: unauthorizedToken('getAllJobOffers')
-        })
-        const getRes = await getManyDocs(jobOfferCollection, undefined, getJobOffersSuccess, getJobOffersFail)
-        if (getRes && getRes.error) throw new Error(getRes.error)
-    }
-    const getJobOffersSuccess = data => res.status(200).json({
-        success: true,
-        data: data,
-        message: success('getAllJobOffers')
-    })
-    const getJobOffersFail = () => res.status(400).json({
-        success: false,
-        message: failure('getAllJobOffers')
-    })
-    try {
-        authRequest(token, request, res)
-    } catch (error) {
-        res.status(400).json({ success: false, error })
-    } finally {}
-}
-/** 
- * get many jobOffers from jobOffer Collection
- * @param {*} req 
- * @param {*} res 
- */
+const jobOffer_validation = require('./jobOffer_validation')
+
+const duplicateItem = serviceName => `jobOffer already exist on db on ${serviceName}`;
+
 async function getManyJobOffers(req, res) {
     const token = req.headers.authorization
     const jobOffer = req.body.jobOffer
@@ -112,7 +78,7 @@ async function getJobOffer(req, res) {
     try {
         authRequest(token, request, res)
     } catch (error) {
-        return res.status(400).json({ success: false, error })
+        res.status(400).json({ success: false, error })
     } finally {}
 }
 /**
@@ -128,7 +94,7 @@ async function getJobOfferByUrlId(req, res) {
         success: false,
         message: requiredToken('getJobOfferByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('getJobOfferByUrlId')
     })
@@ -172,17 +138,17 @@ async function updateJobOfferByUrlId(req, res) {
         success: false,
         message: requiredQuery('updateJobOfferByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('updateJobOfferByUrlId')
     })
-    company._id = _id;
+    jobOffer._id = _id;
     const request = async(data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('updateJobOfferByUrlId')
         })
-        const updateRes = await updateDoc(jobOfferCollection, dataToUpdate, updateJobOfferSuccess, updateJobOfferFail)
+        const updateRes = await updateDoc(jobOfferCollection, jobOffer, updateJobOfferSuccess, updateJobOfferFail)
         if (updateRes && updateRes.error) throw new Error(updateRes.error)
     }
     const updateJobOfferSuccess = data => res.status(201).json({
@@ -195,7 +161,7 @@ async function updateJobOfferByUrlId(req, res) {
         message: failure('updateJobOfferByUrlId')
     })
     try {
-        authToken(token, request, res)
+        authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
@@ -213,7 +179,7 @@ async function deleteJobOfferByUrlId(req, res) {
         success: false,
         message: requiredToken('deleteJobOfferByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('deleteJobOfferByUrlId')
     })
@@ -248,6 +214,7 @@ async function deleteJobOfferByUrlId(req, res) {
 async function postJobOffer(req, res) {
     const token = req.headers.authorization
     const jobOffer = req.body.jobOffer
+    const { uploadedBy, company, location, jobDescription, workRequirements, minYearsOfExperience, notes, finalDateToApply } = jobOffer
     if (!token) return res.status(400).json({
         success: false,
         message: 'auth token is required on postJobOffer'
@@ -256,27 +223,40 @@ async function postJobOffer(req, res) {
         success: false,
         message: 'query data is required on postJobOffer'
     })
+    const { errors, isValid } = jobOffer_validation(jobOffer)
+    if (!isValid) return res.status(400).json(errors)
+    const getJobOfferSuccess = data => res.status(400).json({
+        success: false,
+        message: duplicateItem('postJobOffer')
+    })
+    const getJobOfferFail = async() => {
+        const postRes = await postDocs(jobOfferCollection, jobOffer, postJobOfferSuccess)
+        if (postRes && postRes.error) throw new Error(postRes.error)
+    }
     const request = async(data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: 'token not auth on postJobOffer'
         })
-        const postRes = await postDoc(jobOfferCollection, jobOffer, postJobOfferSuccess)
-        if (postRes && postRes.error) throw new Error(postRes.error)
+        const dataToSearch = { uploadedBy, company, location, jobDescription, workRequirements, minYearsOfExperience, notes, finalDateToApply }
+
+        const jobOfferFromDB = await getDoc(jobOfferCollection, dataToSearch, getJobOfferSuccess, getJobOfferFail);
+        if (jobOfferFromDB && jobOfferFromDB.error) throw new Error(jobOfferFromDB.error)
+
     }
-    const postJobOfferSuccess = () => res.status(201).json({
+    const postJobOfferSuccess = data => res.status(201).json({
         success: true,
-        message: ` post JobOffer by: ${uploadedBy} successfully`
+        message: ` post JobOffer by: ${data?.uploadedBy||data[0]?.uploadedBy} successfully`
     })
     try {
         authRequest(token, request, res)
-    } catch (err) {
+    } catch (error) {
         res.status(400).json({ success: false, error })
     } finally {}
 }
 
+
 module.exports = {
-    getAllJobOffers,
     getManyJobOffers,
     getJobOffer,
     getJobOfferByUrlId,

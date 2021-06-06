@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const jobOffer = new Schema({
-
         uploadedBy: {
             type: String,
             required: true
@@ -31,7 +30,7 @@ const jobOffer = new Schema({
             required: true
         },
         minYearsOfExperience: {
-            type: Number,
+            type: String,
             required: true
         },
         numOfPeopleApplied: {
@@ -57,4 +56,4 @@ const jobOffer = new Schema({
     //  { timestamps: true }
 )
 
-module.exports = mongoose.model('job offer', jobOffer)
+module.exports = mongoose.model('jobOffer', jobOffer)

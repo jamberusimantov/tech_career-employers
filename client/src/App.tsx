@@ -2,67 +2,46 @@ import components from './components'
 import styles from './styles'
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import service from './service';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import windowDimensionsActions from './redux/actions/windowDimensions.actions';
+import service from './utils';
 import usersActions from './redux/actions/user.actions';
-import JobsList from './pages/JobsList';
-import AppRouter from './routes/Route';
+import { getAllStudents } from './service/students.service';
+
 const { setUserData } = usersActions.usersActions;
-const { setWindowDimensions } = windowDimensionsActions.windowDimensionsActions;
-
 const mapDispatchToProps = (dispatch: any) => ({
-  setWindowDimensions: (size: Object) => { dispatch(setWindowDimensions(size)) },
-  setUserData: (data: Object) => { dispatch(setUserData(data)) },
+  setUserData: (data: Object) => { dispatch(setUserData(data)) }
 })
-const mapStateToProps = (state: any) => {
-  return {
-    windowDimensions: state.windowDimensions,
-    userData: state.user.userData,
-  };
-}
-
+const mapStateToProps = (state: any) => { return { userData: state.user.userData } }
 
 function App(props: any) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { windowDimensions, setWindowDimensions, setUserData, userData } = props
-  const { login, app: { getWindowDimensions } } = service
-  const { getUserUseToken } = login.default
+  const { setUserData, userData } = props
+  const { login } = service
+  const { getUserUseToken } = login
   const { LayoutMain } = components;
   const { appStyle } = styles;
+  const token = login.getToken();
+
 
   useEffect(() => {
-    // const token = login.default.getToken();
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI0ZWUwNmYxZDkyNTVhMDA1ZjEyM2UiLCJuYW1lIjoibGlvciIsImVtYWlsIjoibGlvcmltYXppc2dAZ21haWwuY29tIiwiaWF0IjoxNjIyNDcwMjAwLCJleHAiOjE3MDg4NzAyMDB9.PBTGtUiskSoEAoS-z5zEqRQsbsAVf_u0DiNNC9lMSOI'
-    if (token) {
-      getUserUseToken(token).then((userDataUseToken) => {
-        console.log(userDataUseToken);
+    const loginHandler = async () => {
+      if (token) {
+        const userFromToken = await getUserUseToken(token)
+        if (userFromToken.success) {
+          login.setTokenLocal(token)
+          await setUserData(userFromToken)
+        }
 
-        // if (userDataUseToken.success) {
-        //   setUserData(userDataUseToken.data)
-        // }
-      })
-      return () => {
-        setUserData(Object);
       }
     }
-  }, [getUserUseToken, login.default, setUserData]);
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions())
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [setWindowDimensions, getWindowDimensions]);
+    loginHandler()
+  }, [getUserUseToken, login, setUserData]);
+
 
   const classes = appStyle()
 
   if (!userData.email) {
     return (
       <div className={classes.App}>
-        <CssBaseline />
-
         <LayoutMain />
       </div>
     );
@@ -70,9 +49,7 @@ function App(props: any) {
 
   return (
     <div className={classes.App}>
-      <CssBaseline />
       <LayoutMain />
-
     </div>
   );
 }

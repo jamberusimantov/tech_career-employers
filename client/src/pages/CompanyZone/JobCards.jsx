@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { getAllJobOffers } from '../../service/jobOffer.service';
 import { Card, Button, Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import './JobCards.css'
@@ -7,9 +8,16 @@ import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom";
 
 
-export default function JobCards() {
+export default function JobCards(props) {
 
-    // const [jobEditPage, setJobEditPage] = useState(false);
+
+    useEffect(gerAllJobsOffer, []);
+
+    const [jobOffer, setJobOffer] = useState([]);
+
+    function gerAllJobsOffer() {
+        getAllJobOffers().then((res) => { setJobOffer(res) })
+    }
 
 
     const menu = (
@@ -50,6 +58,7 @@ export default function JobCards() {
                     <span className="number"> 1 </span>
                     <Link to="/JobEditPage"><Button className="readMoreBtn" type="primary">קרא עוד</Button></Link>
                 </Card>
+                {/* <p>{jobOffer}</p> */}
             </div>
         </div >
 

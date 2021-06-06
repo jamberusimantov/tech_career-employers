@@ -1,4 +1,8 @@
-
+/* @font-face {
+    font-family: "site-font";
+    src: local('Azonix'),url(./fonts/Azonix.otf);
+  } */
+    
     
   .tcLogo1{
     width:120px;
@@ -66,4 +70,3 @@ direction: rtl;
 .signin{
   direction: ltr;
 }
-

@@ -9,6 +9,14 @@ export async function getAllJobOffers() {
     catch (err) { console.error(err) }
     finally { }
 }
+export async function getManyJobOffers() {
+    try {
+        const res = await fetch(`${API}/jobOffers/all`)
+        return res.json();
+    }
+    catch (err) { console.error(err) }
+    finally { }
+}
 export async function getJobOffer(Id: string) {
     try {
         if (Id.length === 24) {
@@ -22,7 +30,7 @@ export async function getJobOffer(Id: string) {
 }
 export async function postJobOffer(credentials: any) {
     try {
-        const res = await fetch(`${API}/jobOffers/JobOffer`,{
+        const res = await fetch(`${API}/jobOffers/JobOffer`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

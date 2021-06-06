@@ -23,7 +23,7 @@ export default function JobEditPage() {
                     </div>
                     <div className="btns">
                         <Button type="primary">ערוך</Button>
-                        <Link to="/JobCards"><Button type="primary"> הקודם</Button></Link>
+                        <Link to="hr/JobCards"><Button type="primary"> הקודם</Button></Link>
                     </div>
                 </Card>
             </div>

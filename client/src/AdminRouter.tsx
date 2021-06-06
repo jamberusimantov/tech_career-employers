@@ -1,23 +1,25 @@
 import React from 'react';
-
 //Admin page
 import AdminPage from './pages/admin-page/AdminPage'
-
-//Home pages
-import Home from './pages/home-page/Home'
-import HR from './pages/hr-page/Hr'
+//Home page
+import Home from './pages/Home/Home'
+//HR page
+import HrRegisterForm from './pages/hr-page/Hr-Register'
+import CompanyRegister from './pages/hr-page/Company-register'
 import Student from './pages/student-page/Student'
-
+import SpecificStudent from './components/specificStudent/SpecificStudent'
 
 import {
   Switch,
   Route
 } from "react-router-dom";
 import JobCards from './pages/CompanyZone/JobCards';
+import JobEditPage from './pages/CompanyZone/JobEditPage';
 
 
 
 function AdminRouter() {
+
 
   return (
     <Switch>
@@ -26,7 +28,12 @@ function AdminRouter() {
       </Route>
       <Route path="/hr">
         <JobCards />
-        <HR />
+      </Route>
+      {/* <Route exact path="/JobCards">
+        <JobCards />
+      </Route> */}
+      <Route exact path="/JobEditPage">
+        <JobEditPage />
       </Route>
       <Route path="/student">
         <Student />

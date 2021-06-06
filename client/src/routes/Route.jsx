@@ -5,16 +5,16 @@ import JobEditPage from '../pages/CompanyZone/JobEditPage'
 
 export default function AppRouter() {
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/JobCards">
-                    <JobCards />
-                </Route>
-                <Route exact path="/JobEditPage">
-                    <JobEditPage />
-                </Route>
-            </Switch>
-        </Router>
+        // <Router>
+        //     <Switch>
+        //         <Route exact path="/JobCards">
+        //             <JobCards />
+        //         </Route>
+        //         <Route exact path="/JobEditPage">
+        //             <JobEditPage />
+        //         </Route>
+        //     </Switch>
+        // </Router>
 
     )
 }

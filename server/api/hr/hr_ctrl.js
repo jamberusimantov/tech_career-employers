@@ -1,33 +1,11 @@
 const hrCollection = require('./hr_model')
 const DB = require('../../utils/DB.utils')
 const register = require('../../utils/register.utils')
-const {authRequest} = register
+const mongoose = require('mongoose')
+const { authRequest } = register;
 const { getDoc, updateDoc, deleteDoc, filteredPrivateProps, getManyDocs, msgs } = DB
-const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId, } = msgs
-const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
-const { Mongoose } = require('mongoose')
+const { requiredToken, requiredQuery, unSignUser, unauthorizedToken, success, failure, corruptId, } = msgs
 
-/** 
- * get all hrs from hr collection
- * @param {*} req 
- * @param {*} res 
- */
-async function getAllHrs(req, res) {
-    const token = req.headers.authorization
-    if(tokenChecker(token,res) !== true) return
-    const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
-    const getAllDocsFailCb = () => failHandler('list',res)
-    const request = async(data) => {
-        if  (dataHandler(data,res) !== true) return
-        const getRes = await getManyDocs(hrCollection, undefined, getAllDocsSuccessCb, getAllDocsFailCb)
-        if (getRes && getRes.error) throw new Error(getRes.error)
-    }
-    try {
-        authRequest(token, request, res)
-    } catch (error) {
-        res.status(400).json({ success: false, error })
-    } finally {}
-}
 /** 
  * get many hrs from hr collection
  * @param {*} req 
@@ -39,10 +17,6 @@ async function getManyHrs(req, res) {
     if (!token) return res.status(400).json({
         success: false,
         message: requiredToken('getManyHrs')
-    })
-    if (!hr) return res.status(400).json({
-        success: false,
-        message: requiredQuery('getManyHrs')
     })
     const request = async(data) => {
         if (!data) return res.status(400).json({
@@ -119,7 +93,7 @@ async function getHrByUrlId(req, res) {
         success: false,
         message: requiredToken('getHrByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('getHrByUrlId')
     })
@@ -163,7 +137,7 @@ async function updateHrByUrlId(req, res) {
         success: false,
         message: requiredQuery('updateHrByUrlId')
     })
-    if (!Mongoose.Types.ObjectId(_id)) return res.status(400).json({
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
         success: false,
         message: corruptId('updateHrByUrlId')
     })
@@ -199,8 +173,14 @@ async function deleteHrByUrlId(req, res) {
     const token = req.headers.authorization
     const _id = req.params.Id;
     const hr = { _id }
-    if(idChecker(_id,res) !== true) return
-    if(tokenChecker(token,res) !== true) return
+    if (!token) return res.status(400).json({
+        success: false,
+        message: requiredToken('deleteHrByUrlId')
+    })
+    if (!mongoose.Types.ObjectId(_id)) return res.status(400).json({
+        success: false,
+        message: corruptId('deleteHrByUrlId')
+    })
     const request = async(data) => {
         if (!data) return res.status(400).json({
             success: false,
@@ -218,10 +198,9 @@ async function deleteHrByUrlId(req, res) {
     } finally {}
 }
 module.exports = {
-    getAllHrs,
     getManyHrs,
     getHr,
     getHrByUrlId,
     updateHrByUrlId,
-    deleteHrByUrlId,
-};
+    deleteHrByUrlId
+}

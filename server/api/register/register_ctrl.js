@@ -34,6 +34,7 @@ const hour = 60 * minute
 const day = 24 * hour
 const week = 7 * day
 const tokenOptions = { expiresIn: day }
+const baseApi = 'http://localhost:4201';
 const signToken = (req, res, payload, message, emailVerification = false) => {
         const { _id } = payload
         const role = req.params.Role && req.params.Role.toLowerCase();
@@ -46,10 +47,10 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
             if (err) throw new Error(`error on sign token ${err}`)
             const dataToUpdate = !emailVerification ? { _id, isActive: true, token: `Bearer ${token}` } : { _id, token: `Bearer ${token}` }
             const updateDocSuccessCb = async(data) => {
-                const link = new URL(`http://localhost:4201/registration/signUp/${role}/Bearer ${token}`)
+                const link = new URL(`${baseApi}/signUp/${role}/${token}`)
                 if (!emailVerification) return res.status(200).json({
                         success: true,
-                        token: `Bearer ${token}`,
+                        token,
                         data: {
                             email: data.email
                         },
@@ -61,8 +62,7 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
                 res.status(200).json({
                     success: true,
                     data: {
-                        token: `Bearer ${token}`,
-                        link:link,
+                        link,
                         name: data.name,
                         email: data.email
                     },
@@ -96,17 +96,18 @@ async function registerUser(req, res) {
         success: false,
         message: unsupportedRole('registerUser')
     })
-    const getUserSuccess = data => res.status(400).json({
+    const getUserSuccess = () => res.status(400).json({
         success: false,
         message: duplicateItem(`register ${role}`)
     })
     const company = { name: user.company }
+
     const getUserFail = async() => {
         if (role !== 'hr') return await getCompanySuccess()
         const companyFromDB = await getDoc(companiesCollection, company, getCompanySuccess, getCompanyFail);
         if (companyFromDB && companyFromDB.error) throw new Error(companyFromDB.error)
     }
-    const getCompanySuccess = async(data) => {
+    const getCompanySuccess = async() => {
         const postRes = await postDocs(collection, user, postUserSuccess)
         if (postRes && postRes.error) throw new Error(postRes.error)
     }
@@ -257,21 +258,24 @@ async function loginUser(req, res) {
     })
     const { errors, isValid } = validateLoginInput(user)
     if (!isValid) return res.status(400).json(errors)
-    const getDocSuccessCb = (data) => {
+    const getDocSuccessCb = async(data) => {
         const { _id, name, email } = data;
         const passwordFromDB = data.password;
+        console.log(data);
         if (!data.isAuth) return res.status(400).json({
             success: false,
             message: 'unsigned user on loginUser'
         })
-        bcrypt.compare(password, passwordFromDB).then((isMatch) => {
+        const salt = await bcrypt.genSalt(10);
+        const passwordHash = await bcrypt.hash(password, salt);
+        const isMatch = await bcrypt.compare(passwordFromDB, passwordHash);
+     
             if (!isMatch) return res.status(400).json({
                 success: false,
                 message: unauthorizedCredentials('loginUser')
             })
             const payload = { _id, name, email }
             signToken(req, res, payload, success('loginUser'))
-        })
     }
     const getDocFailCb = () => res.status(400).json({
         success: false,
@@ -284,7 +288,6 @@ async function loginUser(req, res) {
         return res.status(400).json({ success: false, error })
     } finally {}
 }
-
 /** 
  * get user by token from hr collection
  * @param {*} req 
@@ -292,38 +295,26 @@ async function loginUser(req, res) {
  */
 async function useToken(req, res) {
     const token = req.headers.authorization
-    const role = req.params.Role && req.params.Role.toLowerCase()
     if (!token) return res.status(400).json({
         success: false,
         message: 'authorization token needed'
     })
-    if (!role) return res.status(404).json({
-        success: false,
-        message: 'role is required'
-    })
-    const collection = collections[role]
-    if (!collection) return res.status(404).json({
-        success: false,
-        message: `role: ${role} is not recognized`
-    })
-    const query = { token };
-    const getDocSuccessCb = (data) => res.status(201).json({
-        success: true,
-        data: filteredPrivateProps(data, 'self'),
-        message: `get own data for:${data.name} successfully`
-    })
-    const getDocFailCb = () => res.status(400).json({
-        success: false,
-        token,
-        message: 'unAuth token'
-    })
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken('useToken')
+        })
+        res.status(201).json({
+            success: true,
+            data: filteredPrivateProps(data, 'self'),
+            message: `get own data for:${data.email} successfully`
+        })
+    }
     try {
-        const getRes = await getDoc(collection, query, getDocSuccessCb, getDocFailCb);
-        if (getRes && getRes.error) throw new Error(getRes.error)
+        authRequest(token, request, res)
     } catch (error) {
-        return res.status(400).json({ success: false, error })
+        res.status(400).json({ success: false, error })
     } finally {}
-
 }
 module.exports = {
     registerUser,
