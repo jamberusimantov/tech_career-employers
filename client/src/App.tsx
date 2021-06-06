@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import service from './utils';
 import usersActions from './redux/actions/user.actions';
-import { getAllStudents } from './service/students.service';
 
 const { setUserData } = usersActions.usersActions;
 const mapDispatchToProps = (dispatch: any) => ({
@@ -22,6 +21,8 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
   useEffect(() => {
       const loginHandler = async()=>{
+        console.log(token);
+        
         if(token){
           const userFromToken = await getUserUseToken(token)
           if (userFromToken.success) {

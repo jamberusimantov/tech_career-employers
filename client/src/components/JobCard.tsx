@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { Card, Avatar } from "antd";
 import { Link } from "react-router-dom";
 // import {
@@ -28,6 +29,7 @@ export default function JobCard({title,company,location,applicants,id}:any) {
     </Container>
   
   );
+
 }
 
 
