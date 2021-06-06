@@ -10,29 +10,32 @@ import Student from './pages/student-page/Student'
 
 
 import {
-    Switch,
-    Route
-  } from "react-router-dom";
+  Switch,
+  Route
+} from "react-router-dom";
+import JobCards from './pages/CompanyZone/JobCards';
+
 
 
 function AdminRouter() {
 
-    return (
-          <Switch>
-              <Route exact path="/">
-            <Home/>
-          </Route>
-          <Route path="/hr">
-            <HR/>
-          </Route>
-          <Route path="/student">
-            <Student/>
-          </Route>
-          <Route path="/admin">
-            <AdminPage/>
-          </Route>
-        </Switch>
-    )
+  return (
+    <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/hr">
+        <JobCards />
+        <HR />
+      </Route>
+      <Route path="/student">
+        <Student />
+      </Route>
+      <Route path="/admin">
+        <AdminPage />
+      </Route>
+    </Switch>
+  )
 }
 
 export default AdminRouter;
