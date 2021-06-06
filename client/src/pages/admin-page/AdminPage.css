@@ -4,8 +4,8 @@
 
 .modal-admin-page{
     /* display: block; */
-    /* position:relative; */
-    /* left:350px; */
+    position:relative;
+    left:350px;
 }
 
 .admin-page-table{

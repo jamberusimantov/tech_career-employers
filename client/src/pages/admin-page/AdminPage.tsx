@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import { Button, Input, Modal,Checkbox } from "antd";
 
 //Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
+import service from '../../utils';
 
-import {getAllCourses ,getStudentById} from './admin.service'
+
+import {getAllCourses } from './admin.service'
 
 
 
@@ -47,8 +49,20 @@ const columns = [
 
 function AdminPage() {
 
+  const { login } = service
 
+  const { registerUser } = login
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   
+  const [hrEmail,setHrEmail]=useState('');
+  const [companyName,setCompanyName]=useState('');
+  const registerHr ={
+    credentials:{
+      email:hrEmail,
+      company:companyName
+    }
+  }
   
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
@@ -88,6 +102,13 @@ function AdminPage() {
     setShowGraduatesTable(!showGraduatesTable);
   }
 
+  useEffect(() => {
+
+    const testAlmito=async ()=>{
+     await registerUser(registerHr.credentials,'hr')
+    }
+    testAlmito()
+  },[])
 
   return (
     <div className="admin-page">
@@ -116,8 +137,8 @@ function AdminPage() {
           onCancel={handleCancelHr}
         >
           <p>אימייל</p>
-          <Input placeholder="אימייל" />
-          <Input placeholder="שם חברה" />
+          <Input onChange={(e)=>{setHrEmail(e.target.value)}} placeholder="אימייל" />
+          <Input onChange={(e)=>{setCompanyName(e.target.value)}} placeholder="שם חברה" />
           <Button>שליחה</Button>
         </Modal>
       </div>
