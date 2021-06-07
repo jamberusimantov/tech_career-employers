@@ -102,6 +102,7 @@ async function updateStudentById(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
+
 async function getAllStudents(req, res) {
     const token = req.headers.authorization
     if(tokenChecker(token,res) !== true) return

@@ -4,6 +4,14 @@ import Http from './http.utils';
 class LogIn {
     token = 'token';
     logList: any[] = [];
+    async registerStudent(credentials: { email: string }, role: string) {
+        const url = `${API}/registration/register/${role}`
+        const body = { user: credentials }
+        try {
+            return await Http.POST(url, body)
+        } catch (error) { return error }
+        finally { }
+    }
     async registerUser(credentials: { company: string, email: string }, role: string) {
         const url = `${API}/registration/register/${role}`
         const body = { user: credentials }

@@ -9,7 +9,7 @@ import service from '../../utils';
 
 import './AdminPage.css'
 
-import {getAllCourses } from './admin.service'
+import {getAllCourses,getAllJobOffers } from './admin.service'
 
 import {getStudent} from '../../utils/drafts/student.utils'
 
@@ -66,6 +66,21 @@ const coursesColumns = [
   },
 ];
 
+// "numOfPeopleApplied": 0,
+// "numOfViews": 0,
+// "isHidden": false,
+// "status": "OPEN",
+// "_id": "60b7cffe4d638323000e7228",
+// "uploadedBy": "jamber@google.com",
+// "finalDateToApply": "2021-06-30T10:00:00.000Z",
+// "company": "google",
+// "location": "tel aviv",
+// "jobDescription": "code++",
+// "workRequirements": "ambition",
+// "minYearsOfExperience": "0",
+// "notes": "promise to robust you :)",
+// "uploadDate": "2021-06-02T18:37:50.293Z",
+// "__v": 0
 
 
 export const graduatesColumns: any[] = [
@@ -87,18 +102,18 @@ export const graduatesColumns: any[] = [
   },
   {
     title: 'סטטוס',
-    dataIndex: 'age',
+    dataIndex: 'status',
   },
   {
     title: 'שאל את המגייסת?',
-    dataIndex: 'emailTo',
+    dataIndex: 'uploadedBy',
     render: (text: string) =>
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a href="mailto: abc@example.com">{text}</a>,
   },
   {
     title: 'הגישו קו"ח',
-    dataIndex: 'name',
+    dataIndex: 'numOfPeopleApplied',
     // render: (text: string) => <a>{text}</a>,
   },
 ];
@@ -107,12 +122,11 @@ export const graduatesColumns: any[] = [
 function AdminPage() {
 
 
-  const [searchValueInTable, setSearchValueInTable] = useState('');
 
 
   const { login } = service
 
-  const { registerUser } = login
+  const { registerUser,registerStudent } = login
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   
@@ -126,7 +140,11 @@ function AdminPage() {
       company:companyName
     }
   }
-  
+  const registerStudentByAdmin ={
+    credentials:{
+      email:studentEmail
+    }
+  }
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
   
@@ -168,29 +186,16 @@ function AdminPage() {
 const onRegisterModalOkStudent= async ()=>{
   setIsModalVisibleStudent(false);
   console.log(studentEmail);
-  await getStudent(studentEmail,'student')
-  
+  await registerStudent(registerStudentByAdmin.credentials,'student')
   
 }
 
 
 
 
-  function sortByName(a: { courseCompletionDate: { toLowerCase: () => number; }; }, b: { courseCompletionDate: { toLowerCase: () => number; }; }) {
-    return a.courseCompletionDate.toLowerCase() - b.courseCompletionDate.toLowerCase();
-  }
-  
-  // function filterByName(value: any, record: { courseCompletionDate: string | any[]; }) {
-  //   return record.courseCompletionDate.indexOf(value) !== -1;
-  // }
-
-
   return (
     <div className="admin-page">
-      <Input.Search
-       placeholder="חפש"
-       value={searchValueInTable}
-       />
+  
 
       <div className="modal-admin-page">
 
@@ -243,7 +248,7 @@ const onRegisterModalOkStudent= async ()=>{
         {!showGraduatesTable ? (
           " "
         ) : (
-          <CodeinTable columns={graduatesColumns}  />
+          <CodeinTable columns={graduatesColumns} getData={getAllJobOffers}  />
         )}
       </div>
     </div>
