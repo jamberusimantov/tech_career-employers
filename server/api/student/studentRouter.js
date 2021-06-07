@@ -7,7 +7,6 @@ studentRouter.post('/single', student_ctrl.getStudent)
 studentRouter.put('/student/:Id', student_ctrl.updateStudentById)
 studentRouter.delete('/student/:Id', student_ctrl.deleteStudentByUrlId)
 studentRouter.get('/student/:Id', student_ctrl.getStudentByUrlId)
-
 module.exports = studentRouter;
 
 

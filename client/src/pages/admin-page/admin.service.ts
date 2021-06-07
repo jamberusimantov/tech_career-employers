@@ -20,3 +20,4 @@ export async function getStudentById(Id: string) {
   }
   catch (err) { console.error(err) }
 }
+
