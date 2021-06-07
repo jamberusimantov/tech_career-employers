@@ -17,7 +17,7 @@ const StudentCard = (student: any) => {
                 <Meta
                     avatar={<Avatar
                     size={{ xs: 32, sm: 40, md: 64, lg: 84, xl: 100, xxl: 100 }}
-                    src={student?.pictures?.path} />}
+                    src={student?.pictures[0]?.path} />}
                     title={student.name}
                     description={student.courseName + ' Developer'} 
                     />
