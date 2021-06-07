@@ -7,10 +7,11 @@ import usersActions from './redux/actions/user.actions';
 
 const { setUserData } = usersActions.usersActions;
 const mapDispatchToProps = (dispatch: any) => ({
-  setUserData: (data: Object) => { dispatch(setUserData(data)) }})
-const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
+  setUserData: (data: Object) => { dispatch(setUserData(data)) }
+})
+const mapStateToProps = (state: any) => { return { userData: state.user.userData } }
 
- function App(props: any) {
+function App(props: any) {
   const { setUserData, userData } = props
   const { login } = service
   const { getUserUseToken } = login
@@ -20,32 +21,26 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
 
   useEffect(() => {
-      const loginHandler = async()=>{
-        console.log(token);
-        if(token){
-          const userFromToken = await getUserUseToken(token)
-          if (userFromToken.success) {
-            login.setTokenLocal(token)
-            await setUserData(userFromToken)
-          }
+    const loginHandler = async () => {
+      console.log(token);
 
+      if (token) {
+        const userFromToken = await getUserUseToken(token)
+        if (userFromToken.success) {
+          login.setTokenLocal(token)
+          await setUserData(userFromToken)
         }
+
       }
-      
-    loginHandler()
-    }, [getUserUseToken, login, setUserData]);
-
-
-    const classes = appStyle()
-
-    if (!userData.email) {
-      return (
-        <div className={classes.App}>
-          <LayoutMain />
-        </div>
-      );
     }
 
+    loginHandler()
+  }, [token, getUserUseToken, login, setUserData]);
+
+
+  const classes = appStyle()
+
+  if (!userData.email) {
     return (
       <div className={classes.App}>
         <LayoutMain />
@@ -53,4 +48,11 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
     );
   }
 
-  export default connect(mapStateToProps, mapDispatchToProps)(App)
+  return (
+    <div className={classes.App}>
+      <LayoutMain />
+    </div>
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

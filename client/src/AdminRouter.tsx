@@ -10,10 +10,10 @@ import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'
 
 import LinkdInRouter from './components/LinkdIn'
-
+import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
 import StudentPersonal from './pages/personal-page/Student-Personal'
-
+import JobEditPage from './pages/CompanyZone/JobEditPage'
 
 import {
   Switch,
@@ -29,12 +29,18 @@ function AdminRouter() {
       <Route exact path="/">
         <Home />
       </Route>
+      <Route path="/hr">
+        <JobCards />
+      </Route>
+      <Route path="/JobEditPage">
+        <JobEditPage/>
+      </Route>
       <Route path="/signUp/hr">
         <HrRegisterForm />
       </Route>
-     < Route path="/recruiter">
-            <LinkdInRouter/>
-          </Route>
+      < Route path="/recruiter">
+        <LinkdInRouter />
+      </Route>
       <Route path="/signUp/company">
         <CompanyRegister />
       </Route>
@@ -45,7 +51,7 @@ function AdminRouter() {
         <SpecificStudent />
       </Route>
       <Route path="/studentReg">
-       <StuSteps/>
+        <StuSteps />
       </Route>
       <Route path="/admin">
         <AdminPage />
