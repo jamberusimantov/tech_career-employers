@@ -1,70 +1,21 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import { Button, Input, Modal,Checkbox } from "antd";
+import { Button, Input, Modal, Checkbox } from "antd";
 
 //Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
-import service from '../../utils';
+import service from "../../utils";
 
-import './AdminPage.css'
+import "./AdminPage.css";
 
-import {getAllCourses,getAllJobOffers } from './admin.service'
+import { getAllCourses, getAllJobOffers } from "../../service/admin.service";
 
-import {getStudent} from '../../utils/drafts/student.utils'
+import NumberOfGraduates from "./number-of-graduates/NumberOfGraduates";
 
-
-const coursesColumns = [
-  {
-    title: 'שם הקורס',
-    dataIndex: 'courseName',
-    key: 'courseName',
-    filters: [
-      {
-        text: 'Full-Stack',
-        value: 'Full-Stack',
-      },
-      {
-        text: 'QA',
-        value: 'QA',
-      },
-      {
-        text: 'Cyber',
-        value: 'Cyber',
-      },
-    ],
-    onFilter: (value: any, record: { courseName: string | any[]; }) => record.courseName.indexOf(value) === 0,
-    // sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
-    sortDirections: ['descend'],  },
-  {
-    title: 'מועד הסיום',
-    dataIndex: 'courseCompletionDate',
-    key: 'courseCompletionDate',
-    // sorter:  sortByName,
-		// onFilter: filterByName,
-  },
-  {
-    title: 'מס בוגרים',
-    dataIndex: 'numberOfGraduates',
-    key: 'numberOfGraduates',
-
-  },
-  {
-    title: 'מס מועסקים',
-    dataIndex: 'graduatesWorking',
-    key: 'graduatesWorking',
-  },
-  {
-    title: 'מס מחפשי עבודה',
-    dataIndex: 'graduatesNotWorking',
-    key: 'graduatesNotWorking',
-  },
-  {
-    title: 'סגירת השמות',
-    dataIndex: 'graduatesWorking',
-    key: 'graduatesWorking',
-  },
-];
+//להוסיף למודל שם פרטי מגייסת
+//להוסיף תפקיד שזה שדה position
+//להוסיף שדה של אימייל של המגייסת שהעלתה את המשרה
 
 // "numOfPeopleApplied": 0,
 // "numOfViews": 0,
@@ -82,126 +33,171 @@ const coursesColumns = [
 // "uploadDate": "2021-06-02T18:37:50.293Z",
 // "__v": 0
 
-
-export const graduatesColumns: any[] = [
-  {
-    title: 'חברה',
-    dataIndex: 'company',
-  },
-  {
-    title: 'מגייסת',
-    dataIndex: 'uploadedBy',
-  },
-  {
-    title: 'תפקיד',
-    dataIndex: 'passion',
-  },
-  {
-    title: 'ת. פתיחת משרה',
-    dataIndex: 'uploadDate',
-  },
-  {
-    title: 'סטטוס',
-    dataIndex: 'status',
-  },
-  {
-    title: 'שאל את המגייסת?',
-    dataIndex: 'uploadedBy',
-    render: (text: string) =>
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a href="mailto: abc@example.com">{text}</a>,
-  },
-  {
-    title: 'הגישו קו"ח',
-    dataIndex: 'numOfPeopleApplied',
-    // render: (text: string) => <a>{text}</a>,
-  },
-];
-
-
 function AdminPage() {
+  const coursesColumns = [
+    {
+      title: "שם הקורס",
+      dataIndex: "courseName",
+      key: "courseName",
+      filters: [
+        {
+          text: "Full-Stack",
+          value: "Full-Stack",
+        },
+        {
+          text: "QA",
+          value: "QA",
+        },
+        {
+          text: "Cyber",
+          value: "Cyber",
+        },
+      ],
+      onFilter: (value: any, record: { courseName: string | any[] }) =>
+        record.courseName.indexOf(value) === 0,
+      // sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
+      sortDirections: ["descend"],
+    },
+    {
+      title: "מועד הסיום",
+      dataIndex: "courseCompletionDate",
+      key: "courseCompletionDate",
+      // sorter:  sortByName,
+      // onFilter: filterByName,
+    },
+    {
+      title: "מס בוגרים",
+      render: renderNumberOfGraduates,
+      key: "numberOfGraduates",
+    },
+    {
+      title: "מס מועסקים",
+      dataIndex: "graduatesWorking",
+      key: "graduatesWorking",
+    },
+    {
+      title: "מס מחפשי עבודה",
+      dataIndex: "graduatesNotWorking",
+      key: "graduatesNotWorking",
+    },
+    {
+      title: "סגירת השמות",
+      dataIndex: "graduatesWorking",
+      key: "graduatesWorking",
+    },
+  ];
 
+  const graduatesColumns: any[] = [
+    {
+      title: "חברה",
+      dataIndex: "company",
+    },
+    {
+      title: "מגייסת",
+      dataIndex: "uploadedBy",
+    },
+    {
+      title: "תפקיד",
+      dataIndex: "position",
+    },
+    {
+      title: "ת. פתיחת משרה",
+      dataIndex: "uploadDate",
+    },
+    {
+      title: "סטטוס",
+      dataIndex: "status",
+    },
+    {
+      title: "שאל את המגייסת?",
+      dataIndex: "uploadedBy",
+      render: (text: string) => (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <a href="mailto: abc@example.com">{text}</a>
+      ),
+    },
+    {
+      title: 'הגישו קו"ח',
+      dataIndex: "numOfPeopleApplied",
+      // render: (text: string) => <a>{text}</a>,
+    },
+  ];
 
+  const { login } = service;
 
-
-  const { login } = service
-
-  const { registerUser,registerStudent } = login
+  const { registerUser, registerStudent } = login;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  
-  const [hrEmail,setHrEmail]=useState('');
-  const [companyName,setCompanyName]=useState('');
-  const [studentEmail,setStudentEmail]=useState('');
 
-  const registerHr ={
-    credentials:{
-      email:hrEmail,
-      company:companyName
-    }
-  }
-  const registerStudentByAdmin ={
-    credentials:{
-      email:studentEmail
-    }
-  }
+  const [hrEmail, setHrEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
+
+  const registerHr = {
+    credentials: {
+      email: hrEmail,
+      company: companyName,
+    },
+  };
+  const registerStudentByAdmin = {
+    credentials: {
+      email: studentEmail,
+    },
+  };
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
-  
+
   const [showCoursesTable, setShowCoursesTable] = useState(false);
   const [showGraduatesTable, setShowGraduatesTable] = useState(false);
-  
+
   const showModalStudent = () => {
     setIsModalVisibleStudent(true);
   };
-  
+
   const handleCancelStudent = () => {
     setIsModalVisibleStudent(false);
   };
-  
+
   const showModalHr = () => {
     setIsModalVisibleHr(true);
   };
-  
-  
+
   const handleCancelHr = () => {
     setIsModalVisibleHr(false);
   };
-  
+
   function changeShowCoursesTable(e: { target: { checked: any } }) {
     setShowCoursesTable(!showCoursesTable);
   }
-  
+
   function changeShowGraduatesTable(e: { target: { checked: any } }) {
     setShowGraduatesTable(!showGraduatesTable);
   }
-  
-  const onRegisterModalOk=async () => {
-    
+
+  const onRegisterModalOk = async () => {
     setIsModalVisibleHr(false);
-   await registerUser(registerHr.credentials,'hr');
+    await registerUser(registerHr.credentials, "hr");
     console.log(registerHr.credentials);
+  };
+
+  const onRegisterModalOkStudent = async () => {
+    setIsModalVisibleStudent(false);
+    console.log(studentEmail);
+    await registerStudent(registerStudentByAdmin.credentials, "student");
+  };
+
+  function renderNumberOfGraduates(course:any) {
+    return (
+      <NumberOfGraduates
+        courseId={course._id}
+        numberOfGraduates={course.numberOfGraduates}
+      />
+    );
   }
-
-const onRegisterModalOkStudent= async ()=>{
-  setIsModalVisibleStudent(false);
-  console.log(studentEmail);
-  await registerStudent(registerStudentByAdmin.credentials,'student')
-  
-}
-
-
-
 
   return (
     <div className="admin-page">
-  
-
       <div className="modal-admin-page">
-
-
-
-
         <Button type="primary" onClick={showModalStudent}>
           רישום סטודנט
         </Button>
@@ -212,7 +208,12 @@ const onRegisterModalOkStudent= async ()=>{
           onCancel={handleCancelStudent}
         >
           <p>אימייל</p>
-          <Input onChange={(e)=>{setStudentEmail(e.target.value)}} placeholder="אימייל סטודנט" />
+          <Input
+            onChange={(e) => {
+              setStudentEmail(e.target.value);
+            }}
+            placeholder="אימייל סטודנט"
+          />
         </Modal>
 
         <Button type="primary" onClick={showModalHr}>
@@ -225,9 +226,19 @@ const onRegisterModalOkStudent= async ()=>{
           onCancel={handleCancelHr}
         >
           <p>אימייל</p>
-          <Input onChange={(e)=>{setHrEmail(e.target.value)}} placeholder="אימייל" />
+          <Input
+            onChange={(e) => {
+              setHrEmail(e.target.value);
+            }}
+            placeholder="אימייל"
+          />
           <p>שם חברה</p>
-          <Input onChange={(e)=>{setCompanyName(e.target.value)}} placeholder="שם חברה" />
+          <Input
+            onChange={(e) => {
+              setCompanyName(e.target.value);
+            }}
+            placeholder="שם חברה"
+          />
         </Modal>
       </div>
 
@@ -248,7 +259,7 @@ const onRegisterModalOkStudent= async ()=>{
         {!showGraduatesTable ? (
           " "
         ) : (
-          <CodeinTable columns={graduatesColumns} getData={getAllJobOffers}  />
+          <CodeinTable columns={graduatesColumns} getData={getAllJobOffers} />
         )}
       </div>
     </div>

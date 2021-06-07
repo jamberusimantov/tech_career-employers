@@ -1,4 +1,4 @@
-import { API } from "../../app.utils";
+import { API } from "../app.utils";
 import axios from "axios";
 
 const headers = {
@@ -15,6 +15,11 @@ export async function getAllJobOffers() {
   return await (await axios.get(`${API}/jobOffers/all`, headers)).data.data;
 }
 
+export async function getGraduatesByCourse(courseId: string){
+
+  return await (await axios.get(`${API}/students/getByCourseId/${courseId}`,headers)).data.data;
+
+}
 
 
 export async function getStudentById(Id: string) {
