@@ -4,8 +4,6 @@ import loginService from '../utils/login.utils';
 export async function getAllJobOffers() {
     try {
         const res = await fetch(`${API}/jobOffers/all`)
-        console.log(res);
-        
         return res.json();
     }
     catch (err) { console.error(err) }

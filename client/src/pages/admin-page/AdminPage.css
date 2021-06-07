@@ -4,10 +4,13 @@
 
 .modal-admin-page{
     /* display: block; */
-    /* position:relative; */
-    /* left:350px; */
+    position:relative;
+    left:500px;
 }
 
+Button{
+    padding:12px 8px;
+}
 .admin-page-table{
     /* display: block; */
 }

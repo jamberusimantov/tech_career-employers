@@ -4,15 +4,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import service from './utils';
 import usersActions from './redux/actions/user.actions';
-import { getAllStudents } from './service/students.service';
 
 const { setUserData } = usersActions.usersActions;
 const mapDispatchToProps = (dispatch: any) => ({
-  setUserData: (data: Object) => { dispatch(setUserData(data)) }
-})
-const mapStateToProps = (state: any) => { return { userData: state.user.userData } }
+  setUserData: (data: Object) => { dispatch(setUserData(data)) }})
+const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
-function App(props: any) {
+ function App(props: any) {
   const { setUserData, userData } = props
   const { login } = service
   const { getUserUseToken } = login
@@ -22,24 +20,32 @@ function App(props: any) {
 
 
   useEffect(() => {
-    const loginHandler = async () => {
-      if (token) {
-        const userFromToken = await getUserUseToken(token)
-        if (userFromToken.success) {
-          login.setTokenLocal(token)
-          await setUserData(userFromToken)
-        }
+      const loginHandler = async()=>{
+        console.log(token);
+        if(token){
+          const userFromToken = await getUserUseToken(token)
+          if (userFromToken.success) {
+            login.setTokenLocal(token)
+            await setUserData(userFromToken)
+          }
 
+        }
       }
+      
+    loginHandler()
+    }, [getUserUseToken, login, setUserData]);
+
+
+    const classes = appStyle()
+
+    if (!userData.email) {
+      return (
+        <div className={classes.App}>
+          <LayoutMain />
+        </div>
+      );
     }
 
-    loginHandler()
-  }, [getUserUseToken, login, setUserData]);
-
-
-  const classes = appStyle()
-
-  if (!userData.email) {
     return (
       <div className={classes.App}>
         <LayoutMain />
@@ -47,11 +53,4 @@ function App(props: any) {
     );
   }
 
-  return (
-    <div className={classes.App}>
-      <LayoutMain />
-    </div>
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+  export default connect(mapStateToProps, mapDispatchToProps)(App)
