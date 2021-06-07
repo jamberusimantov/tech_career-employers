@@ -28,7 +28,7 @@ function LayoutMain() {
 
   return (
     <Layout>
-      <Header className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Header className="header" style={{ display: 'flex', justifyContent: 'space-between' }}/>
         <div>
           {(isLoggedIn) ?
             <Button size="large" type="primary" onClick={logOutHandler}>Logout </Button>
@@ -46,7 +46,7 @@ function LayoutMain() {
             <Menu.Item key="3"><Link to="/student">מועמדים</Link></Menu.Item>
             <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
             <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
-            <Menu.Item key="4"><Link to="/recruiter">משרות</Link></Menu.Item>
+            <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
           </Menu>
         </div>
 
@@ -57,18 +57,18 @@ function LayoutMain() {
       <Content style={{ padding: "0 50px" }}>
         <Layout
           className="site-layout-background"
-          style={{ padding: "24px 0" }}> */}
+          style={{ padding: "24px 0" }}> 
 
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
           </Content>
         </Layout>
       </Content>
-      {/* <Footer style={{ textAlign: "center" }}>
+      <Footer style={{ textAlign: "center" }}>
         Ant Design ©2018 Created by Ant UED
-      </Footer> */}
+      </Footer>
     </Layout>
-  );
+  )
 }
 
 export default LayoutMain;

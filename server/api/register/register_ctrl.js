@@ -47,7 +47,7 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
             if (err) throw new Error(`error on sign token ${err}`)
             const dataToUpdate = !emailVerification ? { _id, isActive: true, token: `Bearer ${token}` } : { _id, token: `Bearer ${token}` }
             const updateDocSuccessCb = async(data) => {
-                const link = new URL(`${baseApi}/signUp/${role}/${token}`)
+                const link = new URL(`http://localhost:3000/signUp/${role}/${token}/${_id}`)
                 if (!emailVerification) return res.status(200).json({
                         success: true,
                         token,

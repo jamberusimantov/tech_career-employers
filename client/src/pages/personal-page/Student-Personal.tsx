@@ -5,7 +5,6 @@ import { GithubOutlined } from "@ant-design/icons";
 import { FacebookOutlined } from "@ant-design/icons";
 import { LinkedinOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import "./student-personal.css";
 const { Header, Footer, Content } = Layout;
 
 export default function userCard() {
