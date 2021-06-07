@@ -12,19 +12,12 @@ const companyRouter = require('./api/company/company_router')
 const jobOfferRouter = require('./api/jobOffer/jobOffer_router')
 const studentsRouter = require('./api/student/studentRouter')
 const coursesRouter = require('./api/courses/course_router')
-
+const adminRouter = require('./api/admin/adminRouter')
 const passport = require('passport')
 const passportFunc = require('./config/passport')
 const path = require('path');
 const app = express()
-const PORT = process.env.PORT || 4201
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 4201;
 
 
 app.use(express.json());
@@ -46,7 +39,7 @@ app.use('/companies', companyRouter);
 app.use('/jobOffers', jobOfferRouter);
 app.use('/students', studentsRouter);
 app.use('/courses', coursesRouter);
-
+app.use('/adminRouter', adminRouter)
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
