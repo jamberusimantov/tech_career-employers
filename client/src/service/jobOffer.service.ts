@@ -1,6 +1,12 @@
 import { API } from '../app.utils'
 import loginService from '../utils/login.utils';
+import axios from 'axios';
 
+const headers = {
+    headers: {
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI2NjZmMGExOGVkYjNjOWMyZTIxMmEiLCJuYW1lIjoiQWRpdiBTaGVua29yIiwiZW1haWwiOiJBZGl2QGdtYWlsLmNvbSIsImlhdCI6MTYyMzA2OTY0MCwiZXhwIjoxNzA5NDY5NjQwfQ.4yccRqdHSoXPnCLi0IX1BiR9sQ6fKsaoWisWDuQ3kws'
+    }
+}
 export async function getAllJobOffers() {
     try {
         const res = await fetch(`${API}/jobOffers/all`)
@@ -11,8 +17,11 @@ export async function getAllJobOffers() {
 }
 export async function getManyJobOffers() {
     try {
-        const res = await fetch(`${API}/jobOffers/all`)
-        return res.json();
+        const body = { "jobOffer": {} }
+        console.log(loginService.getToken());
+        return await (await axios.post(`http://localhost:4201/jobOffers/many`, body, headers)).data.data
+        // const res = await fetch(`${API}/jobOffers/many`)
+        // return res.json();
     }
     catch (err) { console.error(err) }
     finally { }
