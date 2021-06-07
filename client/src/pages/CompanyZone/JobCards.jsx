@@ -11,18 +11,20 @@ import { Link } from "react-router-dom";
 export default function JobCards(props) {
     const [jobOffer, setJobOffer] = useState([]);
 
-    useEffect(gerManyJobsOffer, []);
 
-    function gerManyJobsOffer() {
-        getManyJobOffers().then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-        }).then(jsonResponse => setJobOffer(jsonResponse.data))
-        console.log(jobOffer);
+   async function gerManyJobsOffer() {
+       try{  
+        await getManyJobOffers().then((res) => {setJobOffer(res.data)})
+    }
+    catch(err){console.log(err);}  
+    finally{}
+
+        console.log( jobOffer);
     }
 
-
+    useEffect(() => { 
+        gerManyJobsOffer()
+      }, [])
     const menu = (
         <Menu>
             <Menu.Item>
