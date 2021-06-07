@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { getAllJobOffers } from '../../service/jobOffer.service';
+import React, { useState, useEffect } from 'react';
+import { getManyJobOffers } from '../../service/jobOffer.service';
 import { Card, Button, Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import './JobCards.css'
-import JobEditPage from './JobEditPage';
+// import JobEditPage from './JobEditPage';
 import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom";
 
 
 export default function JobCards(props) {
-
-
-    useEffect(gerAllJobsOffer, []);
-
     const [jobOffer, setJobOffer] = useState([]);
 
-    function gerAllJobsOffer() {
-        getAllJobOffers().then((res) => { setJobOffer(res) })
+    useEffect(gerManyJobsOffer, []);
+
+    function gerManyJobsOffer() {
+        getManyJobOffers().then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+        }).then(jsonResponse => setJobOffer(jsonResponse.data))
+        console.log(jobOffer);
     }
 
 
@@ -58,7 +61,7 @@ export default function JobCards(props) {
                     <span className="number"> 1 </span>
                     <Link to="/JobEditPage"><Button className="readMoreBtn" type="primary">קרא עוד</Button></Link>
                 </Card>
-                {/* <p>{jobOffer}</p> */}
+                <p>{jobOffer}</p>
             </div>
         </div >
 

@@ -1,5 +1,5 @@
 import { API } from '../app.utils'
-import loginService from './login.service';
+import loginService from '../utils/login.utils';
 
 export async function getAllJobOffers() {
     try {
