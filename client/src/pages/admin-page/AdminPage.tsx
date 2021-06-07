@@ -5,55 +5,88 @@ import { Button, Input, Modal,Checkbox } from "antd";
 //Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
-//Data for table from local data
+
+import {getAllCourses ,getStudentById} from './admin.service'
 
 
-import "./AdminPage.css";
-import {
-  coursesColumns,
-  coursesData,
-  graduatesColumns,
-  graduatesData,
-} from "../../components/shared/CodeinTable/mock";
+
+const columns = [
+  {
+    title: 'שם הקורס',
+    dataIndex: 'courseName',
+    key: 'courseName',
+  },
+  {
+    title: 'מועד הסיום',
+    dataIndex: 'courseCompletionDate',
+    key: 'courseCompletionDate',
+  },
+  {
+    title: 'מס בוגרים',
+    dataIndex: 'numberOfGraduates',
+    key: 'numberOfGraduates',
+  },
+  {
+    title: 'מס מועסקים',
+    dataIndex: 'graduatesWorking',
+    key: 'graduatesWorking',
+  },
+  {
+    title: 'מס מחפשי עבודה',
+    dataIndex: 'graduatesNotWorking',
+    key: 'graduatesNotWorking',
+  },
+  {
+    title: 'סגירת השמות',
+    dataIndex: 'graduatesWorking',
+    key: 'graduatesWorking',
+  },
+];
+
 
 function AdminPage() {
+
+
+  
+  
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
-
+  
   const [showCoursesTable, setShowCoursesTable] = useState(false);
   const [showGraduatesTable, setShowGraduatesTable] = useState(false);
-
+  
   const showModalStudent = () => {
     setIsModalVisibleStudent(true);
   };
-
+  
   const handleOkStudent = () => {
     setIsModalVisibleStudent(false);
   };
-
+  
   const handleCancelStudent = () => {
     setIsModalVisibleStudent(false);
   };
-
+  
   const showModalHr = () => {
     setIsModalVisibleHr(true);
   };
-
+  
   const handleOkHr = () => {
     setIsModalVisibleHr(false);
   };
-
+  
   const handleCancelHr = () => {
     setIsModalVisibleHr(false);
   };
-
+  
   function changeShowCoursesTable(e: { target: { checked: any } }) {
     setShowCoursesTable(!showCoursesTable);
   }
-
+  
   function changeShowGraduatesTable(e: { target: { checked: any } }) {
     setShowGraduatesTable(!showGraduatesTable);
   }
+
 
   return (
     <div className="admin-page">
@@ -100,13 +133,13 @@ function AdminPage() {
         {!showCoursesTable ? (
           " "
         ) : (
-          <CodeinTable columns={coursesColumns} data={coursesData} />
+          <CodeinTable  columns={columns} getData={getAllCourses} />
         )}
-        {!showGraduatesTable ? (
+        {/* {!showGraduatesTable ? (
           " "
         ) : (
           <CodeinTable columns={graduatesColumns} data={graduatesData} />
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-import LayoutMain from './Layout'
+
+import LayoutMain from './Layout/LayoutMain/index'
 
 const components = {
     LayoutMain,

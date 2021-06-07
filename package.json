@@ -13,6 +13,7 @@
         "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "dependencies": {
+        "antd": "^4.16.1",
         "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
         "chalk": "^4.1.0",
@@ -35,6 +36,7 @@
     "devDependencies": {
         "@types/cors": "^2.8.10",
         "@types/mui-datatables": "^3.7.1",
+        "@types/react-dom": "^17.0.6",
         "@types/react-router-dom": "^5.1.7",
         "@types/uuid": "^8.3.0",
         "concurrently": "^5.3.0",

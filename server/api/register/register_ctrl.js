@@ -270,6 +270,7 @@ async function loginUser(req, res) {
     const getDocSuccessCb = async(data) => {
         const { _id, name, email } = data;
         const passwordFromDB = data.password;
+        console.log(data);
         if (!data.isAuth) return res.status(400).json({
             success: false,
             message: 'unsigned user on loginUser'
@@ -277,7 +278,7 @@ async function loginUser(req, res) {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const isMatch = await bcrypt.compare(passwordFromDB, passwordHash);
- 
+     
             if (!isMatch) return res.status(400).json({
                 success: false,
                 message: unauthorizedCredentials('loginUser')

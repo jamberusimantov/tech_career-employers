@@ -1,66 +1,33 @@
-import React, { useState } from 'react'
-import { Spin, Card, Row, Col } from 'antd'
+import React, { useState,useEffect } from 'react'
+import { Spin,Row} from 'antd'
 import StudentCard from './card/StudentCard'
-const Cards = ({ students }: any) => {
-    const [studentsArray, setStudentsArray] = useState([1, 2, 3, 4, 5, 6])
-    const readMoreHandler:any = (e:any)=>{
+import service from '../../utils';
+const {student,login} = service
+const Cards = () => {
+    const [studentsArray, setStudentsArray] = useState([])
+    const [token, setToken] = useState(localStorage.getItem('token'))
 
-    }
+    useEffect(() => {
+        const tokenHandler = async ()=>{
+            if(token){
+                const resFromToken = await login.getUserUseToken(token)
+                    if(resFromToken.success){
+                        const data = await student.getAllStudents()
+                        if (data){setStudentsArray(data.data)}
+                    }
+            }
+        }
+       tokenHandler();
+       
+    },[token])
 
     return (
-        (!studentsArray) ?
-            <Spin />
+        (studentsArray.length < 1) ?
+            <Spin size="large" />
             :
-            <div className="site-card-wrapper">
-                <Row gutter={30}>
-                    <Col span={8} style={{margin:'5px 0'}}>
-                        <Card title="Card title" bordered={false}>
-                            <p>name</p>
-                            <p>languages</p>
-                            <p>specialty</p>
-                            <button>Read more</button>
-                        </Card>
-                    </Col>
-                    <Col span={8} style={{margin:'5px 0'}}>
-                        <Card title="Card title" bordered={false}>
-                            <p>name</p>
-                            <p>languages</p>
-                            <p>specialty</p>
-                            <button>Read more</button>
-                        </Card>
-                    </Col>
-                    <Col span={8} style={{margin:'5px 0'}}>
-                        <Card title="Card title" bordered={false}>
-                            <p>name</p>
-                            <p>languages</p>
-                            <p>specialty</p>
-                            <button>Read more</button>
-                        </Card>
-                    </Col>
-                    <Col span={8} style={{margin:'5px 0'}}>
-                        <Card title="Card title" bordered={false}>
-                            <p>name</p>
-                            <p>languages</p>
-                            <p>specialty</p>
-                            <button>Read more</button>
-                        </Card>
-                    </Col>
-                    <Col span={8} style={{margin:'5px 0'}}>
-                        <Card title="Card title" bordered={false}>
-                            <p>name</p>
-                            <p>languages</p>
-                            <p>specialty</p>
-                            <button>Read more</button>
-                        </Card>
-                    </Col>
-                    <Col span={8} style={{margin:'5px 0'}}>
-                        <Card title="Card title" bordered={false}>
-                            <p>name</p>
-                            <p>languages</p>
-                            <p>specialty</p>
-                            <button>Read more</button>
-                        </Card>
-                    </Col>
+            <div >
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                {studentsArray.map((student, index)=><StudentCard key={index} num={index}  {...student}/>)}
                 </Row>
             </div>
     )
