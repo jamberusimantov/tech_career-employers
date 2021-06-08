@@ -39,6 +39,8 @@ function AdminPage() {
       title: "שם הקורס",
       dataIndex: "courseName",
       key: "courseName",
+      width: 250,
+      fixed: 'left',
       filters: [
         {
           text: "Full-Stack",
@@ -62,28 +64,37 @@ function AdminPage() {
       title: "מועד הסיום",
       dataIndex: "courseCompletionDate",
       key: "courseCompletionDate",
-      // sorter:  sortByName,
-      // onFilter: filterByName,
+      width: 200,
+      fixed: 'left',
+     
     },
     {
       title: "מס בוגרים",
       render: renderNumberOfGraduates,
       key: "numberOfGraduates",
+      width: 120,
+      fixed: 'left',
     },
     {
       title: "מס מועסקים",
       dataIndex: "graduatesWorking",
       key: "graduatesWorking",
+      width: 120,
+      fixed: 'left',
     },
     {
       title: "מס מחפשי עבודה",
       dataIndex: "graduatesNotWorking",
       key: "graduatesNotWorking",
+      width: 120,
+      fixed: 'left',
     },
     {
       title: "סגירת השמות",
       dataIndex: "graduatesWorking",
       key: "graduatesWorking",
+      width: 120,
+      fixed: 'right',
     },
   ];
 
@@ -91,26 +102,44 @@ function AdminPage() {
     {
       title: "חברה",
       dataIndex: "company",
+      width: 120,
+      fixed: 'right',
     },
     {
       title: "מגייסת",
       dataIndex: "uploadedBy",
+      width: 120,
+      fixed: 'right',
     },
     {
       title: "תפקיד",
       dataIndex: "position",
+      width: 100,
+      fixed: 'right',
     },
     {
       title: "ת. פתיחת משרה",
       dataIndex: "uploadDate",
+      width: 250,
+      fixed: 'right',
+    },
+    {
+      title: "עיר",
+      dataIndex: "location",
+      width: 120,
+      fixed: 'right',
     },
     {
       title: "סטטוס",
       dataIndex: "status",
+      width: 100,
+      fixed: 'right',
     },
     {
       title: "שאל את המגייסת?",
-      dataIndex: "uploadedBy",
+      dataIndex: "emailHr",
+      width: 150,
+      fixed: 'right',
       render: (text: string) => (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a href="mailto: abc@example.com">{text}</a>
@@ -197,7 +226,16 @@ function AdminPage() {
 
   return (
     <div className="admin-page">
-      <div className="modal-admin-page">
+      
+
+      <div className="modal_checkbox">
+        <Checkbox onChange={changeShowCoursesTable}>
+          טבלת ליווי ובוגרים
+        </Checkbox>
+        <Checkbox onChange={changeShowGraduatesTable}>
+          טבלת משרות ומגייסות
+        </Checkbox>
+     
         <Button type="primary" onClick={showModalStudent}>
           רישום סטודנט
         </Button>
@@ -240,16 +278,7 @@ function AdminPage() {
             placeholder="שם חברה"
           />
         </Modal>
-      </div>
-
-      <div className="checkbox">
-        <Checkbox onChange={changeShowCoursesTable}>
-          טבלת ליווי ובוגרים
-        </Checkbox>
-        <Checkbox onChange={changeShowGraduatesTable}>
-          טבלת משרות ומגייסות
-        </Checkbox>
-      </div>
+        </div>
       <div className="admin-page-table">
         {!showCoursesTable ? (
           " "
@@ -259,7 +288,8 @@ function AdminPage() {
         {!showGraduatesTable ? (
           " "
         ) : (
-          <CodeinTable columns={graduatesColumns} getData={getAllJobOffers} />
+          <CodeinTable size="middle"
+          scroll={{ x: 'calc(700px + 50%)', y: 240 }} columns={graduatesColumns} getData={getAllJobOffers} />
         )}
       </div>
     </div>
