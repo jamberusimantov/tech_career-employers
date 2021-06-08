@@ -1,10 +1,15 @@
 import React from "react";
+import {useParams} from "react-router-dom"
 import styled from "styled-components";
 import { Button } from "antd";
 import Title from "./Title";
-import "./";
+// import "./";
+
 
 function CardsDetail() {
+  // const { id } = useParams();
+  // const { id } = useParams<Record<string, string | undefined>>()
+  // console.log(id);‏‏
   return (
     <Container>
       <Title title="Full-Stack developer" />

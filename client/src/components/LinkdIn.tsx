@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import JobCard from "../components/JobCard";
 import "../components/";
 import { getManyJobOffers } from "../utils/drafts/jobOffer.utils";
 import { Input, Row, Col } from "antd";
-import RecruiterRouter from "./LinkdInRouter";
+import LinkdInRouter from "./LinkdInRouter";
 
 const { Search } = Input;
 
@@ -14,6 +14,8 @@ export default function JobsList() {
   //   .then(data => props.popBooks(data))
 
   // }, []);
+
+  const [IdCard, setIdCard] = useState(1)
   const CardsData = [
     {
       title: "Full-Stack developer",
@@ -83,10 +85,10 @@ export default function JobsList() {
   return (
     <MainContainer>
       <Search
-        placeholder="input search text"
+        placeholder="search"
         enterButton="Search"
         size="large"
-        loading
+        
       />
       <Container>
         
@@ -97,7 +99,7 @@ export default function JobsList() {
             style={{ overflowY: "scroll", height: "100%" }}
             className="colRightCards"
           >
-            <RecruiterRouter />
+            <LinkdInRouter />
           </Col>
 
           <Col
@@ -108,12 +110,14 @@ export default function JobsList() {
           >
             {CardsData.map((item) => {
               return (
+                
                 <JobCard
                   title={item.title}
                   company={item.company}
                   location={item.location}
                   applicants={item.applicants}
                   id={item.id}
+                  
                 />
               );
             })}

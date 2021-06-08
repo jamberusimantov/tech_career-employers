@@ -12,9 +12,9 @@ export const getJobOffer = async (query: object, token: string) => {
     catch (error) { return { success: false, error: err('getJobOffer', error) } }
     finally { }
 }
-export const getManyJobOffers = async (token: string, query?: object) => {
+export const getManyJobOffers = async ( query?: object) => {
     try {
-        return await getManyDocs(collection, body(query || {}), token)
+        return await getManyDocs(collection, body(query || {}))
     }
     catch (error) { return { success: false, error: err('getManyJobOffers', error) } }
     finally { }
@@ -74,3 +74,12 @@ export const postJobOffer = async (doc: object, token: string) => {
   // getJobOfferById('60b7cffe4d638323000e7228', token).then(data => console.log(data))
   // updateJobOfferById({ isHidden: true }, "60b7bc72095e2d0900d81eb1", token).then(data => console.log(data))
   // deleteJobOfferById('60b787e1b3434f0a98f21459',token).then(data => console.log(data))
+
+
+//   export const getManyJobOffers = async (token: string, query?: object) => {
+//     try {
+//         return await getManyDocs(collection, body(query || {}), token)
+//     }
+//     catch (error) { return { success: false, error: err('getManyJobOffers', error) } }
+//     finally { }
+// }
