@@ -1,9 +1,9 @@
-import AdminRouter from '../../../AdminRouter'
+import AdminRouter from '../../AdminRouter'
 import { Link } from 'react-router-dom';
 import { Button, Layout, Menu, Modal } from "antd";
 import { useState, useEffect } from 'react';
-import Login from '../../loginForm/Login'
-import service from '../../../utils';
+import Login from '../loginForm/Login'
+import service from '../../utils';
 import "./style.css";
 import "antd/dist/antd.css";
 const { login } = service
@@ -39,7 +39,7 @@ function LayoutMain(props: any) {
       <Header className="header" style={{ display: 'flex',width:'100%', justifyContent: 'space-between' }}>
         <div> 
           {(isLoggedIn) ?
-            <div style={{display: 'flex',alignItems:'center',justifyContent: 'space-between'}}>
+            <div style={{margin:'0 20px', display: 'flex',alignItems:'center',justifyContent: 'space-between'}}>
               <Button style={{margin:'0 10px'}} size="large" type="primary" onClick={logOutHandler}>Logout </Button>
               <h2 style={{margin:' 8px 0 0 0'}}>Welcome {name}</h2>
             </div>
@@ -64,7 +64,7 @@ function LayoutMain(props: any) {
           </Menu>
         </div>
 
-        <div className="imgdiv">
+        <div className="imgdiv" style={{margin:'0 20px'}}>
           <img src="/img/Logo.png" alt="" className="logo" />
         </div>
       </Header>
