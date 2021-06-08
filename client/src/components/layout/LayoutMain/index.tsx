@@ -13,6 +13,7 @@ function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [token, setToken] = useState(login.getToken())
   const [role, setRole] = useState('')
+  const [name, setName] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
   const showModal = () => { setIsModalVisible(true) }
   const handleCancel = () => { setIsModalVisible(false) }
@@ -24,6 +25,9 @@ function LayoutMain(props: any) {
       if (userData.success) {
         setIsLoggedIn(true)
         setRole(userData.data.role)
+        console.log(userData);
+        
+        setName(userData.data.name)
       }
     }
   }
@@ -32,10 +36,13 @@ function LayoutMain(props: any) {
   return (
 
     <Layout>
-      <Header className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>
+      <Header className="header" style={{ display: 'flex',width:'100%', justifyContent: 'space-between' }}>
+        <div> 
           {(isLoggedIn) ?
-            <Button size="large" type="primary" onClick={logOutHandler}>Logout </Button>
+            <div style={{display: 'flex',alignItems:'center',justifyContent: 'space-between'}}>
+              <Button style={{margin:'0 10px'}} size="large" type="primary" onClick={logOutHandler}>Logout </Button>
+              <h2 style={{margin:' 8px 0 0 0'}}>Welcome {name}</h2>
+            </div>
             :
             <Button size="large" type="primary" onClick={showModal}>Login </Button>
           }
@@ -47,74 +54,30 @@ function LayoutMain(props: any) {
         <div>
           <Menu theme="light" mode="horizontal" style={{ textAlign: "center" }} >
             <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
-            {isLoggedIn && <>
+            {isLoggedIn && 
+              <>
               <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
               <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
               <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
-              {role === 'Admin' &&
-                <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
-              }
-            </>
-
-
-            }
-
-
-            {/* <Menu.Item key="6"><h1>Welcome </h1></Menu.Item> */}
+              {role === 'Admin' &&<Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>}
+              </>}
           </Menu>
         </div>
 
         <div className="imgdiv">
           <img src="/img/Logo.png" alt="" className="logo" />
         </div>
-
-
-
-
-        {/* <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="4">
-            <Link to="/">דף הבית</Link>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Link to="/student">סטודנטים</Link>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Link to="/recruiter">מגייסים</Link>
-          </Menu.Item>
-          <Menu.Item key="1">
-            <Link to="/admin">הנהלה</Link>
-          </Menu.Item>
-          <Menu.Item key="1">
-            <Link to="/admin">משרות</Link>
-          </Menu.Item>
-        </Menu> */}
       </Header>
       <Content style={{ padding: "0 50px" }}>
 
         <Layout
           className="site-layout-background"
           style={{ padding: "24px 0" }}>
-
-
-
-
-
-          {/* </Header>
-      <Content style={{ padding: "0 50px" }}>
-
-        <Layout
-          className="site-layout-background"
-          style={{ padding: "24px 0" }}> */}
-
-
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
           </Content>
         </Layout>
       </Content>
-      {/* <Footer style={{ textAlign: "center" }}>
-        Ant Design ©️2018 Created by Ant UED
-      </Footer> */}
     </Layout>
   );
 }
