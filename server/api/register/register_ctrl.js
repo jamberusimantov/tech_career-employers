@@ -1,6 +1,7 @@
 const hrCollection = require('../hr/hr_model')
 const studentCollection = require('../student/student_model')
 const companiesCollection = require('../company/company_model')
+const adminCollection = require('../admin/admin_model')
 const register_validation = require('./register_validation')
 const {
     validateInitialUserRegistration,
@@ -17,7 +18,8 @@ const keys = require('../../config/keys')
 const passport = require('passport')
 const collections = {
     hr: hrCollection,
-    student: studentCollection
+    student: studentCollection,
+    admin: adminCollection
 }
 const { getDoc, updateDoc, postDocs, msgs, filteredPrivateProps } = DB
 const { authRequest } = register
