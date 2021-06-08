@@ -9,22 +9,25 @@ import "antd/dist/antd.css";
 const { login } = service
 const { Header, Content, Footer } = Layout;
 
-function LayoutMain() {
+function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [token, setToken] = useState(login.getToken())
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [role, setRole] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn)
   const showModal = () => { setIsModalVisible(true) }
   const handleCancel = () => { setIsModalVisible(false) }
-  const logOutHandler = ()=> { login.removeToken(); window.location.reload();}
+  const logOutHandler = () => { login.removeToken(); window.location.reload(); }
+
   const tokenHandler = async () => {
     if (token) {
-      const resFromToken = await login.getUserUseToken(token)
-      if (resFromToken.success) { setIsLoggedIn(true) }
+      const userData = await login.getUserUseToken(token)
+      if (userData.success) {
+        setIsLoggedIn(true)
+        setRole(userData.data.role)
+      }
     }
   }
-  useEffect(() => {
-    tokenHandler()
-  }, [isLoggedIn])
+  useEffect(() => { tokenHandler() }, [isLoggedIn])
 
   return (
 
@@ -44,10 +47,20 @@ function LayoutMain() {
         <div>
           <Menu theme="light" mode="horizontal" style={{ textAlign: "center" }} >
             <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
-            <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
-            <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
-            <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
+            {isLoggedIn && <>
+              <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
+              <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
+              <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
+              {role === 'Admin' &&
+                <Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>
+              }
+            </>
+
+
+            }
+
+
+            {/* <Menu.Item key="6"><h1>Welcome </h1></Menu.Item> */}
           </Menu>
         </div>
 
@@ -81,12 +94,12 @@ function LayoutMain() {
         <Layout
           className="site-layout-background"
           style={{ padding: "24px 0" }}>
- 
 
 
 
 
-      {/* </Header>
+
+          {/* </Header>
       <Content style={{ padding: "0 50px" }}>
 
         <Layout

@@ -41,16 +41,11 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
     if (!userData.email) {
       return (
-        <div className={classes.App}>
-          <LayoutMain />
-        </div>
+        <div className={classes.App}><LayoutMain isLoggedIn = {false}/></div>
       );
     }
-
     return (
-      <div className={classes.App}>
-        <LayoutMain />
-      </div>
+      <div className={classes.App}><LayoutMain isLoggedIn = {true} /></div>
     );
   }
 

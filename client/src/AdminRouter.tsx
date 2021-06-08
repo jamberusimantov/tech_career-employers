@@ -42,7 +42,7 @@ function AdminRouter() {
       <Route path="/studentPage/:id">
         <SpecificStudent />
       </Route>
-      <Route path="/studentReg">
+      <Route path="/signUp/student">
        <StuSteps/>
       </Route>
       <Route path="/admin">

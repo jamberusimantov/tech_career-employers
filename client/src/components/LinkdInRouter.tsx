@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import CardsDetails from './CardsDetail'
-import CardsDetails2 from './CardsDetals2'
-import CardsDetails3 from './CardsDetails3'
-import CardsDetails4 from './CardsDetals4'
-import CardsDetails5 from './CardsDetals5'
+import CardsDetails from './job-cards/CardsDetail'
+import CardsDetails2 from './job-cards/CardsDetals2'
+import CardsDetails3 from './job-cards/CardsDetails3'
+import CardsDetails4 from './job-cards/CardsDetals4'
+import CardsDetails5 from './job-cards/CardsDetals5'
 
 
 export default function RecruiterRouter() {
