@@ -40,6 +40,7 @@ export async function updateStudent(credentials: any) {
     catch (err) { console.error(err) }
     finally { }
 }
+
 export async function deleteStudent(credentials: any) {
     const { _id } = credentials;
     // const body = {
@@ -59,19 +60,18 @@ export async function deleteStudent(credentials: any) {
     finally { }
 }
 
-
 export async function getAllStudents() {
     try {
-        return await (await axios.get(`${API}/students/all`,headers)).data.data
-     
-               
+        return await (await axios.get(`${API}/students/all`,headers)).data.data    
     }
     catch (err) { console.error(err) }
 }
 
-export async function getManyStudents(){
+export async function getManyStudents(credentials: any){
+    const body = {student:{programmingLang:['React']}} 
     try {
-        return await (await axios.get(`${API}/students/all`,headers)).data.data
+        if(headers){}
+        return await (await axios.get(`${API}/students/many`,headers)).data.data
     }
     catch (err) { console.error(err) }
 }
