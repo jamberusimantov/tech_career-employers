@@ -8,6 +8,7 @@ const { Header, Content, Footer } = Layout;
 export default function Home() {
   return (
     <div>
+      
       <Layout>
         <Layout>
           <Layout style={{ padding: "0 24px 24px" }}>
