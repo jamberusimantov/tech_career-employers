@@ -1,9 +1,41 @@
 const studentCollection = require('./student_model')
 const DB = require('../../utils/DB.utils')
 const register = require('../../utils/register.utils')
+
 const {authRequest} = register
 const { getDoc, updateDoc, deleteDoc, getManyDocs, msgs } = DB
 const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandler} = require('../../utils/ctrl.utils')
+
+
+/**
+ * Get graduates by course id from student collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+
+
+async function getGraduatesByCourseId(req, res) {
+    // const token = req.headers.authorization
+    // const courseId = req.params.courseId;
+    const courseId = req.params.courseId;
+    const query = { courseId };
+
+    // if(tokenChecker(token,res) !== true) return;
+    if(idChecker(courseId,res) !== true) return;
+    const getDocSuccessCb = (data)=> successHandler(data,res,'got')
+    const getDocFailCb = () => failHandler(courseId,res)
+    const request = async() => {
+        if (getRes && getRes.error) throw new Error(getRes.error);
+    }
+    try {
+        const getRes = await getManyDocs(studentCollection, query, getDocSuccessCb, getDocFailCb)
+        // authRequest(token, request, res)
+    } catch (error) {
+        res.status(400).json({ success: false, error })
+    }
+}
+
+
 
 /**
  * Get student by id from student collection
@@ -103,6 +135,7 @@ async function updateStudentById(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
+
 async function getAllStudents(req, res) {
     const token = req.headers.authorization
     if(tokenChecker(token,res) !== true) return
@@ -149,5 +182,6 @@ module.exports = {
     updateStudentById,
     deleteStudentByUrlId,
     getAllStudents,
-    getManyStudents
+    getManyStudents,
+    getGraduatesByCourseId
 };

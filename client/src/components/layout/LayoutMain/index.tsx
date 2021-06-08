@@ -88,6 +88,7 @@ function LayoutMain() {
 
       {/* </Header>
       <Content style={{ padding: "0 50px" }}>
+
         <Layout
           className="site-layout-background"
           style={{ padding: "24px 0" }}> */}

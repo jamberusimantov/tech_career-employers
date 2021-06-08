@@ -9,7 +9,7 @@ const {
     validateCompanyRegisterInput,
     validateLoginInput
 } = register_validation;
-const emailer = require('../../utils/email/email');
+const emailer = require('../../email/email');
 const DB = require('../../utils/DB.utils')
 const register = require('../../utils/register.utils')
 const bcrypt = require('bcryptjs')
