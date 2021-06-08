@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import usersActions from '../../redux/actions/user.actions';
 import LogIn from '../../utils/login.utils';
 
-const { loginUser,setTokenLocal } = LogIn
+const { loginUser,setTokenLocal,getUserUseToken } = LogIn
 const { setUserData } = usersActions.usersActions;
 const mapDispatchToProps = (dispatch: any) => ({
   setUserData: (data: Object) => { dispatch(setUserData(data)) }})
@@ -17,12 +17,16 @@ const Login = (): any => {
         const email:any =  values.email
         const password:any =  values.password
         const resFromLogin = await loginUser({email,password},'student')
+        setTokenLocal(JSON.stringify(resFromLogin))
+  
+
         if(resFromLogin.success){
+            window.location.reload();
+            const getConectedUser = await getUserUseToken(resFromLogin.token) 
+            console.log(getConectedUser)
             const token = resFromLogin.token
             setTokenLocal(token)
             setUserData(token)
-            window.location.reload();
-
         }else{alert('failed!')}
         
     }

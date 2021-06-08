@@ -56,6 +56,7 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
                     success: true,
                     token,
                     data: {
+                        name: console.log(data),
                         email: data.email
                     },
                     message: success(`signToken, ${message}`)
@@ -271,6 +272,7 @@ async function loginUser(req, res) {
     if (!isValid) return res.status(400).json(errors)
     const getDocSuccessCb = async(data) => {
         const { _id, name, email } = data;
+        console.log(data)
         const passwordFromDB = data.password;
         console.log(data);
         if (!data.isAuth) return res.status(400).json({

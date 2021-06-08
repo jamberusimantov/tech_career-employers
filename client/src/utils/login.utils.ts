@@ -39,7 +39,8 @@ class LogIn {
         const url = `${API}/registration/login/${role}`
         const body = { user: credentials }
         try {
-            return await Http.POST(url, body)
+            let userData = await Http.POST(url, body)
+            return userData;
         } catch (error) { return error }
         finally { }
     }
