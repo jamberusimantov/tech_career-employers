@@ -88,8 +88,9 @@ function LayoutMain() {
       <Content style={{ padding: "0 50px" }}>
         <Layout
           className="site-layout-background"
-          style={{ padding: "24px 0" }}
-        >
+          style={{ padding: "24px 0" }}> 
+
+    
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
           </Content>
@@ -98,5 +99,4 @@ function LayoutMain() {
     </Layout>
   );
 }
-
 export default LayoutMain;

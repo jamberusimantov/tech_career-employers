@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import { Card, Avatar } from "antd";
 import { Link } from "react-router-dom";
 
@@ -42,6 +43,7 @@ export default function JobCard({
       </Link>
     </Container>
   );
+
 }
 
 const Container = styled.div`
