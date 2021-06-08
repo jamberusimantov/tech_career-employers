@@ -11,8 +11,9 @@ const StuThirdStep = () => {
     const onFinish = (values: any) => { console.log('Success:', values); };
     const handleChange = (value: any) => { console.log(`selected ${value}`); }
     const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo); };
+    const programmingLangArr: any = { fullstack: 'Full-Stack', dev: 'DevNet', qa: 'QA', mongodb: 'MongoDB', typescript: 'Type-Script', python: 'Python', nodejs: 'NodeJS', c: 'C', css: 'CSS', html: 'HTML', 'c#': 'C#', java: 'Java', 'c++': 'C++', php: 'PHP' }
     return (
-        <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Form
                 {...layout}
                 name="basic"
@@ -41,36 +42,17 @@ const StuThirdStep = () => {
                         optionLabelProp="label"
                     >
 
-
-                        <Option value="js" label="JavaScript">
-                            <div className="demo-option-label-item">Java-Script</div>
-                        </Option>
-                        <Option value="html" label="HTML">
-                            <div className="demo-option-label-item">HTML</div>
-                        </Option>
-                        <Option value="css" label="CSS">
-                            <div className="demo-option-label-item">CSS</div>
-                        </Option>
-                        <Option value="react" label="React">
-                            <div className="demo-option-label-item">React</div>
-                        </Option>
-                        <Option value="ts" label="TypeScript">
-                            <div className="demo-option-label-item">Type-Script</div>
-                        </Option>
-                        <Option value="nodejs" label="Nodejs">
-                            <div className="demo-option-label-item">NodeJs</div>
-                        </Option>
-                        <Option value="mongodb" label="MongoDB">
-                            <div className="demo-option-label-item">MongoDB</div>
-                        </Option>
+                        {Object.entries(programmingLangArr).map(([itemKey, itemValue]: any, index: any) => <Option key={index} value={itemKey} label={itemValue}>
+                            <div className="demo-option-label-item">{itemValue}</div>
+                        </Option>)}
 
                     </Select>
                 </div>
                 {/* שפות שלמדת */}
 
-                <div style={{ display: 'flex', justifyContent: 'left'}}>
-                <h1>קצת על עצמך :</h1>
-                <TextArea  rows={8} />
+                <div style={{ display: 'flex', justifyContent: 'left' }}>
+                    <h1>קצת על עצמך :</h1>
+                    <TextArea rows={8} />
                 </div>
             </Form>
         </div>

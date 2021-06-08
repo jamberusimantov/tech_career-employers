@@ -14,6 +14,7 @@ const student = new Schema({
         token: String,
         company: String,
         about: String,
+        pictures:[{path: String}],
         friends: [{ _id: String, name: String }],
         notifications: { notifications: [], new: [] },
         messages: { messages: [], new: [] },

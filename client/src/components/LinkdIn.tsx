@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import JobCard from "../components/JobCard";
+import JobCard from "../components/job-cards/JobCard";
 import "../components/";
 import { getManyJobOffers } from "../utils/drafts/jobOffer.utils";
 import { Input, Row, Col } from "antd";

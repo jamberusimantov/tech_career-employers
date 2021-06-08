@@ -91,12 +91,13 @@ async function updateStudentById(req, res) {
     const token = req.headers.authorization
     const student = req.body.student;
     const _id = req.params.Id;
+    console.log(_id);
     if(tokenChecker(token,res) !== true) return
     if(idChecker(_id,res) !== true) return
     student._id = _id;
     const updateDocSuccessCb = (data)=> successHandler(data,res,'updated')
     const updateDocFailCb = () => failHandler(_id,res)
-    const request = async(data) => {
+    const request = async() => {
         const getRes = await updateDoc(studentCollection, student, updateDocSuccessCb, updateDocFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
@@ -140,7 +141,7 @@ async function getAllStudents(req, res) {
     if(tokenChecker(token,res) !== true) return
     const getAllDocsSuccessCb = (data)=> successHandler(data,res,'list')
     const getAllDocsFailCb = () => failHandler('list',res)
-    const request = async(data) => {
+    const request = async() => {
         const getRes = await getManyDocs(studentCollection, undefined, getAllDocsSuccessCb, getAllDocsFailCb)
         if (getRes && getRes.error) throw new Error(getRes.error)
     }
