@@ -1,6 +1,6 @@
 import { Layout, Breadcrumb } from "antd";
 import Slider from "../../components/slider/Slider";
-import About from "../../components/About/About"
+// import About from "../../components/About/About"
 import Coops from "../../components/coops/Coops"
 // import "antd/dist/antd.css";
 const { Header, Content, Footer } = Layout;
@@ -21,7 +21,7 @@ export default function Home() {
             </Content>
           </Layout>
         </Layout>
-        <About />
+        {/* <About /> */}
         <Coops />
         <Footer>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>

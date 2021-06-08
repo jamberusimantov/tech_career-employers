@@ -4,9 +4,6 @@ import AdminPage from './pages/admin-page/AdminPage'
 //Home page
 import Home from './pages/home-page/Home'
 //HR page
-import HrRegisterForm from './pages/hr-page/Hr-Register'
-import CompanyRegister from './pages/hr-page/Company-register'
-import RegisterIndex from './pages/hr-page/RegisterIndex'
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'  
 import HrSteps from './components/steps/HrSteps'
@@ -24,13 +21,13 @@ import {
 
 function AdminRouter() {
 
-
+ 
   return (
     <Switch>
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/signUp/hr">
+      <Route path="/signUp/hr/:token/:id">
        <HrSteps/>
       </Route>
      < Route path="/recruiter">
