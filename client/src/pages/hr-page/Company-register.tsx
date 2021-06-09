@@ -23,9 +23,7 @@ const CompanyForm = () => {
     const [componentSize, setComponentSize] = useState<SizeType | "default">(
         "default"
     );
-    const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-        setComponentSize(size);
-    };
+   
     const [companyName, setCompanyName] = useState('Company Name')
 
     return (

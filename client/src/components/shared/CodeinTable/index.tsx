@@ -5,7 +5,7 @@ import { Table, Button, Input, Modal } from "antd";
 import "../../../App.css";
 
 const CodeinTable = (props: any): any => {
-  const { columns, getData } = props;
+  const { columns, getData,fixed } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +32,7 @@ const CodeinTable = (props: any): any => {
         {/* <Button icon={loading ? <LoadingOutlined /> : ""} type="primary">רענן</Button> */}
       </div>
 
-      <Table loading={loading} columns={columns} dataSource={data} />
+      <Table  loading={loading} columns={columns} dataSource={data} />
     </div>
   );
 };

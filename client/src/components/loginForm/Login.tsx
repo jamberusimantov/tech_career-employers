@@ -26,7 +26,7 @@ const Login = (): any => {
             setUserData(token)
             window.location.reload();
 
-        } else { alert('failed!') }
+        } else { alert('נסה שוב') }
 
     }
     const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) }

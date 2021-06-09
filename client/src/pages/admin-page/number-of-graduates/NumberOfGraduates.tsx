@@ -13,8 +13,8 @@ function NumberOfGraduates(props: any) {
     <div>
       {loading && <Spin />}
       {!loading &&
-        courseGraduates.map((student: any, index) => (
-         <div> <Link to={`studentPage/${student._id}`} key={index}>{student.name}</Link></div>
+        courseGraduates.map((student: any) => (
+         <div  key={`${student._id}`}> <Link to={`studentPage/${student._id}`}>{student.name}</Link></div>
         ))}
     </div>
   );
