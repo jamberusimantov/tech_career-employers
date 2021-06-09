@@ -1,5 +1,6 @@
 .admin-page{
-
+    display: flex;
+    height: 70vh;
 }
 Button{
     overflow:auto;
@@ -9,25 +10,11 @@ font-weight: bold;
 line-height: 200%;
 }
 .modal_checkbox{
-    display:inline-block;
+    display: inline-grid;
 
 }
 
-Button > a{
-    display: inline-block;
-width: 18em;
-height: 6em;
-margin-bottom: 0.5em;
-padding-top: .6em;
-padding-bottom: .6em;
-color: #fff;
-background-color: #aaabbb;
-border-radius: 5px;
-border: solid #cccccc 1px;
-box-shadow: 2px 2px 1px #888888;
-clear:right;
-float:right;
-}
+
 
 .modal-admin-page{
     /* display: block; */

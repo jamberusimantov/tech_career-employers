@@ -22,7 +22,7 @@ export default function Home() {
             </Content>
           </Layout>
         </Layout>
-        <About />
+        {/* <About /> */}
         <Coops />
         <Footer>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>
