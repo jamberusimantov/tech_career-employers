@@ -1,62 +1,55 @@
 import React, { useEffect } from 'react'
+
 import { useState } from 'react';
 import { getHrById } from '../../utils/drafts/hr.utils'
 import "antd/dist/antd.css";
 import { Form, Input, Button, Typography, Spin } from "antd";
 import { updateHrById } from '../../utils/drafts/hr.utils'
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
+export default function HrRegisterForm(props: any) {
+  const { changeStep } = props
 
-
-export default function HrRegisterForm() {
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
+  const history = useHistory()
 
-  // fake url paramaters for getHrById() 
-  let urlParam = {
-    recruiterId: '60b9877a2b619847d84d17a3',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI5ODc3YTJiNjE5ODQ3ZDg0ZDE3YTMiLCJlbWFpbCI6ImphbWJlcnUuc2ltYW50b3ZAZ21haWwuY29tIiwiaWF0IjoxNjIyNzcxNTc4LCJleHAiOjE3MDkxNzE1Nzh9.iFaLe_FL_sMYkZtwHN1CPVwmtAKZNmBkZhTGYJuFfDY'
-  }
   // to fix to better looking solution
   const { id, token } = useParams<Record<string, string | undefined>>()
-  console.log({ id, token })
-
-
-
   const [hrData, setHrData] = useState({
-    id: '',
+    id: id,
+    token: token,
     email: '',
     name: '',
     phone: '',
     password: '',
     password1: '',
-    company: ''
+    company: '',
+    isAuth: false,
   })
-  useEffect(() => {
-    let urlParam = {
-      recruiterId: '60b9877a2b619847d84d17a3',
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGI5ODc3YTJiNjE5ODQ3ZDg0ZDE3YTMiLCJlbWFpbCI6ImphbWJlcnUuc2ltYW50b3ZAZ21haWwuY29tIiwiaWF0IjoxNjIyNzcxNTc4LCJleHAiOjE3MDkxNzE1Nzh9.iFaLe_FL_sMYkZtwHN1CPVwmtAKZNmBkZhTGYJuFfDY'
-    }
-       // consider async function instead of nesting  ===> (async () => {})() : IIFE‏
-    getHrById(urlParam.recruiterId, urlParam.token).then(data => {
-      // console.log(data);
 
-    setHrData({ ...hrData, company: data.data.company, email: data.data.email });
-      // console.log(hrData)
-    });
-  }
-    , [])
+  useEffect(() => {
+    console.log(hrData.token);
+    // consider async function instead of nesting  ===> (async () => {})() : IIFE‏
+
+    getHrById(hrData.id || '', hrData.token).then((data) => {
+      console.log(data)
+      console.log(hrData.token)
+      console.log(hrData.id)
+      setHrData({ ...hrData, company: data.data.company, email: data.data.email });
+    })
+  }, [])
 
   const onFinish = async (values: any) => {
-    /* updateHrById({phone:'1800bootstrapON'},"60b61267ac39f113dedb0439",token).then(data => console.log(data)) */
-
-
+    setHrData({ ...hrData, isAuth: true });
+    updateHrById(hrData, hrData.id, hrData.token).then(data => console.log(data))
+   changeStep(1)
   }
   const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) }
-  console.log(hrData)
+
 
   return (
     <>
-    {/* Start with spinner in this tennary add second return to make it more readable */}
+      {/* Start with spinner in this tennary add second return to make it more readable */}
       {
         hrData.email && hrData.company ?
           <Form
@@ -68,14 +61,14 @@ export default function HrRegisterForm() {
           >
             <Form.Item label='דוא"ל' name="email" rules={[{
               type: 'email',
-              message: 'אנא הזן דו"אל תקין!',
+              message: ' הכנס דו"אל תקין!',
             }, { required: true, message: 'בבקשה להקליד מייל' }]}>
               <Input disabled={true} placeholder="mail@gmail.com" />
             </Form.Item>
-            <Form.Item label="שם מלא" name="name" rules={[{ required: true, message: 'בבקשה הקלד שם מלא' }]}>
+            <Form.Item label="שם מלא" name="name" rules={[{ required: true, message: 'הכנס שם מלא' }]}>
               <Input id="fullName" onChange={e => setHrData({ ...hrData, name: e.target.value })} placeholder="ג'ון סמית" />
             </Form.Item>
-            <Form.Item label="טלפון" name="phone" rules={[{ required: true, message: 'בבקשה הקלד מספר טלפון תקין' }]}>
+            <Form.Item label="טלפון" name="phone" rules={[{ required: true, message: 'הכנס מספר טלפון תקין' }]}>
               <Input id="phoneNumber" onChange={e => setHrData({ ...hrData, phone: e.target.value })} />
             </Form.Item>
             <Form.Item

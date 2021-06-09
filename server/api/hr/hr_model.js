@@ -11,7 +11,7 @@ const hr = new Schema({
         name: String,
         phone: String,
         token: String,
-        isAuth: Boolean,
+        isAuth: {type: Boolean, default: true},
         isActive: Boolean,
         role:{type:String, default: 'Hr'},
         isCompanyFirstUser: {

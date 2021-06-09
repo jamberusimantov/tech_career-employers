@@ -5,10 +5,13 @@ import HrRegisterForm from '../../pages/hr-page/Hr-Register';
 
 const { Step } = Steps;
 
-const steps = [
+
+
+export default function HrSteps() 
+{const steps = [
     {
         title: 'הרשמת מגייס',
-        content: <HrRegisterForm/>,
+        content: <HrRegisterForm changeStep={(step:number)=>setCurrent(step)}/>,
     },
     {
         title: 'הרשמת חברה',
@@ -16,8 +19,6 @@ const steps = [
     },
     
 ];
-
-export default function HrSteps() {
     const [current, setCurrent] = useState(0);
 
     const next = () => {
@@ -30,18 +31,9 @@ export default function HrSteps() {
 
     return (
         <>
-            <Steps current={current}>
-                {steps.map(item => (
-                    <Step key={item.title} title={item.title} />
-                ))}
-            </Steps>
             <div className="steps-content">{steps[current].content}</div>
             <div className="steps-action">
-                {current < steps.length - 1 && (
-                    <Button type="primary" onClick={() => next()}>
-                        Next
-                    </Button>
-                )}
+                
                 {current === steps.length - 1 && (
                     <Button type="primary" onClick={() => message.success('Processing complete!')}>
                         Done
@@ -52,6 +44,11 @@ export default function HrSteps() {
                         Previous
                     </Button>
                 )}
+            <Steps current={current}>
+                {steps.map(item => (
+                    <Step key={item.title} title={item.title} />
+                ))}
+            </Steps>
             </div>
         </>
     )
