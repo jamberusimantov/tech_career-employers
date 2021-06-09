@@ -184,7 +184,7 @@ function AdminPage() {
       width: 150,
       fixed: 'right',
       key: "isHidden",
-      render: (e: boolean | undefined) => (< Switch  onChange={showJobOffer} defaultChecked={e} />),
+      render: (e: boolean | undefined) => (< Switch  onChange={showJobOffer} defaultChecked={e} checkedChildren="גלוי" unCheckedChildren="מוסתר" />),
     },
     {
       title: "שאל את המגייסת?",
