@@ -1,19 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 
-import { Button, Input, Modal, Checkbox } from "antd";
+import { Button, Input, Modal, Checkbox,Switch  } from "antd";
 
-//Table
 import CodeinTable from "../../components/shared/CodeinTable";
 
 import service from "../../utils";
 
-import "./AdminPage.css";
-
 import { getAllCourses, getAllJobOffers } from "../../service/admin.service";
+
+import {useHistory} from 'react-router-dom';
 
 import NumberOfGraduates from "./number-of-graduates/NumberOfGraduates";
 
 import {tableColumnTextFilterConfig} from './table-utils/tableUtils';
+import "./AdminPage.css";
 
 //להוסיף למודל שם פרטי מגייסת
 //להוסיף תפקיד שזה שדה position
@@ -90,7 +91,7 @@ function AdminPage() {
     },
   ];
 
-  const graduatesColumns: any[] = [
+  const jobOffersColumns: any[] = [
     {
       title: "חברה",
       dataIndex: "company",
@@ -178,6 +179,14 @@ function AdminPage() {
       },
     },
     {
+      title: "פרסום משרה",
+      dataIndex: "isHidden",
+      width: 150,
+      fixed: 'right',
+      key: "isHidden",
+      render: (e: boolean | undefined) => (< Switch  onChange={showJobOffer} defaultChecked={e} />),
+    },
+    {
       title: "שאל את המגייסת?",
       dataIndex: "emailHr",
       width: 150,
@@ -200,13 +209,14 @@ function AdminPage() {
 
   const { registerUser, registerStudent,getUserUseToken } = login;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const [hrEmail, setHrEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
    const [role,setRole] = useState("")
-  const registerHr = {
+   const history =useHistory()
+
+  const registerHrByAdmin = {
     credentials: {
       email: hrEmail,
       company: companyName,
@@ -250,8 +260,8 @@ function AdminPage() {
 
   const onRegisterModalOk = async () => {
     setIsModalVisibleHr(false);
-    await registerUser(registerHr.credentials, "hr");
-    console.log(registerHr.credentials);
+    await registerUser(registerHrByAdmin.credentials, "hr");
+    console.log(registerHrByAdmin.credentials);
   };
 
   const onRegisterModalOkStudent = async () => {
@@ -269,6 +279,12 @@ function AdminPage() {
     );
   }
 
+  function showJobOffer(checked: any) {
+    console.log(`switch to ${checked}`);
+   
+  }
+  
+
   useEffect(() => {
 const getUserData= async () => {
   console.log(localStorage.getItem('token' ));
@@ -277,26 +293,24 @@ const getUserData= async () => {
   const user= await getUserUseToken(localStorage.getItem('token' ) || '{}');  
   const userRole =user.data.role 
   setRole(userRole)
-    // setMessage('400')
 
-  // if('{}'){
-  // }else{
-  //   const userRole = user.data.role;
-  // }
-
+  if( role === undefined || role === null ){
+    
+    history.push('/')
+  }
+  
 } 
 getUserData()
-  },[getUserUseToken])
-  return (
-
-
-
-    <>
+},[getUserUseToken])
+return (
+  
+  
+  
+  <>
 {role === 'Admin' ?
 
-
 <div className="admin-page">
-      
+  
 <div className="modal_checkbox">
   <Checkbox onChange={changeShowCoursesTable}>
     טבלת ליווי ובוגרים
@@ -366,7 +380,7 @@ getUserData()
       <>
       <h1> טבלת משרות ומגייסות </h1>
       <CodeinTable size="middle"
-      scroll={{ x: 'calc(700px + 50%)', y: 240 }} columns={graduatesColumns} getData={getAllJobOffers} />
+      scroll={{ x: 'calc(700px + 50%)', y: 240 }} columns={jobOffersColumns} getData={getAllJobOffers} />
       </>
       )}
 </div>
@@ -374,7 +388,7 @@ getUserData()
 
 :
 
- null
+''
 }
 
   </>
