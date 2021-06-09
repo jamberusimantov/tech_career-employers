@@ -51,7 +51,7 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
             const updateDocSuccessCb = async(data) => {
                 const client = process.env.NODE_ENV === 'production' ?
                     'https://mernusers.herokuapp.com' : 'http://localhost:3000'
-                const link = new URL(`${client}/signUp/${role}/${token}`)
+                const link = new URL(`${client}/signUp/${role}/${token}/${_id}`)
                 if (!emailVerification) return res.status(200).json({
                     success: true,
                     token,
