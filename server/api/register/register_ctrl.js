@@ -88,6 +88,7 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
           data: emailResponse.rejected,
         });
 
+
       res.status(200).json({
         success: true,
         data: {
