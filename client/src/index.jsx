@@ -26,7 +26,6 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
     <ConfigProvider direction="rtl">
-
       <App />
     </ConfigProvider>
     </BrowserRouter>
