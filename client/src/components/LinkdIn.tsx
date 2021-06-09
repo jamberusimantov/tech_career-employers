@@ -85,11 +85,6 @@ export default function JobsList() {
 
   let { id }: any = useParams();
 
-  // function getCorrectDataFromDbToRouter(urlParam:any){
-  //   setIdCard(CardsData[urlParam])
-
-  // }
-
   return (
     <MainContainer>
       <Search placeholder="search" enterButton="Search" size="large" />
@@ -110,9 +105,11 @@ export default function JobsList() {
             style={{ overflowY: "scroll", height: "100%" }}
             className="allCardsCol"
           >
-            {CardsData.map((item: any) => {
-              return <JobCard setUser={setUserInfo} userItem={item} />;
-            })}
+            {React.Children.toArray(
+              CardsData.map((item: any) => {
+                return <JobCard setUser={setUserInfo} userItem={item} />;
+              })
+            )}
           </Col>
         </Row>
       </Container>
@@ -135,4 +132,3 @@ const MainContainer = styled.div`
   width: 75vw;
   margin: auto;
 `;
-
