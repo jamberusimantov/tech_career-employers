@@ -1,16 +1,21 @@
-import React from "react";
+import React,{useState,useContext} from "react";
 import { Switch, Route,useParams } from "react-router-dom";
 import { idText } from "typescript";
 
+
 import CardsDetails from "./CardsDetail";
 
-export default function RecruiterRouter() {
+export default function RecruiterRouter({UserInfo,firstJob}:any) {
+  
   let { id }:any = useParams();
   return (
     <div>
       <Switch>
+        <Route path={`/recruiter/job`}>
+          <CardsDetails UserInfo={firstJob} />
+        </Route>
         <Route path={`/recruiter/:${id}`}>
-          <CardsDetails />
+          <CardsDetails  UserInfo={UserInfo}/>
         </Route>
       </Switch>
     </div>

@@ -6,22 +6,29 @@ import Title from "./Title";
 // import "./";
 
 
-function CardsDetail() {
+function CardsDetail({UserInfo,firstJob}:any) {
   // const { id } = useParams();
   // const { id } = useParams<Record<string, string | undefined>>()
-  // console.log(id);‏‏
+  // console.log(id);
+  // console.log(UserInfo)
+  // let tenery = 
+  const {title,company,location,id,applicants}:any = UserInfo 
+  // const {title,company,location,id,applicants}:any = UserInfo.length === 0 ? firstJob :UserInfo    
+  console.log("cardsDeatails > UserInfo",UserInfo)
+
   return (
     <Container>
-      <Title title="Full-Stack developer" />
+      <Title  />
       <TopSection>
+        
         <div>
           <div>
-            <span>checkPoint</span>
-            <span> -Tel Aviv</span>
+            <span>{title}</span>
+            <span>{location}</span>
           </div>
           <div>
             <span>active</span>
-            <span> -applicants</span>
+            <span>{applicants}</span>
           </div>
           <div>last date to apply : 23/6/2021</div>
         </div>

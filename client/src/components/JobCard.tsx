@@ -6,24 +6,15 @@ import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
-export default function JobCard({
-  title,
-  company,
-  location,
-  applicants,
-  id,
-}: any) {
-  const [pageParam, setpageParam] = useState("1");
-  // function onClickUsestateId() {
-  //   setpageParam(JSON.stringify(id));
-  //   console.log(pageParam);
-    
-  // }
+export default function JobCard({ userItem, setUser }: any): any {
+  const { title, company, location, id, applicants } = userItem;
+
   return (
-    <Container onClick={()=>{
-      setpageParam(JSON.stringify(id));
-    console.log(pageParam);
-    }}>
+    <Container
+      onClick={() => {
+        setUser(userItem);
+      }}
+    >
       <Link to={`/recruiter/:${id}`}>
         <Card style={{ padding: 5, cursor: "pointer" }}>
           <Meta
@@ -43,7 +34,6 @@ export default function JobCard({
       </Link>
     </Container>
   );
-
 }
 
 const Container = styled.div`

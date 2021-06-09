@@ -5,18 +5,17 @@ import "../components/";
 import { getManyJobOffers } from "../utils/drafts/jobOffer.utils";
 import { Input, Row, Col } from "antd";
 import LinkdInRouter from "./LinkdInRouter";
+import { useParams } from "react-router-dom";
 
 const { Search } = Input;
 
 export default function JobsList() {
-  // useEffect( () => {
-  //    getManyJobOffers()
-  //   .then(data => props.popBooks(data))
+  useEffect(() => {}, []);
 
-  // }, []);
+  const [IdCard, setIdCard] = useState(1);
+  const [UserInfo, setUserInfo] = useState([]);
 
-  const [IdCard, setIdCard] = useState(1)
-  const CardsData = [
+  const CardsData: any = [
     {
       title: "Full-Stack developer",
       company: "Checkpoint",
@@ -82,16 +81,19 @@ export default function JobsList() {
     },
   ];
 
+  let firstJob = CardsData[0];
+
+  let { id }: any = useParams();
+
+  // function getCorrectDataFromDbToRouter(urlParam:any){
+  //   setIdCard(CardsData[urlParam])
+
+  // }
+
   return (
     <MainContainer>
-      <Search
-        placeholder="search"
-        enterButton="Search"
-        size="large"
-        
-      />
+      <Search placeholder="search" enterButton="Search" size="large" />
       <Container>
-        
         <Row style={{ width: "100%" }}>
           <Col
             span={16}
@@ -99,7 +101,7 @@ export default function JobsList() {
             style={{ overflowY: "scroll", height: "100%" }}
             className="colRightCards"
           >
-            <LinkdInRouter />
+            <LinkdInRouter UserInfo={UserInfo} firstJob={firstJob} />
           </Col>
 
           <Col
@@ -108,23 +110,13 @@ export default function JobsList() {
             style={{ overflowY: "scroll", height: "100%" }}
             className="allCardsCol"
           >
-            {CardsData.map((item) => {
-              return (
-                
-                <JobCard
-                  title={item.title}
-                  company={item.company}
-                  location={item.location}
-                  applicants={item.applicants}
-                  id={item.id}
-                  
-                />
-              );
+            {CardsData.map((item: any) => {
+              return <JobCard setUser={setUserInfo} userItem={item} />;
             })}
           </Col>
         </Row>
       </Container>
-      </MainContainer>
+    </MainContainer>
   );
 }
 
@@ -142,27 +134,5 @@ const Container = styled.div`
 const MainContainer = styled.div`
   width: 75vw;
   margin: auto;
+`;
 
-
-
-`
-
-// const Cards = styled.div`
-//   background-color: #dedede;
-//   /* width: 35%; */
-//   flex: 0.35;
-//   height: 100%;
-// `;
-
-// const JobsDetails = styled.div`
-//   /* width: 65%; */
-//   flex: 0.65;
-//   height: 100%;
-//   background-color: #d4d4d4;
-// `;
-
-// const RightCards = styled.div`
-//   &::hover {
-//     overflow-y: scroll;
-//   }
-// `;
