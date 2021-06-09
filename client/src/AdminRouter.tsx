@@ -9,8 +9,8 @@ import SpecificStudent from './components/specificStudent/SpecificStudent'
 import HrSteps from './components/steps/HrSteps'
 
 import LinkdInRouter from './components/LinkdIn'
-
 import StuSteps from './components/steps/StuSteps'
+import StudentPersonal from './pages/personal-page/Student-Personal'
 
 
 import {
@@ -41,11 +41,14 @@ function AdminRouter() {
       <Route path="/studentPage/:id">
         <SpecificStudent />
       </Route>
-      <Route path="/studentReg">
+      <Route path="/signUp/student">
        <StuSteps/>
       </Route>
       <Route path="/admin">
         <AdminPage />
+      </Route>
+      <Route path="/privatestudent">
+        <StudentPersonal />
       </Route>
     </Switch>
   )

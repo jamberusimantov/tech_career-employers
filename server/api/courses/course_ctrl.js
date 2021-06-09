@@ -56,7 +56,7 @@ async function getAllCourses(req, res) {
     if(tokenChecker(token,res) !== true) return
         try {
             await courseCollection.find((err,courses)=>{
-                if (err) throw new Error(`error on get all docs: ${error}`);
+                if (err) throw new Error(`error on get all courses: ${error}`);
                 return res.status(200).json({success:true,data:courses})
             })
         } catch (error) {

@@ -6,6 +6,18 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
+        numOfPeopleApplied :{
+            type: String,
+            required: true
+        },
+        position: {
+            type: String,
+            required: true
+        },
+        emailHr: {
+            type: String,
+            required: true
+        },
         uploadDate: {
             type: Date,
             default: Date.now,
