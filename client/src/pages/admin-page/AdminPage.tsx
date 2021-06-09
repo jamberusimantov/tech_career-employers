@@ -13,6 +13,8 @@ import { getAllCourses, getAllJobOffers } from "../../service/admin.service";
 
 import NumberOfGraduates from "./number-of-graduates/NumberOfGraduates";
 
+import {tableColumnTextFilterConfig} from './table-utils/tableUtils';
+
 //להוסיף למודל שם פרטי מגייסת
 //להוסיף תפקיד שזה שדה position
 //להוסיף שדה של אימייל של המגייסת שהעלתה את המשרה
@@ -41,24 +43,14 @@ function AdminPage() {
       key: "courseName",
       width: 250,
       fixed: 'left',
-      filters: [
-        {
-          text: "Full-Stack",
-          value: "Full-Stack",
-        },
-        {
-          text: "QA",
-          value: "QA",
-        },
-        {
-          text: "Cyber",
-          value: "Cyber",
-        },
-      ],
-      onFilter: (value: any, record: { courseName: string | any[] }) =>
-        record.courseName.indexOf(value) === 0,
-      // sorter: (a: { name: string | any[]; }, b: { name: string | any[]; }) => a.name.length - b.name.length,
-      sortDirections: ["descend"],
+      render: (text: string) => text,
+      ...tableColumnTextFilterConfig(),
+      onFilter: (value: { toString: () => string; }, record: { courseName: { toString: () => string; }; }) => {
+        return record.courseName
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+      },
     },
     {
       title: "מועד הסיום",
@@ -104,42 +96,93 @@ function AdminPage() {
       dataIndex: "company",
       width: 120,
       fixed: 'right',
+      key: "company",
+
+      render: (text: string) => text,
+      ...tableColumnTextFilterConfig(),
+      onFilter: (value: { toString: () => string; }, record: { company: { toString: () => string; }; }) => {
+        return record.company
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+      },
+    
     },
     {
       title: "מגייסת",
       dataIndex: "uploadedBy",
       width: 120,
       fixed: 'right',
+      key: "uploadedBy",
+
+      render: (text: string) => text,
+      ...tableColumnTextFilterConfig(),
+      onFilter: (value: { toString: () => string; }, record: { uploadedBy: { toString: () => string; }; }) => {
+        return record.uploadedBy
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+      },
     },
     {
       title: "תפקיד",
       dataIndex: "position",
       width: 100,
       fixed: 'right',
+      key: "position",
+      render: (text: string) => text,
+      ...tableColumnTextFilterConfig(),
+      onFilter: (value: { toString: () => string; }, record: { position: { toString: () => string; }; }) => {
+        return record.position
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+      },
     },
     {
       title: "ת. פתיחת משרה",
       dataIndex: "uploadDate",
       width: 250,
-      fixed: 'right',
+      fixed: 'left',
+      key: "uploadDate",
     },
     {
       title: "עיר",
       dataIndex: "location",
       width: 120,
-      fixed: 'right',
+      fixed: 'left',
+
+      key: "location",
+      render: (text: string) => text,
+      ...tableColumnTextFilterConfig(),
+      onFilter: (value: { toString: () => string; }, record: { location: { toString: () => string; }; }) => {
+        return record.location
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+      },
     },
     {
       title: "סטטוס",
       dataIndex: "status",
       width: 100,
       fixed: 'right',
+      key: "status",
+      render: (text: string) => text,
+      ...tableColumnTextFilterConfig(),
+      onFilter: (value: { toString: () => string; }, record: { status: { toString: () => string; }; }) => {
+        return record.status
+          .toString()
+          .toLowerCase()
+          .includes(value.toString().toLowerCase())
+      },
     },
     {
       title: "שאל את המגייסת?",
       dataIndex: "emailHr",
       width: 150,
       fixed: 'right',
+      key: "emailHr",
       render: (text: string) => (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a href="mailto: abc@example.com">{text}</a>
@@ -148,20 +191,21 @@ function AdminPage() {
     {
       title: 'הגישו קו"ח',
       dataIndex: "numOfPeopleApplied",
-      // render: (text: string) => <a>{text}</a>,
+      key: "numOfPeopleApplied",
+      fixed:'left'
     },
   ];
 
   const { login } = service;
 
-  const { registerUser, registerStudent } = login;
+  const { registerUser, registerStudent,getUserUseToken } = login;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const [hrEmail, setHrEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
-
+   const [role,setRole] = useState("")
   const registerHr = {
     credentials: {
       email: hrEmail,
@@ -188,6 +232,7 @@ function AdminPage() {
   };
 
   const showModalHr = () => {
+
     setIsModalVisibleHr(true);
   };
 
@@ -224,75 +269,115 @@ function AdminPage() {
     );
   }
 
+  useEffect(() => {
+const getUserData= async () => {
+  console.log(localStorage.getItem('token' ));
+  
+  
+  const user= await getUserUseToken(localStorage.getItem('token' ) || '{}');  
+  const userRole =user.data.role 
+  setRole(userRole)
+    // setMessage('400')
+
+  // if('{}'){
+  // }else{
+  //   const userRole = user.data.role;
+  // }
+
+} 
+getUserData()
+  },[getUserUseToken])
   return (
-    <div className="admin-page">
+
+
+
+    <>
+{role === 'Admin' ?
+
+
+<div className="admin-page">
       
+<div className="modal_checkbox">
+  <Checkbox onChange={changeShowCoursesTable}>
+    טבלת ליווי ובוגרים
+  </Checkbox>
+  <Checkbox onChange={changeShowGraduatesTable}>
+    טבלת משרות ומגייסות
+  </Checkbox>
 
-      <div className="modal_checkbox">
-        <Checkbox onChange={changeShowCoursesTable}>
-          טבלת ליווי ובוגרים
-        </Checkbox>
-        <Checkbox onChange={changeShowGraduatesTable}>
-          טבלת משרות ומגייסות
-        </Checkbox>
-     
-        <Button type="primary" onClick={showModalStudent}>
-          רישום סטודנט
-        </Button>
-        <Modal
-          title="רישום סטודנט"
-          visible={isModalVisibleStudent}
-          onOk={onRegisterModalOkStudent}
-          onCancel={handleCancelStudent}
-        >
-          <p>אימייל</p>
-          <Input
-            onChange={(e) => {
-              setStudentEmail(e.target.value);
-            }}
-            placeholder="אימייל סטודנט"
-          />
-        </Modal>
+  <Button type="primary" onClick={showModalStudent}>
+    רישום סטודנט
+  </Button>
+  <Modal
+    title="רישום סטודנט"
+    visible={isModalVisibleStudent}
+    onOk={onRegisterModalOkStudent}
+    onCancel={handleCancelStudent}
+    >
+    <p>אימייל</p>
+    <Input
+      onChange={(e) => {
+        setStudentEmail(e.target.value);
+      }}
+      placeholder="אימייל סטודנט"
+      />
+  </Modal>
 
-        <Button type="primary" onClick={showModalHr}>
-          רישום מגייס
-        </Button>
-        <Modal
-          title="רישום מגייס"
-          visible={isModalVisibleHr}
-          onOk={onRegisterModalOk}
-          onCancel={handleCancelHr}
-        >
-          <p>אימייל</p>
-          <Input
-            onChange={(e) => {
-              setHrEmail(e.target.value);
-            }}
-            placeholder="אימייל"
-          />
-          <p>שם חברה</p>
-          <Input
-            onChange={(e) => {
-              setCompanyName(e.target.value);
-            }}
-            placeholder="שם חברה"
-          />
-        </Modal>
-        </div>
-      <div className="admin-page-table">
-        {!showCoursesTable ? (
-          " "
-        ) : (
-          <CodeinTable columns={coursesColumns} getData={getAllCourses} />
-        )}
-        {!showGraduatesTable ? (
-          " "
-        ) : (
-          <CodeinTable size="middle"
-          scroll={{ x: 'calc(700px + 50%)', y: 240 }} columns={graduatesColumns} getData={getAllJobOffers} />
-        )}
-      </div>
-    </div>
+  <Button type="primary" onClick={showModalHr}>
+    רישום מגייס
+  </Button>
+  <Modal
+    title="רישום מגייס"
+    visible={isModalVisibleHr}
+    onOk={onRegisterModalOk}
+    onCancel={handleCancelHr}
+    >
+    <p>אימייל</p>
+    <Input
+      onChange={(e) => {
+        setHrEmail(e.target.value);
+      }}
+      placeholder="אימייל"
+      />
+    <p>שם חברה</p>
+    <Input
+      onChange={(e) => {
+        setCompanyName(e.target.value);
+      }}
+      placeholder="שם חברה"
+      />
+  </Modal>
+  </div>
+
+<div className="admin-page-table">
+
+
+  {!showCoursesTable ? (
+    " "
+    ) : (
+      <>
+      <h1> טבלת בוגרים וקורסים </h1>
+      <CodeinTable columns={coursesColumns} getData={getAllCourses} />
+      </>
+      )}
+  {!showGraduatesTable ? (
+    " "
+    ) : (
+      <>
+      <h1> טבלת משרות ומגייסות </h1>
+      <CodeinTable size="middle"
+      scroll={{ x: 'calc(700px + 50%)', y: 240 }} columns={graduatesColumns} getData={getAllJobOffers} />
+      </>
+      )}
+</div>
+</div>
+
+:
+
+ null
+}
+
+  </>
   );
 }
 

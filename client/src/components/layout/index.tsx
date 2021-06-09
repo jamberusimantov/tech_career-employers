@@ -52,14 +52,14 @@ function LayoutMain(props: any) {
         </div>
 
         <div>
-          <Menu theme="light" mode="horizontal" style={{ textAlign: "center" }} >
-            <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
+          <Menu theme="light" mode="vertical" style={{ textAlign: "center",display: 'flex'}} >
+            <Menu.Item key="1"><Link to="/">דף הבית</Link></Menu.Item>
             {isLoggedIn && 
               <>
               <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
               <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
-              <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
-              {role === 'Admin' &&<Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>}
+              <Menu.Item key="4"><Link to="/recruiter">משרות</Link></Menu.Item>
+              {role === 'Admin' && <Menu.Item key="5"><Link to="/admin">הנהלה</Link></Menu.Item>}
               </>}
           </Menu>
         </div>
