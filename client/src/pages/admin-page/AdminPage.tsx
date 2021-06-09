@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 
 import { Button, Input, Modal, Checkbox,Switch  } from "antd";
@@ -67,6 +66,8 @@ function AdminPage() {
       key: "numberOfGraduates",
       width: 120,
       fixed: 'left',
+      defaultSortOrder: 'descend',
+      sorter: (a: { numberOfGraduates: number; }, b: { numberOfGraduates: number; }) => a.numberOfGraduates - b.numberOfGraduates,
     },
     {
       title: "מס מועסקים",
@@ -74,6 +75,8 @@ function AdminPage() {
       key: "graduatesWorking",
       width: 120,
       fixed: 'left',
+      defaultSortOrder: 'descend',
+      sorter: (a: { numberOfGraduates: number; }, b: { numberOfGraduates: number; }) => a.numberOfGraduates - b.numberOfGraduates,
     },
     {
       title: "מס מחפשי עבודה",
@@ -209,12 +212,19 @@ function AdminPage() {
 
   const { registerUser, registerStudent,getUserUseToken } = login;
 
+const [adminEmail,setAdminEmail]=useState("");
+const [adminPassword,setAdminPassword]=useState("");
+const [adminConfirmPassword,setAdminConfirmPassword]=useState("");
+
 
   const [hrEmail, setHrEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
    const [role,setRole] = useState("")
    const history =useHistory()
+
+
+
 
   const registerHrByAdmin = {
     credentials: {
@@ -228,12 +238,16 @@ function AdminPage() {
     },
   };
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
+  const [isModalVisibleAdmin, setIsModalVisibleAdmin] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
 
   const [showCoursesTable, setShowCoursesTable] = useState(false);
   const [showGraduatesTable, setShowGraduatesTable] = useState(false);
 
   const showModalStudent = () => {
+    setIsModalVisibleAdmin(true);
+  };
+  const showModalAdmin = () => {
     setIsModalVisibleStudent(true);
   };
 
@@ -250,6 +264,10 @@ function AdminPage() {
     setIsModalVisibleHr(false);
   };
 
+  const handleCancelAdmin = () => {
+    setIsModalVisibleAdmin(false);
+  };
+
   function changeShowCoursesTable(e: { target: { checked: any } }) {
     setShowCoursesTable(!showCoursesTable);
   }
@@ -258,6 +276,11 @@ function AdminPage() {
     setShowGraduatesTable(!showGraduatesTable);
   }
 
+  const onRegisterModalOkAdmin = async()=>{
+    setIsModalVisibleAdmin(false)
+    await registerUser(registerHrByAdmin.credentials, "admin");
+
+  }
   const onRegisterModalOk = async () => {
     setIsModalVisibleHr(false);
     await registerUser(registerHrByAdmin.credentials, "hr");
@@ -284,30 +307,26 @@ function AdminPage() {
    
   }
   
-
   useEffect(() => {
 const getUserData= async () => {
   console.log(localStorage.getItem('token' ));
   
   
-  const user= await getUserUseToken(localStorage.getItem('token' ) || '{}');  
-  const userRole =user.data.role 
-  setRole(userRole)
+  // const user= await getUserUseToken(localStorage.getItem('token' ) || '{}');  
+  // const userRole =user.data.role 
+  // setRole(userRole)
 
-  if( role === undefined || role === null ){
-    
-    history.push('/')
-  }
+  // if( role === undefined || role === null ){
+  //   history.push('/')
+  // }
   
 } 
 getUserData()
 },[getUserUseToken])
 return (
   
-  
-  
   <>
-{role === 'Admin' ?
+{/* {role === 'Admin' ? */}
 
 <div className="admin-page">
   
@@ -361,6 +380,42 @@ return (
       placeholder="שם חברה"
       />
   </Modal>
+
+
+
+
+  <Button type="primary" onClick={showModalAdmin}>
+    רישום מנהל
+  </Button>
+  <Modal
+    title="רישום מנהל"
+    visible={isModalVisibleAdmin}
+    onOk={onRegisterModalOkAdmin}
+    onCancel={handleCancelAdmin}
+    >
+    <p>אימייל</p>
+    <Input
+      onChange={(e) => {
+        setAdminEmail(e.target.value);
+      }}
+      placeholder="אימייל מנהל"
+      />
+          <p>סיסמה</p>
+
+      <Input
+      onChange={(e) => {
+        setAdminPassword(e.target.value);
+      }}
+      placeholder="סיסמה"
+      />
+      <p>אימות סיסמה</p>
+      <Input
+      onChange={(e) => {
+        setAdminConfirmPassword(e.target.value);
+      }}
+      placeholder="אימות סיסמה"
+      />
+  </Modal>
   </div>
 
 <div className="admin-page-table">
@@ -386,10 +441,10 @@ return (
 </div>
 </div>
 
-:
+{/* :
 
 ''
-}
+} */}
 
   </>
   );
