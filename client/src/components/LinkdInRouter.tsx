@@ -2,8 +2,7 @@ import React,{useState,useContext} from "react";
 import { Switch, Route,useParams } from "react-router-dom";
 import { idText } from "typescript";
 
-
-import CardsDetails from "./CardsDetail";
+import CardsDetails from "./job-cards/CardsDetail";
 
 export default function RecruiterRouter({UserInfo,firstJob}:any) {
   

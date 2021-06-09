@@ -4,9 +4,41 @@ const mongoose = require('mongoose')
 const authRequest = require('../../utils/register.utils').authRequest
 const { getDoc, updateDoc, deleteDoc, postDocs, getManyDocs, msgs, filteredPrivateProps } = DB
 const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId } = msgs
+
+const {tokenChecker} = require('../../utils/ctrl.utils')
+
 const jobOffer_validation = require('./jobOffer_validation')
 
 const duplicateItem = serviceName => `jobOffer already exist on db on ${serviceName}`;
+
+
+/** 
+ * get all JobOffers from JobOffers collection
+ * @param {*} req 
+ * @param {*} res 
+ */
+ getAllJobOffers
+
+ async function getAllJobOffers(req, res) {
+    const token = req.headers.authorization
+    if(tokenChecker(token,res) !== true) return
+        try {
+            await jobOfferCollection.find((err,jobOffer)=>{
+                if (err) throw new Error(`error on get all jobOffers: ${error}`);
+                return res.status(200).json({success:true,data:jobOffer})
+            })
+        } catch (error) {
+            return { success: false, error }
+        } 
+}
+
+
+
+
+
+
+
+
 
 async function getManyJobOffers(req, res) {
     const token = req.headers.authorization
@@ -263,4 +295,5 @@ module.exports = {
     updateJobOfferByUrlId,
     deleteJobOfferByUrlId,
     postJobOffer,
+    getAllJobOffers,
 }

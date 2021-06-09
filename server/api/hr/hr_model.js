@@ -13,6 +13,7 @@ const hr = new Schema({
         token: String,
         isAuth: Boolean,
         isActive: Boolean,
+        role:{type:String, default: 'Hr'},
         isCompanyFirstUser: {
             type: Boolean,
             default: false
