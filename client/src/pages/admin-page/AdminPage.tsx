@@ -330,7 +330,10 @@ function AdminPage() {
   return (
     <>
       {role === "Admin" ? (
+      
+
         <div className="admin-page">
+          
           <div className="admin-page-actions">
             <Checkbox onChange={changeShowCoursesTable}>
               טבלת ליווי ובוגרים
@@ -362,46 +365,46 @@ function AdminPage() {
                   scroll={{ x: 1300 }}
                   columns={coursesColumns}
                   getData={getAllCourses}
-                />
+                  />
               </>
             )}
-            <div/>
+            </div>
 
             <div className="admin-page-table-job-offers">
               {!showJobOffersTable ? (
                 " "
-              ) : (
-                <>
+                ) : (
+                  <>
                   <h1> טבלת משרות ומגייסות </h1>
                   <CodeinTable
                     scroll={{ x: 1500, y: 300 }}
                     columns={jobOffersColumns}
                     getData={getAllJobOffers}
-                  />
+                    />
                 </>
               )}
             </div>
-          </div>
+            
           <Modal
             title="רישום מגייס"
             visible={isModalVisibleHr}
             onOk={onRegisterModalOkHr}
             onCancel={handleCancelHr}
-          >
+            >
             <p>אימייל</p>
             <Input
               onChange={(e) => {
                 setHrEmail(e.target.value);
               }}
               placeholder="אימייל"
-            />
+              />
             <p>שם חברה</p>
             <Input
               onChange={(e) => {
                 setCompanyName(e.target.value);
               }}
               placeholder="שם חברה"
-            />
+              />
           </Modal>
 
           <Modal
@@ -409,14 +412,14 @@ function AdminPage() {
             visible={isModalVisibleAdmin}
             onOk={onRegisterModalOkAdmin}
             onCancel={handleCancelAdmin}
-          >
+            >
             <p>אימייל</p>
             <Input
               onChange={(e) => {
                 setAdminEmail(e.target.value);
               }}
               placeholder="אימייל מנהל"
-            />
+              />
             <p>סיסמה</p>
 
             <Input
@@ -431,7 +434,7 @@ function AdminPage() {
                 setAdminConfirmPassword(e.target.value);
               }}
               placeholder="אימות סיסמה"
-            />
+              />
           </Modal>
 
           <Modal
@@ -439,19 +442,21 @@ function AdminPage() {
             visible={isModalVisibleStudent}
             onOk={onRegisterModalOkStudent}
             onCancel={handleCancelStudent}
-          >
+            >
             <p>אימייל</p>
             <Input
               onChange={(e) => {
                 setStudentEmail(e.target.value);
               }}
               placeholder="אימייל סטודנט"
-            />
+              />
           </Modal>
+          
         </div>
+        
       ) : (
         " "
-      )}
+        )}
     </>
   );
 }
