@@ -1,20 +1,29 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
-function phoneChecker(input:any)
+
+function phoneChecker(input:any):Boolean 
 {
   let phoneNum = /^\d{10}$/
-  if(input.value.match(phoneNum)){
-    return true;
-  }else { alert("message"); return false}}
+  try {
+    if(input.match(phoneNum)){return true}
+    else { alert("מספר פלאפון שגוי"); return false}}
+   catch (error) {
+     console.log(error);
+    return false
+  }}
 
 const layout = {
   labelCol: { span: 10 },
   wrapperCol: { span: 20 },
 };
 const StuFirstStep = (props: any) => {
-  const { inputHandler } = props
+  const { inputHandler,updateStudent} = props
   const onFinish = (values: any) => {
-    inputHandler(2)
+    values.steps = 2
+    if(phoneChecker(values.phone)){
+      inputHandler(1)
+      updateStudent(values)
+    }
   }
   const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) };
 
@@ -68,7 +77,7 @@ const StuFirstStep = (props: any) => {
         </Form.Item>
 
         <Form.Item
-          name="confirm"
+          name="password1"
           label="Confirm Password"
           dependencies={['password']}
           hasFeedback
