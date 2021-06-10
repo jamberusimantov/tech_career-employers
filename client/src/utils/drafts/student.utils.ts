@@ -18,7 +18,7 @@ export async function getStudentById(Id: string) {
 
 export async function getStudent(credentials: any, body:any) {
     const { email } = credentials;
-    // const body = {"student":{"email":"test3@gmail.com"}} //example
+    
     try {
         if (email) {
             return await(await axios.post(`${API}/students/single`,body,headers)).data.data
@@ -28,9 +28,12 @@ export async function getStudent(credentials: any, body:any) {
     catch (err) { console.error(err) }
 }
 
-export async function updateStudent(credentials: any) {
-    const { _id } = credentials;
+export async function updateStudent(credentials: Object,_id:string,token:string) {
     const body = {student:credentials} // example : {student:{phone:045434343,email: tech@gmail.com}}
+    const headers = {headers: {authorization: `Bearer ${token}`}}
+    console.log('body', body);
+    console.log('headers', headers);
+    
     try {
         if (_id) {
             return await(await axios.put(`${API}/students/student/${_id}`,body,headers)).data.data
