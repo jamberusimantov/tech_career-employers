@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { getManyJobOffers, getJobOffer } from '../../service/jobOffer.service';
-import { Card, Button, Menu, Dropdown } from 'antd';
+import { getManyJobOffers } from '../../service/jobOffer.service';
+import { Card, Button, Menu, Dropdown, Spin, Row } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import './JobCards.css'
 // import JobEditPage from './JobEditPage';
 import JobCardsHeader from './JobCardsHeader';
-import { Link } from "react-router-dom";
+import { useHistory, Link } from 'react-router-dom';
 
-
-export default function JobCards(props: any) {
-    const [jobOffer, setJobOffer] = useState([]);
-
-    useEffect(gerManyJobsOffer, []);
-
-    function gerManyJobsOffer() {
-
+export default function JobCards() {
+    const history = useHistory()
+    const [jobOffer, setJobOffer] = useState<any[]>([])
+    const [selcted, setSelcte] = useState({})
+    const [company, setCompany] = useState('')
+    
+    const getJobData = async () => {
+        const data = await getManyJobOffers({company:{company}});
+        console.log(data);
+        setJobOffer(data)
+        
     }
-    useEffect(() => {
-        const jobsHandler = async () => {
-            getManyJobOffers().then(jsonResponse => {
-                console.log(jsonResponse);
+    console.log(jobOffer);
+    
+function historyPushData(currentJob:any){
+    history.push('/JobEditPage', {jobData:currentJob})
+}
 
-            });
-        }
-        jobsHandler()
+    useEffect(() => {
+        getJobData()
     }, [])
+
 
 
     const menu = (
@@ -42,6 +46,9 @@ export default function JobCards(props: any) {
     );
 
     return (
+        (jobOffer.length < 1) ?
+            <Spin size="large" />
+            :
         <div>
             <JobCardsHeader />
             < div className="site-card-border-less-wrapper">
@@ -57,18 +64,31 @@ export default function JobCards(props: any) {
                     </div>
                 </div>
 
-                <Card title="פרטי משרה" bordered={true} style={{ width: 400 }}>
-                    <p>תפקיד</p>
-                    <p>מיקום</p>
-                    <p>זמינות</p>
+                
+                
+            
+            <div >
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                {jobOffer.map((job, index)=>
+                     <Card title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
+                    <p>{jobOffer[index].jobDescription}</p>
+                    <p>{jobOffer[index].position}</p>
+                    <p>{jobOffer[index].location}</p>
+                    <p>{jobOffer[index].status}</p>
                     <span className="applicans">פניות</span>
-                    <span className="number"> 1 </span>
-                    <Link to="/JobEditPage"><Button className="readMoreBtn" type="primary">קרא עוד</Button></Link>
+                    <span className="number"> {jobOffer[index].numOfPeopleApplied} </span>
+                    <Button className="readMoreBtn" type="primary" onClick={()=>{historyPushData(jobOffer[index])}}>קרא עוד</Button>
                 </Card>
-                <p>{jobOffer}</p>
+                
+                    )}
+                </Row>
+                
+                
+            </div>
+                
+               
             </div>
         </div >
 
     );
 }
-
