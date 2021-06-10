@@ -5,18 +5,24 @@ import SecondStep from './StuSecondStep'
 import ThirdStep from './StuThirdStep'
 import service from '../../utils';
 import { useParams } from 'react-router-dom'
-const { login } = service
+const { login, student } = service
 const { getUserUseToken } = login
+const { updateStudent } = student
 const { Step } = Stepss;
 
 const Steps = () => {
   const [current, setCurrent] = useState(0);
   const { token, id } = useParams<Record<string, string | undefined>>()
   const inputHandler = (step: any) => { setCurrent(step) }
+  const updateHandler = (obj: any) => {
+    if (typeof (id) === 'string' && typeof (token) === 'string') {
+      updateStudent(obj, id, token)
+    }
+  }
   const steps = [
-    { title: 'First', content: <FirstStep inputHandler={inputHandler} /> },
-    { title: 'Second', content: <SecondStep /> },
-    { title: 'Last', content: <ThirdStep /> },
+    { title: 'First', content: <FirstStep updateStudent={updateHandler} inputHandler={inputHandler} /> },
+    { title: 'Second', content: <SecondStep updateStudent={updateHandler} inputHandler={inputHandler}  /> },
+    { title: 'Last', content: <ThirdStep updateStudent={updateHandler}/> },
   ];
   useEffect(() => {
     const getUserHandler = async () => {
@@ -27,8 +33,6 @@ const Steps = () => {
     }
     getUserHandler()
   }, [])
-  const next = () => { setCurrent(current + 1); };
-
 
   return (
     <>
@@ -39,12 +43,6 @@ const Steps = () => {
         ))}
       </Stepss>
       <div className="steps-action">
-
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
       </div>
     </>
   );
