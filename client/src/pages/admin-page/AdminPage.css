@@ -1,22 +1,27 @@
-.admin-page{
-    /* display: flex; */
-    height: 70vh;
+.admin-page {
+  /* display: flex; */
+  height: 70vh;
+}
+/* .admin-page-actions {
+  position: relative;
+  right: 150px;
+} */
+
+
+.admin-page-actions button {
+  float: right;
+  margin: 0 10px;
 }
 
-.modal_checkbox{
-    display: flex;
-position: relative;
-flex-direction: column;
+.ant-switch {
+  width: 75px;
+}
+.admin-page-actions .ant-checkbox-wrapper {
+  float: right;
 }
 
-Button{
-    width: 150px;
-}
-
-.modal-admin-page{
-    /* display: block; */
-    /* position:relative;
+.modal-admin-page {
+  /* display: block; */
+  /* position:relative;
     left:500px; */
 }
-
-

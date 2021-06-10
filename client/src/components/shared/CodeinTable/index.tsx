@@ -6,7 +6,7 @@ import "../../../App.css";
 
 const CodeinTable = (props: any): any => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { columns, getData } = props;
+  const { columns, getData,scroll } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +33,7 @@ const CodeinTable = (props: any): any => {
         {/* <Button icon={loading ? <LoadingOutlined /> : ""} type="primary">רענן</Button> */}
       </div>
 
-      <Table  loading={loading} columns={columns} dataSource={data} />
+      <Table scroll={scroll}  loading={loading} columns={columns} dataSource={data} />
     </div>
   );
 };
