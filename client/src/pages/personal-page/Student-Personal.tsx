@@ -8,10 +8,10 @@ import "antd/dist/antd.css";
 const { Header, Footer, Content } = Layout;
 
 export default function userCard() {
-    return (
-        <Layout>
-            <Header>
-                {/* <ol>
+  return (
+    <Layout>
+      <Header>
+        {/* <ol>
             <a href=''>
               <li>
               <img src="welcome.jpg"></img>
@@ -33,42 +33,42 @@ export default function userCard() {
               <button>Log out</button>
             </li>
           // </ol> */}
-            </Header>
-            <Content>
-                <div className="textUserCard">
-                    <div className="textNum1">great!</div>
-                    <div className="textNum2">Looking good</div>
+      </Header>
+      <Content>
+        <div className="textUserCard">
+          <div className="textNum1">great!</div>
+          <div className="textNum2">Looking good</div>
 
-                    <div className="userCardFrame">
-                        <div className="userInfo">
-                            <div className="nameUserCard">Aviv Tarkay</div>
-                            <div className="emailUserCard">aviv@gmail.com</div>
-                            <div className="courseDateUserCard">course date</div>
-                            <div className="aboutUserCard">about</div>
-                            <div className="jobsTimlineUserCard">job timeline</div>
-                            <div className="skillsUserCard">skills</div>
+          <div className="userCardFrame">
+            <div className="userInfo">
+              <div className="nameUserCard">Aviv Tarkay</div>
+              <div className="emailUserCard">aviv@gmail.com</div>
+              <div className="courseDateUserCard">course date</div>
+              <div className="aboutUserCard">about</div>
+              <div className="jobsTimlineUserCard">job timeline</div>
+              <div className="skillsUserCard">skills</div>
 
-                            {/* <div className="gitHubIcon"> */}
-                            <div className='icons'>
-                                <GithubOutlined />
-                                {/* </div> */}
-                                {/* <div className="facebookIcon"> */}
-                                <FacebookOutlined />
-                                {/* </div> */}
-                                {/* <div className="LinkdinIcon"> */}
-                                <LinkedinOutlined />
-                                {/* </div> */}</div>
+              {/* <div className="gitHubIcon"> */}
+              <div className='icons'>
+                <GithubOutlined />
+              {/* </div> */}
+              {/* <div className="facebookIcon"> */}
+                <FacebookOutlined />
+              {/* </div> */}
+              {/* <div className="LinkdinIcon"> */}
+                <LinkedinOutlined />
+              {/* </div> */}</div>
 
-                            <br />
-                            <button className="editButtonUserCarrd">edit</button>
-                        </div>
-                        <div className="userCardImage">
-                            <img src="/welcom.png"></img>
-                        </div>
-                    </div>
-                </div>
-            </Content>
-            <Footer>Footer</Footer>
-        </Layout>
-    );
+              <br />
+              <button className="editButtonUserCarrd">edit</button>
+            </div>
+            <div className="userCardImage">
+              <img src="/welcom.png"></img>
+            </div>
+          </div>
+        </div>
+      </Content>
+      <Footer>Footer</Footer>
+    </Layout>
+  );
 }

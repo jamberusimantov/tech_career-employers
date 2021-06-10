@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "antd";
 import Title from "./Title";
-import "./";
 
 function CardsDetals5() {
   return (

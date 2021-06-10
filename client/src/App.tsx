@@ -7,11 +7,10 @@ import usersActions from './redux/actions/user.actions';
 
 const { setUserData } = usersActions.usersActions;
 const mapDispatchToProps = (dispatch: any) => ({
-  setUserData: (data: Object) => { dispatch(setUserData(data)) }
-})
-const mapStateToProps = (state: any) => { return { userData: state.user.userData } }
+  setUserData: (data: Object) => { dispatch(setUserData(data)) }})
+const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
-function App(props: any) {
+ function App(props: any) {
   const { setUserData, userData } = props
   const { login } = service
   const { getUserUseToken } = login
@@ -21,38 +20,33 @@ function App(props: any) {
 
 
   useEffect(() => {
-    const loginHandler = async () => {
-      console.log(token);
+      const loginHandler = async()=>{
+        console.log(token);
+        
+        if(token){
+          const userFromToken = await getUserUseToken(token)
+          if (userFromToken.success) {
+            login.setTokenLocal(token)
+            await setUserData(userFromToken)
+          }
 
-      if (token) {
-        const userFromToken = await getUserUseToken(token)
-        if (userFromToken.success) {
-          login.setTokenLocal(token)
-          await setUserData(userFromToken)
         }
-
       }
-    }
-
+      
     loginHandler()
-  }, [token, getUserUseToken, login, setUserData]);
+    }, [getUserUseToken, login, setUserData]);
 
 
-  const classes = appStyle()
+    const classes = appStyle()
 
-  if (!userData.email) {
+    if (!userData.email) {
+      return (
+        <div className={classes.App}><LayoutMain isLoggedIn = {false}/></div>
+      );
+    }
     return (
-      <div className={classes.App}>
-        <LayoutMain />
-      </div>
+      <div className={classes.App}><LayoutMain isLoggedIn = {true} /></div>
     );
   }
 
-  return (
-    <div className={classes.App}>
-      <LayoutMain />
-    </div>
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+  export default connect(mapStateToProps, mapDispatchToProps)(App)

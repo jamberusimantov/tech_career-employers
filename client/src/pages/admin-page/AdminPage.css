@@ -1,6 +1,20 @@
 .admin-page{
+    display: flex;
+    height: 70vh;
+}
+Button{
+    overflow:auto;
+text-align: center;
+font-size: 1.0em;
+font-weight: bold;
+line-height: 200%;
+}
+.modal_checkbox{
+    display: inline-grid;
 
 }
+
+
 
 .modal-admin-page{
     /* display: block; */

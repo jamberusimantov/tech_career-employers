@@ -14,6 +14,8 @@ const student = new Schema({
         token: String,
         company: String,
         about: String,
+        steps:{type:Number, default: 1},
+        pictures:[{path: String}],
         friends: [{ _id: String, name: String }],
         notifications: { notifications: [], new: [] },
         messages: { messages: [], new: [] },

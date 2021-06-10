@@ -95,10 +95,7 @@ const filteredPrivateProps = (userItem, method = 'strict') => {
     const setObject = obj => methods[method] ? methods[method](obj) : methods.fallbackMethod(obj)
     if (newObj instanceof Array) {
         let results = [];
-        newObj.forEach(user => {
-            results.push(setObject(user))
-        })
-        console.log(results);
+        newObj.forEach(user => {results.push(setObject(user))})
         return results;
     }
     if (typeof userItem === 'object') return setObject(newObj)
