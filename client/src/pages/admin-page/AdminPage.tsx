@@ -36,13 +36,15 @@ import "./AdminPage.css";
 // "__v": 0
 
 function AdminPage() {
+
+  //courses columns
   const coursesColumns = [
     {
       title: "שם הקורס",
       dataIndex: "courseName",
       key: "courseName",
       width: 250,
-      fixed: 'left',
+      // fixed: 'left',
       render: (text: string) => text,
       ...tableColumnTextFilterConfig(),
       onFilter: (value: { toString: () => string; }, record: { courseName: { toString: () => string; }; }) => {
@@ -57,7 +59,7 @@ function AdminPage() {
       dataIndex: "courseCompletionDate",
       key: "courseCompletionDate",
       width: 200,
-      fixed: 'left',
+      // fixed: 'left',
      
     },
     {
@@ -65,7 +67,7 @@ function AdminPage() {
       render: renderNumberOfGraduates,
       key: "numberOfGraduates",
       width: 120,
-      fixed: 'left',
+      // fixed: 'left',
       defaultSortOrder: 'descend',
       sorter: (a: { numberOfGraduates: number; }, b: { numberOfGraduates: number; }) => a.numberOfGraduates - b.numberOfGraduates,
     },
@@ -74,26 +76,26 @@ function AdminPage() {
       dataIndex: "graduatesWorking",
       key: "graduatesWorking",
       width: 120,
-      fixed: 'left',
-      defaultSortOrder: 'descend',
-      sorter: (a: { numberOfGraduates: number; }, b: { numberOfGraduates: number; }) => a.numberOfGraduates - b.numberOfGraduates,
+      // fixed: 'left',
+     
     },
     {
       title: "מס מחפשי עבודה",
       dataIndex: "graduatesNotWorking",
       key: "graduatesNotWorking",
       width: 120,
-      fixed: 'left',
+      // fixed: 'left',
     },
     {
       title: "סגירת השמות",
       dataIndex: "graduatesWorking",
       key: "graduatesWorking",
       width: 120,
-      fixed: 'right',
+      // fixed: 'right',
     },
   ];
 
+  //jobOffers columns
   const jobOffersColumns: any[] = [
     {
       title: "חברה",
@@ -102,7 +104,6 @@ function AdminPage() {
       fixed: 'right',
       key: "company",
 
-      render: (text: string) => text,
       ...tableColumnTextFilterConfig(),
       onFilter: (value: { toString: () => string; }, record: { company: { toString: () => string; }; }) => {
         return record.company
@@ -204,27 +205,38 @@ function AdminPage() {
       title: 'הגישו קו"ח',
       dataIndex: "numOfPeopleApplied",
       key: "numOfPeopleApplied",
+      width: 150,
       fixed:'left'
     },
   ];
 
+
   const { login } = service;
-
-  const { registerUser, registerStudent,getUserUseToken } = login;
-
-const [adminEmail,setAdminEmail]=useState("");
-const [adminPassword,setAdminPassword]=useState("");
-const [adminConfirmPassword,setAdminConfirmPassword]=useState("");
-
-
+  const { registerUser, registerStudent,getUserUseToken,registerAdmin } = login;
+  
+  const [studentEmail, setStudentEmail] = useState("");
+  
+  
   const [hrEmail, setHrEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
+
+  const [adminEmail,setAdminEmail]=useState("");
+  const [adminPassword,setAdminPassword]=useState("");
+  const [adminConfirmPassword,setAdminConfirmPassword]=useState("");
+
+
+  const [message ,setMessage] = useState("")
    const [role,setRole] = useState("")
    const history =useHistory()
 
 
-
+   const registerAdminByAdmin = {
+    credentials: {
+      email: adminEmail,
+      password: adminPassword,
+      confirmPassword:adminConfirmPassword,
+    },
+  };
 
   const registerHrByAdmin = {
     credentials: {
@@ -237,60 +249,65 @@ const [adminConfirmPassword,setAdminConfirmPassword]=useState("");
       email: studentEmail,
     },
   };
-  const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
-  const [isModalVisibleAdmin, setIsModalVisibleAdmin] = useState(false);
-  const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
 
+  const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
+  const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
+  const [isModalVisibleAdmin, setIsModalVisibleAdmin] = useState(false);
+  
+
+  
   const [showCoursesTable, setShowCoursesTable] = useState(false);
   const [showGraduatesTable, setShowGraduatesTable] = useState(false);
 
   const showModalStudent = () => {
-    setIsModalVisibleAdmin(true);
-  };
-  const showModalAdmin = () => {
     setIsModalVisibleStudent(true);
   };
-
   const handleCancelStudent = () => {
     setIsModalVisibleStudent(false);
   };
 
   const showModalHr = () => {
-
     setIsModalVisibleHr(true);
   };
-
   const handleCancelHr = () => {
     setIsModalVisibleHr(false);
   };
 
+  const showModalAdmin = () => {
+    setIsModalVisibleAdmin(true);
+  };
   const handleCancelAdmin = () => {
     setIsModalVisibleAdmin(false);
   };
+  
+  function showJobOffer(checked: any) {
+    console.log(`switch to ${checked}`);
+   
+  }
 
   function changeShowCoursesTable(e: { target: { checked: any } }) {
     setShowCoursesTable(!showCoursesTable);
   }
 
-  function changeShowGraduatesTable(e: { target: { checked: any } }) {
+  function changeShowJobOffersTable(e: { target: { checked: any } }) {
     setShowGraduatesTable(!showGraduatesTable);
   }
-
-  const onRegisterModalOkAdmin = async()=>{
-    setIsModalVisibleAdmin(false)
-    await registerUser(registerHrByAdmin.credentials, "admin");
-
-  }
-  const onRegisterModalOk = async () => {
-    setIsModalVisibleHr(false);
-    await registerUser(registerHrByAdmin.credentials, "hr");
-    console.log(registerHrByAdmin.credentials);
-  };
 
   const onRegisterModalOkStudent = async () => {
     setIsModalVisibleStudent(false);
     console.log(studentEmail);
     await registerStudent(registerStudentByAdmin.credentials, "student");
+  };
+
+  const onRegisterModalOkAdmin = async()=>{
+    setIsModalVisibleAdmin(false)
+    await registerAdmin(registerAdminByAdmin.credentials, "admin");
+  }
+
+  const onRegisterModalOkHr = async () => {
+    setIsModalVisibleHr(false);
+    await registerUser(registerHrByAdmin.credentials, "hr");
+    console.log(registerHrByAdmin.credentials);
   };
 
   function renderNumberOfGraduates(course:any) {
@@ -302,39 +319,37 @@ const [adminConfirmPassword,setAdminConfirmPassword]=useState("");
     );
   }
 
-  function showJobOffer(checked: any) {
-    console.log(`switch to ${checked}`);
-   
-  }
-  
   useEffect(() => {
-const getUserData= async () => {
-  console.log(localStorage.getItem('token' ));
+  const getUserData= async () => {
+  const user= await getUserUseToken(localStorage.getItem('token' ) || '{}');  
+  const userRole =user.data.role 
   
+  setRole(userRole)
   
-  // const user= await getUserUseToken(localStorage.getItem('token' ) || '{}');  
-  // const userRole =user.data.role 
-  // setRole(userRole)
 
-  // if( role === undefined || role === null ){
-  //   history.push('/')
-  // }
+  if( role === undefined || role === null || role === '{}'){
+    history.push('/')
+  }else{ 
+    setMessage('404')
+  }
   
 } 
 getUserData()
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[getUserUseToken])
 return (
   
   <>
-{/* {role === 'Admin' ? */}
+{role === 'Admin' ?
 
 <div className="admin-page">
   
 <div className="modal_checkbox">
+
   <Checkbox onChange={changeShowCoursesTable}>
     טבלת ליווי ובוגרים
   </Checkbox>
-  <Checkbox onChange={changeShowGraduatesTable}>
+  <Checkbox onChange={changeShowJobOffersTable}>
     טבלת משרות ומגייסות
   </Checkbox>
 
@@ -356,13 +371,14 @@ return (
       />
   </Modal>
 
+
   <Button type="primary" onClick={showModalHr}>
     רישום מגייס
   </Button>
   <Modal
     title="רישום מגייס"
     visible={isModalVisibleHr}
-    onOk={onRegisterModalOk}
+    onOk={onRegisterModalOkHr}
     onCancel={handleCancelHr}
     >
     <p>אימייל</p>
@@ -380,7 +396,6 @@ return (
       placeholder="שם חברה"
       />
   </Modal>
-
 
 
 
@@ -426,7 +441,7 @@ return (
     ) : (
       <>
       <h1> טבלת בוגרים וקורסים </h1>
-      <CodeinTable columns={coursesColumns} getData={getAllCourses} />
+      <CodeinTable  scroll={{ x: 1300 }} columns={coursesColumns} getData={getAllCourses} />
       </>
       )}
   {!showGraduatesTable ? (
@@ -441,10 +456,10 @@ return (
 </div>
 </div>
 
-{/* :
+ :
 
-''
-} */}
+{message}
+}
 
   </>
   );

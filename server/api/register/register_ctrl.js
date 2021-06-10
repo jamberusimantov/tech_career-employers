@@ -112,6 +112,94 @@ const signToken = (req, res, payload, message, emailVerification = false) => {
     if (updateRes && updateRes.error) throw new Error(updateRes.error);
   });
 };
+
+/**
+ * initial register Admin 
+ * @param {*} req
+ * @param {*} res
+ */
+
+async function signUpAdmin(req, res) {
+  const token = req.headers.authorization;
+  const user = req.body.user;
+  const { password } = user;
+  const role = req.params.Role && req.params.Role.toLowerCase();
+  if (!role)
+    return res.status(404).json({
+      success: false,
+      message: requiredRole("signUpUser"),
+    });
+  const collection = collections[role];
+  if (!collection)
+    return res.status(404).json({
+      success: false,
+      message: unsupportedRole("signUpUser"),
+    });
+  if (!token)
+    return res.status(400).json({
+      success: false,
+      message: requiredToken(`signUp ${role}`),
+    });
+  const { errors, isValid } = validateRegisterInput(user);
+  if (!isValid) return res.status(400).json(errors);
+
+  const request = async (data) => {
+    if (!data)
+      return res.status(400).json({
+        success: false,
+        message: unauthorizedToken("signUpUser"),
+      });
+    hashAndUpdateUser();
+  };
+  const hashAndUpdateUser = () => {
+    bcrypt.genSalt(10, (error, salt) => {
+      if (error) throw new Error(err("gen Salt", error));
+      bcrypt.hash(password, salt, async (error, hash) => {
+        if (error) throw new Error(err("hash password", error));
+        user.password = hash;
+        user.isAuth = true;
+        const docToUpdate = await updateDoc(
+          collection,
+          user,
+          updateUserSuccess,
+          updateUserFail
+        );
+        if (docToUpdate && docToUpdate.error)
+          throw new Error(docToUpdate.error);
+      });
+    });
+  };
+  const updateUserSuccess = (data) =>
+    res.status(201).json({
+      success: true,
+      message: success("signUpUser"),
+    });
+  try {
+    authRequest(token, request, res);
+  } catch (error) {
+    res.status(400).json({ success: false, error });
+  } finally {
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * initial register User to website- hr collection/ user Collection
  * @param {*} req
@@ -211,6 +299,9 @@ async function registerUser(req, res) {
  * @param {*} req
  * @param {*} res
  */
+
+
+
 async function signUpUser(req, res) {
   const token = req.headers.authorization;
   const user = req.body.user;
@@ -317,6 +408,9 @@ async function signUpUser(req, res) {
   } finally {
   }
 }
+
+
+
 /**
  * login user to website- hr collection/ user Collection
  * @param {*} req
@@ -415,4 +509,5 @@ module.exports = {
   signUpUser,
   loginUser,
   useToken,
+  signUpAdmin
 };

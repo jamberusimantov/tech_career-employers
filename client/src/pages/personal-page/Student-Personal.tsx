@@ -63,7 +63,7 @@ export default function userCard() {
               <button className="editButtonUserCarrd">edit</button>
             </div>
             <div className="userCardImage">
-              <img src="/welcom.png"></img>
+              <img src="/welcom.png" alt="welcome"></img>
             </div>
           </div>
         </div>

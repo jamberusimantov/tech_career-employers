@@ -5,7 +5,8 @@ import { Table, Button, Input, Modal } from "antd";
 import "../../../App.css";
 
 const CodeinTable = (props: any): any => {
-  const { columns, getData,fixed } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { columns, getData } = props;
 
   const [loading, setLoading] = useState(false);
 
