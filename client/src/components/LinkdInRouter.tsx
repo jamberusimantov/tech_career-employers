@@ -2,7 +2,7 @@ import React,{useState,useContext} from "react";
 import { Switch, Route,useParams } from "react-router-dom";
 import { idText } from "typescript";
 
-import CardsDetails from "./job-cards/CardsDetail";
+import CardsDetail from "./job-cards/CardsDetail";
 
 export default function RecruiterRouter({UserInfo,firstJob}:any) {
   
@@ -11,10 +11,10 @@ export default function RecruiterRouter({UserInfo,firstJob}:any) {
     <div>
       <Switch>
         <Route path={`/recruiter/job`}>
-          <CardsDetails UserInfo={firstJob} />
+          <CardsDetail UserInfo={UserInfo} />
         </Route>
         <Route path={`/recruiter/:${id}`}>
-          <CardsDetails  UserInfo={UserInfo}/>
+          <CardsDetail  UserInfo={UserInfo}/>
         </Route>
       </Switch>
     </div>

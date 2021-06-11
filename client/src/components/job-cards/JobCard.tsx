@@ -39,7 +39,5 @@ export default function JobCard({ userItem, setUser }: any): any {
 const Container = styled.div`
   text-align: left;
   /* padding: 12px 24px; */
-  &:hover {
-    /* background-color: gray !important; */
-  }
+  
 `;

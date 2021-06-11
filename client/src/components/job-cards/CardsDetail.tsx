@@ -3,36 +3,36 @@ import {useParams} from "react-router-dom"
 import styled from "styled-components";
 import { Button } from "antd";
 import Title from "./Title";
-// import "./";
+
 
 
 function CardsDetail({UserInfo,firstJob}:any) {
  
-  // console.log(id);
-  // console.log(UserInfo)
+    const {title,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
+
+    // const {title,company,location,id,applicants}:any =  firstJob     
+
   
-  const {title,company,location,id,applicants}:any = UserInfo 
-  // const {title,company,location,id,applicants}:any = UserInfo.length === 0 ? firstJob :UserInfo    
-  console.log("cardsDeatails > UserInfo",UserInfo)
+  // console.log("cardsDeatails > UserInfo",UserInfo)
 
   return (
     <Container>
       <Title  title={title}/>
       <TopSection>
-        
         <div>
           <div>
-            <span>{company}</span>
+            <span>{company}-</span>
             <span>{location}</span>
+            <span>{numOfPeopleApplied}</span>
           </div>
           <div>
-            <span>active</span>
-            <span>{applicants}</span>
+            <span>{status}</span>
+            {/* <span>{numOfPeopleApplied}</span> */}
           </div>
-          <div>last date to apply : 23/6/2021</div>
+          <div>{finalDateToApply}</div>
         </div>
 
-        <Button type="primary">apply job</Button>
+        <Button style={{borderRadius:10}} type="primary">apply job</Button>
       </TopSection>
 
       <SecondSection>
@@ -84,7 +84,7 @@ const Container = styled.div`
 const TopSection = styled.div`
   /* background-color: green; */
   margin-bottom: 3rem;
-  margin-top: 2rem;
+  margin-top: 0.3rem;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;

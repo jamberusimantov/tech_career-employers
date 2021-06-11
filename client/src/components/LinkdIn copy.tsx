@@ -3,45 +3,37 @@ import styled from "styled-components";
 import JobCard from "../components/job-cards/JobCard";
 import "../components/";
 import { getManyJobOffers } from "../utils/drafts/jobOffer.utils";
-import { Input, Row, Col,Spin } from "antd";
+import { Input, Row, Col } from "antd";
 import LinkdInRouter from "./LinkdInRouter";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
-export default function JobsList() {
 const { Search } = Input;
-const [fetchedDataDb, setfetchedDataDb] = useState<any>([])
-const [UserInfo, setUserInfo] = useState([]);
-
 
 useEffect( () => {
-  const fetchData=  async ()=>{
-     let fetchedData = await getManyJobOffers({isHidden:false})
-    //  console.log(fetchedData);
-     setfetchedDataDb(fetchedData.data)
-    }
-   // getManyJobOffers({isHidden:false}).then((data)=>{console.log(data)})
-   fetchData()
- }, []);
+  async ()=>{
+    let startData = await getManyJobOffers({isHidden:false})
+  }
+}, []);
+export default function JobsList() {
+  const [IdCard, setIdCard] = useState(1);
+  const [UserInfo, setUserInfo] = useState([]);
 
- console.log(fetchedDataDb);
-
-// production level MockUp
-
-const CardsData: any = [
-  {
-    title: "Full-Stack developer",
-    company: "Checkpoint",
-    location: "Tel Aviv",
-    numOfPeopleApplied: "numOfPeopleApplied 7",
-    id: 1,
-  },
-  {
-    title: "Full-Stack developer",
-    company: "Microsoft",
-    location: "Tel Aviv",
-    numOfPeopleApplied: "numOfPeopleApplied 23",
-    id: 2,
-  },
+  const CardsData: any = [
+    {
+      title: "Full-Stack developer",
+      company: "Checkpoint",
+      location: "Tel Aviv",
+      numOfPeopleApplied: "numOfPeopleApplied 7",
+      id: 1,
+    },
+    {
+      title: "Full-Stack developer",
+      company: "Microsoft",
+      location: "Tel Aviv",
+      numOfPeopleApplied: "numOfPeopleApplied 23",
+      id: 2,
+    },
     {
       title: "Full-Stack developer",
       company: "Google",
@@ -92,18 +84,12 @@ const CardsData: any = [
       id: 9,
     },
   ];
+
   let firstJob = CardsData[0];
+
   let { id }: any = useParams();
-  
- 
   return (
-    <>
-    {
-      
-      fetchedDataDb ?
-      
-      <MainContainer>
-        
+    <MainContainer>
       <Search placeholder="search" enterButton="Search" size="large" />
       <Container>
         <Row style={{ width: "100%" }}>
@@ -123,15 +109,14 @@ const CardsData: any = [
             className="allCardsCol"
           >
             {React.Children.toArray(
-              fetchedDataDb.map((item: any) => {
+              CardsData.map((item: any) => {
                 return <JobCard setUser={setUserInfo} userItem={item} />;
               })
             )}
           </Col>
         </Row>
       </Container>
-    </MainContainer>: <Spin/>}
-    </>
+    </MainContainer>
   );
 }
 
