@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { getManyJobOffers } from '../../service/jobOffer.service';
+import { getManyJobOffers } from '../../utils/drafts/jobOffer.utils';
 import { Card, Button, Menu, Dropdown, Spin, Row } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import './JobCards.css'
-// import JobEditPage from './JobEditPage';
 import JobCardsHeader from './JobCardsHeader';
 import { useHistory, Link } from 'react-router-dom';
 
-export default function JobCards() {
+import { connect } from 'react-redux';
+const mapStateToProps = (state: any) => {return {userData: state.user.userData.data}}
+
+
+ function JobCards(props:any) {
+    const { userData } = props
+ console.log(userData);
+
     const history = useHistory()
     const [jobOffer, setJobOffer] = useState<any[]>([])
-    const [selcted, setSelcte] = useState({})
+    const [selcted, setSelcted] = useState({})
     const [company, setCompany] = useState('')
-    
-    const getJobData = async () => {
-        const data = await getManyJobOffers({company:{company}});
-        console.log(data);
-        setJobOffer(data)
+
+   const getJobData = async () => {
+    const jobOfferData =  (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
+       
+    setJobOffer(jobOfferData.data || [])
         
     }
-    console.log(jobOffer);
     
 function historyPushData(currentJob:any){
     history.push('/JobEditPage', {jobData:currentJob})
@@ -28,8 +33,6 @@ function historyPushData(currentJob:any){
     useEffect(() => {
         getJobData()
     }, [])
-
-
 
     const menu = (
         <Menu>
@@ -92,3 +95,4 @@ function historyPushData(currentJob:any){
 
     );
 }
+export default connect(mapStateToProps, null )(JobCards)
