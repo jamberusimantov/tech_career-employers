@@ -1,12 +1,34 @@
 .card-container{
     width:100%;
+    background-color:#dbe2ef;
+    border-radius:20px;
+    padding: 15px;
+  
 }
 
 .title-class{
     text-align: left;
+    
 }
 
 .card-container img{
     width:25%;
-  
+    border-radius:10%
+}
+
+.skills-class{
+    padding:10px;
+    border: 1px solid #333;
+    border-radius:10px
+}
+
+.about-class{
+    text-align: left;
+    font-size: large;
+    margin-top:20px;
+    padding:10px;
+}
+
+.about-container{
+    margin-top:50px;
 }

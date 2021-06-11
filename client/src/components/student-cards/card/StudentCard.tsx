@@ -7,8 +7,6 @@ const { Meta } = Card;
 
 const StudentCard = (student: any) => {
     const history = useHistory();
-    console.log(student.name);
-    console.log(student.pictures);
     
     const readMoreHandler: any = () => {history.push(`/studentPage/${student._id}`)}
     return (
@@ -26,7 +24,7 @@ const StudentCard = (student: any) => {
                     />
                     <br/>
                     <Title  level={5}>{student.programmingLang.join(', ')}</Title>
-                     <Button shape="round" onClick={readMoreHandler}>More info</Button>
+                     <Button  shape="round" onClick={readMoreHandler}>More info</Button>
             </Card>
         </Col>
         

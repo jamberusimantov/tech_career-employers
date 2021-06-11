@@ -1,6 +1,9 @@
 import AdminRouter from '../../AdminRouter'
 import { Link } from 'react-router-dom';
-import { Button, Layout, Menu, Modal } from "antd";
+import { Button, Layout, Menu, Modal} from "antd";
+import {
+  HomeOutlined,
+} from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import Login from '../loginForm/Login'
 import service from '../../utils';
@@ -35,27 +38,26 @@ function LayoutMain(props: any) {
 
   return (
 
-    <Layout>
+    <Layout className="container-site-layout-background" >
       <Header className="header" style={{ display: 'flex',width:'100%', justifyContent: 'space-between' }}>
         <div> 
           {(isLoggedIn) ?
             <div style={{margin:'0 20px', display: 'flex',alignItems:'center',justifyContent: 'space-between'}}>
-              <Button style={{margin:'0 10px'}} size="large" type="primary" onClick={logOutHandler}>Logout </Button>
-              <h2 style={{margin:' 8px 0 0 0'}}>ברוך הבא, {name}</h2>
+              <Button style={{margin:'5px 10px 15px 10px'}} size="large" type="primary" onClick={logOutHandler}>Logout </Button>
+              <h2>ברוך הבא, {name}</h2>
             </div>
             :
-            <Button size="large" type="primary" onClick={showModal}>Login </Button>
-          }
+            <Button size="large" type="primary" onClick={showModal}>Login </Button>}
           <Modal title="התחברות" visible={isModalVisible} onCancel={handleCancel} footer={null}>
             <Login />
           </Modal>
         </div>
 
-        <div>
-          <Menu theme="light" mode="vertical" style={{ textAlign: "center",display: 'flex'}} >
+        <div >
+          <Menu mode="vertical" style={{ textAlign: "center",display: 'flex',height:'100px'}} >
             {isLoggedIn && 
               <>
-              <Menu.Item key="1"><Link to="/">דף הבית</Link></Menu.Item>
+              <Menu.Item key="1"><Link to="/">דף הבית</Link><HomeOutlined/></Menu.Item>
               <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
               <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
               <Menu.Item key="4"><Link to="/recruiter">משרות</Link></Menu.Item>
@@ -72,7 +74,7 @@ function LayoutMain(props: any) {
 
         <Layout
           className="site-layout-background"
-          style={{ padding: "24px 0" }}>
+          style={{ padding: "20px 0" }}>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
           </Content>

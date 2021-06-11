@@ -5,6 +5,7 @@ const express = require('express');
 const chalk = require('chalk');
 const cors = require('cors');
 const db = require('./DB')
+const bodyParser =require('body-parser')
 
 const registerRouter = require('./api/register/register_router')
 const hrRouter = require('./api/hr/hr_router')
@@ -20,7 +21,8 @@ const app = express()
 const PORT = process.env.PORT || 4201;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb',extended:true}))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
 app.use(cors());
 app.set('view engine', 'ejs')
 app.set('trust proxy', true);

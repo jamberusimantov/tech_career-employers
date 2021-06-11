@@ -17,7 +17,7 @@ const layout = {
   wrapperCol: { span: 20 },
 };
 const StuFirstStep = (props: any) => {
-  const { inputHandler,updateStudent} = props
+  const {email, inputHandler,updateStudent} = props
   const onFinish = (values: any) => {
     values.steps = 2
     if(phoneChecker(values.phone)){
@@ -28,11 +28,15 @@ const StuFirstStep = (props: any) => {
   const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) };
 
   return (
+    
+    email && 
+    
+
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Form
         {...layout}
         name="basic"
-        initialValues={{ remember: true }}
+        initialValues={{ remember: true,email:email }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
@@ -47,7 +51,6 @@ const StuFirstStep = (props: any) => {
         <Form.Item
           label="טלפון"
           name="phone"
-          
           rules={[{  required: true, message: 'הכנס פלאפון!' }]}
           >
            <Input placeholder="0548174393"/>
@@ -58,7 +61,7 @@ const StuFirstStep = (props: any) => {
           name="email"
           rules={[{required: true, message: 'הכנס אימייל!' }]}
         >
-          <Input />
+          <Input disabled={true} value={email} />
         </Form.Item>
 
 

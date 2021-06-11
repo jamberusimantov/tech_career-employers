@@ -1,20 +1,37 @@
 .logo {
     width: 150px;
     height:31px;
-    margin: 20px 12px 8px 0;
+
   }
   
   .ant-row-rtl .logo {
     float: right;
-    margin: 16px 0 16px 24px;
+  }
+  .ant-menu {
+    background: #d8e3e7 ;
+    height:100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #d8e3e7  !important;
+    
+  }
+
+  .ant-layout-header.header{
+    background: #d8e3e7 ;
+  }
+  .container-site-layout-background{
+    background: #d8e3e7 ;
+    border-radius:20px;
   }
   
   .site-layout-background {
-    background: #fff;
+    margin:20px;
+    background: #d8e3e7;
+    border-radius: 20px;
+    border: none;
   }
-  .ant-layout-header.header{
-    background: #fff;
-  }
+  
 
 .ant-layout ant-layout-rtl{
   width: 100%;

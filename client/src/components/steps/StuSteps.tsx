@@ -12,6 +12,7 @@ const { Step } = Stepss;
 
 const Steps = () => {
   const [current, setCurrent] = useState(0);
+  const [email, setEmail] = useState('');
   const { token, id } = useParams<Record<string, string | undefined>>()
   const inputHandler = (step: any) => { setCurrent(step) }
   const updateHandler = (obj: any) => {
@@ -20,7 +21,7 @@ const Steps = () => {
     }
   }
   const steps = [
-    { title: 'First', content: <FirstStep updateStudent={updateHandler} inputHandler={inputHandler} /> },
+    { title: 'First', content: <FirstStep email={email} updateStudent={updateHandler} inputHandler={inputHandler} /> },
     { title: 'Second', content: <SecondStep updateStudent={updateHandler} inputHandler={inputHandler}  /> },
     { title: 'Last', content: <ThirdStep updateStudent={updateHandler}/> },
   ];
@@ -28,6 +29,7 @@ const Steps = () => {
     const getUserHandler = async () => {
       if (token) {
         const userData = await getUserUseToken(token)
+        setEmail(userData.data.email);
         setCurrent(userData.data.steps - 1)
       }
     }
