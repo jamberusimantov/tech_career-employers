@@ -25,7 +25,6 @@ function LayoutMain(props: any) {
       if (userData.success) {
         setIsLoggedIn(true)
         setRole(userData.data.role)
-        console.log(userData);
         
         setName(userData.data.name)
       }
