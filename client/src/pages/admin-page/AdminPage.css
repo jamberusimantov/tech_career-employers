@@ -1,0 +1,36 @@
+.admin-page{
+    display: flex;
+    height: 70vh;
+}
+Button{
+    overflow:auto;
+text-align: center;
+font-size: 1.0em;
+font-weight: bold;
+line-height: 200%;
+}
+.modal_checkbox{
+    display: inline-grid;
+
+}
+
+
+
+.modal-admin-page{
+    /* display: block; */
+    position:relative;
+    left:500px;
+}
+
+Button{
+    padding:12px 8px;
+}
+.admin-page-table{
+    /* display: block; */
+}
+
+.checkbox{
+    /* position:absolute; */
+/* position:absolute; */
+/* display:block; */
+}
