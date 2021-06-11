@@ -10,6 +10,7 @@ const company = new Schema({
     info: String,
     phone: String,
     address: String,
+    siteLink: String,
     img: {
         _id: Object,
         data: Buffer,

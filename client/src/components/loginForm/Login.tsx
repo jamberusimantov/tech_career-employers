@@ -20,6 +20,10 @@ const Login = (): any => {
         const email: any = values.email
         const password: any = values.password
         const resFromLogin = await loginUser({ email, password }, role)
+        console.log(resFromLogin);
+        console.log(email);
+        console.log(password);
+        
         if (resFromLogin.success) {
             const token = resFromLogin.token
             setTokenLocal(token)
