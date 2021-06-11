@@ -3,12 +3,13 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { getHrById } from '../../utils/drafts/hr.utils'
 import "antd/dist/antd.css";
-import { Form, Input, Button, Typography, Spin } from "antd";
+import { Form, Input, Button, Typography, Spin, Image  } from "antd";
 import { updateHrById } from '../../utils/drafts/hr.utils'
 import { useHistory, useParams } from 'react-router-dom';
+import FileBase from 'react-file-base64'
 
 export default function HrRegisterForm(props: any) {
-  const { changeStep } = props
+  const { changeStep, getCompannyName } = props
 
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
   const history = useHistory()
@@ -24,7 +25,8 @@ export default function HrRegisterForm(props: any) {
     password: '',
     password1: '',
     company: '',
-    isAuth: false,
+    isAuth: true,
+    profilePicture: ''
   })
 
   useEffect(() => {
@@ -42,7 +44,8 @@ export default function HrRegisterForm(props: any) {
   const onFinish = async (values: any) => {
     setHrData({ ...hrData, isAuth: true });
     updateHrById(hrData, hrData.id, hrData.token).then(data => console.log(data))
-   changeStep(1)
+    getCompannyName(hrData.company)
+    changeStep(1)
   }
   const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo) }
 
@@ -51,7 +54,7 @@ export default function HrRegisterForm(props: any) {
     <>
       {/* Start with spinner in this tennary add second return to make it more readable */}
       {
-        hrData.email && hrData.company ?
+        hrData && hrData.email && hrData.company ?
           <Form
             {...layout}
             name="basic"
@@ -77,7 +80,7 @@ export default function HrRegisterForm(props: any) {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your password!',
+                  message: '  הכנס סיסמה תקינה!',
                 },
               ]}
               hasFeedback
@@ -93,7 +96,7 @@ export default function HrRegisterForm(props: any) {
               rules={[
                 {
                   required: true,
-                  message: 'Please confirm your password!',
+                  message: 'אנא וודא את הסיסמה!',
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
@@ -111,10 +114,18 @@ export default function HrRegisterForm(props: any) {
             <Form.Item label="שם ארגון" name="company">
               <Input id="company" disabled={true} />
             </Form.Item>
+            <Form.Item label="תמונת פרופיל" name="profilePic">
+              <FileBase type="file" multiple={false} onDone={({ base64 }: any) => {  setHrData({ ...hrData, profilePicture:base64 }) }} />
+            </Form.Item>
             <Button id="submitBtn" type="primary" htmlType="submit">
               Submit
-        </Button>
+            </Button>
+            { hrData.profilePicture&&  <Image
+      width={200}
+      src={hrData.profilePicture}
+    />}
           </Form>
+          
           : <Spin />}
     </>
   );
