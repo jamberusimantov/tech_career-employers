@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button } from 'antd';
 import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom"
-import { getManyJobOffers } from '../../service/jobOffer.service'
+import { getManyJobOffers } from '../../utils/drafts/jobOffer.utils'
 import './JobEditPage.css';
 import Login from '../../utils/login.utils'
 import { useLocation } from 'react-router-dom'
