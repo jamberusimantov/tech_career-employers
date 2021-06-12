@@ -479,11 +479,12 @@ async function loginUser(req, res) {
  */
 async function useToken(req, res) {
   const token = req.headers.authorization;
+  console.log('user not found token from reg ctrl' + token);
   if (!token)
-    return res.status(400).json({
-      success: false,
-      message: "authorization token needed",
-    });
+  return res.status(400).json({
+    success: false,
+    message: "authorization token needed",
+  });
   const request = async (data) => {
     if (!data)
       return res.status(400).json({

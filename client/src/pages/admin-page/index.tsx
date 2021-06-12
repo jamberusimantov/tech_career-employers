@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Input, Modal, Checkbox, Switch } from "antd";
+import { Button, Input, Modal, Checkbox, Switch, Popconfirm } from "antd";
 
 import CodeinTable from "../../components/shared/CodeinTable";
 
@@ -8,12 +8,19 @@ import service from "../../utils";
 
 import { getAllCourses, getAllJobOffers } from "../../service/admin.service";
 
+
+import {
+  updateJobOfferById,
+  deleteJobOfferById,
+} from "../../utils/drafts/jobOffer.utils";
+
 import { useHistory } from "react-router-dom";
 
 import NumberOfGraduates from "./number-of-graduates/NumberOfGraduates";
+import { DeleteOutlined } from "@ant-design/icons";
 
 import { tableColumnTextFilterConfig } from "./table-utils/tableUtils";
-import "./AdminPage.css";
+import "./style.css";
 
 function AdminPage() {
   //courses columns
@@ -24,7 +31,7 @@ function AdminPage() {
       key: "courseName",
       width: 250,
       fixed: "left",
-      render: (text: string) => text,
+      render: (text: string, row: any) => text + row.cycle,
       ...tableColumnTextFilterConfig(),
       onFilter: (
         value: { toString: () => string },
@@ -54,11 +61,14 @@ function AdminPage() {
       ) => a.numberOfGraduates - b.numberOfGraduates,
     },
     {
+      title: "מחזור",
+      dataIndex: "cycle",
+      key: "cycle",
+    },
+    {
       title: "מס מועסקים",
       dataIndex: "graduatesWorking",
       key: "graduatesWorking",
-      // width: 120,
-      // fixed: 'left',
     },
     {
       title: "מס מחפשי עבודה",
@@ -100,7 +110,6 @@ function AdminPage() {
       title: "מגייסת",
       dataIndex: "uploadedBy",
       width: 120,
-      // fixed: 'left',
       key: "uploadedBy",
       render: (text: string) => text,
       ...tableColumnTextFilterConfig(),
@@ -175,34 +184,46 @@ function AdminPage() {
       title: "פרסום משרה",
       dataIndex: "isHidden",
       width: 100,
-      // fixed: 'left',
       key: "isHidden",
-      render: (e: boolean | undefined) => (
+      render: (isHidden: boolean | undefined, row: any) => (
         <Switch
-          onChange={showJobOffer}
-          defaultChecked={e}
-          checkedChildren="גלוי"
-          unCheckedChildren="מוסתר"
+          onChange={(e) => showJobOffer(e, row._id)}
+          defaultChecked={isHidden}
+          checkedChildren="מוסתר"
+          unCheckedChildren="גלוי"
         />
-      ),
-    },
-    {
-      title: "שאל את המגייסת?",
-      dataIndex: "emailHr",
-      width: 150,
-      // fixed: 'left',
-      key: "emailHr",
-      render: (text: string) => (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid
-        <a href="mailto: abc@example.com">{text}</a>
       ),
     },
     {
       title: 'הגישו קו"ח',
       dataIndex: "numOfPeopleApplied",
       key: "numOfPeopleApplied",
-      width: 150,
+      width: 120,
+    },
+    {
+      title: "שאל את המגייסת?",
+      dataIndex: "emailHr",
+      width: 120,
+      // fixed: "left",
       fixed: "right",
+      key: "emailHr",
+      render: (text: string) => (
+        <a href="mailto: abc@example.com">{text}</a>
+      ),
+    },
+    {
+      title: "מחיקה",
+      key: "delete",
+      width: 100,
+      fixed: "right",
+      render: (text: any, row: any) => (
+        <Popconfirm
+          title="למחוק?"
+          onConfirm={() => deleteJobOffer(row._id)}>
+          <DeleteOutlined />
+        </Popconfirm>
+      ),
+      
     },
   ];
 
@@ -213,6 +234,9 @@ function AdminPage() {
     getUserUseToken,
     registerAdmin,
   } = login;
+
+
+  const [jobOfferReload , setJobOfferReload] = useState(0);
 
   const [studentEmail, setStudentEmail] = useState("");
 
@@ -274,8 +298,13 @@ function AdminPage() {
     setIsModalVisibleAdmin(false);
   };
 
-  function showJobOffer(checked: any) {
-    console.log(`switch to ${checked}`);
+  async function showJobOffer(checked: any, rowId: any) {
+    await updateJobOfferById({ isHidden: checked }, rowId);
+  }
+
+  async function deleteJobOffer(rowId: any) {
+    await deleteJobOfferById(rowId);
+    setJobOfferReload(jobOfferReload + 1)
   }
 
   function changeShowCoursesTable(e: { target: { checked: any } }) {
@@ -303,11 +332,11 @@ function AdminPage() {
     console.log(registerHrByAdmin.credentials);
   };
 
-  function renderNumberOfGraduates(course: any) {
+  function renderNumberOfGraduates(row: any) {
     return (
       <NumberOfGraduates
-        courseId={course._id}
-        numberOfGraduates={course.numberOfGraduates}
+        courseId={row._id}
+        numberOfGraduates={row.numberOfGraduates}
       />
     );
   }
@@ -315,25 +344,19 @@ function AdminPage() {
   useEffect(() => {
     const getUserData = async () => {
       const user = await getUserUseToken(localStorage.getItem("token") || "{}");
-      console.log(user);
       const userRole = (user.data || { role: undefined }).role;
-
       setRole(userRole);
-
-      if (!role) {
+          if (!role) {
         history.push("/");
       }
     };
     getUserData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [role]);
   return (
     <>
       {role === "Admin" ? (
-      
-
         <div className="admin-page">
-          
           <div className="admin-page-actions">
             <Checkbox onChange={changeShowCoursesTable}>
               טבלת ליווי ובוגרים
@@ -360,51 +383,54 @@ function AdminPage() {
               " "
             ) : (
               <>
-                <h1> טבלת בוגרים וקורסים </h1>
                 <CodeinTable
+                title={"טבלת בוגרים וקורסים"}
                   scroll={{ x: 1300 }}
                   columns={coursesColumns}
                   getData={getAllCourses}
-                  />
+                />
               </>
             )}
-            </div>
+          </div>
 
-            <div className="admin-page-table-job-offers">
-              {!showJobOffersTable ? (
-                " "
-                ) : (
-                  <>
-                  <h1> טבלת משרות ומגייסות </h1>
-                  <CodeinTable
-                    scroll={{ x: 1500, y: 300 }}
-                    columns={jobOffersColumns}
-                    getData={getAllJobOffers}
-                    />
-                </>
-              )}
-            </div>
-            
+          <div className="admin-page-table-job-offers">
+            {!showJobOffersTable ? (
+              " "
+            ) : (
+              <>
+                <CodeinTable
+                    title={"טבלת משרות ומגייסות"}
+
+                  scroll={{ x: 1500, y: 300 }}
+                  columns={jobOffersColumns}
+                  getData={getAllJobOffers}
+                  tableReload={jobOfferReload}
+               
+                />
+              </>
+            )}
+          </div>
+
           <Modal
             title="רישום מגייס"
             visible={isModalVisibleHr}
             onOk={onRegisterModalOkHr}
             onCancel={handleCancelHr}
-            >
+          >
             <p>אימייל</p>
             <Input
               onChange={(e) => {
                 setHrEmail(e.target.value);
               }}
               placeholder="אימייל"
-              />
+            />
             <p>שם חברה</p>
             <Input
               onChange={(e) => {
                 setCompanyName(e.target.value);
               }}
               placeholder="שם חברה"
-              />
+            />
           </Modal>
 
           <Modal
@@ -412,14 +438,14 @@ function AdminPage() {
             visible={isModalVisibleAdmin}
             onOk={onRegisterModalOkAdmin}
             onCancel={handleCancelAdmin}
-            >
+          >
             <p>אימייל</p>
             <Input
               onChange={(e) => {
                 setAdminEmail(e.target.value);
               }}
               placeholder="אימייל מנהל"
-              />
+            />
             <p>סיסמה</p>
 
             <Input
@@ -434,7 +460,7 @@ function AdminPage() {
                 setAdminConfirmPassword(e.target.value);
               }}
               placeholder="אימות סיסמה"
-              />
+            />
           </Modal>
 
           <Modal
@@ -442,21 +468,19 @@ function AdminPage() {
             visible={isModalVisibleStudent}
             onOk={onRegisterModalOkStudent}
             onCancel={handleCancelStudent}
-            >
+          >
             <p>אימייל</p>
             <Input
               onChange={(e) => {
                 setStudentEmail(e.target.value);
               }}
               placeholder="אימייל סטודנט"
-              />
+            />
           </Modal>
-          
         </div>
-        
       ) : (
         " "
-        )}
+      )}
     </>
   );
 }
