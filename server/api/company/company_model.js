@@ -8,7 +8,6 @@ const company = new Schema({
         },
         field: String,
         info: String,
-        phone: String,
         address: String,
         siteLink: String,
 
@@ -25,6 +24,5 @@ const company = new Schema({
             default: Date.now,
         },
     },
-    //  { timestamps: true }
 )
 module.exports = mongoose.model('company', company)
