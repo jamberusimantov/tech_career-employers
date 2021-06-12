@@ -1,0 +1,40 @@
+.navBtn{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+.ant-card {
+    justify-content: center;
+    align-items:center;
+    background-color:  #fafafa;
+    border-radius: 15px;
+    border: 1px dotted blue;
+}
+.ant-card-body p {
+    text-align: right;
+    font-size: 20px;
+    line-height: 0.8;
+}
+
+.site-card-border-less-wrapper .applicans{
+    position: relative;
+    bottom: 120px;
+    right: 60%;
+    font-size: 20px;
+}
+
+.number{
+    position: relative;
+    bottom: 40px;
+    float: left;
+    font-size: 50px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 90px;
+    background-color: #fff;
+}
+.readMoreBtn{
+    position: relative;
+    top: 15px;
+    left: 35%;
+}
