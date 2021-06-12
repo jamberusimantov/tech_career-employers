@@ -8,7 +8,7 @@ import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'  
 import HrSteps from './components/steps/HrSteps'
 
-import LinkdInRouter from './components/LinkdIn'
+import LinkdInRouter from './components/job-cards/LinkdIn'
 import StuSteps from './components/steps/StuSteps'
 import StudentPersonal from './pages/personal-page/Student-Personal'
 

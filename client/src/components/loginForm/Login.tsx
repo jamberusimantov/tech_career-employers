@@ -38,19 +38,19 @@ const Login = (): any => {
 
         } else { alert('נסה שוב') }
 
-  const onFinish = async (values: any) => {
-    const email: any = values.email;
-    const password: any = values.password;
-    const resFromLogin = await loginUser({ email, password }, role);
-    if (resFromLogin.success) {
-      const token = resFromLogin.token;
-      setTokenLocal(token);
-      setUserData(token);
-      window.location.reload();
-    } else {
-      alert("failed!");
-    }
-  };
+  // const onFinish = async (values: any) => {
+  //   const email: any = values.email;
+  //   const password: any = values.password;
+  //   const resFromLogin = await loginUser({ email, password }, role);
+  //   if (resFromLogin.success) {
+  //     const token = resFromLogin.token;
+  //     setTokenLocal(token);
+  //     setUserData(token);
+  //     window.location.reload();
+  //   } else {
+  //     alert("failed!");
+  //   }
+  // };
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
