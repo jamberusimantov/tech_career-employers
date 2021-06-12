@@ -13,6 +13,9 @@
         "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.3",
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
         "antd": "^4.16.1",
         "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",

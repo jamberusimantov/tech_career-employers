@@ -1,5 +1,7 @@
 .site-card-wrapper {
-    
+    height:300px;
+    padding:10px;
     background: #6787c2;
     border-radius: 10px;
   }
+

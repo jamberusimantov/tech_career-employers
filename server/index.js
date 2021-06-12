@@ -20,9 +20,8 @@ const path = require('path');
 const app = express()
 const PORT = process.env.PORT || 4201;
 
-app.use(express.json());
-app.use(bodyParser.json({limit: '50mb',extended:true}))
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
+app.use(bodyParser.json({limit:'30mb',extended:true}))
+app.use(bodyParser.urlencoded({limit:'30mb',extended:true}))
 app.use(cors());
 app.set('view engine', 'ejs')
 app.set('trust proxy', true);

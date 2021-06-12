@@ -14,7 +14,7 @@ const AboutStudent = () => {
           fetchMyAPI()
     }, [])
     return (
-        <div>student info</div>
+        <div>Student info</div>
         // <div className="userClass my-5 text-dark rounded-lg p-3" style={stylesInnerBox}>
         //     {user != null && <React.Fragment>
         //         <div><h3><u>Name</u> :  {user.name.first} {user.name.last}</h3>

@@ -1,22 +1,33 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { Form, Input, Button, Checkbox, Select, message } from 'antd';
 import { useHistory } from "react-router-dom";
+import {getAllCourses} from '../../service/admin.service'
 
 const { TextArea } = Input;
 const { Option } = Select;
 const layout = { labelCol: { span: 10 }, wrapperCol: { span: 5 } };
 
 const StuThirdStep = (props:any) => {
+    const [courses, setCourses] = useState([])
     const {updateStudent} = props
     let history = useHistory();
-    const onFinish = (values: any) => {
-        console.log('Success:', values)
-        const {courseName, about,programmingLang} = values;
-        updateStudent({courseName,about,programmingLang,isAuth:true});
+
+    const onFinish = (values: any) => {        
+        const {courseDetails, about,programmingLang} = values;
+        const [courseName, courseId] = courseDetails.split('_')
+        updateStudent({courseName, about, programmingLang ,courseId ,isAuth:true});
         message.success('Processing complete!')
         setInterval(()=>{history.push("/");},1000)
-            
     };
+    useEffect(() => {
+        const coursesHandler = async()=>{
+            let courses = await getAllCourses();
+            setCourses(courses)    
+            console.log(courses);
+                    
+        }   
+        coursesHandler();
+        }, [])
     const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo); };
     const programmingLangArr: any = { react: 'React', angular: 'Angular', bootstrap: 'Bootstrap', mongodb: 'MongoDB', typescript: 'Type-Script', python: 'Python', nodejs: 'NodeJS', c: 'C', css: 'CSS', html: 'HTML', 'c#': 'C#', java: 'Java', 'c++': 'C++', php: 'PHP' }
     return (
@@ -24,16 +35,16 @@ const StuThirdStep = (props:any) => {
             <Form
                 {...layout}
                 name="basic"
-                initialValues={{ remember: true, courseName: 'Full-Stack',programmingLang:['Java-Script']}}
+                initialValues={{ remember: true, courseDetails: 'Full-Stack', programmingLang:['Java-Script']}}
                 style={{ width: '100%'}}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}>
                 {/* שם הקורס */}
-                <Form.Item label="שם הקורס" name="courseName" style={{ display: 'flex', justifyContent: 'left' }}>
-                    <Select style={{ width: 120 }}  >
-                        <Option name="fullstack" label="Full" value="fullstack">Full-Stack</Option>
-                        <Option value="dev">DevNet</Option>
-                        <Option value="qa">QA</Option>
+                <Form.Item label="שם הקורס" name="courseDetails" style={{ display: 'flex', justifyContent: 'left' }}>
+                    <Select >
+                        {courses.map((course:any)=><Option name={course.courseName} label={course.courseName} value={course.courseName + '_' + course._id}>{course.courseName +" "+ course.cycle}</Option>)}
+                        {/* <Option value="dev">DevNet</Option>
+                        <Option value="qa">QA</Option> */}
                     </Select>
                 </Form.Item>
                 {/* שפות תכנות */}
