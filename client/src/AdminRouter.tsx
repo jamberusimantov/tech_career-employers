@@ -6,7 +6,7 @@ import Home from './pages/home-page/Home'
 //HR page
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'  
-import HrSteps from './components/steps/HrSteps'
+import HrRegisterForm from './pages/hr-page/Hr-Register'
 
 import LinkdInRouter from './components/LinkdIn'
 import StuSteps from './components/steps/StuSteps'
@@ -28,7 +28,7 @@ function AdminRouter() {
         <Home />
       </Route>
       <Route path="/signUp/hr/:token/:id">
-       <HrSteps/>
+       <HrRegisterForm/>
       </Route>
      < Route path="/recruiter">
             <LinkdInRouter/>
