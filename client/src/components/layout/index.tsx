@@ -44,7 +44,7 @@ function LayoutMain(props: any) {
 
   return (
     <Layout className="mainlay">
-      <img className="bgbgbg" src="/mainbg.png" alt="" />
+ 
       <Header className="header">
         <div>
           {isLoggedIn ? (

@@ -21,6 +21,9 @@ export default function About() {
                 כיתות ומשרדים במתחם טלרד ודירות שכורות לסטודנטים בשכונות
                 הסמוכות.
                 </p>
+                <img className="givun" src="./images/giv.png" alt="" />
+                <br />
+                
             </div>
             <a href="#coOpsMainDiv">
         <DownCircleFilled className="DownCircleFilled" />

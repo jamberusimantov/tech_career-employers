@@ -8,7 +8,7 @@ export default function Coops() {
       <div className="texttext">
         <u><h1> שיתופי פעולה</h1></u>
         <div className="coImages">
-         <a href="https://https://www.bynet.co.il//"><img className="coLogo" src="./co-images/binat.png" alt="" /></a> 
+         <a href="https://https://www.bynet.co.il//"><img className="coLogo1" src="./co-images/binat.png" alt="" /></a> 
           <a href="https://https://www.is.com//"><img className="coLogo" src="./co-images/iron.png" alt="" /></a> 
           <a href="https://www.oracle.com/index.html"><img className="coLogo" src="./co-images/oracle.png" alt="" /></a>
           <a href="https://www.wix.com/"><img className="coLogo" src="./co-images/wix.png" alt="" /></a>

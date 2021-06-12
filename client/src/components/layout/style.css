@@ -22,6 +22,10 @@ background-repeat: no-repeat;
    
   }
   
+  .site-layout-background {
+    background: rgba(0, 0, 0, 0);
+  
+  }
 
   .ant-layout-header.header{
     background: rgb(255, 255, 255);
@@ -33,7 +37,7 @@ background-repeat: no-repeat;
     /* background-color: rgba(255, 255, 255, 0); */
     height:100vh;
    
-    
+    background-color: #ffffff00;
    
     
   }
@@ -48,6 +52,13 @@ background-repeat: no-repeat;
  
   
 }
+
+
+.ant-layout-rtl{
+  background-color: rgba(255, 255, 255, 0);
+}
+
+
 
 .imgdiv{
   background-color: rgba(255, 255, 255, 0);

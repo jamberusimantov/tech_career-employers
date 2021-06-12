@@ -70,7 +70,7 @@ to{
 
 .DownCircleFilled{
     font-size: 50px;
-     color: #000;
+     color: rgb(88, 85, 85);
    cursor: pointer;
     padding-top:40px; 
     animation:upDown 2s infinite linear; 

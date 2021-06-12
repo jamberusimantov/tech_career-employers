@@ -29,6 +29,13 @@
         font-size: 16px;
     }
 
+    .givun{
+display: flex;
+align-items: center;
+justify-content: center;
+height: 200px;
+margin:auto;
+    }
     
  
 

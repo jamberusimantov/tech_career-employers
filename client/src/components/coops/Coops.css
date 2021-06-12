@@ -18,3 +18,13 @@ justify-content: space-evenly;
 align-items: center;
 float: left;
 }
+
+.coLogo1{
+    width:140px;
+    height:80;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    float: left;
+    padding-top: 30px;
+    }
