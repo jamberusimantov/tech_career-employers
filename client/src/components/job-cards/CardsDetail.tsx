@@ -8,7 +8,7 @@ import Title from "./Title";
 
 function CardsDetail({UserInfo,firstJob}:any) {
  
-    const {title,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
+    const {position,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
 
     // const {title,company,location,id,applicants}:any =  firstJob     
 
@@ -17,12 +17,12 @@ function CardsDetail({UserInfo,firstJob}:any) {
 
   return (
     <Container>
-      <Title  title={title}/>
+      <Title  title={position}/>
       <TopSection>
         <div>
           <div>
             <span>{company}-</span>
-            <span>{location}</span>
+            <span>{location}-</span>
             <span>{numOfPeopleApplied}</span>
           </div>
           <div>
@@ -32,7 +32,7 @@ function CardsDetail({UserInfo,firstJob}:any) {
           <div>{finalDateToApply}</div>
         </div>
 
-        <Button style={{borderRadius:10}} type="primary">apply job</Button>
+        <Button style={{borderRadius:10}} type="primary">Apply</Button>
       </TopSection>
 
       <SecondSection>

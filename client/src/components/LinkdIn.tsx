@@ -23,7 +23,7 @@ useEffect( () => {
    fetchData()
  }, []);
 
- console.log(fetchedDataDb);
+//  console.log(fetchedDataDb);
 
 // production level MockUp
 

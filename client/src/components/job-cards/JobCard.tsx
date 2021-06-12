@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const { Meta } = Card;
 
 export default function JobCard({ userItem, setUser }: any): any {
-  const { title, company, location, id, applicants } = userItem;
+  const { position, company, location, id, numOfPeopleApplied } = userItem;
 
   return (
     <Container
@@ -24,12 +24,12 @@ export default function JobCard({ userItem, setUser }: any): any {
                 size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
               />
             }
-            title={title}
+            title={position}
             description={company}
           />
 
           <p>{location}</p>
-          <p>{applicants}</p>
+          <p>{numOfPeopleApplied}</p>
         </Card>
       </Link>
     </Container>
