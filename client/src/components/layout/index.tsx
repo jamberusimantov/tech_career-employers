@@ -44,7 +44,7 @@ function LayoutMain(props: any) {
 
   return (
     <Layout className="mainlay">
-      <img className="bgbgbg" src="mainbg.png" alt="" />
+      <img className="bgbgbg" src="/mainbg.png" alt="" />
       <Header className="header">
         <div>
           {isLoggedIn ? (
@@ -81,7 +81,7 @@ function LayoutMain(props: any) {
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="2" className="menIt">
-                  <Link to="hr">
+                  <Link to="/hr">
                     <b>מגייסים</b>
                   </Link>
                 </Menu.Item>
@@ -96,7 +96,7 @@ function LayoutMain(props: any) {
                   </Link>
                 </Menu.Item>
                 {role === "Admin" && (
-                  <Menu.Item key="5">
+                  <Menu.Item key="6">
                     <Link to="/admin">הנהלה</Link>
                   </Menu.Item>
                 )}
