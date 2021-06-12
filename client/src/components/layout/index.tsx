@@ -41,7 +41,7 @@ function LayoutMain(props: any) {
           {(isLoggedIn) ?
             <div style={{margin:'0 20px', display: 'flex',alignItems:'center',justifyContent: 'space-between'}}>
               <Button style={{margin:'0 10px'}} size="large" type="primary" onClick={logOutHandler}>Logout </Button>
-              <h2 style={{margin:' 8px 0 0 0'}}>Welcome {name}</h2>
+              <h2 style={{margin:' 3px 0 0 0'}}>ברוך הבא, {name}</h2>
             </div>
             :
             <Button size="large" type="primary" onClick={showModal}>Login </Button>

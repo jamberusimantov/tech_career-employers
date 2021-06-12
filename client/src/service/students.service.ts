@@ -68,10 +68,14 @@ export async function getAllStudents() {
 }
 
 export async function getManyStudents(credentials: any){
+
     const body = {student:{programmingLang:['React']}} 
     try {
+        console.log("headers from stu ser");
+        console.log(headers);
+        
         if(headers){}
-        return await (await axios.get(`${API}/students/many`,headers)).data.data
+        return await (await axios.post(`${API}/students/many`,headers)).data.data
     }
     catch (err) { console.error(err) }
 }
