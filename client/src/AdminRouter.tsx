@@ -1,6 +1,6 @@
 import React from 'react';
 //Admin page
-import AdminPage from './pages/admin-page/AdminPage'
+import AdminPage from './pages/admin-page'
 //Home page
 import Home from './pages/home-page/Home'
 //HR page
