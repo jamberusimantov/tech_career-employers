@@ -1,0 +1,35 @@
+.site-card-border-less-wrapper {
+    padding: 30px;
+    background: #ececec;
+}
+
+.JobRequirement{
+    width:50%;
+    float: right;
+    font-size: 20px;
+    text-align: right;
+    line-height: 0.8;
+    margin:2%;
+}
+.jobDetails{
+    width: 42%;
+    float: left;
+    background-color: #ffecec;
+    border: 1px solid #000;
+}
+.jobDetails p{
+    text-align: left;
+    padding: 10px;
+    line-height: 1.2;
+}
+.btns{
+    padding: 20px;
+    float:left;
+}
+.btns button{
+    margin: 5px;
+    width: 70px;
+    height:40px;
+}
+  
+ 

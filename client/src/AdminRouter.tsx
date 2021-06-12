@@ -9,8 +9,11 @@ import SpecificStudent from './components/specificStudent/SpecificStudent'
 import HrSteps from './components/steps/HrSteps'
 
 import LinkdInRouter from './components/LinkdIn'
+import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
 import StudentPersonal from './pages/personal-page/Student-Personal'
+import JobEditPage from './pages/CompanyZone/JobEditPage'
+
 
 
 import {
@@ -27,12 +30,19 @@ function AdminRouter() {
       <Route exact path="/">
         <Home />
       </Route>
+      <Route path="/hr">
+        <JobCards />
+      </Route>
+      <Route path="/JobEditPage">
+        <JobEditPage/>
+      </Route>
+       
       <Route path="/signUp/hr/:token/:id">
        <HrSteps/>
       </Route>
-     < Route path="/recruiter">
-            <LinkdInRouter/>
-          </Route>
+      < Route path="/recruiter">
+        <LinkdInRouter />
+      </Route>
       <Route path="/signUp/company">
       </Route>
       <Route path="/student">
@@ -56,5 +66,3 @@ function AdminRouter() {
 }
 
 export default AdminRouter;
-
-
