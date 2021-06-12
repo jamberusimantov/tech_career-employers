@@ -1,7 +1,23 @@
 .site-card-border-less-wrapper {
     padding: 30px;
-    background: #ececec;
+    display: flex;
+    justify-content: center;
+    
+
 }
+
+#showCard{
+    border: 1px solid rgb(255, 255, 255);
+    width: 700px; 
+    box-shadow: 1px 5px 20px 5px rgba(28, 43, 179, 0.212);
+}
+
+#editCard{
+    border: 1px solid rgb(255, 255, 255);
+    width: 700px; 
+    box-shadow: 1px 5px 20px 5px rgb(185, 185, 185);
+}
+
 
 .JobRequirement{
     width:50%;
@@ -10,12 +26,13 @@
     text-align: right;
     line-height: 0.8;
     margin:2%;
+
 }
 .jobDetails{
     width: 42%;
     float: left;
     background-color: #ffecec;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
 }
 .jobDetails p{
     text-align: left;

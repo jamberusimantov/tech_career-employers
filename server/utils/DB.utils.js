@@ -1,4 +1,4 @@
-async function getManyDocs(collection, query, successCb = () => { }, failCb = () => { }) {
+async function getManyDocs(collection, query, successCb = () => {}, failCb = () => {}) {
     const options = [(error, collectionArray) => {
         if (error) throw new Error(`error on getManyDocs: ${error}`);
         !collectionArray ? failCb() : successCb(collectionArray)
@@ -8,19 +8,9 @@ async function getManyDocs(collection, query, successCb = () => { }, failCb = ()
         await collection.find(...options)
     } catch (error) {
         return { success: false, error }
-    } finally { }
+    } finally {}
 }
-async function getAllDocsByQuery(collection, query, successCb = () => { }, failCb = () => { }) {
-    try {
-        await collection.find(query, (error, collectionArray) => {
-            if (error) throw new Error(`error on getAllDocs: ${error}`);
-            !collectionArray ? failCb() : successCb(collectionArray)
-        })
-    } catch (error) {
-        return { success: false, error }
-    } finally { }
-}
-async function getDoc(collection, query, successCb = () => { }, failCb = () => { }) {
+async function getDoc(collection, query, successCb = () => {}, failCb = () => {}) {
 
     try {
         await collection.findOne(query, (error, doc) => {
@@ -29,9 +19,9 @@ async function getDoc(collection, query, successCb = () => { }, failCb = () => {
         })
     } catch (error) {
         return { success: false, error };
-    } finally { }
+    } finally {}
 }
-async function postDocs(collection, docs, successCb = () => { }) {
+async function postDocs(collection, docs, successCb = () => {}) {
     try {
         await collection.insertMany(docs, (error) => {
             if (error) throw new Error(`error on postDocs: ${error}`);
@@ -39,22 +29,22 @@ async function postDocs(collection, docs, successCb = () => { }) {
         })
     } catch (error) {
         return { success: false, error };
-    } finally { }
+    } finally {}
 }
-async function updateDoc(collection, doc, successCb = () => { }, failCb = () => { }) {
+async function updateDoc(collection, doc, successCb = () => {}, failCb = () => {}) {
     const { _id } = doc;
     if (!_id) throw new Error('id is required on updateDoc');
     const query = { _id }
     try {
-        await collection.findOneAndUpdate(query, doc, async (error, docFromDb) => {
+        await collection.findOneAndUpdate(query, doc, async(error, docFromDb) => {
             if (error) throw new Error(`error on updateDoc: ${error}`);
             !docFromDb ? failCb() : successCb(docFromDb);
         })
     } catch (error) {
         return { success: false, error };
-    } finally { }
+    } finally {}
 }
-async function deleteDoc(collection, doc, successCb = () => { }, failCb = () => { }) {
+async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {}) {
     const { _id } = doc;
     if (!_id) throw new Error('id is required on deleteDoc');
     const query = { _id }
@@ -65,7 +55,7 @@ async function deleteDoc(collection, doc, successCb = () => { }, failCb = () => 
         })
     } catch (error) {
         return { success: false, error };
-    } finally { }
+    } finally {}
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
     const newObj = new Object(userItem)
