@@ -1,0 +1,12 @@
+.headerContainer img{
+    margin: 20px;
+    width: 120px;
+    height: 120px;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+    border-radius: 50%;
+    position: relative;
+    top: 80px;
+    left: 20px;
+}
+

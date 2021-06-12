@@ -21,6 +21,8 @@ const Login = (): any => {
         const password: any = values.password
         const resFromLogin = await loginUser({ email, password }, role)
         console.log(resFromLogin);
+        console.log(email);
+        console.log(password);
         
         if (resFromLogin.success) {
             const token = resFromLogin.token

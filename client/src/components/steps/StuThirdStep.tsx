@@ -17,7 +17,6 @@ const StuThirdStep = (props:any) => {
         setInterval(()=>{history.push("/");},1000)
             
     };
-    const handleChange = (value: any) => { console.log(`selected ${value}`); }
     const onFinishFailed = (errorInfo: any) => { console.log('Failed:', errorInfo); };
     const programmingLangArr: any = { react: 'React', angular: 'Angular', bootstrap: 'Bootstrap', mongodb: 'MongoDB', typescript: 'Type-Script', python: 'Python', nodejs: 'NodeJS', c: 'C', css: 'CSS', html: 'HTML', 'c#': 'C#', java: 'Java', 'c++': 'C++', php: 'PHP' }
     return (
@@ -31,7 +30,7 @@ const StuThirdStep = (props:any) => {
                 onFinishFailed={onFinishFailed}>
                 {/* שם הקורס */}
                 <Form.Item label="שם הקורס" name="courseName" style={{ display: 'flex', justifyContent: 'left' }}>
-                    <Select style={{ width: 120 }} onChange={handleChange} >
+                    <Select style={{ width: 120 }}  >
                         <Option name="fullstack" label="Full" value="fullstack">Full-Stack</Option>
                         <Option value="dev">DevNet</Option>
                         <Option value="qa">QA</Option>
@@ -42,7 +41,6 @@ const StuThirdStep = (props:any) => {
                     <Select
                         mode="multiple"
                         placeholder="Select language"
-                        onChange={handleChange}
                         optionLabelProp="label">
                         {Object.entries(programmingLangArr).map(([itemKey, itemValue]: any, index: any) => <Option key={index} value={itemValue} label={itemValue}>
                             <div className="demo-option-label-item">{itemValue}</div>
