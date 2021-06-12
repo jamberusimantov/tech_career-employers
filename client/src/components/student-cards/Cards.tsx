@@ -13,9 +13,7 @@ const Cards = () => {
             if (token) {
                 const resFromToken = await login.getUserUseToken(token)
                 if (resFromToken.success) {
-                    
                     const data = await student.getAllStudents()
-                    console.log(data);
                     if (data) { setStudentsArray(data.data) }
                 }
             }

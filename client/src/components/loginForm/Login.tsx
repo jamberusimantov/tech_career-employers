@@ -18,9 +18,25 @@ const mapStateToProps = (state: any) => {
 };
 
 const Login = (): any => {
-  const [role, setRole] = useState("student");
-  const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
-  const tailLayout = { wrapperCol: { offset: 8, span: 16 } };
+    const [role, setRole] = useState('student')
+    const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
+    const tailLayout = { wrapperCol: { offset: 8, span: 16 } }
+
+    const onFinish = async (values: any) => {
+        const email: any = values.email
+        const password: any = values.password
+        const resFromLogin = await loginUser({ email, password }, role)
+        console.log(resFromLogin);
+        console.log(email);
+        console.log(password);
+        
+        if (resFromLogin.success) {
+            const token = resFromLogin.token
+            setTokenLocal(token)
+            setUserData(token)
+            window.location.reload();
+
+        } else { alert('נסה שוב') }
 
   const onFinish = async (values: any) => {
     const email: any = values.email;
@@ -85,5 +101,5 @@ const Login = (): any => {
     </Form>
   );
 };
-
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

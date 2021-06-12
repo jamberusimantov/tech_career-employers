@@ -26,9 +26,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <ConfigProvider direction="rtl">
-        <App />
-      </ConfigProvider>
+    <ConfigProvider direction="rtl">
+      <App />
+    </ConfigProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

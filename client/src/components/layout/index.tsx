@@ -25,7 +25,6 @@ function LayoutMain(props: any) {
       if (userData.success) {
         setIsLoggedIn(true)
         setRole(userData.data.role)
-        console.log(userData);
         
         setName(userData.data.name)
       }
@@ -41,7 +40,7 @@ function LayoutMain(props: any) {
           {(isLoggedIn) ?
             <div style={{margin:'0 20px', display: 'flex',alignItems:'center',justifyContent: 'space-between'}}>
               <Button style={{margin:'0 10px'}} size="large" type="primary" onClick={logOutHandler}>Logout </Button>
-              <h2 style={{margin:' 8px 0 0 0'}}>Welcome {name}</h2>
+              <h2 style={{margin:' 8px 0 0 0'}}>ברוך הבא, {name}</h2>
             </div>
             :
             <Button size="large" type="primary" onClick={showModal}>Login </Button>
@@ -52,14 +51,14 @@ function LayoutMain(props: any) {
         </div>
 
         <div>
-          <Menu theme="light" mode="horizontal" style={{ textAlign: "center" }} >
-            <Menu.Item key="4"><Link to="/">דף הבית</Link></Menu.Item>
+          <Menu theme="light" mode="vertical" style={{ textAlign: "center",display: 'flex'}} >
             {isLoggedIn && 
               <>
+              <Menu.Item key="1"><Link to="/">דף הבית</Link></Menu.Item>
               <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
               <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
-              <Menu.Item key="5"><Link to="/recruiter">משרות</Link></Menu.Item>
-              {role === 'Admin' &&<Menu.Item key="1"><Link to="/admin">הנהלה</Link></Menu.Item>}
+              <Menu.Item key="4"><Link to="/recruiter">משרות</Link></Menu.Item>
+              {role === 'Admin' && <Menu.Item key="5"><Link to="/admin">הנהלה</Link></Menu.Item>}
               </>}
           </Menu>
         </div>
