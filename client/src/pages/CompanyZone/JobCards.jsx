@@ -18,7 +18,7 @@ export default function JobCards(props) {
     function gerAllJobsOffer() {
         getManyJobOffers().then((res) => { setJobOffer(res) })
     }
-
+console.log("hello there", jobOffer);
 
     const menu = (
         <Menu>

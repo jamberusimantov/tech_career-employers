@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const company = new Schema({
+
         name: {
             type: String,
             required: true
         },
         field: String,
         info: String,
-        phone: String,
         address: String,
         siteLink: String,
 
@@ -25,6 +25,6 @@ const company = new Schema({
             default: Date.now,
         },
     },
-    //  { timestamps: true }
+
 )
 module.exports = mongoose.model('company', company)

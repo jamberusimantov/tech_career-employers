@@ -13,15 +13,14 @@ const enhancers = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-const store = createStore(
-  rootReducer,
-  {
-    windowDimensions: { width: 0, height: 0 },
-    user: { userData: Object },
-    // auth:{auth:Boolean},
-  },
-  enhancers
-);
+const store = createStore(rootReducer, {
+  windowDimensions: { width: 0, height: 0 },
+  user: { userData: Object },
+  recruterRegistration: {hrData: Object},
+
+  // auth:{auth:Boolean},
+  
+},enhancers);
 
 ReactDOM.render(
   <Provider store={store}>

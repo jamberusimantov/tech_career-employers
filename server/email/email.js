@@ -51,7 +51,8 @@ module.exports = async(recipientAddress, link) => {
             auth: {
                 user: process.env.USER,
                 pass: process.env.PASS
-            }
+            },
+            tls: {rejectUnauthorized: false}
         });
         return await transporter.sendMail(email);
     } catch (error) { return { success: false, error } } finally {}

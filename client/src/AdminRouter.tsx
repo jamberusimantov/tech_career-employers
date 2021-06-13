@@ -1,16 +1,20 @@
 import React from 'react';
 //Admin page
-import AdminPage from './pages/admin-page/AdminPage'
+import AdminPage from './pages/admin-page'
 //Home page
 import Home from './pages/home-page/Home'
 //HR page
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'  
-import HrSteps from './components/steps/HrSteps'
+import HrRegisterForm from './pages/hr-page/Hr-Register'
 
 import LinkdIn from './components/job-cards/LinkdIn'
+
+import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
 import StudentPersonal from './pages/personal-page/Student-Personal'
+import JobEditPage from './pages/CompanyZone/JobEditPage'
+
 
 
 import {
@@ -28,8 +32,18 @@ function AdminRouter() {
       <Route exact path="/">
         <Home />
       </Route>
+      <Route path="/hr">
+        <JobCards />
+      </Route>
+      <Route path="/JobEditPage">
+        <JobEditPage/>
+      </Route>
+       
       <Route path="/signUp/hr/:token/:id">
-       <HrSteps/>
+       <HrRegisterForm/>
+      </Route>
+      < Route path="/recruiter">
+        <LinkdIn />
       </Route>
      < Route path="/recruiter">
             <LinkdIn/>
@@ -57,5 +71,3 @@ function AdminRouter() {
 }
 
 export default AdminRouter;
-
-
