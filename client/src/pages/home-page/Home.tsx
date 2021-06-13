@@ -12,12 +12,9 @@ export default function Home() {
       <Layout>
         <Layout>
           <Layout style={{ padding: "0 24px 24px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-            </Breadcrumb>
+            <Breadcrumb style={{ margin: "16px 0" }}></Breadcrumb>
             <Content className="site-layout-background">
-              <h1 className="h1topic">
-                טק קריירה - הדרך שלך להייטק !
-              </h1>
+              <h1 className="h1topic">טק קריירה - הדרך שלך להייטק !</h1>
               <Slider />
             </Content>
           </Layout>

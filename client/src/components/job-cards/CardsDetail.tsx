@@ -1,26 +1,49 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import {useParams} from "react-router-dom"
 import styled from "styled-components";
-import { Button } from "antd";
+import { Button,Spin } from "antd";
 import Title from "./Title";
 
-function CardsDetail() {
+
+
+function CardsDetail({UserInfo}:any) {
+  // const [firstJobFromInfo, setfirstJobFromInfo] = useState(fetchedDataDb[0])
+  
+  // useEffect(() => {
+  //   setfirstJobFromInfo(UserInfo)    
+  //   console.log(firstJobFromInfo,"firstJobFromInfo");
+  //   console.log(firstJob,"firstJob");
+    
+  // }, []);
+  const {position,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
+  
+    
+
+    // const {title,company,location,id,applicants}:any =  firstJob     
+
+  
+  // console.log("cardsDeatails > UserInfo",UserInfo)
+
   return (
+    UserInfo ?
+      
     <Container>
-      <Title title="Full-Stack developer" />
+      <Title  title={position}/>
       <TopSection>
         <div>
           <div>
-            <span>checkPoint</span>
-            <span> -Tel Aviv</span>
+            <span>{company}-</span>
+            <span>{location}-</span>
+            <span>{numOfPeopleApplied}</span>
           </div>
           <div>
-            <span>active</span>
-            <span> -applicants</span>
+            <span>{status}</span>
+            {/* <span>{numOfPeopleApplied}</span> */}
           </div>
-          <div>last date to apply : 23/6/2021</div>
+          <div>{finalDateToApply}</div>
         </div>
 
-        <Button type="primary">apply job</Button>
+        <Button style={{borderRadius:10}} type="primary">Apply</Button>
       </TopSection>
 
       <SecondSection>
@@ -56,6 +79,8 @@ function CardsDetail() {
         </div>
       </SecondSection>
     </Container>
+      : <Spin/>
+    
   );
 }
 
@@ -72,7 +97,7 @@ const Container = styled.div`
 const TopSection = styled.div`
   /* background-color: green; */
   margin-bottom: 3rem;
-  margin-top: 2rem;
+  margin-top: 0.3rem;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
