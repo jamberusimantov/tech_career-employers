@@ -21,7 +21,6 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
   useEffect(() => {
       const loginHandler = async()=>{
-        console.log(token);
         
         if(token){
           const userFromToken = await getUserUseToken(token)
@@ -38,6 +37,7 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData}}
 
 
     const classes = appStyle()
+    console.log(userData)
 
     if (!userData.email) {
       return (
