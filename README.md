@@ -7,7 +7,7 @@ npm run setup
 **To run the server and the client, run:**
 npm run dev
 
-Client also uses storybook for testing shared components online.
+Client also uses storybook for testing shared components offline (with mock data instead of server).
 **To run storybook navigate to /client directory, and run:**
 npm run storybook
 To test components with mock data see index.stories.js files in the client.
