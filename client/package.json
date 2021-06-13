@@ -20,7 +20,6 @@
     "mui-datatables": "^3.7.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-file-base64": "^1.0.3",
     "react-history": "^0.18.2",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",

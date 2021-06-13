@@ -16,7 +16,7 @@ const jobOffer = new Schema({
         },
         numOfPeopleApplied :{
             type: String,
-            required: true
+            
         },
         position: {
             type: String,
@@ -49,9 +49,11 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
-        minYearsOfExperience: {
-            type: String,
-            required: true
+  
+       
+        numOfPeopleApplied: {
+            type: Number,
+            default: 0,
         },
         numOfViews: {
             type: Number,
