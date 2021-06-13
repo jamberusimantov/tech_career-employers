@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Card, Button, Input, Switch, Form } from 'antd';
 import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom"
 import './JobEditPage.css';
-import Login from '../../utils/login.utils'
-import { useLocation } from 'react-router-dom'
+import { postJobOffer } from '../../utils/drafts/jobOffer.utils'
+import { useHistory } from 'react-router-dom';
 
-export default function JobEditPage() {
+export default function AddJob() {
+
     const { TextArea } = Input;
-
-    const [cardType, setCardType] = useState(false)
+    const history = useHistory()
     const [jobOffers, setJobOffers] = useState([])
     const [jobData, setJobData] = useState(
         {
@@ -26,9 +26,12 @@ export default function JobEditPage() {
         }
     )
     
-    const location: any = useLocation();
-    const JobObject: any = location.state?.jobData;
-    console.log(JobObject);
+    function sendData(){
+        postJobOffer(jobData)
+        console.log(jobData);
+        history.push('/hr')
+
+    }
 
 
     function statusToggel(checked:boolean) {
@@ -37,57 +40,17 @@ export default function JobEditPage() {
         
       }
 
-    function jobDescriptionText (e:any){
-        setJobData({ ...jobData, jobDescription: e.target.value })
-        console.log('Change:', e.target.value);
-      };
 
   
     
-    function changeCardType() {
-        if (cardType === false) { setCardType(true) }
-        else { setCardType(false) }
-    };
+    
 
-   
     return (
-        (!cardType ) ?
-            <div>
+        <div>
 
                 <JobCardsHeader />
 
                 <div className="site-card-border-less-wrapper">
-
-
-                    <Card id="showCard" title={''} bordered={false} style={{ width: 700 }}>
-
-                        <div className="JobRequirement">
-                            <h2>{JobObject.position}</h2>
-                            <h3>{JobObject.jobDescription}</h3>
-                            <p>{JobObject.minYearsOfExperience} שנות ניסיון</p>
-                            <p>זמינות: {JobObject.status}</p>
-                        </div>
-                        <div className="jobDetails">
-                            <p>{JobObject.notes} Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos totam, officiis velit consequatur quidem at, cupiditate aspernatur molestias commodi ab dolorum fugiat nam blanditiis tenetur omnis dolores cumque, libero dolorem.</p>
-                        </div>
-                        <div className="btns">
-                            <Button type="primary" onClick={changeCardType}>ערוך</Button>
-                            <Link to="hr/JobCards"><Button type="primary"> הקודם</Button></Link>
-                        </div>
-                    </Card>
-
-                </div>
-            </div>
-
-            :
-
-            <div>
-
-                <JobCardsHeader />
-
-                <div className="site-card-border-less-wrapper">
-
-
 
                     <Card id="editCard" title={"New job"} bordered={false}>
                         <Form>
@@ -96,7 +59,7 @@ export default function JobEditPage() {
                                 <div className="allInputClass">
                                     <Input placeholder="Name" onChange={e => setJobData({ ...jobData, uploadedBy: e.target.value })}/>
                                 </div>
-                                
+                               
                                 <div className="allInputClass">
                                     <Input placeholder="Email" onChange={e => setJobData({ ...jobData, emailHr: e.target.value })}/>
                                 </div>
@@ -124,11 +87,11 @@ export default function JobEditPage() {
                                 </div>
 
                                 <div className="jobDetails">
-                                    <TextArea showCount maxLength={100} onChange={jobDescriptionText}  placeholder="Job description"/>
+                                    <TextArea showCount maxLength={100} onChange={e => setJobData({ ...jobData, jobDescription: e.target.value })}  placeholder="Job description"/>
                                 </div>
                                
                                 <div className="btns">
-                                    <Button type="primary" onClick={changeCardType}>שמור</Button>
+                                    <Button type="primary" onClick={sendData}>שמור</Button>
                                     <Link to="hr/JobCards"><Button type="primary"> הקודם</Button></Link>
                                 </div>
                             </div>
@@ -137,5 +100,6 @@ export default function JobEditPage() {
                     </Card>
                 </div>
             </div>
+        
     )
 }

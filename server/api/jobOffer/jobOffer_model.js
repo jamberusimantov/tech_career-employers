@@ -6,10 +6,7 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
-        jobTitle:{
-            type:String,
-            required:true
-        },
+       
         logo:{
             type:String,
             required:false
@@ -66,9 +63,9 @@ const jobOffer = new Schema({
             type: Boolean,
             default: true,
         },
-        status: {
-            type: String,
-            default: 'OPEN',
+        isOpen: {
+            type:  Boolean,
+            default: true,
         },
     },
     //  { timestamps: true }

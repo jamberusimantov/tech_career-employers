@@ -21,6 +21,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import AddJob from './pages/CompanyZone/AddJob';
 
 
 function AdminRouter() {
@@ -38,7 +39,9 @@ function AdminRouter() {
       <Route path="/JobEditPage">
         <JobEditPage/>
       </Route>
-       
+      <Route path="/addNewJob">
+        <AddJob/>
+      </Route>
       <Route path="/signUp/hr/:token/:id">
        <HrRegisterForm/>
       </Route>
