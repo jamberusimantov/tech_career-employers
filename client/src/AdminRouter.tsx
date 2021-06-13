@@ -11,7 +11,7 @@ import HrSteps from './components/steps/HrSteps'
 import LinkdInRouter from './components/LinkdIn'
 import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
-import StudentPersonal from './pages/personal-page/Student-Personal'
+import StudentPersonal from './pages/personal-page/StudentPersonal'
 import JobEditPage from './pages/CompanyZone/JobEditPage'
 
 
@@ -36,7 +36,6 @@ function AdminRouter() {
       <Route path="/JobEditPage">
         <JobEditPage/>
       </Route>
-       
       <Route path="/signUp/hr/:token/:id">
        <HrSteps/>
       </Route>
