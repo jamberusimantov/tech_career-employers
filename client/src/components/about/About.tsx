@@ -1,9 +1,10 @@
 import React from 'react'
 import './About.css'
-
+import { DownCircleFilled } from "@ant-design/icons";
 export default function About() {
     return (
-        <div className="aboutMainDiv">
+        <div id="aboutMainDiv">
+            
             <img className="tcLogo" src="./images/logotech.png" alt="" />
             <div className="texttext">
                 <h2> מי אנחנו ?</h2>
@@ -20,7 +21,13 @@ export default function About() {
                 כיתות ומשרדים במתחם טלרד ודירות שכורות לסטודנטים בשכונות
                 הסמוכות.
                 </p>
+                <img className="givun" src="./images/giv.png" alt="" />
+                <br />
+                
             </div>
+            <a href="#coOpsMainDiv">
+        <DownCircleFilled className="DownCircleFilled" />
+      </a>
         </div>
     )
 }
