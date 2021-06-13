@@ -12,7 +12,7 @@ import LinkdIn from './components/job-cards/LinkdIn'
 
 import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
-import StudentPersonal from './pages/personal-page/Student-Personal'
+import StudentPersonal from './pages/personal-page/StudentPersonal'
 import JobEditPage from './pages/CompanyZone/JobEditPage'
 
 

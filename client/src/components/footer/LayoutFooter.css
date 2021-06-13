@@ -1,0 +1,14 @@
+.layoutFooter{
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: white; */
+    gap: 3vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content:  space-between;
+}
+.footerTitle{
+    /* align-self: center; */
+    /* /* text-align: 'center' */
+    align-content: center; 
+}
