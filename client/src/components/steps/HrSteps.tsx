@@ -8,12 +8,12 @@ const { Step } = Steps;
 
 
 export default function HrSteps(){
-    const [current, setCurrent] = useState(0);
+    const [current, setCurrent] = useState(1);
     const [company, setCompany] = useState('');
     const steps = [
-    {
+    {   
         title: 'הרשמת מגייס',
-        content: <HrRegisterForm changeStep={(step:number)=>setCurrent(step)} getCompannyName={(company:string)=>setCompany(company)}/>,
+        content: <HrRegisterForm />,
     },
     {
         title: 'הרשמת חברה',
