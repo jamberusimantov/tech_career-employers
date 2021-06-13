@@ -35,8 +35,7 @@ const minute = 60 * second
 const hour = 60 * minute
 const day = 24 * hour
 const week = 7 * day
-const tokenOptions = { expiresIn: day }
-const baseApi = 'http://localhost:4201';
+const tokenOptions = { expiresIn: week }
 const signToken = (req, res, payload, message, emailVerification = false) => {
         const { _id } = payload
         const role = req.params.Role && req.params.Role.toLowerCase();
@@ -280,13 +279,13 @@ async function loginUser(req, res) {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const isMatch = await bcrypt.compare(passwordFromDB, passwordHash);
-     
-            if (!isMatch) return res.status(400).json({
-                success: false,
-                message: unauthorizedCredentials('loginUser')
-            })
-            const payload = { _id, name, email }
-            signToken(req, res, payload, success('loginUser'))
+
+        if (!isMatch) return res.status(400).json({
+            success: false,
+            message: unauthorizedCredentials('loginUser')
+        })
+        const payload = { _id, name, email }
+        signToken(req, res, payload, success('loginUser'))
     }
     const getDocFailCb = () => res.status(400).json({
         success: false,
