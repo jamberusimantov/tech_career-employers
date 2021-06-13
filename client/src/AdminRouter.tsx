@@ -6,9 +6,10 @@ import Home from './pages/home-page/Home'
 //HR page
 import Student from './pages/student-page/Student'
 import SpecificStudent from './components/specificStudent/SpecificStudent'  
-import HrSteps from './components/steps/HrSteps'
+import HrRegisterForm from './pages/hr-page/Hr-Register'
 
-import LinkdInRouter from './components/LinkdIn'
+import LinkdIn from './components/job-cards/LinkdIn'
+
 import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
 import StudentPersonal from './pages/personal-page/Student-Personal'
@@ -25,6 +26,7 @@ import {
 function AdminRouter() {
 
  
+
   return (
     <Switch>
       <Route exact path="/">
@@ -38,11 +40,14 @@ function AdminRouter() {
       </Route>
        
       <Route path="/signUp/hr/:token/:id">
-       <HrSteps/>
+       <HrRegisterForm/>
       </Route>
       < Route path="/recruiter">
-        <LinkdInRouter />
+        <LinkdIn />
       </Route>
+     < Route path="/recruiter">
+            <LinkdIn/>
+          </Route>
       <Route path="/signUp/company">
       </Route>
       <Route path="/student">
