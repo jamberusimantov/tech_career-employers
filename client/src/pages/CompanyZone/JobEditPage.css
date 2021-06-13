@@ -2,7 +2,6 @@
     padding: 30px;
     display: flex;
     justify-content: center;
-    
 
 }
 
@@ -13,23 +12,29 @@
 }
 
 #editCard{
+    display: flex;
+    flex-direction: column;
     border: 1px solid rgb(255, 255, 255);
     width: 700px; 
     box-shadow: 1px 5px 20px 5px rgb(185, 185, 185);
 }
-
+.allInputClass{
+    padding-bottom: 20px;
+}
 
 .JobRequirement{
-    width:50%;
-    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:400px;
+    /* float: right; */
     font-size: 20px;
     text-align: right;
     line-height: 0.8;
-    margin:2%;
-
+    /* margin:2%; */
 }
 .jobDetails{
-    width: 42%;
+    width: 100%;
     float: left;
     background-color: #ffecec;
     /* border: 1px solid #000; */
