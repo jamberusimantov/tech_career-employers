@@ -6,7 +6,7 @@ const admin = new Schema({
         name:String,
         password:String,
         phone: String,
-        isAuth: Boolean,
+        isAuth:{type:Boolean, default: true},
         token: String,
         notifications: { notifications: [], new: [] },
         role:{type:String, default: 'Admin'},

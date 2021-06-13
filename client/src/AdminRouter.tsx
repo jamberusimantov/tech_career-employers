@@ -1,16 +1,19 @@
 import React from 'react';
 //Admin page
-import AdminPage from './pages/admin-page/AdminPage'
+import AdminPage from './pages/admin-page'
 //Home page
 import Home from './pages/home-page/Home'
 //HR page
-import HrRegisterForm from './pages/hr-page/Hr-Register'
-import CompanyRegister from './pages/hr-page/Company-register'
 import Student from './pages/student-page/Student'
-import SpecificStudent from './components/specificStudent/SpecificStudent'
+import SpecificStudent from './components/specificStudent/SpecificStudent'  
+import HrSteps from './components/steps/HrSteps'
+
 import LinkdInRouter from './components/LinkdIn'
+import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
 import StudentPersonal from './pages/personal-page/Student-Personal'
+import JobEditPage from './pages/CompanyZone/JobEditPage'
+
 
 
 import {
@@ -21,20 +24,26 @@ import {
 
 function AdminRouter() {
 
-
+ 
   return (
     <Switch>
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/signUp/hr">
-        <HrRegisterForm />
+      <Route path="/hr">
+        <JobCards />
       </Route>
-     < Route path="/recruiter">
-            <LinkdInRouter/>
-          </Route>
+      <Route path="/JobEditPage">
+        <JobEditPage/>
+      </Route>
+       
+      <Route path="/signUp/hr/:token/:id">
+       <HrSteps/>
+      </Route>
+      < Route path="/recruiter">
+        <LinkdInRouter />
+      </Route>
       <Route path="/signUp/company">
-        <CompanyRegister />
       </Route>
       <Route path="/student">
         <Student />
@@ -42,7 +51,7 @@ function AdminRouter() {
       <Route path="/studentPage/:id">
         <SpecificStudent />
       </Route>
-      <Route path="/signUp/student">
+      <Route path="/signUp/student/:token/:id">
        <StuSteps/>
       </Route>
       <Route path="/admin">
@@ -57,5 +66,3 @@ function AdminRouter() {
 }
 
 export default AdminRouter;
-
-

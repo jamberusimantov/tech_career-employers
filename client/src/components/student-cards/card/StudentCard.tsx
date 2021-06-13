@@ -12,7 +12,7 @@ const StudentCard = (student: any) => {
     
     const readMoreHandler: any = () => {history.push(`/studentPage/${student._id}`)}
     return (
-        <Col xs={{ span: 24}} sm={{ span: 12 }} lg={{ span: 8 }}   className="gutter-row" onClick={readMoreHandler}>
+            <Col xs={{ span: 24}} sm={{ span: 12 }} lg={{ span: 8 }}   className="gutter-row" onClick={readMoreHandler}>
             <Card style={{  margin:'20px 5px' }}
             className="site-card-wrapper" 
             hoverable 
@@ -20,7 +20,7 @@ const StudentCard = (student: any) => {
                 <Meta
                     avatar={<Avatar
                     size={{ xs: 32, sm: 40, md: 64, lg: 84, xl: 100, xxl: 100 }}
-                    src={student.pictures[0].path} />}
+                    src={student.profilePicture} />}
                     title={student.name}
                     description={student.courseName + ' Developer'} 
                     />
@@ -29,6 +29,8 @@ const StudentCard = (student: any) => {
                      <Button shape="round" onClick={readMoreHandler}>More info</Button>
             </Card>
         </Col>
+        
+       
     )
 }
 

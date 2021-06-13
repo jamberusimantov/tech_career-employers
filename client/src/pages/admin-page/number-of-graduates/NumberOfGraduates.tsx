@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
-import { getGraduatesByCourse } from "../../../service/admin.service";
+import {  getManyStudents } from "../../../utils/drafts/student.utils";
 import { Popover, Spin } from "antd";
 
 function NumberOfGraduates(props: any) {
+
   const [loading, setLoading] = useState(false);
   const [courseGraduates, setCourseGraduates] = useState([]);
 
@@ -13,8 +14,8 @@ function NumberOfGraduates(props: any) {
     <div>
       {loading && <Spin />}
       {!loading &&
-        courseGraduates.map((student: any, index) => (
-         <div> <Link to={`studentPage/${student._id}`} key={index}>{student.name}</Link></div>
+        courseGraduates.map((student: any) => (
+         <div  key={`${student._id}`}> <Link to={`studentPage/${student._id}`}>{student.name}</Link></div>
         ))}
     </div>
   );
@@ -24,9 +25,18 @@ function NumberOfGraduates(props: any) {
       try {
         setLoading(true);
 
-        const graduates = await getGraduatesByCourse(courseId);
+        // const graduates = await getGraduatesByCourse(cycle);
 
-        setCourseGraduates(graduates);
+       const graduatesFromSameCycle= await getManyStudents({courseId});
+       console.log(graduatesFromSameCycle);
+       
+
+      //  console.log("numberOfLior from numOfStu ");
+      //  console.log(numberOfLior);
+
+       setCourseGraduates(graduatesFromSameCycle);
+
+
         setLoading(false);
       } catch (error) {
         console.log(error);

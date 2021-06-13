@@ -6,14 +6,16 @@ export default function JobsList() {
   return (
     <Container>
       <Cards>
+        {/* <JobCard />
         <JobCard />
         <JobCard />
         <JobCard />
         <JobCard />
-        <JobCard />
-        
+         */}
       </Cards>
-      <JobsDetails></JobsDetails>
+      <JobsDetails>
+
+      </JobsDetails>
     </Container>
   );
 }

@@ -36,7 +36,7 @@ const createMail = (recipientAddress, link) => {
     </body>
     </html>`;
 
-    return ({ from: '"⚡ Tech Career ⚡" DoNotReply@Tech-Career.com', to, subject, text, html, amp })
+    return ({ from: '"⚡ Tech Career ⚡" DoNotReply@Tech-Career.com', to, subject, text, html })
 }
 
 module.exports = async(recipientAddress, link) => {
@@ -51,7 +51,8 @@ module.exports = async(recipientAddress, link) => {
             auth: {
                 user: process.env.USER,
                 pass: process.env.PASS
-            }
+            },
+            tls: {rejectUnauthorized: false}
         });
         return await transporter.sendMail(email);
     } catch (error) { return { success: false, error } } finally {}

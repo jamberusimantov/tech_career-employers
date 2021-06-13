@@ -1,0 +1,30 @@
+.admin-page-actions {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.admin-page-actions button {
+  float: right;
+  margin: 0 10px;
+}
+
+.ant-switch {
+  width: 75px;
+}
+.admin-page-actions .ant-checkbox-wrapper {
+  float: right;
+}
+
+.ant-table-cell {
+  color: rgb(38, 28, 185);
+}
+.ant-table-cell-fix-right {
+  background-color: rgb(179, 222, 241);
+}
+.ant-table-cell-fix-left {
+  background-color: rgb(179, 222, 241);
+}
+
+.ant-modal input {
+  margin-bottom: 10px;
+}
