@@ -6,6 +6,14 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
+        jobTitle:{
+            type:String,
+            required:true
+        },
+        logo:{
+            type:String,
+            required:false
+        },
         numOfPeopleApplied :{
             type: String,
             required: true
@@ -44,10 +52,6 @@ const jobOffer = new Schema({
         minYearsOfExperience: {
             type: String,
             required: true
-        },
-        numOfPeopleApplied: {
-            type: Number,
-            default: 0,
         },
         numOfViews: {
             type: Number,
