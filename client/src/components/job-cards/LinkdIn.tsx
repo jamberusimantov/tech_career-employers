@@ -11,11 +11,11 @@ export default function LinkdIn() {
   const { Search } = Input;
   const [fetchedDataDb, setFetchedDataDb] = useState<any>([]);
   const [UserInfo, setUserInfo] = useState("");
-  // const [firstJob, setfirstJob] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
-      let fetchedData = await getManyJobOffers({ isHidden: false });
-      const jobOffers = fetchedData.data
+      let fetchedData = await getManyJobOffers({ isHidden: false }) ;
+      const jobOffers = fetchedData.data || []
       setFetchedDataDb(jobOffers);  
       setUserInfo(jobOffers[0])
     };
@@ -25,7 +25,7 @@ export default function LinkdIn() {
 
   return (
     
-      (fetchedDataDb.length > 0 ) ? 
+      (fetchedDataDb?.length > 0 ) ? 
         <MainContainer>
           <Search placeholder="search" enterButton="Search" size="large" />
           <Container>

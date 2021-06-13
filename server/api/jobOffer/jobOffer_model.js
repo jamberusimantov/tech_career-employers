@@ -6,10 +6,6 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
-        jobTitle:{
-            type:String,
-            required:true
-        },
         logo:{
             type:String,
             required:false
