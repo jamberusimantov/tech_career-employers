@@ -1,0 +1,6 @@
+form{
+    display: flex;
+    justify-content: right;
+    width: 50%;
+    background-color: brown;
+}
