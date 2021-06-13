@@ -12,9 +12,9 @@ export const getJobOffer = async (query: object, token: string) => {
     catch (error) { return { success: false, error: err('getJobOffer', error) } }
     finally { }
 }
-export const getManyJobOffers = async (token: string, query?: object) => {
+export const getManyJobOffers = async ( query?: object) => {
     try {
-        return await getManyDocs(collection, body(query || {}), token)
+        return await getManyDocs(collection, body(query || {}))
     }
     catch (error) { return { success: false, error: err('getManyJobOffers', error) } }
     finally { }

@@ -11,6 +11,7 @@ const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandle
  * @param {*} res 
  */
 async function getAdminByUrlId(req, res) {
+    
     const token = req.headers.authorization
     const _id = req.params.Id;
     const admin = { _id }

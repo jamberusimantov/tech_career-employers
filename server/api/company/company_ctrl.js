@@ -4,7 +4,6 @@ const authRequest = require('../../utils/register.utils').authRequest
 const Mongoose = require('mongoose')
 const { getDoc, updateDoc, deleteDoc, getManyDocs, msgs } = DB
 const { requiredToken, requiredQuery, unauthorizedToken, success, failure, corruptId } = msgs
-
 /** 
  * get many companies from company collection
  * @param {*} req 
@@ -21,7 +20,7 @@ async function getManyCompanies(req, res) {
         success: false,
         message: requiredQuery('postCompany')
     })
-    const request = async(data) => {
+    const request = async (data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('getManyCompanies')
@@ -42,7 +41,7 @@ async function getManyCompanies(req, res) {
         authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    } finally {}
+    } finally { }
 }
 
 /**
@@ -61,7 +60,7 @@ async function getCompany(req, res) {
         success: false,
         message: requiredQuery('getCompany')
     })
-    const request = async(data) => {
+    const request = async (data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('getCompany')
@@ -82,7 +81,7 @@ async function getCompany(req, res) {
         authRequest(token, request, res)
     } catch (error) {
         return { success: false, error }
-    } finally {}
+    } finally { }
 }
 /**
  * update company from company collection
@@ -106,7 +105,7 @@ async function updateCompanyById(req, res) {
         message: corruptId('updateCompanyByUrlId')
     })
     company._id = _id;
-    const request = async(data) => {
+    const request = async (data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('updateCompanyByUrlId')
@@ -126,7 +125,7 @@ async function updateCompanyById(req, res) {
         authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    } finally {}
+    } finally { }
 }
 
 /**
@@ -148,7 +147,7 @@ async function getCompanyById(req, res) {
         message: corruptId('getCompanyByUrlId')
     })
     company._id = _id;
-    const request = async(data) => {
+    const request = async (data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('getCompanyByUrlId')
@@ -169,7 +168,7 @@ async function getCompanyById(req, res) {
         authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    } finally {}
+    } finally { }
 }
 
 /** 
@@ -190,7 +189,7 @@ async function deleteCompanyById(req, res) {
         message: corruptId('deleteCompanyByUrlId')
     })
     company._id = _id;
-    const request = async(data) => {
+    const request = async (data) => {
         if (!data) return res.status(400).json({
             success: false,
             message: unauthorizedToken('deleteCompanyByUrlId')
@@ -210,7 +209,7 @@ async function deleteCompanyById(req, res) {
         authRequest(token, request, res)
     } catch (error) {
         res.status(400).json({ success: false, error })
-    } finally {}
+    } finally { }
 }
 
 module.exports = {
