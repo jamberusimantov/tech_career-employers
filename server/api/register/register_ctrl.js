@@ -479,6 +479,7 @@ async function loginUser(req, res) {
  */
 async function useToken(req, res) {
   const token = req.headers.authorization;
+
   if (!token)
   return res.status(400).json({
     success: false,

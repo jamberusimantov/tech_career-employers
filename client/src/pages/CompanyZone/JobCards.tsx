@@ -5,7 +5,7 @@ import { DownOutlined } from '@ant-design/icons';
 import './JobCards.css'
 // import JobEditPage from './JobEditPage';
 import JobCardsHeader from './JobCardsHeader';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -27,12 +27,17 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData.d
    const getJobData = async () => {
    
     const jobOfferData =  (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
-     
+     console.log(userData)
     setJobOffer(jobOfferData.data || [])
     
         
     }
-    console.log(jobOffer);
+
+    function addNewJob(){
+    history.push('/addNewJob')
+
+    }
+
 
 function historyPushData(currentJob:any){
     history.push('/JobEditPage', {jobData:currentJob})
@@ -71,7 +76,7 @@ function historyPushData(currentJob:any){
                         </a>
                     </Dropdown>
                     <div className="addNewJobBtn">
-                        <Button>הוסף משרה חדשה</Button>
+                        <Button onClick={addNewJob}>הוסף משרה חדשה</Button>
                     </div>
                 </div>
 

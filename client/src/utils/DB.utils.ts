@@ -60,7 +60,7 @@ export async function deleteDocById(collection: string, key: string, _id: string
     catch (error) { return { success: false, error: err('deleteDocById', error) } }
     finally { }
 }
-export async function postDoc(collection: string, body: object, key: string, token: string) {
+export async function postDoc(collection: string, body: object, key: string, token?: string) {
     if (!collection) return { success: false, message: requiredCollection('getDoc') }
     const url = `${API}/${collection}/${key}`;
     try {
