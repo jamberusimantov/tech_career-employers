@@ -5,6 +5,7 @@ jobOfferRouter.post('/many', jobOffer_ctrl.getManyJobOffers)
 jobOfferRouter.get('/all', jobOffer_ctrl.getAllJobOffers)
 
 jobOfferRouter.post('/single', jobOffer_ctrl.getJobOffer)
+jobOfferRouter.post('/addSingle', jobOffer_ctrl.postJobOffer)
 
 jobOfferRouter.get('/JobOffer/:Id', jobOffer_ctrl.getJobOfferByUrlId)
 jobOfferRouter.put('/JobOffer/:Id', jobOffer_ctrl.updateJobOfferByUrlId)
