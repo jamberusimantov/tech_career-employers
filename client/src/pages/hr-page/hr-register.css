@@ -1,6 +1,20 @@
-form{
+/* form{
     display: flex;
     justify-content: right;
     width: 50%;
-    background-color: brown;
+    background-color: rgb(27, 27, 27);
+} */
+
+.site-layout-background{
+    background-color: crimson;
 }
+
+.ant-layout-content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+

@@ -14,12 +14,26 @@
   }
   .ant-layout-header.header{
     background: #fff;
+    display: flex;
+    align-items: center;
   }
 
 .ant-layout ant-layout-rtl{
   width: 100%;
   height: 100vh;
+
+  
 }
+
+.helloDiv{
+  display: flex;
+ justify-content: center;
+align-items: center;
+  height: 70px;
+/* margin: 0%; */
+ 
+}
+
 
 
 

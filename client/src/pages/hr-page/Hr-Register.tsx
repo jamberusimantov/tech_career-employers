@@ -4,7 +4,8 @@ import "antd/dist/antd.css";
 import { Form, Input, Button, Spin, Image, message } from "antd";
 import { useHistory, useParams } from 'react-router-dom';
 import FileBase from 'react-file-base64'
-// import '/hr-register.css'
+
+import './hr-register.css'
 export default function HrRegisterForm() {
   const history = useHistory()
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
