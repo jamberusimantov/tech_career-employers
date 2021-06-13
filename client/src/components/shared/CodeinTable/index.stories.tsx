@@ -1,11 +1,10 @@
 import '../../../../src/App.css';
 import CodeinTable from './index';
+import { storiesOf } from '@storybook/react';
 import { coursesColumns, coursesData, graduatesColumns, graduatesData } from './mock'
 
-export default {
-    title: 'CodeinTable',
-    component: CodeinTable
-}
+storiesOf('components/shared/CodinTable', module)
+    .add('coursesTable', () => <CodeinTable getData={() => { return coursesData }} columns={coursesColumns} />)
 
-export const coursesTable = () => <CodeinTable getData={() => { return coursesData }} columns={coursesColumns} />;
-export const graduatesTable = () => <CodeinTable getData={() => { return graduatesData }} columns={graduatesColumns} />;
+storiesOf('components/shared/CodinTable', module)
+    .add('graduatesTable', () => <CodeinTable getData={() => { return graduatesData }} columns={graduatesColumns} />)
