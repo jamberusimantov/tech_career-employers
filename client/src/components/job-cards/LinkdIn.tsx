@@ -7,32 +7,25 @@ import { Input, Row, Col, Spin } from "antd";
 import LinkdInRouter from "./LinkdInRouter";
 import { useParams } from "react-router-dom";
 
-export default function JobsList() {
+export default function LinkdIn() {
   const { Search } = Input;
-  const [fetchedDataDb, setfetchedDataDb] = useState<any>([]);
-  const [UserInfo, setUserInfo] = useState([]);
-  const [firstJob, setfirstJob] = useState([]);
-
+  const [fetchedDataDb, setFetchedDataDb] = useState<any>([]);
+  const [UserInfo, setUserInfo] = useState("");
+  // const [firstJob, setfirstJob] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       let fetchedData = await getManyJobOffers({ isHidden: false });
-      //  console.log(fetchedData);
-      setfetchedDataDb(fetchedData.data);
-      // setfirstJob(fetchedDataDb[0])
+      const jobOffers = fetchedData.data
+      setFetchedDataDb(jobOffers);  
+      setUserInfo(jobOffers[0])
     };
-    // getManyJobOffers({isHidden:false}).then((data)=>{console.log(data)})
     fetchData();
+    
   }, []);
 
-  // production level MockUp
-
-  
-  // let firstJob = fetchedDataDb[0];
-  let { id }: any = useParams();
-
   return (
-    <>
-      {fetchedDataDb ? (
+    
+      (fetchedDataDb.length > 0 ) ? 
         <MainContainer>
           <Search placeholder="search" enterButton="Search" size="large" />
           <Container>
@@ -43,7 +36,7 @@ export default function JobsList() {
                 style={{ overflowY: "scroll", height: "100%" }}
                 className="colRightCards"
               >
-                <LinkdInRouter UserInfo={UserInfo} firstJob={firstJob} />
+                <LinkdInRouter UserInfo={UserInfo}  />
               </Col>
 
               <Col
@@ -61,10 +54,9 @@ export default function JobsList() {
             </Row>
           </Container>
         </MainContainer>
-      ) : (
-        <Spin />
-      )}
-    </>
+       : 
+        <Spin size="large"/>
+    
   );
 }
 
@@ -74,7 +66,7 @@ const Container = styled.div`
   margin: 3rem auto;
   display: flex;
   flex-direction: row;
-  background-color: #b4b1b1;
+  background-color: #b1b2b4;
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
 `;

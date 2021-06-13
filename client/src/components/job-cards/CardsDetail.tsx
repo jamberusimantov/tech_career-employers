@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import {useParams} from "react-router-dom"
 import styled from "styled-components";
-import { Button } from "antd";
+import { Button,Spin } from "antd";
 import Title from "./Title";
 
 
 
-function CardsDetail({UserInfo,firstJob}:any) {
- 
-    const {position,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
+function CardsDetail({UserInfo}:any) {
+  // const [firstJobFromInfo, setfirstJobFromInfo] = useState(fetchedDataDb[0])
+  
+  // useEffect(() => {
+  //   setfirstJobFromInfo(UserInfo)    
+  //   console.log(firstJobFromInfo,"firstJobFromInfo");
+  //   console.log(firstJob,"firstJob");
+    
+  // }, []);
+  const {position,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
+  
+    
 
     // const {title,company,location,id,applicants}:any =  firstJob     
 
@@ -16,6 +25,8 @@ function CardsDetail({UserInfo,firstJob}:any) {
   // console.log("cardsDeatails > UserInfo",UserInfo)
 
   return (
+    UserInfo ?
+      
     <Container>
       <Title  title={position}/>
       <TopSection>
@@ -68,6 +79,8 @@ function CardsDetail({UserInfo,firstJob}:any) {
         </div>
       </SecondSection>
     </Container>
+      : <Spin/>
+    
   );
 }
 

@@ -4,17 +4,19 @@ import { idText } from "typescript";
 
 import CardsDetail from "./CardsDetail";
 
-export default function RecruiterRouter({UserInfo,firstJob}:any) {
+export default function RecruiterRouter({UserInfo}:any) {
   
-  let { id }:any = useParams();
+  
+  
+  let { _id }:any = useParams();
   return (
     <div>
       <Switch>
-        <Route path={`/recruiter/job`}>
+        <Route path={`/`}>
           <CardsDetail UserInfo={UserInfo} />
         </Route>
-        <Route path={`/recruiter/:${id}`}>
-          <CardsDetail  UserInfo={UserInfo}/>
+        <Route path={`/recruiter/:${_id}`}>
+          <CardsDetail  UserInfo={UserInfo} />
         </Route>
       </Switch>
     </div>
