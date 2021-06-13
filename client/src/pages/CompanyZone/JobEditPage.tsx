@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button, Input, InputNumber, Radio } from 'antd';
 import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom"
-import { getManyJobOffers } from '../../service/jobOffer.service'
 import './JobEditPage.css';
 import Login from '../../utils/login.utils'
 import { useLocation } from 'react-router-dom'

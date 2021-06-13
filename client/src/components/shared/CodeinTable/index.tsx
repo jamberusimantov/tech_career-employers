@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { Table, Button, Input, Modal } from "antd";
 
-import "../../../App.css";
+import "./style.css";
 
 const CodeinTable = (props: any): any => {
-  const { columns, getData,fixed } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { columns, getData, scroll, tableReload,title } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -24,15 +25,21 @@ const CodeinTable = (props: any): any => {
       }
     }
     fetchData();
-  }, [getData]);
+  }, [getData, tableReload]);
 
   return (
     <div className="codein-table-wrapper">
-      <div>
-        {/* <Button icon={loading ? <LoadingOutlined /> : ""} type="primary">רענן</Button> */}
+      <div className="codein-table-title">
+       {title && title}
       </div>
 
-      <Table  loading={loading} columns={columns} dataSource={data} />
+      <Table
+        scroll={scroll}
+        loading={loading}
+        columns={columns}
+        dataSource={data}
+
+      />
     </div>
   );
 };
