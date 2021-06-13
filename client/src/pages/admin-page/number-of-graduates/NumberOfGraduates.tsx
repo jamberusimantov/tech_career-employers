@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
-import {  getManyStudents } from "../../../utils/drafts/student.utils";
+import { Link } from "react-router-dom";
+import { getManyStudents } from "../../../utils/drafts/student.utils";
 import { Popover, Spin } from "antd";
 
 function NumberOfGraduates(props: any) {
-
   const [loading, setLoading] = useState(false);
   const [courseGraduates, setCourseGraduates] = useState([]);
 
@@ -15,7 +14,10 @@ function NumberOfGraduates(props: any) {
       {loading && <Spin />}
       {!loading &&
         courseGraduates.map((student: any) => (
-         <div  key={`${student._id}`}> <Link to={`studentPage/${student._id}`}>{student.name}</Link></div>
+          <div key={`${student._id}`}>
+            {" "}
+            <Link to={`studentPage/${student._id}`}>{student.name}</Link>
+          </div>
         ))}
     </div>
   );
@@ -25,17 +27,10 @@ function NumberOfGraduates(props: any) {
       try {
         setLoading(true);
 
-        // const graduates = await getGraduatesByCourse(cycle);
+        const graduatesFromSameCycle = await getManyStudents({ courseId });
+        console.log(graduatesFromSameCycle);
 
-       const graduatesFromSameCycle= await getManyStudents({courseId});
-       console.log(graduatesFromSameCycle);
-       
-
-      //  console.log("numberOfLior from numOfStu ");
-      //  console.log(numberOfLior);
-
-       setCourseGraduates(graduatesFromSameCycle);
-
+        setCourseGraduates(graduatesFromSameCycle);
 
         setLoading(false);
       } catch (error) {

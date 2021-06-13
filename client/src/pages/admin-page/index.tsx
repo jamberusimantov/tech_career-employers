@@ -8,7 +8,6 @@ import service from "../../utils";
 
 import { getAllCourses, getAllJobOffers } from "../../service/admin.service";
 
-
 import {
   updateJobOfferById,
   deleteJobOfferById,
@@ -31,7 +30,7 @@ function AdminPage() {
       key: "courseName",
       width: 250,
       fixed: "left",
-      render: (text: string, row: any) => text + row.cycle,
+      render: (text: string) => text,
       ...tableColumnTextFilterConfig(),
       onFilter: (
         value: { toString: () => string },
@@ -47,13 +46,12 @@ function AdminPage() {
       title: "מועד הסיום",
       dataIndex: "courseCompletionDate",
       key: "courseCompletionDate",
-      // width: 200,
     },
     {
       title: "מס בוגרים",
       render: renderNumberOfGraduates,
       key: "numberOfGraduates",
-      // width: 120,
+
       defaultSortOrder: "descend",
       sorter: (
         a: { numberOfGraduates: number },
@@ -207,9 +205,7 @@ function AdminPage() {
       // fixed: "left",
       fixed: "right",
       key: "emailHr",
-      render: (text: string) => (
-        <a href="mailto: abc@example.com">{text}</a>
-      ),
+      render: (text: string) => <a href="mailto: abc@example.com">{text}</a>,
     },
     {
       title: "מחיקה",
@@ -217,13 +213,10 @@ function AdminPage() {
       width: 100,
       fixed: "right",
       render: (text: any, row: any) => (
-        <Popconfirm
-          title="למחוק?"
-          onConfirm={() => deleteJobOffer(row._id)}>
+        <Popconfirm title="למחוק?" onConfirm={() => deleteJobOffer(row._id)}>
           <DeleteOutlined />
         </Popconfirm>
       ),
-      
     },
   ];
 
@@ -235,8 +228,7 @@ function AdminPage() {
     registerAdmin,
   } = login;
 
-
-  const [jobOfferReload , setJobOfferReload] = useState(0);
+  const [jobOfferReload, setJobOfferReload] = useState(0);
 
   const [studentEmail, setStudentEmail] = useState("");
 
@@ -250,11 +242,9 @@ function AdminPage() {
   const [role, setRole] = useState(" ");
   const history = useHistory();
 
-  const registerAdminByAdmin = {
+  const registerStudentByAdmin = {
     credentials: {
-      email: adminEmail,
-      password: adminPassword,
-      confirmPassword: adminConfirmPassword,
+      email: studentEmail,
     },
   };
 
@@ -264,9 +254,11 @@ function AdminPage() {
       company: companyName,
     },
   };
-  const registerStudentByAdmin = {
+  const registerAdminByAdmin = {
     credentials: {
-      email: studentEmail,
+      email: adminEmail,
+      password: adminPassword,
+      confirmPassword: adminConfirmPassword,
     },
   };
 
@@ -275,7 +267,7 @@ function AdminPage() {
   const [isModalVisibleAdmin, setIsModalVisibleAdmin] = useState(false);
 
   const [showCoursesTable, setShowCoursesTable] = useState(false);
-  const [showJobOffersTable, setShowGraduatesTable] = useState(false);
+  const [showJobOffersTable, setShowJobOffersTable] = useState(false);
 
   const showModalStudent = () => {
     setIsModalVisibleStudent(true);
@@ -304,32 +296,29 @@ function AdminPage() {
 
   async function deleteJobOffer(rowId: any) {
     await deleteJobOfferById(rowId);
-    setJobOfferReload(jobOfferReload + 1)
+    setJobOfferReload(jobOfferReload + 1);
   }
 
-  function changeShowCoursesTable(e: { target: { checked: any } }) {
+  function hideOrShowCoursesTable(e: { target: { checked: any } }) {
     setShowCoursesTable(!showCoursesTable);
   }
 
-  function changeShowJobOffersTable(e: { target: { checked: any } }) {
-    setShowGraduatesTable(!showJobOffersTable);
+  function hideOrShowJobOffersTable(e: { target: { checked: any } }) {
+    setShowJobOffersTable(!showJobOffersTable);
   }
 
   const onRegisterModalOkStudent = async () => {
     setIsModalVisibleStudent(false);
-    console.log(studentEmail);
     await registerStudent(registerStudentByAdmin.credentials, "student");
+  };
+  const onRegisterModalOkHr = async () => {
+    setIsModalVisibleHr(false);
+    await registerUser(registerHrByAdmin.credentials, "hr");
   };
 
   const onRegisterModalOkAdmin = async () => {
     setIsModalVisibleAdmin(false);
     await registerAdmin(registerAdminByAdmin.credentials, "admin");
-  };
-
-  const onRegisterModalOkHr = async () => {
-    setIsModalVisibleHr(false);
-    await registerUser(registerHrByAdmin.credentials, "hr");
-    console.log(registerHrByAdmin.credentials);
   };
 
   function renderNumberOfGraduates(row: any) {
@@ -346,22 +335,21 @@ function AdminPage() {
       const user = await getUserUseToken(localStorage.getItem("token") || "{}");
       const userRole = (user.data || { role: undefined }).role;
       setRole(userRole);
-          if (!role) {
+      if (!role) {
         history.push("/");
       }
     };
     getUserData();
-
   }, [role]);
   return (
     <>
       {role === "Admin" ? (
         <div className="admin-page">
           <div className="admin-page-actions">
-            <Checkbox onChange={changeShowCoursesTable}>
+            <Checkbox onChange={hideOrShowCoursesTable}>
               טבלת ליווי ובוגרים
             </Checkbox>
-            <Checkbox onChange={changeShowJobOffersTable}>
+            <Checkbox onChange={hideOrShowJobOffersTable}>
               טבלת משרות ומגייסות
             </Checkbox>
 
@@ -379,12 +367,12 @@ function AdminPage() {
           </div>
 
           <div className="admin-page-table-courses">
-            {!showCoursesTable ? (
+            {showCoursesTable ? (
               " "
             ) : (
               <>
                 <CodeinTable
-                title={"טבלת בוגרים וקורסים"}
+                  title={"טבלת בוגרים וקורסים"}
                   scroll={{ x: 1300 }}
                   columns={coursesColumns}
                   getData={getAllCourses}
@@ -394,18 +382,16 @@ function AdminPage() {
           </div>
 
           <div className="admin-page-table-job-offers">
-            {!showJobOffersTable ? (
+            {showJobOffersTable ? (
               " "
             ) : (
               <>
                 <CodeinTable
-                    title={"טבלת משרות ומגייסות"}
-
+                  title={"טבלת משרות ומגייסות"}
                   scroll={{ x: 1500, y: 300 }}
                   columns={jobOffersColumns}
                   getData={getAllJobOffers}
                   tableReload={jobOfferReload}
-               
                 />
               </>
             )}

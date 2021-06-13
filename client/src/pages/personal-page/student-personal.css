@@ -1,0 +1,196 @@
+.code-box-demo {
+    text-align: center;
+  }
+  
+  .ant-layout-sider {
+    color: #fff;
+    line-height: 120px;
+    background: #3ba0e9;
+  }
+  [data-theme="dark"] .ant-layout-sider {
+    background: #3499ec;
+  }
+  
+  [data-theme="dark"] .ant-layout-content {
+    background: #107bcb;
+  }
+   .code-box-demo > .ant-layout + .ant-layout {
+    margin-top: 48px;
+  }
+  
+  .textUserCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .textNum1{
+    display: flex;
+  }
+  
+  
+  
+  .textNum2{
+    display: flex;
+  }
+  
+  .userCardFrame{
+    height: auto;
+    width: 100%;
+    background-color:grey ;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: 1fr;
+    border:1px black solid;
+    box-shadow: black 3px 3px 3px 0;
+    
+  }
+  .nameUserCard{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: name;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .emailUserCard{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: email;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .courseDateUserCard{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: courseDate;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .aboutUserCard{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: about; 
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .jobsTimlineUserCard{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: jobTimline;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .skillsUserCard{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: skills;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .editButtonUserCarrd{
+    height: 20px;
+    width: 50%;
+    background-color: white;
+    color: black;
+    grid-area: editButtonUserCarrd;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .userCardImage{
+  height: 50vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  } 
+  
+  .userCardImage img{
+    width: 50%;
+    height: 50%;
+    border-radius: 50px;
+  }
+  
+  .userInfo{
+  height: 50vh;
+  background-color: #fff;
+  display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(6,1fr);
+    grid-template-areas: 
+    "name name"
+    "email email"
+    "courseDate about"
+    "jobTimline skills"
+    "icons icons"
+    "editButtonUserCarrd editButtonUserCarrd"
+    ;
+  
+    align-items: center;
+    
+    justify-items: center;
+  }
+  
+  .gitHubIcon{
+    height: 50px;
+    width: 50px;
+    color: black;
+    
+  }
+  
+  .editButtonUserCarrd{
+    height: 50px;
+    width: 50px;
+    color: black;
+    
+  }
+  
+  .LinkdinIcon{
+    height: 50px;
+    width: 50px;
+    color: black;
+  
+  }
+  
+  .facebookIcon{
+    height: 50px;
+    width: 50px;
+    color: black;
+  }
+  
+  .snIcons{
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .icons{
+    grid-area: icons;
+    color: black;
+  }
