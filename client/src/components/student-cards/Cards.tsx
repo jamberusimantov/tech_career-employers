@@ -3,6 +3,7 @@ import { Spin, Row } from 'antd'
 import StudentCard from './card/StudentCard'
 import service from '../../utils';
 const { student, login } = service
+
 const Cards = () => {
     const [studentsArray, setStudentsArray] = useState([])
     const [token, setToken] = useState(localStorage.getItem('token'))

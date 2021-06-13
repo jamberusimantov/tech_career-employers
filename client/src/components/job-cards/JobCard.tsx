@@ -1,42 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Card, Avatar } from "antd";
 import { Link } from "react-router-dom";
-// import {
-//   EditOutlined,
-//   EllipsisOutlined,
-//   SettingOutlined,
-// } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-export default function JobCard({title,company,location,applicants,id}:any) {
+export default function JobCard({ userItem, setUser }: any): any {
+  const { position, company, location, _id, numOfPeopleApplied } = userItem;
+  console.log("user item",userItem)  
+
   return (
-    <Container>
-      <Link to={`/recruiter/${id}`}>
-        <Card style={{ padding: 5, cursor: "pointer"}}>
+    <Container
+      onClick={() => {
+        setUser(userItem);
+      }}
+    >
+      <Link to={`/recruiter/:${_id}`}>
+        <Card style={{ padding: 5, cursor: "pointer" }}>
           <Meta
-            avatar={<Avatar src="/img/checkpoint.png" size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}  />}
-            title={title}
-             description={company}
+            avatar={
+              <Avatar
+                src="/img/checkpoint.png"
+                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+              />
+            }
+            title={position}
+            description={company}
           />
-         
+
           <p>{location}</p>
-          <p>{applicants}</p>
+          <p>{numOfPeopleApplied}</p>
         </Card>
       </Link>
     </Container>
-  
   );
-
 }
-
 
 const Container = styled.div`
-text-align: left;
-&:hover{
-  /* background-color: gray !important; */
-
-}
-`
+  text-align: left;
+  /* padding: 12px 24px; */
+  
+`;
