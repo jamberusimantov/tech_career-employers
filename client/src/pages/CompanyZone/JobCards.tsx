@@ -71,7 +71,7 @@ function historyPushData(currentJob:any){
                         </a>
                     </Dropdown>
                     <div className="addNewJobBtn">
-                        <Button >הוסף משרה חדשה</Button>
+                        <Button>הוסף משרה חדשה</Button>
                     </div>
                 </div>
 
