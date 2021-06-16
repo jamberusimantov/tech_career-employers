@@ -5,9 +5,10 @@ import { Form, Input, Button, Spin, Image, message } from "antd";
 import { useHistory, useParams } from 'react-router-dom';
 import FileBase from 'react-file-base64'
 
+import './hr-register.css'
 export default function HrRegisterForm() {
-  const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
   const history = useHistory()
+  const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } }
   const [linkValidator, setLinkValidator] = useState(true)
   // to fix to better looking solution
   const { id, token } = useParams<Record<string, string | undefined>>()
@@ -25,7 +26,6 @@ export default function HrRegisterForm() {
 
   useEffect(() => {
     // consider async function instead of nesting  ===> (async () => {})() : IIFE
-
     const getHrrById = async () => {
       const data = await getHrById(hrData.id || '', token)
       if (!data.success) {
@@ -36,7 +36,6 @@ export default function HrRegisterForm() {
       } else {
         setHrData({ ...hrData, company: data.data.company, email: data.data.email })
       }
-      console.log(data);
     }
     getHrrById()
   }, [])
@@ -67,6 +66,7 @@ export default function HrRegisterForm() {
               initialValues={{ remember: true, email: hrData.email, company: hrData.company }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
+              className="recruiterForm"
             >
               <Form.Item label='דוא"ל' name="email" rules={[{
                 type: 'email',
@@ -124,7 +124,7 @@ export default function HrRegisterForm() {
                 <FileBase type="file" multiple={false} onDone={({ base64 }: any) => { setHrData({ ...hrData, profilePicture: base64 }) }} />
               </Form.Item>
               <Button id="submitBtn" type="primary" htmlType="submit">
-                Submit
+                הרשם
               </Button>
               {hrData.profilePicture && <Image
                 width={200}
