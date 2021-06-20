@@ -25,14 +25,17 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData.d
     
 
    const getJobData = async () => {
-    const jobOfferData = await getManyJobOffers(userData?.company && {company:userData.company})
-    // const jobOfferData =  (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
-       
-   
-    const jobOfferData =  (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
-     console.log(userData)
+ 
+try {
+    const jobOfferData = (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
+    console.log(userData)
+    console.log(jobOfferData);
     setJobOffer(jobOfferData.data || [])
+} 
+catch (error) {
+    console.log(error);
     
+}
         
     }
 
@@ -48,7 +51,7 @@ function historyPushData(currentJob:any){
 
     useEffect(() => {
         getJobData()
-    }, [])
+    }, [userData])
 
     const menu = (
         <Menu>
