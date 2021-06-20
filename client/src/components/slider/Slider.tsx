@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 
-import "./Slider.css";
+import "./index.css";
 import { Carousel } from "antd";
 export default function Slider() {
   return (
