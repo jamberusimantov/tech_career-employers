@@ -25,6 +25,9 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData.d
     
 
    const getJobData = async () => {
+    const jobOfferData = await getManyJobOffers(userData?.company && {company:userData.company})
+    // const jobOfferData =  (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
+       
    
     const jobOfferData =  (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
      console.log(userData)

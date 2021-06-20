@@ -8,7 +8,7 @@ const { Meta } = Card;
 
 export default function JobCard({ userItem, setUser }: any): any {
   const { position, company, location, _id, numOfPeopleApplied } = userItem;
-  console.log("user item",userItem)  
+  
 
   return (
     <Container
@@ -21,7 +21,7 @@ export default function JobCard({ userItem, setUser }: any): any {
           <Meta
             avatar={
               <Avatar
-                src="/img/checkpoint.png"
+                src={`/img/${company}.png`}
                 size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
               />
             }
@@ -40,5 +40,27 @@ export default function JobCard({ userItem, setUser }: any): any {
 const Container = styled.div`
   text-align: left;
   /* padding: 12px 24px; */
-  
-`;
+  outline: none;
+  border: none;
+
+  /* img{
+    width: 100%;
+    height: 100%;
+    
+    
+
+  } */
+  .ant-card-meta-avatar{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ant-card-meta-avatar img{
+width: 100%;
+height: 100%;
+  }
+
+`
