@@ -12,7 +12,7 @@ const jobOffer = new Schema({
         },
         numOfPeopleApplied :{
             type: String,
-            required: true
+            
         },
         position: {
             type: String,
@@ -45,9 +45,11 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
-        minYearsOfExperience: {
-            type: String,
-            required: true
+  
+       
+        numOfPeopleApplied: {
+            type: Number,
+            default: 0,
         },
         numOfViews: {
             type: Number,
@@ -60,9 +62,9 @@ const jobOffer = new Schema({
             type: Boolean,
             default: true,
         },
-        status: {
-            type: String,
-            default: 'OPEN',
+        isOpen: {
+            type:  Boolean,
+            default: true,
         },
     },
     //  { timestamps: true }

@@ -1,0 +1,25 @@
+
+
+.slick-slider.slick-initialized{
+width: 600px;
+height: 50vh;
+box-shadow: 4px 4px 20px 2px #000;
+
+}
+
+
+.caruselmain{
+    
+    background-color: aqua;
+}
+
+.caruselmain img{
+height: 100%;
+}
+
+
+/* img{
+    width:100%;
+    height:100%;
+    
+} */

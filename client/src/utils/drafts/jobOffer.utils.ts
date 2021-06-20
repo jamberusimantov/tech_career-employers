@@ -43,7 +43,7 @@ export const deleteJobOfferById = async (_id: string, token?: string) => {
     catch (error) { return { success: false, error: err('deleteJobOfferById', error) } }
     finally { }
 }
-export const postJobOffer = async (doc: object, token: string) => {
+export const postJobOffer = async (doc: object, token?: string) => {
     try {
         return await postDoc(collection, body(doc), key, token)
     }

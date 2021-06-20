@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Table, Button, Input, Modal } from "antd";
+import { Table } from "antd";
 
 import "./style.css";
 

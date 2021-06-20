@@ -12,7 +12,7 @@ import LinkdIn from './components/job-cards/LinkdIn'
 
 import JobCards from './pages/CompanyZone/JobCards'
 import StuSteps from './components/steps/StuSteps'
-import StudentPersonal from './pages/personal-page/Student-Personal'
+import StudentPersonal from './pages/personal-page/StudentPersonal'
 import JobEditPage from './pages/CompanyZone/JobEditPage'
 
 
@@ -21,6 +21,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import AddJob from './pages/CompanyZone/AddJob';
 
 
 function AdminRouter() {
@@ -38,7 +39,9 @@ function AdminRouter() {
       <Route path="/JobEditPage">
         <JobEditPage/>
       </Route>
-       
+      <Route path="/addNewJob">
+        <AddJob/>
+      </Route>
       <Route path="/signUp/hr/:token/:id">
        <HrRegisterForm/>
       </Route>
