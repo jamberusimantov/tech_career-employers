@@ -9,6 +9,6 @@ const course = new Schema({
     numberOfGraduates: {type:Number ,required:true},
     graduatesWorking:{type:Number ,required:true},
     graduatesNotWorking:{type:Number ,required:true},
-    cycle: {type:String ,required:true}, 
+    courseCycle: {type:String ,required:true}, 
 })
 module.exports = mongoose.model('courses', course)

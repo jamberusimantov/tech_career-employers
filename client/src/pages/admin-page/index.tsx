@@ -6,7 +6,7 @@ import CodeinTable from "../../components/shared/CodeinTable";
 
 import service from "../../utils";
 
-import { getAllCourses, getAllJobOffers } from "../../service/admin.service";
+import { getAllCourses, getAllJobOffers,creatingCourse } from "../../service/admin.service";
 
 import {
   updateJobOfferById,
@@ -230,6 +230,9 @@ function AdminPage() {
 
   const [jobOfferReload, setJobOfferReload] = useState(0);
 
+  const [courseName,setCourseName]=useState("");
+  const [courseCycle,setCourseCycle]=useState("");
+
   const [studentEmail, setStudentEmail] = useState("");
 
   const [hrEmail, setHrEmail] = useState("");
@@ -241,6 +244,14 @@ function AdminPage() {
 
   const [role, setRole] = useState(" ");
   const history = useHistory();
+
+  const creatingCourseByAdmin = {
+    course:{
+      courseName:courseName,
+      courseCycle:courseCycle
+    }
+  }
+
 
   const registerStudentByAdmin = {
     credentials: {
@@ -263,11 +274,22 @@ function AdminPage() {
   };
 
   const [isModalVisibleStudent, setIsModalVisibleStudent] = useState(false);
+  const [isModalVisibleCourseOpening, setIsModalVisibleCourseOpening] = useState(false);
   const [isModalVisibleHr, setIsModalVisibleHr] = useState(false);
   const [isModalVisibleAdmin, setIsModalVisibleAdmin] = useState(false);
 
   const [showCoursesTable, setShowCoursesTable] = useState(false);
   const [showJobOffersTable, setShowJobOffersTable] = useState(false);
+
+  const showModalCourseOpening = ()=>{
+    setIsModalVisibleCourseOpening(true)
+  }
+
+  const handleCancelCourseOpening = () => {
+    setIsModalVisibleCourseOpening(false);
+  };
+
+
 
   const showModalStudent = () => {
     setIsModalVisibleStudent(true);
@@ -306,6 +328,12 @@ function AdminPage() {
   function hideOrShowJobOffersTable(e: { target: { checked: any } }) {
     setShowJobOffersTable(!showJobOffersTable);
   }
+  const onRegisterModalOkCourseOpening = async () => {
+    setIsModalVisibleCourseOpening(false);
+
+    // await creatingCourse(creatingCourseByAdmin.course)
+    // await registerStudent(registerStudentByAdmin.credentials, "student");
+  };
 
   const onRegisterModalOkStudent = async () => {
     setIsModalVisibleStudent(false);
@@ -353,6 +381,9 @@ function AdminPage() {
               טבלת משרות ומגייסות
             </Checkbox>
 
+            <Button type="primary" onClick={showModalCourseOpening}>
+            פתיחת קורס
+            </Button>
             <Button type="primary" onClick={showModalStudent}>
               רישום סטודנט
             </Button>
@@ -463,6 +494,30 @@ function AdminPage() {
               placeholder="אימייל סטודנט"
             />
           </Modal>
+
+          <Modal
+            title="פתיחת קורס"
+            visible={isModalVisibleCourseOpening}
+            onOk={onRegisterModalOkCourseOpening}
+            onCancel={handleCancelCourseOpening}
+          >
+            <p>שם קורס</p>
+            <Input
+              onChange={(e) => {
+                setCourseName(e.target.value);
+              }}
+              placeholder="שם קורס"
+            />
+            <p>מחזור</p>
+             <Input
+              onChange={(e) => {
+                setCourseCycle(e.target.value);
+              }}
+              placeholder="מחזור"
+            />
+          </Modal>
+
+
         </div>
       ) : (
         " "

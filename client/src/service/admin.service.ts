@@ -15,6 +15,10 @@ export async function getAllJobOffers() {
   return await (await axios.get(`${API}/jobOffers/all`, headers)).data.data;
 }
 
+export async function creatingCourse() {
+  return await (await axios.post(`${API}/course`, headers)).data.data;
+}
+
 export async function getGraduatesByCourse(courseId: string){
 
   return await (await axios.get(`${API}/students/getByCourseId/${courseId}`,headers)).data.data;
