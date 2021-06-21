@@ -1,29 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { Link } from "react-scroll";
-import "./index.css";
-import { Carousel } from "antd";
 import { CaretDownOutlined } from '@ant-design/icons'
+import CountUp from 'react-countup';
+
+import "./index.css";
+// import { Carousel } from "antd";
+// import AnimatedNumber from "react-animated-numbers"
 
 export default function Slider() {
- 
+
+
   return (
-   <div> <h1 className="h1title">
-   <img className="tcLogo" src="./img/tek.png" alt="" />
-   קריירה
- </h1>
-    {/* <Carousel className="caruselmain" autoplay>
-      
-      <img src="images/11.jpg" alt="" />
-      <img src="images/1234.jpg" alt="" />
-   
-     
-      <img src="images/44.jpeg" alt="" />
-      <img src="images/665.jpg" alt="" />
-      <img src="images/33.jpeg" alt="" />
-      <img src="images/321.jpg" alt="" />
-    </Carousel><br/><br/> */}
-    <Link className="c-about" to="aboutMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }}/></Link>
+    <div className="container">
+    <div className="DataNumbersDiv">
+      <div className='countUp'>
+<CountUp duration={5} start={0} end={350} delay={0}>{({ countUpRef }) => (
+    <div>
+      <span className="numData" ref={countUpRef} />
+      <h1>סטודנטים מגוייסים</h1>
     </div>
-  );
+  )}
+</CountUp>
+</div>
+<div  className='countUp'>
+<CountUp duration={5} start={0} end={20} delay={0}>{({ countUpRef }) => (
+    <div>
+      <span className="numData" ref={countUpRef} />
+      <h1>חברות מגייסות</h1>
+    </div>
+  )}
+</CountUp>
+</div>
+<div className='countUp'>
+<CountUp  start={0} end={7} delay={0}>{({ countUpRef }) => (
+    <div>
+      <span className="numData" ref={countUpRef} />
+      <h1>קורסים פעילים</h1>
+    </div>
+  )}
+</CountUp>
+</div>
+    </div>
+
+    <Link className="c-about" to="aboutMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }}/></Link>
+
+    </div>
+  )
 }
+
