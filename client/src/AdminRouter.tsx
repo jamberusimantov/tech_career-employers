@@ -29,7 +29,9 @@ function AdminRouter() {
  
 
   return (
+   
     <Switch>
+      
       <Route exact path="/">
         <Home />
       </Route>
@@ -69,6 +71,7 @@ function AdminRouter() {
         <StudentPersonal />
       </Route>
     </Switch>
+  
   )
 
 }
