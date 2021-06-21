@@ -1,6 +1,6 @@
 import AdminRouter from "../../AdminRouter";
 import { Link } from "react-router-dom";
-import { Button, Layout, Menu, Modal } from "antd";
+import { Button, Layout, Menu, Modal,Row, Col } from "antd";
 import { useState, useEffect } from "react";
 import Login from "../loginForm/Login";
 import service from "../../utils";
@@ -41,19 +41,22 @@ function LayoutMain(props: any) {
   }, [isLoggedIn]);
 
   return (
+    // <Row>
+    //   <Col md={24} lg={8}>
     <Layout className="mainlay">
- 
       <Header className="header">
+
         <div>
+
           {isLoggedIn ? (
             <>
-            <Button size="large" type="primary" onClick={logOutHandler}>
-              התנתק{" "}
-            </Button>
-            <Link style={{padding:'0 15px'}} to="/privateStudent">אזור אישי</Link>
+              <Button size="large" type="primary" onClick={logOutHandler}>
+                התנתק{" "}
+              </Button>
+              <Link style={{ padding: "0 15px" }} to="/privateStudent">
+                אזור אישי
+              </Link>
             </>
-
-            
           ) : (
             <Button size="large" type="primary" onClick={showModal}>
               התחבר{" "}
@@ -68,18 +71,6 @@ function LayoutMain(props: any) {
             <Login />
           </Modal>
         </div>
-        {/* <div>
-          <Menu theme="light" mode="vertical" style={{ textAlign: "center",display: 'flex'}} >
-            {isLoggedIn && 
-              <>
-              <Menu.Item key="1"><Link to="/">דף הבית</Link></Menu.Item>
-              <Menu.Item key="2"><Link to="hr">מגייסים</Link></Menu.Item>
-              <Menu.Item key="3"><Link to="/student">סטודנטים</Link></Menu.Item>
-              <Menu.Item key="4"><Link to="/recruiter">משרות</Link></Menu.Item>
-              {role === 'Admin' && <Menu.Item key="5"><Link to="/admin">הנהלה</Link></Menu.Item>}
-              </>}
-          </Menu>
-        </div> */}
         <div>
           <Menu theme="light" mode="horizontal">
             {isLoggedIn && (
@@ -99,29 +90,25 @@ function LayoutMain(props: any) {
                     <b>מגייסים</b>
                   </Link>
                 </Menu.Item>
-               {role === 'Admin' &&
-               <Menu.Item key="1" className="menIt">
-               <Link to="/admin">
-                 <b>הנהלה</b>
-               </Link>
-             </Menu.Item>} 
+                {role === "Admin" && (
+                  <Menu.Item key="1" className="menIt">
+                    <Link to="/admin">
+                      <b>הנהלה</b>
+                    </Link>
+                  </Menu.Item>
+                )}
                 <Menu.Item key="5" className="menIt">
                   <Link to="/recruiter">
                     <b>משרות</b>
                   </Link>
                 </Menu.Item>
-                {role === "Admin" && (
-                  <Menu.Item key="6">
-                    <Link to="/admin">הנהלה</Link>
-                  </Menu.Item>
-                )}
               </>
             )}
           </Menu>
         </div>
 
         <div className="imgdiv">
-          <img src="/img/Logo.png" alt="" className="logo" />
+          <img src="/img/logo.png" alt="" className="logo" />
         </div>
       </Header>
       <Content>
@@ -137,6 +124,8 @@ function LayoutMain(props: any) {
 
       <img />
     </Layout>
+    // </Col>
+    // </Row>
   );
 }
 
