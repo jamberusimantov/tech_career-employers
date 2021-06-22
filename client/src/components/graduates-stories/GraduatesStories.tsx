@@ -27,18 +27,18 @@ const GraduatesStories =()=> {
       </div>
     </div>
 
-    <div>
-      <img src="/images/yizhak.jpeg" />
-      <div className="myCarousel">
-        <h3>יצחק גטאי</h3>
-        <h4>Wix</h4>
-        <p>
-          תמיד אהבתי ליצור דברים חדשים טק קריירה בהחלט גרמה לי להבין שזו תהייה הקריירה שלי
-        </p>
-      </div>
-    </div>
+        <div>
+          <img src="/images/yizhak.jpeg" />
+          <div className="myCarousel">
+            <h3>יצחק גטאי</h3>
+            <h4>Wix</h4>
+            <p>
+              תמיד אהבתי ליצור דברים חדשים טק קריירה בהחלט גרמה לי להבין שזו תהייה הקריירה שלי
+            </p>
+          </div>
+        </div>
 
-  </Carousel>
+      </Carousel>
 
 
 

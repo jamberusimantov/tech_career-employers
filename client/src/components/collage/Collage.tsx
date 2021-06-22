@@ -1,6 +1,6 @@
-import React from 'react'
-import "./Collage.css"
-const Collage=()=> {
+import React from 'react';
+import "./Collage.css";
+const Collage = () => {
 
 
     return (

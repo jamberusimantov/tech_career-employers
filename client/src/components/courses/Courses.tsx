@@ -1,8 +1,11 @@
 import React from 'react'
-import { FcComboChart, FcFinePrint, FcGlobe, FcCommandLine, FcCloth, FcMindMap, FcMultipleDevices, FcEnteringHeavenAlive, FcAcceptDatabase  } from "react-icons/fc"
+import { FcComboChart, FcFinePrint, FcGlobe, FcCommandLine, FcCloth, FcMindMap, FcMultipleDevices, FcEnteringHeavenAlive, FcAcceptDatabase } from "react-icons/fc"
 import { Link } from "react-scroll";
 import { CaretDownOutlined } from '@ant-design/icons'
 import './Courses.css';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 export default function Courses() {
     return (
         <div className='coursesContainer'>
@@ -50,7 +53,7 @@ export default function Courses() {
 
             </div>
             <div></div>
-            <Link className="c-about" to="coOpsMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }}/></Link>
+            <Link className="c-about" to="coOpsMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }} /></Link>
 
         </div>
     )
