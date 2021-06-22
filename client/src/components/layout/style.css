@@ -105,8 +105,8 @@ justify-content: space-evenly;
 .ant-layout-header.header{
   display: flex;
   justify-content: space-between;
-  box-shadow:2px 2px 10px 1px;
-  width: 100%;
+  -moz-box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0px 3px 6px #00000029;  width: 100%;
   z-index: 1;
 }
 /* --------------------------------------------- */
