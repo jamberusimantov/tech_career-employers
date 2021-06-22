@@ -6,9 +6,6 @@ import CountUp from 'react-countup';
 import TextAnimation from 'react-animate-text';
 import "./index.css";
 
-// import { Carousel } from "antd";
-// import AnimatedNumber from "react-animated-numbers"
-
 export default function Slider() {
 
 

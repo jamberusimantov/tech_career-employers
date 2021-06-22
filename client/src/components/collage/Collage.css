@@ -12,14 +12,9 @@
   height: 200px;
 }
 .grid-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* justify-content: space-evenly; */
-  padding: 2%;
-    background-color: #f5f5f5;
-    
+    grid-template-columns: auto auto auto;
+    background-color: #567e9c;
+    padding: 10px;
   }
   .grid-item {
     background-color: rgba(255, 255, 255, 0.8);
