@@ -17,6 +17,11 @@ export default function Coops() {
       <div className='Footer-bottom'>
         1
       </div>
+      <div className='Footer-bottom'>
+        2
+      </div><div className='Footer-bottom'>
+        3
+      </div>
 
       <div className="footer-links">
         <h2 className='header'></h2>

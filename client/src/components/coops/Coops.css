@@ -7,7 +7,6 @@
     flex-direction: column;
     background-color: #f0f0f0;
     padding-top: 20px;
-    
     /* border: 1px solid; */
 }
 
@@ -35,8 +34,8 @@ float: left;
 .coImages{
  /* background-color: #fff; */
  /* text-decoration: underline solid; */
- opacity: 0.7;
- z-index: 2;
+ /* opacity: 0.7; */
+ /* z-index: 1; */
 }
 .coLogo1{
     width:90px;
