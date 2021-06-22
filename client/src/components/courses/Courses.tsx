@@ -6,9 +6,9 @@ import './Courses.css';
 export default function Courses() {
     return (
         <div className='coursesContainer'>
-            <div></div>
+            <div className='coursesTitelDiv'><h1>הקורסים שלנו</h1>
+</div>
             <div className='coursesDiv'>
-
             <div className='course'>
             <FcMultipleDevices size={70}/>
             <h3> Full Stack Web Development</h3>

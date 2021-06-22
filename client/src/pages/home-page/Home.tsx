@@ -14,10 +14,10 @@ export default function Home() {
   return (
     <div className="mainHomeDiv">
       
+      <Slider />
 
       <Collage/>
-      <About />
-      <Slider />
+      {/* <About /> */}
       <Courses/>
       <GraduatesStories/>
       <Coops />

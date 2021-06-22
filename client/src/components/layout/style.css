@@ -28,6 +28,7 @@ background-repeat: no-repeat;
   }
 
   .ant-layout-header.header{
+    scroll-snap-align: start;
     background: rgb(255, 255, 255);
     /* font-family: "Guttman Yad-Brush"; */
     /* width: 100%; */

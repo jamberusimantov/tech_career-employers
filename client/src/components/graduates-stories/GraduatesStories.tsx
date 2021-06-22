@@ -5,9 +5,10 @@ import './GraduatesStories.css'
 const GraduatesStories =()=> {
 
     return (
-        <div>
-            <h1>בוגרים שלנו</h1>
-            <Carousel
+      <div className='graduatContainer'>
+        <div className='graduatInnerDiv'>
+            <h1>בוגרים שגוייסו השבוע</h1>
+            <Carousel className='carouselComponent'
     showArrows={true}
     infiniteLoop={true}
     showThumbs={true}
@@ -42,6 +43,7 @@ const GraduatesStories =()=> {
 
 
 
+        </div>
         </div>
     )
 }
