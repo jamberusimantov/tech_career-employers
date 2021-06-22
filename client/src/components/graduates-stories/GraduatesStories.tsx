@@ -7,7 +7,7 @@ const GraduatesStories =()=> {
     return (
       <div className='graduatContainer'>
         <div className='graduatInnerDiv'>
-            <h1>בוגרים שגוייסו השבוע</h1>
+            <h1>בוגרים שגוייסו החודש</h1>
             <Carousel className='carouselComponent'
     showArrows={true}
     infiniteLoop={true}

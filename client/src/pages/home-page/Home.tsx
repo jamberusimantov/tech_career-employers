@@ -15,9 +15,7 @@ export default function Home() {
     <div className="mainHomeDiv">
       
       <Slider />
-
       <Collage/>
-      {/* <About /> */}
       <Courses/>
       <GraduatesStories/>
       <Coops />

@@ -9,7 +9,7 @@ const Collage = () => {
             <div className='titleDiv'>
                 
             <img src="./images/logotech.png" alt=""/><span className='collageH1'>קריירה</span><br></br><br></br>
-            <h1>הכשרה של כוכבים להייטק</h1>
+            <h1>הכשרת כוכבים להייטק</h1>
             </div>
             <div></div>
         </div>
