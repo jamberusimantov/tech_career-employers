@@ -34,3 +34,6 @@
 h1{
     font-size: xx-large;
 }
+.ant-layout-rtl {
+    direction: ltr;
+  }
