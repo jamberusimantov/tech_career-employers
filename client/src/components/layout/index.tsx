@@ -1,3 +1,4 @@
+import ChatBot from '../../components/chat-bot/ChatBot';
 import AdminRouter from "../../AdminRouter";
 import { Link } from "react-router-dom";
 import { Button, Layout, Menu, Modal,Row, Col } from "antd";
@@ -8,6 +9,7 @@ import "./style.css";
 import "antd/dist/antd.css";
 const { login } = service;
 const { Header, Content, Footer } = Layout;
+
 
 function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -141,6 +143,7 @@ function LayoutMain(props: any) {
         >
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
+            <ChatBot/>
           </Content>
         </Layout>
       </Content>

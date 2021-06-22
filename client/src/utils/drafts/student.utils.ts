@@ -54,7 +54,7 @@ export async function deleteStudent(credentials: any) {
     catch (err) { console.error(err) }
     finally { }
 }
-export async function getAllStudents() {
+export async function   getAllStudents() {
     try {
         return await (await axios.get(`${API}/students/all`,headers)).data
     }
