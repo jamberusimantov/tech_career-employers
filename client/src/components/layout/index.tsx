@@ -1,11 +1,15 @@
 import AdminRouter from "../../AdminRouter";
-import { Link } from "react-router-dom";
-import { Button, Layout, Menu, Modal,Row, Col } from "antd";
+// import { Link } from "react-router-dom";
+import { Link } from 'react-scroll';
+import { Button, Layout, Menu, Modal, Row, Col } from "antd";
 import { useState, useEffect } from "react";
 import Login from "../loginForm/Login";
 import service from "../../utils";
 import "./style.css";
 import "antd/dist/antd.css";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 const { login } = service;
 const { Header, Content, Footer } = Layout;
 
@@ -40,6 +44,11 @@ function LayoutMain(props: any) {
     tokenHandler();
   }, [isLoggedIn]);
 
+  // useEffect of on scroll animation
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     // <Row>
     //   <Col md={24} lg={8}>
@@ -71,28 +80,28 @@ function LayoutMain(props: any) {
             <Login />
           </Modal>
         </div>
-        {/* <Menu theme="light" mode="horizontal">
-        <Menu.Item key="6" className="menIt">
-                  <Link to="/">
-                    <b> הבוגרים שלנו</b>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="7" className="menIt">
-                  <Link to="/">
-                    <b> דף הבית</b>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="8" className="menIt">
-                  <Link to="/">
-                    <b> דף הבית</b>
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="9" className="menIt">
-                  <Link to="/">
-                    <b> דף הבית</b>
-                  </Link>
-                </Menu.Item>
-        </Menu> */}
+        <Menu theme="light" mode="horizontal">
+          <Menu.Item key="6" className="menIt">
+            <Link to="homePage" smooth={true} duration={1000}>
+              <b>דף הבית</b>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="7" className="menIt">
+            <Link to="about" smooth={true} duration={1000}>
+              <b> מי אנחנו?</b>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="8" className="menIt" >
+            <Link to="courses" smooth={true} duration={1000} >
+              <b> קורסים</b>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="9" className="menIt">
+            <Link to="graduates" smooth={true} duration={1000}>
+              <b> בוגרים</b>
+            </Link>
+          </Menu.Item>
+        </Menu>
 
         <div>
           <Menu theme="light" mode="horizontal">
