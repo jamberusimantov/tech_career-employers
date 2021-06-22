@@ -13,13 +13,11 @@ const { Header, Content, Footer } = Layout;
 export default function Home() {
   return (
     <div className="mainHomeDiv">
-
-
-      <Collage />
-      <About />
+      
       <Slider />
-      <Courses />
-      <GraduatesStories />
+      <Collage/>
+      <Courses/>
+      <GraduatesStories/>
       <Coops />
     </div>
   );

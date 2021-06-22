@@ -2,13 +2,19 @@
 
 .sliderContainer{
     height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    background-repeat: round;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: rgb(243, 243, 243);
-
+    background-image: url('https://i.ibb.co/80QGpsn/bgImage.jpg');
+    background-color: rgb(238, 238, 238);
 }
 
+.numDataDiv{
+    width: 150px;
+}
 
 .numData{
     font-size: 150px;
@@ -26,6 +32,7 @@
     float: right;
     -moz-box-shadow: 0px 3px 9px #00000029;
     box-shadow: 0px 3px 9px #00000029;
+    opacity: 0.7;
 }
 
 /* .techImage img{
@@ -34,6 +41,8 @@
 h1{
     font-size: xx-large;
 }
-.ant-layout-rtl {
+/* .ant-layout-rtl {
     direction: ltr;
-  }
+  } */
+
+ 

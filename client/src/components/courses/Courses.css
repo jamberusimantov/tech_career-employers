@@ -6,9 +6,14 @@
     background-color: rgb(255, 255, 255);
 }
 
+.coursesTitelDiv h1{
+    font-size: 50px;
+}
+
 .coursesDiv{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-content: space-around;
     flex-wrap: wrap;
     text-align: center;
@@ -20,9 +25,11 @@
     box-shadow: 0px 3px 9px #00000029;
 }
 
+.course svg {
+    margin-top:20px;
+}
+
 .course h3{
-    padding-top: 7px;
+    margin: 20px 0;
     font-size: xx-large;
-    width:250px;
-    height: 170px;
 }
