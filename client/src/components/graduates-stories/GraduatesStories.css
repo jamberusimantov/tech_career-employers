@@ -1,3 +1,21 @@
+.graduatContainer{
+  background-color: rgb(238, 238, 238);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.graduatInnerDiv h1{
+  font-size: 50px;
+}
+
+.caroselComponent{
+  -moz-box-shadow: 0px 3px 9px #00000029;
+  box-shadow: 0px 3px 9px #00000029;
+}
+
 .carousel-root {
     width: 64% !important;
     margin: auto !important;
@@ -95,6 +113,10 @@
   
   .testimonials {
     text-align: center;
+  }
+  
+  .ant-layout-rtl {
+    direction: ltr;
   }
   
   @media only screen and (max-width: 934px) {

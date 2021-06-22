@@ -20,16 +20,17 @@ export default function Slider() {
         <div className='countUp'>
           <CountUp duration={5} start={0} end={770} delay={0}>{({ countUpRef }) => (
             <div>
-              <span className="numData" ref={countUpRef} />
+              <div className='numDataDiv'><span className="numData" ref={countUpRef} /></div>
               <h1><TextAnimation>בוגרים </TextAnimation></h1>
             </div>
           )}
+          
           </CountUp>
         </div>
         <div className='countUp'>
           <CountUp duration={5} start={0} end={112} delay={0}>{({ countUpRef }) => (
             <div>
-              <span className="numData" ref={countUpRef} />
+              <div className='numDataDiv'><span className="numData" ref={countUpRef} /></div>
               <h1><TextAnimation>חברות מגייסות </TextAnimation></h1>
 
             </div>
@@ -39,7 +40,7 @@ export default function Slider() {
         <div className='countUp'>
           <CountUp duration={5} start={0} end={93} delay={0}>{({ countUpRef }) => (
             <div>
-              <span className="numData" ref={countUpRef} /><span className="numData">%</span>
+              <div className='numDataDiv'><span className="numData" ref={countUpRef} /></div>
               <h1>השמה</h1>
             </div>
           )}
@@ -48,7 +49,7 @@ export default function Slider() {
         <div className='countUp'>
           <CountUp duration={5} start={0} end={10} delay={0}>{({ countUpRef }) => (
             <div>
-              <span className="numData" ref={countUpRef} />
+              <div className='numDataDiv'><span className="numData" ref={countUpRef} /></div>
               <h1><TextAnimation>כלל הקורסים </TextAnimation></h1>
 
             </div>
@@ -58,7 +59,7 @@ export default function Slider() {
         <div className='countUp'>
           <CountUp duration={5} start={0} end={6} delay={0}>{({ countUpRef }) => (
             <div>
-              <span className="numData" ref={countUpRef} />
+              <div className='numDataDiv'><span className="numData" ref={countUpRef} /></div>
               <h1><TextAnimation>קורסים פעילים </TextAnimation></h1>
 
             </div>

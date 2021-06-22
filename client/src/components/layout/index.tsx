@@ -84,22 +84,22 @@ function LayoutMain(props: any) {
         </div>
         <Menu theme="light" mode="horizontal">
           <Menu.Item key="6" className="menIt">
-            <Link to="homePage" smooth={true} duration={1000}>
+            <Link to="sliderContainer" smooth={true} duration={500}>
               <b>דף הבית</b>
             </Link>
           </Menu.Item>
           <Menu.Item key="7" className="menIt">
-            <Link to="about" smooth={true} duration={1000}>
-              <b> מי אנחנו?</b>
+            <Link to="about" smooth={true} duration={500}>
+              <b> עדכונים</b>
             </Link>
           </Menu.Item>
           <Menu.Item key="8" className="menIt" >
-            <Link to="courses" smooth={true} duration={1000} >
+            <Link to="grid-container" smooth={true} duration={500} >
               <b> קורסים</b>
             </Link>
           </Menu.Item>
           <Menu.Item key="9" className="menIt">
-            <Link to="graduates" smooth={true} duration={1000}>
+            <Link to="graduatContainer" smooth={true} duration={500}>
               <b> בוגרים</b>
             </Link>
           </Menu.Item>
