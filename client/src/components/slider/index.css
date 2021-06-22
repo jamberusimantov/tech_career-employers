@@ -1,46 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100&display=swap');
 
-.container{
+.sliderContainer{
     height: 100vh;
-}
-.slick-slider.slick-initialized{
-width: 600px;
-height: 50vh;
-box-shadow: 4px 4px 20px 2px #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(243, 243, 243);
 
 }
 
-
-.caruselmain{
-    
-    background-color: aqua;
-}
-
-.caruselmain img{
-height: 100%;
-}
-
-
-/* img{
-    width:100%;
-    height:100%;
-    
-} */
 
 .numData{
     font-size: 150px;
     font-weight: bold;
     font-family: 'Big Shoulders Stencil Display', cursive;
-    /* border: 1px solid red; */
 }
 .DataNumbersDiv{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    background: #f8fbfc;
+    width: 100%;
+    float: right;
+    -moz-box-shadow: 0px 3px 9px #00000029;
+    box-shadow: 0px 3px 9px #00000029;
+}
 
+/* .techImage img{
+} */
+
+h1{
+    font-size: xx-large;
 }
-.dataTextDiv{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+.ant-layout-rtl {
+    direction: ltr;
+  }

@@ -21,7 +21,7 @@ export default function About() {
                 כיתות ומשרדים במתחם טלרד ודירות שכורות לסטודנטים בשכונות
                 הסמוכות.
                 </p>
-                <Link className="c-about" to="coOpsMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }}/></Link>
+                <Link className="c-about" to="sliderContainer" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }}/></Link>
 
                 
             </div>

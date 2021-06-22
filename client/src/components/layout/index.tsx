@@ -71,6 +71,28 @@ function LayoutMain(props: any) {
             <Login />
           </Modal>
         </div>
+        {/* <Menu theme="light" mode="horizontal">
+        <Menu.Item key="6" className="menIt">
+                  <Link to="/">
+                    <b> הבוגרים שלנו</b>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="7" className="menIt">
+                  <Link to="/">
+                    <b> דף הבית</b>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="8" className="menIt">
+                  <Link to="/">
+                    <b> דף הבית</b>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="9" className="menIt">
+                  <Link to="/">
+                    <b> דף הבית</b>
+                  </Link>
+                </Menu.Item>
+        </Menu> */}
 
         <div>
           <Menu theme="light" mode="horizontal">
