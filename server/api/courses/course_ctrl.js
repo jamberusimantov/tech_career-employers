@@ -11,6 +11,7 @@ const {idChecker,tokenChecker,successHandler,failHandler,queryHandler,dataHandle
  * @param {*} req 
  * @param {*} res 
  */
+
 async function updateCourseByUrlId(req, res) {
     const token = req.headers.authorization
     const course = req.body.course;
