@@ -53,7 +53,7 @@ export default function Courses() {
 
             </div>
             <div></div>
-            <Link className="c-about" to="coOpsMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }} /></Link>
+            {/* <Link className="c-about" to="coOpsMainDiv" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }} /></Link> */}
 
         </div>
     )

@@ -68,7 +68,7 @@ export default function Slider() {
         </div>
       </div>
       <div></div>
-      <Link className="c-about" to="coursesContainer" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }} /></Link>
+      {/* <Link className="c-about" to="coursesContainer" smooth={true}><CaretDownOutlined style={{ fontSize: '50px', color: 'black' }} /></Link> */}
   
         </div>
 
