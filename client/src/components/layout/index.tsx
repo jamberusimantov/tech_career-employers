@@ -1,7 +1,7 @@
 import ChatBot from '../../components/chat-bot/ChatBot';
 import AdminRouter from "../../AdminRouter";
-// import { Link } from "react-router-dom";
-import { Link } from 'react-scroll';
+import { Link } from "react-router-dom";
+import { Link as LinkSmoothLink } from 'react-scroll';
 import { Button, Layout, Menu, Modal, Row, Col } from "antd";
 import { useState, useEffect } from "react";
 import Login from "../loginForm/Login";
@@ -12,7 +12,7 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 
 const { login } = service;
-const { Header, Content, Footer } = Layout;
+const { Header, Content} = Layout;
 
 
 function LayoutMain(props: any) {
@@ -69,9 +69,34 @@ function LayoutMain(props: any) {
               </Link>
             </>
           ) : (
-            <Button size="large" type="primary" onClick={showModal}>
+            <>
+           
+             {/* <Menu theme="light" mode="horizontal">
+          <Menu.Item key="6" className="menIt">
+            <LinkSmoothLink to="sliderContainer" smooth={true} duration={500}>
+              <b>דף הבית</b>
+            </LinkSmoothLink>
+          </Menu.Item>
+          <Menu.Item key="7" className="menIt">
+            <LinkSmoothLink to="about" smooth={true} duration={500}>
+              <b> עדכונים</b>
+            </LinkSmoothLink>
+          </Menu.Item>
+          <Menu.Item key="8" className="menIt" >
+            <LinkSmoothLink to="grid-container" smooth={true} duration={500} >
+              <b> קורסים</b>
+            </LinkSmoothLink>
+          </Menu.Item>
+          <Menu.Item key="9" className="menIt">
+            <LinkSmoothLink to="graduatContainer" smooth={true} duration={500}>
+              <b> בוגרים</b>
+            </LinkSmoothLink>
+          </Menu.Item>
+        </Menu> */}
+         <Button size="large" type="primary" onClick={showModal}>
               התחבר{" "}
             </Button>
+            </>
           )}
           <Modal
             title="התחברות"
@@ -81,32 +106,13 @@ function LayoutMain(props: any) {
           >
             <Login />
           </Modal>
+          
         </div>
-        <Menu theme="light" mode="horizontal">
-          <Menu.Item key="6" className="menIt">
-            <Link to="sliderContainer" smooth={true} duration={500}>
-              <b>דף הבית</b>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="7" className="menIt">
-            <Link to="about" smooth={true} duration={500}>
-              <b> עדכונים</b>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="8" className="menIt" >
-            <Link to="grid-container" smooth={true} duration={500} >
-              <b> קורסים</b>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="9" className="menIt">
-            <Link to="graduatContainer" smooth={true} duration={500}>
-              <b> בוגרים</b>
-            </Link>
-          </Menu.Item>
-        </Menu>
+       
 
         <div>
           <Menu theme="light" mode="horizontal">
+            
             {isLoggedIn && (
               <>
                 <Menu.Item key="4" className="menIt">

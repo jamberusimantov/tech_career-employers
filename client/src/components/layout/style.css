@@ -111,6 +111,7 @@ justify-content: space-evenly;
   z-index: 1;
   position: sticky;
   top: 0;
+  opacity: 0.5;
 }
 /* --------------------------------------------- */
 /* login button style start */
