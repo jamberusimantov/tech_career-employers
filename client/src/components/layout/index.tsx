@@ -1,11 +1,11 @@
-import ChatBot from '../../components/chat-bot/ChatBot';
 import AdminRouter from "../../AdminRouter";
 import { Link } from "react-router-dom";
-import { Link as LinkSmoothLink } from 'react-scroll';
+import { Link as LinkScroll } from 'react-scroll';
 import { Button, Layout, Menu, Modal, Row, Col } from "antd";
 import { useState, useEffect } from "react";
 import Login from "../loginForm/Login";
 import service from "../../utils";
+import ChatBot from '../../components/chat-bot/ChatBot';
 import "./style.css";
 import "antd/dist/antd.css";
 import Aos from 'aos';
@@ -13,7 +13,6 @@ import 'aos/dist/aos.css';
 
 const { login } = service;
 const { Header, Content} = Layout;
-
 
 function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -73,6 +72,7 @@ function LayoutMain(props: any) {
            
              {/* <Menu theme="light" mode="horizontal">
           <Menu.Item key="6" className="menIt">
+<<<<<<< HEAD
             <LinkSmoothLink to="sliderContainer" smooth={true} duration={500}>
               <b>דף הבית</b>
             </LinkSmoothLink>
@@ -91,6 +91,26 @@ function LayoutMain(props: any) {
             <LinkSmoothLink to="graduatContainer" smooth={true} duration={500}>
               <b> בוגרים</b>
             </LinkSmoothLink>
+=======
+            <LinkScroll to="sliderContainer" smooth={true} duration={500}>
+              <b>דף הבית</b>
+            </LinkScroll>
+          </Menu.Item>
+          <Menu.Item key="7" className="menIt">
+            <LinkScroll to="grid-container" smooth={true} duration={500}>
+              <b> עדכונים</b>
+            </LinkScroll>
+          </Menu.Item>
+          <Menu.Item key="8" className="menIt" >
+            <LinkScroll to="coursesContainer" smooth={true} duration={500} >
+              <b> קורסים</b>
+            </LinkScroll>
+          </Menu.Item>
+          <Menu.Item key="9" className="menIt">
+            <LinkScroll to="graduatContainer" smooth={true} duration={500}>
+              <b> בוגרים</b>
+            </LinkScroll>
+>>>>>>> master
           </Menu.Item>
         </Menu> */}
          <Button size="large" type="primary" onClick={showModal}>
@@ -158,11 +178,10 @@ function LayoutMain(props: any) {
         >
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
-            <ChatBot/>
           </Content>
         </Layout>
       </Content>
-
+<ChatBot/>
       <img />
     </Layout>
     // </Col>
