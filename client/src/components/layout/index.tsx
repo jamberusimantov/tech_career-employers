@@ -1,11 +1,11 @@
-import ChatBot from '../../components/chat-bot/ChatBot';
 import AdminRouter from "../../AdminRouter";
-// import { Link } from "react-router-dom";
-import { Link } from 'react-scroll';
+import { Link } from "react-router-dom";
+import { Link as LinkScroll } from 'react-scroll';
 import { Button, Layout, Menu, Modal, Row, Col } from "antd";
 import { useState, useEffect } from "react";
 import Login from "../loginForm/Login";
 import service from "../../utils";
+import ChatBot from '../../components/chat-bot/ChatBot';
 import "./style.css";
 import "antd/dist/antd.css";
 import Aos from 'aos';
@@ -13,7 +13,6 @@ import 'aos/dist/aos.css';
 
 const { login } = service;
 const { Header, Content, Footer } = Layout;
-
 
 function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -84,24 +83,24 @@ function LayoutMain(props: any) {
         </div>
         <Menu theme="light" mode="horizontal">
           <Menu.Item key="6" className="menIt">
-            <Link to="sliderContainer" smooth={true} duration={500}>
+            <LinkScroll to="sliderContainer" smooth={true} duration={500}>
               <b>דף הבית</b>
-            </Link>
+            </LinkScroll>
           </Menu.Item>
           <Menu.Item key="7" className="menIt">
-            <Link to="about" smooth={true} duration={500}>
+            <LinkScroll to="grid-container" smooth={true} duration={500}>
               <b> עדכונים</b>
-            </Link>
+            </LinkScroll>
           </Menu.Item>
           <Menu.Item key="8" className="menIt" >
-            <Link to="grid-container" smooth={true} duration={500} >
+            <LinkScroll to="coursesContainer" smooth={true} duration={500} >
               <b> קורסים</b>
-            </Link>
+            </LinkScroll>
           </Menu.Item>
           <Menu.Item key="9" className="menIt">
-            <Link to="graduatContainer" smooth={true} duration={500}>
+            <LinkScroll to="graduatContainer" smooth={true} duration={500}>
               <b> בוגרים</b>
-            </Link>
+            </LinkScroll>
           </Menu.Item>
         </Menu>
 
@@ -152,11 +151,10 @@ function LayoutMain(props: any) {
         >
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             <AdminRouter />
-            <ChatBot/>
           </Content>
         </Layout>
       </Content>
-
+<ChatBot/>
       <img />
     </Layout>
     // </Col>
