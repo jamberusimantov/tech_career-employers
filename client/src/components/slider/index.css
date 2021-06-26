@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100&display=swap');
 
 .sliderContainer{
-    height: 100vh;
-    width: 100%;
-    object-fit: cover;
-    background-repeat: round;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    background-image: url('https://i.ibb.co/80QGpsn/bgImage.jpg');
-    background-color: rgb(238, 238, 238);
+    /* height: 100vh; */
+    /* width: 100%; */
+    /* object-fit: cover; */
+    /* background-repeat: round; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-evenly; */
+    /* background-image: url('https://i.ibb.co/80QGpsn/video.mv4'); */
+    /* background-color: rgb(238, 238, 238); */
 }
 
 .numDataDiv{
@@ -40,9 +40,12 @@
 
 h1{
     font-size: xx-large;
+
 }
 /* .ant-layout-rtl {
     direction: ltr;
   } */
+
+ 
 
  

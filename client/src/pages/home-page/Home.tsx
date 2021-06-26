@@ -7,18 +7,18 @@ import Collage from '../../components/collage/Collage'
 import GraduatesStories from '../../components/graduates-stories/GraduatesStories'
 import "./Home.css";
 import { DownCircleFilled } from "@ant-design/icons";
-
 const { Header, Content, Footer } = Layout;
 
 export default function Home() {
   return (
     <div className="mainHomeDiv">
-      
+      {/* <BackgroundVideo/> */}
       <Slider />
       <Collage/>
       <Courses/>
       <GraduatesStories/>
       <Coops />
+      
     </div>
   );
 }
