@@ -8,7 +8,7 @@ const { Meta } = Card;
 
 export default function JobCard({ userItem, setUser }: any): any {
   const { position, company, location, _id, numOfPeopleApplied } = userItem;
-  console.log("user item",userItem)  
+  console.log("user item", userItem)
 
   return (
     <Container
@@ -30,7 +30,7 @@ export default function JobCard({ userItem, setUser }: any): any {
           />
 
           <p>{location}</p>
-          <p>{numOfPeopleApplied}</p>
+            <p>{numOfPeopleApplied}</p>
         </Card>
       </Link>
     </Container>

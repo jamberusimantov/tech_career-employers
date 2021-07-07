@@ -67,6 +67,8 @@ function LayoutMain(props: any) {
           <img src="/img/Logo.png" alt="" className="logo" />
         </div>
       </Header>
+
+      
       <Content style={{ padding: "0 50px" }}>
 
         <Layout

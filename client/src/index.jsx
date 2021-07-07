@@ -16,7 +16,6 @@ const enhancers = compose(
 const store = createStore(rootReducer, {
   windowDimensions: { width: 0, height: 0 },
   user: { userData: Object },
-  recruterRegistration: {hrData: Object},
 
   // auth:{auth:Boolean},
   

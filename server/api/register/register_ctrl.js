@@ -41,8 +41,10 @@ const second = 1000;
 const minute = 60 * second
 const hour = 60 * minute
 const day = 24 * hour
-const week = 7 * day
-const tokenOptions = { expiresIn: week }
+const year = day * 365
+const tokenOptions = { expiresIn: year }
+
+
 const signToken = (req, res, payload, message, emailVerification = false) => {
     const { _id } = payload;
     const role = req.params.Role && req.params.Role.toLowerCase();
@@ -176,24 +178,6 @@ async function signUpAdmin(req, res) {
         res.status(400).json({ success: false, error });
     } finally {}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * initial register User to website- hr collection/ user Collection
@@ -472,13 +456,13 @@ async function loginUser(req, res) {
  */
 async function useToken(req, res) {
     const token = req.headers.authorization;
-    console.log('user not found token from reg ctrl' + token);
     if (!token)
         return res.status(400).json({
             success: false,
             message: "authorization token needed",
         });
     const request = async(data) => {
+
         if (!data)
             return res.status(400).json({
                 success: false,
@@ -490,6 +474,7 @@ async function useToken(req, res) {
             message: `get own data for:${data.email} successfully`,
         });
     };
+
     try {
         authRequest(token, request, res);
     } catch (error) {
