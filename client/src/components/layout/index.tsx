@@ -1,22 +1,22 @@
 import AdminRouter from "../../AdminRouter";
 import { Link } from "react-router-dom";
-import { Link as LinkScroll } from 'react-scroll';
-import { Button, Layout, Menu, Modal, Row, Col } from "antd";
+import { Link as LinkScroll } from "react-scroll";
+import { Button, Layout, Menu, Modal } from "antd";
 import { useState, useEffect } from "react";
 import Login from "../loginForm/Login";
 import service from "../../utils";
-import ChatBot from '../../components/chat-bot/ChatBot';
+import ChatBot from "../../components/chat-bot/ChatBot";
 import "./style.css";
 import "antd/dist/antd.css";
-import Aos from 'aos';
-import 'aos/dist/aos.css';
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const { login } = service;
-const { Header, Content} = Layout;
+const { Header, Content } = Layout;
 
 function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [token, setToken] = useState(login.getToken());
+  const token = login.getToken();
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn);
@@ -51,13 +51,9 @@ function LayoutMain(props: any) {
   }, []);
 
   return (
-    // <Row>
-    //   <Col md={24} lg={8}>
     <Layout className="mainlay">
       <Header className="header">
-
         <div>
-
           {isLoggedIn ? (
             <>
               <Button size="large" type="primary" onClick={logOutHandler}>
@@ -69,53 +65,48 @@ function LayoutMain(props: any) {
             </>
           ) : (
             <>
-           
-             {/* <Menu theme="light" mode="horizontal">
-          <Menu.Item key="6" className="menIt">
-<<<<<<< HEAD
-            <LinkSmoothLink to="sliderContainer" smooth={true} duration={500}>
-              <b>דף הבית</b>
-            </LinkSmoothLink>
-          </Menu.Item>
-          <Menu.Item key="7" className="menIt">
-            <LinkSmoothLink to="about" smooth={true} duration={500}>
-              <b> עדכונים</b>
-            </LinkSmoothLink>
-          </Menu.Item>
-          <Menu.Item key="8" className="menIt" >
-            <LinkSmoothLink to="grid-container" smooth={true} duration={500} >
-              <b> קורסים</b>
-            </LinkSmoothLink>
-          </Menu.Item>
-          <Menu.Item key="9" className="menIt">
-            <LinkSmoothLink to="graduatContainer" smooth={true} duration={500}>
-              <b> בוגרים</b>
-            </LinkSmoothLink>
-=======
-            <LinkScroll to="sliderContainer" smooth={true} duration={500}>
-              <b>דף הבית</b>
-            </LinkScroll>
-          </Menu.Item>
-          <Menu.Item key="7" className="menIt">
-            <LinkScroll to="grid-container" smooth={true} duration={500}>
-              <b> עדכונים</b>
-            </LinkScroll>
-          </Menu.Item>
-          <Menu.Item key="8" className="menIt" >
-            <LinkScroll to="coursesContainer" smooth={true} duration={500} >
-              <b> קורסים</b>
-            </LinkScroll>
-          </Menu.Item>
-          <Menu.Item key="9" className="menIt">
-            <LinkScroll to="graduatContainer" smooth={true} duration={500}>
-              <b> בוגרים</b>
-            </LinkScroll>
->>>>>>> master
-          </Menu.Item>
-        </Menu> */}
-         <Button size="large" type="primary" onClick={showModal}>
-              התחבר{" "}
-            </Button>
+              <Menu theme="light" mode="horizontal" className="headerNavbar">
+                <Menu.Item key="6" className="menIt">
+                  <LinkScroll to="root" smooth={true} duration={500}>
+                    <b>דף הבית</b>
+                  </LinkScroll>
+                </Menu.Item>
+                <Menu.Item key="7" className="menIt">
+                  <LinkScroll
+                    offset={-88}
+                    to="grid-container"
+                    smooth={true}
+                    duration={500}
+                  >
+                    <b> עדכונים</b>
+                  </LinkScroll>
+                </Menu.Item>
+                <Menu.Item key="8" className="menIt">
+                  <LinkScroll
+                    offset={-60}
+                    to="coursesContainer"
+                    smooth={true}
+                    duration={500}
+                  >
+                    <b> קורסים</b>
+                  </LinkScroll>
+                </Menu.Item>
+                <Menu.Item key="9" className="menIt">
+                  <LinkScroll
+                    offset={-60}
+                    to="graduatContainer"
+                    smooth={true}
+                    duration={500}
+                  >
+                    <b> בוגרים</b>
+                  </LinkScroll>
+                </Menu.Item>
+                <Menu.Item key="10" className="menIt">
+                  <Button size="large" type="primary" onClick={showModal}>
+                    התחבר{" "}
+                  </Button>
+                </Menu.Item>
+              </Menu>
             </>
           )}
           <Modal
@@ -126,13 +117,10 @@ function LayoutMain(props: any) {
           >
             <Login />
           </Modal>
-          
         </div>
-       
 
         <div>
-          <Menu theme="light" mode="horizontal">
-            
+          <Menu theme="light" mode="horizontal" className="headerNavbar">
             {isLoggedIn && (
               <>
                 <Menu.Item key="4" className="menIt">
@@ -142,7 +130,7 @@ function LayoutMain(props: any) {
                 </Menu.Item>
                 <Menu.Item key="3" className="menIt">
                   <Link to="/student">
-                    <b>סטודנטים</b>
+                    <b>בוגרים</b>
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="2" className="menIt">
@@ -168,7 +156,7 @@ function LayoutMain(props: any) {
         </div>
 
         <div className="imgdiv">
-          <img src="/img/logo.png" alt="" className="logo" />
+          <img src="/images/bigLogo2.png" alt="" className="logo" />
         </div>
       </Header>
       <Content>
@@ -181,7 +169,7 @@ function LayoutMain(props: any) {
           </Content>
         </Layout>
       </Content>
-<ChatBot/>
+      <ChatBot />
       <img />
     </Layout>
     // </Col>

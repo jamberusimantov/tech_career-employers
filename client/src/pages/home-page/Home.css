@@ -3,13 +3,13 @@
   background-color: rgba(255, 255, 255, 0);
 }
 
-.mainHomeDiv > * {
+/* .mainHomeDiv > * {
   scroll-snap-align: start;
 }
 
 html {
   scroll-snap-type: y mandatory;
-}
+} */
 
 .ptopic {
   font-family: "Guttman Yad-Brush";

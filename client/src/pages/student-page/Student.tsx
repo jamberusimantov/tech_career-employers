@@ -1,9 +1,9 @@
 import React from 'react'
 import Cards from '../../components/student-cards/Cards'
-
+import './Student.css'
 function Student() {
     return (
-        <div>
+        <div className="studentCards">
             <Cards/>
         </div>
     )

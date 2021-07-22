@@ -3,11 +3,11 @@ import { Typography } from 'antd';
 import './JobCardsHeader.css';
 
 export default function JobCardsHeader() {
-    const { Title } = Typography;
+    // const { Title } = Typography;
 
     return (
         <div className="headerContainer">
-            <Title>דף חברה</Title>
+            <h1>דף חברה</h1>
             <div className="logo">
                 <img src="/img/checkpoint.png" alt="Checkpoint" />
             </div>

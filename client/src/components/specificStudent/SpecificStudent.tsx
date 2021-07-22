@@ -23,13 +23,21 @@ const SpecificStudent = () => {
       <Spin />
       :
       <div className='card-container'>
-        <img src={student.profilePicture} alt="" />
+        <img className="card-container-img" src={student.profilePicture} alt="" />
         <Title level={1}>{student.name}</Title>
         <div>
 
           <div className='skills-class'>
             <Title className="title-class" level={2}>:Skills</Title>
-            <Title className="title-class" level={5}>{student.programmingLang.join(', ')}</Title>
+            <Title className="title-class" level={5}>{student.programmingLang.join(', ')}</Title><br/><br/>
+            <div className="icons">
+              <img className="icons-img" src="../img/icon-javascript.png" />
+              <img className="icons-img" src="../img/icon-bootstrap.png" />
+              <img className="icons-img" src="../img/icon-mongodb.png" />
+              <img className="icons-img" src="../img/icon-typescript.png" />
+              <img className="icons-img" src="../img/icon-nodejs.png" />
+              <img className="icons-img" src="../img/icon-react.png" />
+            </div>
           </div>
         </div>
 

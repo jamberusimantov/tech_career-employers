@@ -51,7 +51,6 @@ export default function AddJob() {
                 <JobCardsHeader />
 
                 <div className="site-card-border-less-wrapper">
-
                     <Card id="editCard" title={"New job"} bordered={false}>
                         <Form>
                             <div className="JobDetails">

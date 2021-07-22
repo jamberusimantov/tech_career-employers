@@ -44,14 +44,6 @@ export default function Coops() {
           <h2>טקלה מקונן</h2>
         </div>
       </div>
-
-      <div className="footer-bottom">
-        <h2 className='header'></h2>
-        {/* <a href="#">home</a>
-        <a href="#">home</a>
-        <a href="#">home</a> */}
-
-      </div>
     </div>
   );
 }
