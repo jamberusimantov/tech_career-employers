@@ -1,8 +1,7 @@
 .card-container{
     width:100%;
-    background-color:#dbe2ef;
     border-radius:20px;
-    
+    margin-top: 60px;
   
 }
 
@@ -11,16 +10,18 @@
     
 }
 
-.card-container img{
-    width:250px;
-    height: 250px;
+.card-container-img{
+    width:350px;
+    height: auto;
     border-radius:10%
 }
 
 .skills-class{
     padding:10px;
     border: 1px solid #333;
-    border-radius:10px
+    border-radius:10px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .about-class{
@@ -60,4 +61,14 @@
 }
 .fa-github-square{
     color:#333;
+}
+
+.icons-img{
+    width: 50px;
+    height: auto;
+    
+}
+
+.icons{
+    display: block;
 }

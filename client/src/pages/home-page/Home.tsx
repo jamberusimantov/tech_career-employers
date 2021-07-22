@@ -13,6 +13,7 @@ export default function Home() {
   return (
     <div className="mainHomeDiv">
       {/* <BackgroundVideo/> */}
+      
       <Slider />
       <Collage/>
       <Courses/>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {  } from 'antd';
 
 import { Button, Input, Modal, Checkbox, Switch, Popconfirm } from "antd";
 
@@ -22,6 +23,7 @@ import { tableColumnTextFilterConfig } from "./table-utils/tableUtils";
 import "./style.css";
 
 function AdminPage() {
+
   //courses columns
   const coursesColumns = [
     {
@@ -374,13 +376,8 @@ function AdminPage() {
       {role === "Admin" ? (
         <div className="admin-page">
           <div className="admin-page-actions">
-            <Checkbox onChange={hideOrShowCoursesTable}>
-              טבלת ליווי ובוגרים
-            </Checkbox>
-            <Checkbox onChange={hideOrShowJobOffersTable}>
-              טבלת משרות ומגייסות
-            </Checkbox>
-
+         
+         
             <Button type="primary" onClick={showModalCourseOpening}>
             פתיחת קורס
             </Button>
@@ -395,6 +392,12 @@ function AdminPage() {
             <Button type="primary" onClick={showModalAdmin}>
               רישום מנהל
             </Button>
+            <Checkbox onChange={hideOrShowCoursesTable}>
+              טבלת ליווי ובוגרים
+            </Checkbox>
+            <Checkbox onChange={hideOrShowJobOffersTable}>
+              טבלת משרות ומגייסות
+            </Checkbox>
           </div>
 
           <div className="admin-page-table-courses">
