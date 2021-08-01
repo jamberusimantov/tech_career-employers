@@ -12,10 +12,10 @@ function App(props: any) {
   const { getUserUseToken } = login
   const { LayoutMain } = components;
   const { appStyle } = styles;
-  const token = login.getToken();
   const classes = appStyle()
-
+  
   useEffect(() => {
+    const token = login.getToken();
     const loginHandler = async () => {
       const userFromToken = await getUserUseToken(token)
       if (userFromToken.success) {

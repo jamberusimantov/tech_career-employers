@@ -6,10 +6,10 @@ const { student, login } = service
 
 const Cards = () => {
     const [studentsArray, setStudentsArray] = useState([])
-    const [token, setToken] = useState(localStorage.getItem('token'))
-
+    
     useEffect(() => {
         const tokenHandler = async () => {
+            const token = localStorage.getItem('token')
             if (token) {
                 const resFromToken = await login.getUserUseToken(token)
                 if (resFromToken.success) {
@@ -22,7 +22,7 @@ const Cards = () => {
         }
         tokenHandler();
 
-    }, [token])
+    }, [])
 
     return (
         (studentsArray.length < 1) ?

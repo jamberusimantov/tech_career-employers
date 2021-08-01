@@ -8,7 +8,7 @@ const fetchFile = async(req, res) => {
         console.log(`get cv id: ${Id}...`);
         const post = await studentsCollection.findById(Id);
         if (!post) return failHandler(Id, res, 'getFile')
-        if (!post.cv) return failHandler('no cv found', res, 'getFile')
+        if (!post.cv) return failHandler('user cv', res, 'getFile')
         const validName = () => {
             const nameURI = encodeURI(post.cv.name, "GBK")
             const notValid = post.cv.name.split('').some((char, index) =>

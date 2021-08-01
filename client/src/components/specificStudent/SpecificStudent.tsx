@@ -28,6 +28,7 @@ const SpecificStudent = () => {
       document.body.removeChild(link);
 
     } catch (error) {
+      alert(error)
       console.error(error);
     }
   }
@@ -40,8 +41,8 @@ const SpecificStudent = () => {
       }
       getStudent();
     }
-    console.log(student);
-  }, [student])
+    // console.log(student);
+  }, [student,myUserPath])
 
   if (!student?.profilePicture) return <Spin />;
 
@@ -70,32 +71,38 @@ const SpecificStudent = () => {
           <div className="contact-links">
             <a
               target="_blank"
+              rel="noreferrer"
               href={`mailto: ${student.email}`}
               className='mail'
             ><MailOutlined /></a>
             <a
               target="_blank"
+              rel="noreferrer"
               href={student.links.personalSite}
               className='personalSite'
             ><HomeOutlined /></a>
             <a
               target="_blank"
+              rel="noreferrer"
               href={student.links.github}
               className='github'
             ><GithubOutlined /></a>
             <a
               target="_blank"
+              rel="noreferrer"
               href={student.links.linkedIn}
               className='linkedIn'
             ><LinkedinOutlined /></a>
             <a
               target="_blank"
+              rel="noreferrer"
               href={student.links.facebook}
               className='facebook'
             ><FacebookOutlined /></a>
             <a
               target="_blank"
-              href=''
+              href='/'
+              rel="noreferrer"
               style={{ color: '#333' }}
               onClick={fetchFile}
             ><FormOutlined /></a>

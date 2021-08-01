@@ -15,29 +15,29 @@ const mapStateToProps = (state: any) => { return { userData: state.user} }
 function JobCards(props: any) {
 
     const { userData } = props
-    console.log(userData);
+    // console.log(userData);
 
     const history = useHistory()
     const [jobOffer, setJobOffer] = useState<any[]>([])
-    const [selcted, setSelcted] = useState({})
-    const [company, setCompany] = useState('')
+    // const [selcted, setSelcted] = useState({})
+    // const [company, setCompany] = useState('')
 
 
 
-    const getJobData = async () => {
+    // const getJobData = async () => {
 
-        try {
-            const jobOfferData = (userData.company) ? await getManyJobOffers({ company: userData.company }) : await getManyJobOffers()
-            console.log(userData)
-            console.log(jobOfferData);
-            setJobOffer(jobOfferData.data || [])
-        }
-        catch (error) {
-            console.log(error);
+    //     try {
+    //         const jobOfferData = (userData.company) ? await getManyJobOffers({ company: userData.company }) : await getManyJobOffers()
+    //         console.log(userData)
+    //         console.log(jobOfferData);
+    //         setJobOffer(jobOfferData.data || [])
+    //     }
+    //     catch (error) {
+    //         console.log(error);
 
-        }
+    //     }
 
-    }
+    // }
 
     function addNewJob() {
         history.push('/addNewJob')
@@ -60,13 +60,13 @@ function JobCards(props: any) {
     const menu = (
         <Menu>
             <Menu.Item>
-                <a href="#"> כותרת</a>
+                <a href="/#"> כותרת</a>
             </Menu.Item>
             <Menu.Item>
-                <a href="#"> תאריך</a>
+                <a href="/#"> תאריך</a>
             </Menu.Item>
             <Menu.Item>
-                <a href="#"> מיקום</a>
+                <a href="/#"> מיקום</a>
             </Menu.Item>
         </Menu>
     );
@@ -81,7 +81,10 @@ function JobCards(props: any) {
                     <div className="navBtn">
                         <Button>ערוך</Button>
                         <Dropdown overlay={menu}>
-                            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            <a 
+                            href='/#'
+                            className="ant-dropdown-link" 
+                            onClick={e => e.preventDefault()}>
                                 מיון משרות   <DownOutlined />
                             </a>
                         </Dropdown>

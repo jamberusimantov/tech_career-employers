@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "antd/dist/antd.css";
 import { PercentageOutlined } from '@ant-design/icons'
 import CountUp from 'react-countup';
 import TextAnimation from 'react-animate-text';
-import BackgroundVideo from "../video/Video.mp4";
 
 
 
@@ -29,7 +28,7 @@ style={{
 
 }
 >
-  <source src={BackgroundVideo} type ="video/mp4"/>
+  <source src= "../video/Video.mp4" type ="video/mp4"/>
 </video>
 
 

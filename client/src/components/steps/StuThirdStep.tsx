@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox, Select, message } from 'antd';
+import { Form, Input, Button, Select, message } from 'antd';
 import { useHistory } from "react-router-dom";
 
 const { TextArea } = Input;

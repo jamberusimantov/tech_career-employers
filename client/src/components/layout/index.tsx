@@ -16,9 +16,7 @@ const { Header, Content } = Layout;
 
 function LayoutMain(props: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const token = login.getToken();
   const [role, setRole] = useState("");
-  const [name, setName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn);
   const showModal = () => setIsModalVisible(true);
   const handleCancel = () => setIsModalVisible(false);
@@ -26,18 +24,18 @@ function LayoutMain(props: any) {
     login.removeToken();
     window.location.reload();
   };
-
-  const tokenHandler = async () => {
-    if (token) {
-      const userData = await login.getUserUseToken(token);
-      if (userData.success) {
-        setIsLoggedIn(true);
-        setRole(userData.data.role);
-        setName(userData.data.name);
-      }
-    }
-  };
+  
   useEffect(() => {
+    const token = login.getToken();
+    const tokenHandler = async () => {
+      if (token) {
+        const userData = await login.getUserUseToken(token);
+        if (userData.success) {
+          setIsLoggedIn(true);
+          setRole(userData.data.role);
+        }
+      }
+    };
     tokenHandler();
   }, [isLoggedIn]);
 
