@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Karantina:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=David+Libre:wght@500&family=Karantina:wght@300&display=swap");
+.coursesContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* height: 100vh; */
+    background-color: rgb(255, 255, 255);
+}
+
+.coursesTitleDiv h1 {
+    letter-spacing: 10px;
+    font-family: "Karantina", cursive;
+    font-size: 50px;
+    color: white;
+    text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+}
+
+.coursesDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.course {
+    margin: 20px;
+    /* -moz-box-shadow: 0px 3px 9px #00000029;
+    box-shadow: 0px 3px 9px #00000029; */
+}
+
+.course svg {
+    margin-top: 20px;
+}
+
+.course h3 {
+    margin: 20px 0;
+    font-size: 35px;
+    font-family: "David Libre", serif;
+    font-family: "Karantina", cursive;
+    letter-spacing: 3px;
+}
+
+.courseDescription {
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    flex-direction: row-reverse;
+    width: 1000px;
+    max-width: 100%;
+}
+
+.courseStructure {
+    font-size: 26px;
+    color: white;
+    -webkit-text-fill-color: white;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+ul {
+    list-style-type: circle;
+}
+
+.ant-modal-content {
+    /* width: 650px; */
+    /* width: 1000px; */
+    transform-origin: -305.667px 137px;
+}
+
+.courseName {
+    display: inline;
+}

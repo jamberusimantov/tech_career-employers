@@ -10,3 +10,8 @@
     left: 20px;
 }
 
+.headerContainer{
+    display:flex;
+    flex-direction: column;
+}
+

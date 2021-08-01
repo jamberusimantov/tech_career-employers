@@ -12,7 +12,7 @@ class LogIn {
         } catch (error) { return error }
         finally { }
     }
-    
+
     async registerStudent(credentials: { email: string }, role: string) {
         const url = `${API}/registration/register/${role}`
         const body = { user: credentials }
@@ -34,7 +34,9 @@ class LogIn {
         const body = undefined
         try {
             return await Http.POST(url, body, token)
-        } catch (error) { return error }
+        } catch (error) {
+            console.error(error);
+        }
         finally { }
     }
     async signUpUser(credentials: { user: object, company: object }, role: string, token?: string) {
@@ -124,7 +126,7 @@ export default new LogIn();
 //     email: "jamber@google.com",
 //     password: "123456"
 //   }
-  
+
 //   login.login.loginUser(user, 'hr').then((data:{token:string}) => {
 //     data?.token && login.login.setTokenLocal(data?.token)
 //     console.log(data)

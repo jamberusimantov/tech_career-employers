@@ -7,23 +7,9 @@ import Title from "./Title";
 
 
 function CardsDetail({UserInfo}:any) {
-  // const [firstJobFromInfo, setfirstJobFromInfo] = useState(fetchedDataDb[0])
-  
-  // useEffect(() => {
-  //   setfirstJobFromInfo(UserInfo)    
-  //   console.log(firstJobFromInfo,"firstJobFromInfo");
-  //   console.log(firstJob,"firstJob");
-    
-  // }, []);
-  const {position,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
-  
-    
 
-    // const {title,company,location,id,applicants}:any =  firstJob     
-
+  const {workRequirements,jobDescription,position,company,location,numOfPeopleApplied,status,finalDateToApply}:any = UserInfo 
   
-  // console.log("cardsDeatails > UserInfo",UserInfo)
-
   return (
     UserInfo ?
       
@@ -32,52 +18,32 @@ function CardsDetail({UserInfo}:any) {
       <TopSection>
         <div>
           <div>
-            <span>{company}-</span>
-            <span>{location}-</span>
-            <span>{numOfPeopleApplied}</span>
+            <span>{location}</span>
+           
           </div>
+          <div> <span>{numOfPeopleApplied} Applied</span></div>
+            <span>{company}</span>
           <div>
             <span>{status}</span>
             {/* <span>{numOfPeopleApplied}</span> */}
           </div>
-          <div>{finalDateToApply}</div>
+          <div>final date to apply: {finalDateToApply}</div>
         </div>
 
         <Button style={{borderRadius:10}} type="primary">Apply</Button>
       </TopSection>
 
       <SecondSection>
-        <TherdSection>
 
-          <p className="jobDescription">
-            At DeePathology.ai, we are developing next generation tools for AI
-            in Pathology, that unleash massive AI creation, and radically
-            optimize accuracy and time utilization in pharma and diagnostics.
-            <br />
-            Our STUDIO platform lets Pathologists create AI solutions by
-            themselves, leveraging Active Learning, Interactive/Online Learning
-            and more.
-          </p>
-          <p>
-            As a Full Stack Engineer, you will work on both the frontend and
-            backend of our STUDIO platform and other large scale systems we are
-            building for pathology.
-          </p>
-        </TherdSection>
-        <div>
-          <h4>Minimum Qualifications:</h4>
-          <ul>
-            <li>Must: 3+ Years experience in Angular or Vue or React</li>
-            <li>
-              {" "}
-              Hands-on experience with HTML5, CSS3, JavaScript, Typescript.
-            </li>
-            <li>Good knowledge of Python.</li>
-            <li>"Let's make this happen!" attitude</li>
-            <li>Team player, self learning abilities, independence.</li>
-          </ul>
-        </div>
+         
+            {jobDescription}
+          
       </SecondSection>
+        <TherdSection>
+        
+          {workRequirements}
+        
+        </TherdSection>
     </Container>
       : <Spin/>
     

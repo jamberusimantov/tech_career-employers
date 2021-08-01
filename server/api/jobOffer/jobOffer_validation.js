@@ -20,9 +20,10 @@ const validateJobOfferRegistration = (data) => {
     }
     if (Validator.isEmpty(data.uploadedBy)) {
         errors.uploadedBy = "uploadedBy field is required"
-    } else if (!Validator.isEmail(data.uploadedBy)) {
-        errors.uploadedBy = "uploadedBy is invalid"
     }
+    //  else if (!Validator.isEmail(data.uploadedBy)) {
+    //     errors.uploadedBy = "uploadedBy is invalid"
+    // }
     if (Validator.isEmpty(data.location)) {
         errors.location = 'location field is required'
     }

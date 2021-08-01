@@ -1,0 +1,76 @@
+.mainHomeDiv {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+/* .mainHomeDiv > * {
+  scroll-snap-align: start;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+} */
+
+.ptopic {
+  font-family: "Guttman Yad-Brush";
+  padding-bottom: 20px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* @keyframes spin{
+from{
+    transform: rotateY(0deg);
+}
+to{
+    transform: rotateY(360deg);
+}
+
+} */
+
+.tcLogo {
+  animation: spin 4s ease-out infinite;
+  /* padding-top: 40px; */
+  display: flex;
+  animation-delay: 0s;
+}
+
+.titelsMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  /* height: 100vh; */
+  padding-bottom: 30px;
+}
+
+.h1title {
+  font-size: 40px;
+  padding-left: 70px;
+  font-family: "Guttman";
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  width: 100%;
+}
+
+.DownCircleFilled {
+  font-size: 50px;
+  color: rgb(88, 85, 85);
+  cursor: pointer;
+  padding-top: 40px;
+  animation: upDown 2s infinite linear;
+}
+
+@keyframes upDown {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}

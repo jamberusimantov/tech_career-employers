@@ -2,16 +2,46 @@ import React from "react";
 import "./Coops.css"
 
 export default function Coops() {
+  {/* <img className="tcLogo" src="./images/logotech.png" alt="" /> */ }
+
   return (
-    <div className="coOpsMainDiv">
-      <img className="tcLogo" src="./images/logotech.png" alt="" />
-      <div className="texttext">
-        <u><h1> שיתופי פעולה</h1></u>
-        <div className="coImages">
-         <a href="https://www.thejoint.org.il/"><img className="coLogo" src="./co-images/joint.png" alt="" /></a> 
-          <a href="https://il.att.com/"><img className="coLogo" src="./co-images/atnt.jpg" alt="" /></a> 
-          <a href="https://bherezbh.wixsite.com/mysite-1?fbclid=IwAR2SEwwATeH_JAhEJ1RYaLU_z4s23j_INzgaw6F561Sdy5z4ZB4idPLUklw"><img className="coLogo" src="./co-images/code.jpg" alt="" /></a>
-          <a href="https://www.wix.com/"><img className="coLogo" src="./co-images/wix.png" alt="" /></a>
+    <div id="footer-container">
+      <div className="coImages">
+        <div className='coImage'> 
+               <a href="https://https://www.bynet.co.il//"><img className="coLogo1" src="./co-images/binat.png" alt="" /></a>
+        </div>
+        <div className='coImage'>     
+           <a href="https://https://www.is.com//"><img className="coLogo" src="./co-images/iron.png" alt="" /></a>
+        </div>
+        <div className='coImage'>   
+             <a href="https://www.oracle.com/index.html"><img className="coLogo" src="./co-images/oracle.png" alt="" /></a>
+        </div>
+        <div className='coImage'>    
+            <a href="https://www.wix.com/"><img className="coLogo" src="./co-images/wix.png" alt="" /></a>
+        </div>
+        <div className='coImage'>    
+            <a href="https://www.redhat.com/en"><img className="coLogo" src="./co-images/redhat.jpg" alt="" /></a>
+        </div>
+      </div>
+
+      <div className='footer-middle'>
+        <div>
+          <h1>צרו קשר</h1>
+          <h2>0533345685</h2>
+          <h2>Sara@tech-career.org</h2>
+        </div>
+        <div>
+          <h1>כתובת</h1>
+          <h2>בת שבע 3, מתחם טלרד, לוד</h2>
+        </div>
+       
+        <div>
+        <h1>סמנכ״ל טק קריירה</h1>
+          <h2>מורית דרורי</h2>
+        </div>
+        <div>
+          <h1>מנכ״ל טק קריירה</h1>
+          <h2>טקלה מקונן</h2>
         </div>
       </div>
     </div>

@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyle = makeStyles((theme: any) => ({
   App: {
     textAlign: "center",
-    height: "100vh",
-    padding: "1vh",
+    minHeight: "100vh",
+    // padding: "1vh",
     margin: 0,
     boxSizing: "border-box",
   },

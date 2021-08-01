@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300&display=swap');
+#sliderContainer {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+  background-repeat: round;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color:white;
+}
+
+.numDataDiv {
+  width: 150px;
+}
+
+
+.numData {
+  font-size: 150px;
+  font-weight: bold;
+  font-family: "Big Shoulders Stencil Display", cursive;
+}
+.DataNumbersDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  float: right;
+  box-shadow: 0px 3px 9px #00000029;
+  opacity: 0.7;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(35px);
+  color: white;
+  text-shadow: 1px 1px 0 #000,
+  -1px 1px 0 #000,
+  1px -1px 0 #000,
+  -1px -1px 0 #000,
+  0px 1px 0 #000,
+  0px -1px 0 #000,
+  -1px 0px 0 #000,
+  1px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  1px 2px 0 #000,
+  -1px 2px 0 #000,
+  1px -2px 0 #000,
+  -1px -2px 0 #000,
+  2px 1px 0 #000,
+  -2px 1px 0 #000,
+  2px -1px 0 #000,
+  -2px -1px 0 #000;
+}
+
+.numDataDiv > span {
+  font-size: 150px;
+}
+.sliderH1 {
+  font-size: 60px;
+  color:white;
+  font-family: 'Karantina', cursive;
+  letter-spacing:3px;
+}
+
+.percentIcone {
+  -webkit-animation: mover 1s infinite  alternate;
+  animation: mover 1s infinite  alternate;
+}
+.percentIcone{
+  -webkit-animation: mover 1s infinite  alternate;
+  animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-85px); }
+}
+@keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-85px); }
+}
+
+

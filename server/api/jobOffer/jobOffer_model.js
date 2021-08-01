@@ -6,17 +6,13 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
-        jobTitle:{
-            type:String,
-            required:true
-        },
         logo:{
             type:String,
             required:false
         },
         numOfPeopleApplied :{
             type: String,
-            required: true
+            
         },
         position: {
             type: String,
@@ -49,9 +45,11 @@ const jobOffer = new Schema({
             type: String,
             required: true
         },
-        minYearsOfExperience: {
-            type: String,
-            required: true
+  
+       
+        numOfPeopleApplied: {
+            type: Number,
+            default: 0,
         },
         numOfViews: {
             type: Number,
@@ -64,9 +62,9 @@ const jobOffer = new Schema({
             type: Boolean,
             default: true,
         },
-        status: {
-            type: String,
-            default: 'OPEN',
+        isOpen: {
+            type:  Boolean,
+            default: true,
         },
     },
     //  { timestamps: true }

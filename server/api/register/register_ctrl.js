@@ -461,20 +461,18 @@ async function useToken(req, res) {
             success: false,
             message: "authorization token needed",
         });
-    const request = async(data) => {
 
-        if (!data)
-            return res.status(400).json({
-                success: false,
-                message: unauthorizedToken("useToken"),
-            });
+    const request = async(data) => {
+        if (!data) return res.status(400).json({
+            success: false,
+            message: unauthorizedToken("useToken"),
+        });
         res.status(201).json({
             success: true,
             data: filteredPrivateProps(data, "self"),
             message: `get own data for:${data.email} successfully`,
         });
     };
-
     try {
         authRequest(token, request, res);
     } catch (error) {

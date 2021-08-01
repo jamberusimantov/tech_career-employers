@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;700&display=swap');
+
+.graduatContainer {
+  /* background-color: rgb(238, 238, 238); */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graduatInnerDiv {
+  width: 80%;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -moz-box-shadow: 0px 3px 9px #00000029;
+  box-shadow: 0px 3px 9px #00000029;
+}
+.graduatInnerDiv h1 {
+  letter-spacing:10px;
+  font-family: 'Karantina', cursive;
+  color: white;
+  font-size: 50px;
+  text-shadow: 1px 1px 0 #000,
+  -1px 1px 0 #000,
+  1px -1px 0 #000,
+  -1px -1px 0 #000,
+  0px 1px 0 #000,
+  0px -1px 0 #000,
+  -1px 0px 0 #000,
+  1px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  1px 2px 0 #000,
+  -1px 2px 0 #000,
+  1px -2px 0 #000,
+  -1px -2px 0 #000,
+  2px 1px 0 #000,
+  -2px 1px 0 #000,
+  2px -1px 0 #000,
+  -2px -1px 0 #000;
+}
+
+.caroselComponent {
+  -moz-box-shadow: 0px 3px 9px #00000029;
+  box-shadow: 0px 3px 9px #00000029;
+}
+
+.carousel-root {
+  width: 64% !important;
+  margin: auto !important;
+  margin-top: 3% !important;
+}
+
+.carousel .slide {
+  background: #fff !important;
+  color: black;
+  height: 100%;
+}
+
+.carousel .slide img {
+  width: 139px !important;
+  border-radius: 50%;
+}
+
+.myCarousel {
+  background: #fafafa;
+  margin-top: -6%;
+  width: 54%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 6%;
+  padding-bottom: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: 1px solid #ddd;
+  height: 286px;
+}
+
+.carousel .control-dots {
+  padding-left: 5px !important;
+  outline: 0;
+  bottom: 5% !important;
+}
+
+.myCarousel h3 {
+  color: #222;
+  font-weight: 100;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 17px;
+}
+
+.myCarousel h4 {
+  text-transform: uppercase;
+  margin-top: 0;
+  padding-top: 0;
+  font-weight: 500;
+  color: #787878;
+  font-size: 14px;
+}
+
+.myCarousel p {
+  font-weight: 100 !important;
+  line-height: 29px !important;
+  color: #222;
+  font-size: 15px;
+  font-family: sans-serif;
+  max-height: 67px;
+}
+
+.myCarousel p:before {
+  content: "“";
+  color: #aaa;
+  font-size: 26px;
+  font-family: monospace;
+  font-weight: 100;
+}
+
+.myCarousel p:after {
+  content: "”";
+  color: #aaa;
+  font-size: 26px;
+  font-family: monospace;
+  font-weight: 100;
+  line-height: 0;
+}
+
+.carousel .control-dots .dot {
+  box-shadow: none;
+  background: #454545;
+  outline: 0;
+}
+
+.carousel.carousel-slider .control-arrow {
+  background: #000;
+  height: 50px;
+  position: absolute;
+  top: 35%;
+}
+
+.testimonials {
+  text-align: center;
+}
+
+.ant-layout-rtl {
+  direction: ltr;
+}
+
+@media only screen and (max-width: 934px) {
+  .carousel-root {
+    outline: 0;
+    width: 93%;
+    margin: auto;
+  }
+
+  .carousel.carousel-slider .control-arrow {
+    display: none;
+  }
+  .myCarousel {
+    background: #fafafa;
+    margin-top: -9%;
+    width: 88%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 8%;
+    padding-bottom: 12.5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: 1px solid #ddd;
+    height: 269px;
+  }
+
+  .carousel .slide img {
+    width: 24%;
+    border-radius: 50%;
+  }
+}

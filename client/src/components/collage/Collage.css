@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;400&display=swap');
+.collageDiv img {
+  width: 50%;
+  height: auto;
+  -moz-box-shadow: 0px 3px 9px #00000029;
+  box-shadow: 0px 3px 9px #00000029;
+}
+.titleDiv img {
+  height: 200px;
+}
+
+.grid-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 50px;
+  text-align: center;
+}
+.collageH1 {
+  font-family: 'Karantina', cursive;
+  letter-spacing: 10px;
+  font-size: 100px;
+  font-weight: 700;
+  font-style: italic;
+}
+.titleDiv {
+  align-items: center;
+  /* height: 100px; */
+  width: 600px;
+  direction: rtl;
+}
+.typewriter  {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 11s steps(40, end),
+    blink-caret .75s step-end infinite;
+    font-size: 35px;
+
+    
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+.collageFirstLetters{
+  color:#2ec1d9;
+}
+
+.collageSecondLetters{
+  color:#fed23f;
+}
+
+.collageThirdLetters{
+  color:#ee5892;
+}
+.collageLastLetters{
+  color:#4baf59;
+}
