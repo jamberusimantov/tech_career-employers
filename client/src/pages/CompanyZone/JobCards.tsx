@@ -9,10 +9,10 @@ import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state: any) => {return {userData: state.user.userData.data}}
+const mapStateToProps = (state: any) => { return { userData: state.user} }
 
 
- function JobCards(props:any) {
+function JobCards(props: any) {
 
     const { userData } = props
     console.log(userData);
@@ -22,34 +22,38 @@ const mapStateToProps = (state: any) => {return {userData: state.user.userData.d
     const [selcted, setSelcted] = useState({})
     const [company, setCompany] = useState('')
 
-    
 
-   const getJobData = async () => {
- 
-try {
-    const jobOfferData = (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
-    console.log(userData)
-    console.log(jobOfferData);
-    setJobOffer(jobOfferData.data || [])
-} 
-catch (error) {
-    console.log(error);
-    
-}
-        
-    }
 
-    function addNewJob(){
-    history.push('/addNewJob')
+    const getJobData = async () => {
+
+        try {
+            const jobOfferData = (userData.company) ? await getManyJobOffers({ company: userData.company }) : await getManyJobOffers()
+            console.log(userData)
+            console.log(jobOfferData);
+            setJobOffer(jobOfferData.data || [])
+        }
+        catch (error) {
+            console.log(error);
+
+        }
 
     }
 
+    function addNewJob() {
+        history.push('/addNewJob')
 
-function historyPushData(currentJob:any){
-    history.push('/JobEditPage', {jobData:currentJob})
-}
+    }
+
+
+    function historyPushData(currentJob: any) {
+        history.push('/JobEditPage', { jobData: currentJob })
+    }
 
     useEffect(() => {
+        const getJobData = async () => {
+            const jobOfferData = await getManyJobOffers(userData?.company && { company: userData.company })
+            setJobOffer(jobOfferData.data || [])
+        }
         getJobData()
     }, [userData])
 
@@ -71,47 +75,47 @@ function historyPushData(currentJob:any){
         (jobOffer.length < 1) ?
             <Spin size="large" />
             :
-        <div>
-            <JobCardsHeader />
-            < div className="site-card-border-less-wrapper">
-                <div className="navBtn">
-                    <Button>ערוך</Button>
-                    <Dropdown overlay={menu}>
-                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            מיון משרות   <DownOutlined />
-                        </a>
-                    </Dropdown>
-                    <div className="addNewJobBtn">
-                        <Button onClick={addNewJob}>הוסף משרה חדשה</Button>
-                    </div>
-                </div>
+            <div>
+                <JobCardsHeader />
+                < div className="site-card-border-less-wrapper">
+                    <div className="navBtn">
+                        <Button>ערוך</Button>
+                        <Dropdown overlay={menu}>
+                            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                                מיון משרות   <DownOutlined />
+                            </a>
+                        </Dropdown>
+                        <div className="addNewJobBtn">
+                            <Button onClick={addNewJob}>הוסף משרה חדשה</Button>
+                        </div>
 
-                
-                
-            
-            <div >
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                {jobOffer.map((job, index)=>
-                     <Card title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
-                    <p>{jobOffer[index].jobDescription}</p>
-                    <p>{jobOffer[index].position}</p>
-                    <p>{jobOffer[index].location}</p>
-                    <p>{jobOffer[index].status}</p>
-                    <span className="applicans">פניות</span>
-                    <span className="number"> {jobOffer[index].numOfPeopleApplied} </span>
-                    <Button className="readMoreBtn" type="primary" onClick={()=>{historyPushData(jobOffer[index])}}>קרא עוד</Button>
-                </Card>
-                
-                    )}
-                </Row>
-                
-                
-            </div>
-                
-               
-            </div>
-        </div >
+
+
+
+                        <div >
+                            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                                {React.Children.toArray(jobOffer.map((job, index) =>
+                                    <Card title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
+                                        <p>{jobOffer[index].jobDescription}</p>
+                                        <p>{jobOffer[index].position}</p>
+                                        <p>{jobOffer[index].location}</p>
+                                        <p>{jobOffer[index].status}</p>
+                                        <span className="applicans">פניות</span>
+                                        <span className="number"> {jobOffer[index].numOfPeopleApplied} </span>
+                                        <Button className="readMoreBtn" type="primary" onClick={() => { historyPushData(jobOffer[index]) }}>קרא עוד</Button>
+                                    </Card>
+
+                                ))}
+                            </Row>
+
+
+                        </div>
+
+
+                    </div>
+                </div >
+            </div >
 
     );
 }
-export default connect(mapStateToProps, null )(JobCards)
+export default connect(mapStateToProps, null)(JobCards)

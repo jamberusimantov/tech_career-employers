@@ -2,56 +2,69 @@
     padding: 30px;
     display: flex;
     justify-content: center;
-
 }
 
-#showCard{
+#showCard {
     border: 1px solid rgb(255, 255, 255);
-    width: 700px; 
+    width: 700px;
     box-shadow: 1px 5px 20px 5px rgba(28, 43, 179, 0.212);
 }
 
-#editCard{
+#editCard {
     display: flex;
     flex-direction: column;
     border: 1px solid rgb(255, 255, 255);
-    width: 700px; 
+    width: 700px;
     box-shadow: 1px 5px 20px 5px rgb(185, 185, 185);
 }
-.allInputClass{
+
+.allInputClass {
     padding-bottom: 20px;
 }
 
-.JobDetails{
+.JobDetails {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width:400px;
+    width: 400px;
     /* float: right; */
     font-size: 20px;
     text-align: right;
     line-height: 0.8;
     /* margin:2%; */
 }
-.jobDetails{
+
+.jobDetails {
     width: 100%;
     float: left;
     background-color: #ffecec;
     /* border: 1px solid #000; */
 }
-.jobDetails p{
+
+.jobDetails p {
     text-align: left;
     padding: 10px;
     line-height: 1.2;
 }
-.btns{
-    padding: 20px;
-    float:left;
+
+.jobAppliers ul {
+    list-style: none;
 }
-.btns button{
+
+.jobAppliers a {
+    display: flex;
+    align-items: center;
+}
+
+.btns {
+    /* width: max-content; */
+    padding: 20px;
+    float: left;
+}
+
+.btns button {
+    box-sizing: content-box;
     margin: 5px;
     width: 70px;
-    height:40px;
+    height: 40px;
 }
-  
- 

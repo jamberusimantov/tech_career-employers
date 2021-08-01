@@ -30,7 +30,7 @@ export default function JobCard({ userItem, setUser }: any): any {
           />
 
           <p>{location}</p>
-          <p>{numOfPeopleApplied}</p>
+            <p>{numOfPeopleApplied}</p>
         </Card>
       </Link>
     </Container>

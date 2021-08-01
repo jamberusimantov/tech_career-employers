@@ -1,154 +1,162 @@
 .bgbgbg {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  z-index: -1;
-  background-repeat: no-repeat;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background-repeat: no-repeat;
 }
 
-.headerNavbarNotLog{
-  display:flex;
-  justify-content:space-between;
+.settings {
+    display: flex;
+    align-items: center;
 }
 
-.logo {
-  float: left;
-  width: 120px;
-  height: 31px;
-  margin: 8px 12px 8px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.personalArea {
+    padding: 0 15px;
 }
 
-.ant-row-rtl .logo {
-  float: right;
-  margin: 16px 0 16px 24px;
+.personalArea a {
+    color: black;
 }
 
 .site-layout-background {
-  background: rgba(0, 0, 0, 0);
-}
-
-.ant-layout-header.header {
-  /* scroll-snap-align: start; */
-  background: rgb(255, 255, 255);
-  /* font-family: "Guttman Yad-Brush"; */
-  width: 100%;
+    background: rgba(0, 0, 0, 0);
 }
 
 .ant-layout-content {
-  /* background-color: rgba(255, 255, 255, 0); */
-  height: 100vh;
-
-  background-color: #ffffff00;
+    /* background-color: rgba(255, 255, 255, 0); */
+    height: 100vh;
+    background-color: #ffffff00;
 }
 
 .ant-layout ant-layout-rtl {
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .ant-layout-rtl {
-  background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .imgdiv {
-  background-color: rgba(255, 255, 255, 0);
-  width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0);
+    width: 100px;
 }
 
 .imgdiv .logo {
-  width: auto;
-  height: 50px;
+    position: relative;
+    height: 100%;
+    width: auto;
 }
 
 .ant-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .ant-menu a :hover {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .ant-menu-horizontal {
-  width: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* font-family: "Guttman Yad-Brush"; */
-  text-align: center;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-family: "Guttman Yad-Brush"; */
+    text-align: center;
 }
 
 .ant-menu-horizontal li {
-  justify-content: space-evenly;
+    justify-content: space-evenly;
 }
 
-.ant-layout-header.header {
-  display: flex;
-  justify-content: space-between;
-  -moz-box-shadow: 0px 3px 6px #00000029;
-  box-shadow: 0px 3px 6px #00000029;
-  width: 100%;
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  /* opacity: 0.5; */
-  background: rgba(255, 255, 255, 0.6);
-  transition: 0.5s;
+.header {
+    display: flex;
+    justify-content: space-between;
+    -moz-box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #00000029;
+    width: 100%;
+    max-height: 50px;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    /* opacity: 0.5; */
+    background: rgba(255, 255, 255, 0.6);
+    transition: 0.5s;
+    /* scroll-snap-align: start;
+        background: rgb(255, 255, 255);
+        /* font-family: "Guttman Yad-Brush"; */
+    /* width: 100%; */
 }
 
-.ant-layout-header.header:hover {
-  /* opacity: 1; */
-  background: rgba(255, 255, 255, 1);
+.Content {
+    padding: 0 24px;
+    min-height: 280;
+    height: fit-content;
+    margin: 100px 0;
 }
+
+.header:hover {
+    /* opacity: 1; */
+    background: rgba(255, 255, 255, 1);
+}
+
+
 /* --------------------------------------------- */
+
+
 /* login button style start */
 
 .ant-btn {
-  line-height: 1.5715;
-  display: inline-block;
-  white-space: nowrap;
-  text-align: center;
-  background-image: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  touch-action: manipulation;
-  height: 32px;
-  padding: 4px 15px;
-  font-size: 14px;
-  border-radius: 2px;
-  color: rgba(0, 0, 0, 0.85);
-  background: #fff;
+    line-height: 1.5715;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    touch-action: manipulation;
+    height: 32px;
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    color: rgba(0, 0, 0, 0.85);
+    background: #fff;
 }
 
 .ant-btn:hover,
 .ant-btn:focus {
-  background-color: #1890ff;
-  border-color: #1890ff;
-  color: #ffffff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    color: #ffffff;
 }
 
-/* login button style end */
-/* --------------------------------------------- */
-
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after,
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected::after {
-  border-bottom: 0px solid #188fff00;
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-submenu:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-submenu-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-submenu-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-item-selected::after,
+.ant-menu-horizontal:not(.ant-menu-dark)>.ant-menu-submenu-selected::after {
+    border-bottom: 0px solid #188fff00;
 }
 
-.headerNavbar{
-  background: transparent;
+.headerNavbar {
+    background: transparent;
+    width: fit-content;
+}
+
+.headerNavbar li {
+    min-width: fit-content;
+    padding: 0;
 }
