@@ -9,60 +9,64 @@ import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state: any) => {return {userData: state.user.userData.data}}
+const mapStateToProps = (state: any) => { return { userData: state.user} }
 
 
- function JobCards(props:any) {
+function JobCards(props: any) {
 
     const { userData } = props
-    console.log(userData);
+    // console.log(userData);
 
     const history = useHistory()
     const [jobOffer, setJobOffer] = useState<any[]>([])
-    const [selcted, setSelcted] = useState({})
-    const [company, setCompany] = useState('')
+    // const [selcted, setSelcted] = useState({})
+    // const [company, setCompany] = useState('')
 
-    
 
-   const getJobData = async () => {
- 
-try {
-    const jobOfferData = (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
-    console.log(userData)
-    console.log(jobOfferData);
-    setJobOffer(jobOfferData.data || [])
-} 
-catch (error) {
-    console.log(error);
-    
-}
-        
+
+    // const getJobData = async () => {
+
+    //     try {
+    //         const jobOfferData = (userData.company) ? await getManyJobOffers({ company: userData.company }) : await getManyJobOffers()
+    //         console.log(userData)
+    //         console.log(jobOfferData);
+    //         setJobOffer(jobOfferData.data || [])
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+
+    //     }
+
+    // }
+
+    function addNewJob() {
+        history.push('/addNewJob')
+
     }
 
-    function addNewJob(){
-    history.push('/addNewJob')
 
+    function historyPushData(currentJob: any) {
+        history.push('/JobEditPage', { jobData: currentJob })
     }
-
-
-function historyPushData(currentJob:any){
-    history.push('/JobEditPage', {jobData:currentJob})
-}
 
     useEffect(() => {
+        const getJobData = async () => {
+            const jobOfferData = await getManyJobOffers(userData?.company && { company: userData.company })
+            setJobOffer(jobOfferData.data || [])
+        }
         getJobData()
     }, [userData])
 
     const menu = (
         <Menu>
             <Menu.Item>
-                <a href="#"> כותרת</a>
+                <a href="/#"> כותרת</a>
             </Menu.Item>
             <Menu.Item>
-                <a href="#"> תאריך</a>
+                <a href="/#"> תאריך</a>
             </Menu.Item>
             <Menu.Item>
-                <a href="#"> מיקום</a>
+                <a href="/#"> מיקום</a>
             </Menu.Item>
         </Menu>
     );
@@ -72,27 +76,34 @@ function historyPushData(currentJob:any){
             <Spin size="large" />
             :
         <div>
-            <JobCardsHeader />
+            {/* <JobCardsHeader /> */}
             < div className="site-card-border-less-wrapper">
-                <div className="navBtn">
+                <div id="jobCardsHeader" className="navBtn">
+                    <div>1
                     <Button>ערוך</Button>
+                    </div>
+
+                    <div>2
                     <Dropdown overlay={menu}>
-                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            מיון משרות   <DownOutlined />
-                        </a>
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>מיון משרות<DownOutlined /></a>
                     </Dropdown>
-                    <div className="addNewJobBtn">
+                    </div>
+
+                    <div className="addNewJobBtn">3
                         <Button onClick={addNewJob}>הוסף משרה חדשה</Button>
                     </div>
+
                 </div>
 
                 
                 
             
-            <div >
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <div id="mainCardDiv">
+            
+                <Row className='jobCardRow' gutter={{ xs: 8, sm: 16, md: 24, lg: 35 }}>
                 {jobOffer.map((job, index)=>
-                     <Card title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
+                
+                     <Card className="jobCard"  title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
                     <p>{jobOffer[index].jobDescription}</p>
                     <p>{jobOffer[index].position}</p>
                     <p>{jobOffer[index].location}</p>
@@ -108,10 +119,10 @@ function historyPushData(currentJob:any){
                 
             </div>
                 
-               
+               <div></div>
             </div>
         </div >
 
     );
 }
-export default connect(mapStateToProps, null )(JobCards)
+export default connect(mapStateToProps, null)(JobCards)

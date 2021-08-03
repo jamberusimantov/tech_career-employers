@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Steps as Stepss, Button, message } from 'antd';
+import { Steps as Stepss} from 'antd';
 import FirstStep from './StuFirstStep'
 import SecondStep from './StuSecondStep'
 import ThirdStep from './StuThirdStep'
@@ -32,7 +32,7 @@ const Steps = () => {
       }
     }
     getUserHandler()
-  }, [])
+  }, [token])
 
   return (
     <>

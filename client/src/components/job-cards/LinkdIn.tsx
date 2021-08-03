@@ -5,7 +5,6 @@ import "..";
 import { getManyJobOffers } from "../../utils/drafts/jobOffer.utils";
 import { Input, Row, Col, Spin } from "antd";
 import LinkdInRouter from "./LinkdInRouter";
-import { useParams } from "react-router-dom";
 
 export default function LinkdIn() {
   const { Search } = Input;

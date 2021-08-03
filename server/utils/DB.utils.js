@@ -1,6 +1,7 @@
-async function getManyDocs(collection, query, successCb = () => {}, failCb = () => {}) {
+async function getManyDocs(collection, query, successCb = (collectionArray) => {}, failCb = () => {}) {
     const options = [(error, collectionArray) => {
         if (error) throw new Error(`error on getManyDocs: ${error}`);
+        console.log(collectionArray.length);
         !collectionArray ? failCb() : successCb(collectionArray)
     }]
     if (query) options.unshift(query)
@@ -10,7 +11,7 @@ async function getManyDocs(collection, query, successCb = () => {}, failCb = () 
         return { success: false, error }
     } finally {}
 }
-async function getDoc(collection, query, successCb = () => {}, failCb = () => {}) {
+async function getDoc(collection, query, successCb = (doc) => {}, failCb = () => {}) {
 
     try {
         await collection.findOne(query, (error, doc) => {
@@ -21,7 +22,7 @@ async function getDoc(collection, query, successCb = () => {}, failCb = () => {}
         return { success: false, error };
     } finally {}
 }
-async function postDocs(collection, docs, successCb = () => {}) {
+async function postDocs(collection, docs, successCb = (docs) => {}) {
     try {
         await collection.insertMany(docs, (error) => {
             if (error) throw new Error(`error on postDocs: ${error}`);
@@ -31,20 +32,20 @@ async function postDocs(collection, docs, successCb = () => {}) {
         return { success: false, error };
     } finally {}
 }
-async function updateDoc(collection, doc, successCb = () => {}, failCb = () => {}) {
-    const { _id } = doc;
-    if (!_id) throw new Error('id is required on updateDoc');
-    const query = { _id }
+async function updateDoc(collection, doc, successCb = (doc) => {}, failCb = () => {}) {
     try {
-        await collection.findOneAndUpdate(query, doc, async(error, docFromDb) => {
-            if (error) throw new Error(`error on updateDoc: ${error}`);
+        const { _id } = doc;
+        if (!_id) return 'id is required'
+        const query = { _id }
+        await collection.findOneAndUpdate(query, doc, (error, docFromDb) => {
+            if (error) console.error(error.message);
             !docFromDb ? failCb() : successCb(docFromDb);
         })
     } catch (error) {
         return { success: false, error };
     } finally {}
 }
-async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {}) {
+async function deleteDoc(collection, doc, successCb = (doc) => {}, failCb = () => {}) {
     const { _id } = doc;
     if (!_id) throw new Error('id is required on deleteDoc');
     const query = { _id }
@@ -58,37 +59,50 @@ async function deleteDoc(collection, doc, successCb = () => {}, failCb = () => {
     } finally {}
 }
 const filteredPrivateProps = (userItem, method = 'strict') => {
-    const newObj = new Object(userItem)
     const methods = {
+
         strict: newObj => {
+            newObj.notifications = undefined;
+            newObj.messages = undefined;
+            newObj.pictures = undefined;
+            newObj.friends = undefined;
+
+
             newObj.password = undefined;
             newObj.token = undefined;
-            newObj.messages = undefined;
-            newObj.notifications = undefined;
             newObj.phone = undefined;
-            newObj.tags = undefined
+            newObj.cv = undefined
             return newObj;
         },
         self: newObj => {
+            newObj.notifications = undefined;
+            newObj.messages = undefined;
+            newObj.pictures = undefined;
+            newObj.friends = undefined;
+            newObj.password = undefined;
+
+
             newObj.password = undefined;
             newObj.token = undefined;
             return newObj;
         },
         fallbackMethod: newObj => {
+            newObj.notifications = undefined;
+            newObj.messages = undefined;
+            newObj.pictures = undefined;
+            newObj.friends = undefined;
+
+
+
             newObj.password = undefined;
             newObj.token = undefined;
-            newObj.messages = undefined;
-            newObj.notifications = undefined;
+            newObj.phone = undefined;
+            newObj.cv = undefined
             return newObj;
         }
+
     }
-    const setObject = obj => methods[method] ? methods[method](obj) : methods.fallbackMethod(obj)
-    if (newObj instanceof Array) {
-        let results = [];
-        newObj.forEach(user => {results.push(setObject(user))})
-        return results;
-    }
-    if (typeof userItem === 'object') return setObject(newObj)
+    return methods[method] ? methods[method](userItem) : methods.fallbackMethod(userItem);
 }
 const msgs = {
     requiredToken: serviceName => `required auth token on ${serviceName}`,

@@ -5,15 +5,12 @@ const {
 
 
 export default function user(
-    state = { userData: Object },
+    state = {},
     action: { type: string, payload: Object }) {
 
     switch (action.type) {
         case SET_USER_DATA:
-            return {
-                ...state,
-                userData: action.payload,
-            };
+            return { ...state, ...action.payload };
         default:
             return state;
     }

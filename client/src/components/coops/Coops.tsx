@@ -2,7 +2,7 @@ import React from "react";
 import "./Coops.css"
 
 export default function Coops() {
-  {/* <img className="tcLogo" src="./images/logotech.png" alt="" /> */ }
+
 
   return (
     <div id="footer-container">

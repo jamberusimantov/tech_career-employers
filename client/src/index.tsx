@@ -6,21 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, compose } from "redux";
-import rootReducer from "./redux/reducers";
+import rootReducers from "./redux/reducers";
 import { ConfigProvider } from "antd";
 
-const enhancers = compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 
-const store = createStore(rootReducer, {
-  windowDimensions: { width: 0, height: 0 },
-  user: { userData: Object },
-  recruterRegistration: {hrData: Object},
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 
-  // auth:{auth:Boolean},
-  
-},enhancers);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducers, composeEnhancers());
 
 ReactDOM.render(
   <Provider store={store}>

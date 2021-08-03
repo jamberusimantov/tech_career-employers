@@ -17,7 +17,7 @@ const GraduatesStories =()=> {
     interval={6100}
   >
     <div>
-      <img src="/images/lior.jpeg" />
+      <img src="/images/lior.jpeg" alt =''/>
       <div className="myCarousel">
         <h3>ליאור מזיג</h3>
         <h4>Wix</h4>
@@ -28,7 +28,7 @@ const GraduatesStories =()=> {
     </div>
 
         <div>
-          <img src="/images/yizhak.jpeg" />
+          <img src="/images/yizhak.jpeg" alt=''/>
           <div className="myCarousel">
             <h3>יצחק גטאי</h3>
             <h4>Wix</h4>

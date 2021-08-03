@@ -6,21 +6,23 @@ const { student, login } = service
 
 const Cards = () => {
     const [studentsArray, setStudentsArray] = useState([])
-    const [token, setToken] = useState(localStorage.getItem('token'))
-
+    
     useEffect(() => {
         const tokenHandler = async () => {
+            const token = localStorage.getItem('token')
             if (token) {
                 const resFromToken = await login.getUserUseToken(token)
                 if (resFromToken.success) {
                     const data = await student.getAllStudents()
-                    if (data) { setStudentsArray(data.data) }
+                    if (data?.data) { setStudentsArray(data.data) }
+                    else console.log({data});
+                    
                 }
             }
         }
         tokenHandler();
 
-    }, [token])
+    }, [])
 
     return (
         (studentsArray.length < 1) ?
