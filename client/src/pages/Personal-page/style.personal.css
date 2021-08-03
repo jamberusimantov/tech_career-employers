@@ -1,0 +1,172 @@
+.StudentPersonal {
+    display: flex;
+    justify-content: center;
+}
+
+.paper {
+    max-width: 1024px;
+    position: relative;
+    height: auto;
+    width: 100%;
+    padding: 3em;
+    background-color: #fff;
+    border: 1px black solid;
+    box-shadow: black 3px 3px 3px 0;
+    border-radius: 10px;
+    margin-top: 60px;
+}
+
+.title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.grid-top {
+    display: flex;
+}
+
+.grid-bottom {
+    padding: 3em 0;
+}
+
+.userCardImage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+}
+
+.userCardImage {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 3em 0;
+}
+
+.userCardImage img {
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+.userInfo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.userInfo {
+    padding: 3em 0;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.programmingLang {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.programmingLang li {
+    padding: 1em;
+    list-style: none;
+}
+
+.icons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.icons li {
+    list-style: none;
+}
+
+.icons svg {
+    font-size: x-large;
+}
+
+.icon-Btn {
+    padding: 10px;
+}
+
+.icons a {
+    padding: 10px;
+}
+
+.icons a :hover,
+.icon-Btn :hover {
+    cursor: pointer;
+}
+
+.uploadBtn-studentPersonal {
+    color: #333;
+    background-color: white;
+    border: 0;
+    position: relative;
+    margin: 1em;
+}
+
+.edit-options {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+}
+
+.uploadIcon {
+    font-size: x-large;
+}
+
+.uploadFile {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+}
+
+.downloadText {
+    color: #333;
+}
+
+.submit-Btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+@media screen and (max-width: 1024px) {
+    .grid-top {
+        flex-flow: column;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .grid-top {
+        flex-flow: row;
+        justify-content: space-around;
+    }
+    .userInfo-container {
+        width: 50%;
+    }
+    .userCardImage-container {
+        width: 50%;
+    }
+}

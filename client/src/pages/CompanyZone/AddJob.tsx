@@ -10,7 +10,7 @@ export default function AddJob() {
 
     const { TextArea } = Input;
     const history = useHistory()
-    const [jobOffers, setJobOffers] = useState([])
+    // const [jobOffers, setJobOffers] = useState([])
     const [jobData, setJobData] = useState(
         {
             uploadedBy: "",

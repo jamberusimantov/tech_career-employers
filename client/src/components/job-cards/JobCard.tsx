@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Card, Avatar } from "antd";
@@ -30,7 +30,7 @@ export default function JobCard({ userItem, setUser }: any): any {
           />
 
           <p>{location}</p>
-          <p>{numOfPeopleApplied}</p>
+            <p>{numOfPeopleApplied}</p>
         </Card>
       </Link>
     </Container>

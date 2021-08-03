@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Card, Button, Input, Switch, Form } from 'antd';
 import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom"
 import { getManyJobOffers, deleteJobOfferById } from '../../utils/drafts/jobOffer.utils'
 import './JobEditPage.css';
-import Login from '../../utils/login.utils'
+// import Login from '../../utils/login.utils'
 import { useLocation } from 'react-router-dom'
 
 export default function JobEditPage() {
     const { TextArea } = Input;
 
     const [cardType, setCardType] = useState(false)
-    const [jobOffers, setJobOffers] = useState([])
+    // const [jobOffers, setJobOffers] = useState([])
     const [jobData, setJobData] = useState(
         {
             uploadedBy: "",

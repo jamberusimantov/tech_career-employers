@@ -1,74 +1,96 @@
-.card-container{
-    width:100%;
-    border-radius:20px;
-    margin-top: 60px;
-  
+.card-container {
+    display: flex;
+    justify-content: center;
 }
 
-.title-class{
-    text-align: left;
-    
-}
-
-.card-container-img{
-    width:350px;
+.paper {
+    max-width: 1024px;
+    position: relative;
     height: auto;
-    border-radius:10%
+    width: 100%;
+    padding: 3em;
+    background-color: #fff;
+    border: 1px black solid;
+    box-shadow: black 3px 3px 3px 0;
+    border-radius: 10px;
+    margin-top: 60px;
 }
 
-.skills-class{
-    padding:10px;
+.title-class {
+    text-align: left;
+}
+
+.card-container-img {
+    width: 350px;
+    height: auto;
+    border-radius: 10%
+}
+
+.skills-class {
+    padding: 10px;
     border: 1px solid #333;
-    border-radius:10px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
-.about-class{
+.about-class {
     text-align: left;
     font-size: large;
-    margin-top:20px;
-    padding:10px;
+    margin-top: 20px;
+    padding: 10px;
 }
 
-.about-container{
-    margin-top:30px;
-    width:47%;
-    padding:10px;
+.about-container {
+    margin-top: 30px;
+    width: 47%;
+    padding: 10px;
     border: 1px solid #333;
-    border-radius:10px
+    border-radius: 10px
 }
 
-.contact-container{
-    height:fit-content;
-    margin-top:30px;
-    width:47%;
-    padding:15px;
+.contact-container {
+    height: fit-content;
+    margin-top: 30px;
+    width: 47%;
+    padding: 15px;
     border: 1px solid #333;
-    border-radius:10px
+    border-radius: 10px
 }
 
-.contact-container i{
-    width:50px;
-    font-size:xx-large;
+.contact-links {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-.fa-facebook-square{
-    color:#4267B2;
-}
-.fa-linkedin-square{
-    color:#2867B2;
-}
-.fa-github-square{
-    color:#333;
+.contact-links {
+    font-size: xx-large;
 }
 
-.icons-img{
+.facebook {
+    color: #4267B2;
+}
+
+.linkedin {
+    color: #2867B2;
+}
+
+.github {
+    color: #333;
+}
+
+.mail {
+    color: #BB001B;
+}
+
+.icon-Btn {
+    padding: 10px;
+}
+
+.icons-img {
     width: 50px;
     height: auto;
-    
-}
-
-.icons{
-    display: block;
 }

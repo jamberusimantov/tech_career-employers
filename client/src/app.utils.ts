@@ -1,2 +1,2 @@
 export const API = process.env.NODE_ENV === 'production' ?
-'https://mernusers.herokuapp.com' : 'http://localhost:4201'
+'https:/your-site-here.herokuapp.com' : 'http://localhost:4201'

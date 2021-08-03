@@ -7,7 +7,9 @@ import CodeinTable from "../../components/shared/CodeinTable";
 
 import service from "../../utils";
 
-import { getAllCourses, getAllJobOffers,creatingCourse } from "../../service/admin.service";
+import { getAllCourses, getAllJobOffers
+  // ,creatingCourse
+ } from "../../service/admin.service";
 
 import {
   updateJobOfferById,
@@ -247,12 +249,12 @@ function AdminPage() {
   const [role, setRole] = useState(" ");
   const history = useHistory();
 
-  const creatingCourseByAdmin = {
-    course:{
-      courseName:courseName,
-      courseCycle:courseCycle
-    }
-  }
+  // const creatingCourseByAdmin = {
+  //   course:{
+  //     courseName:courseName,
+  //     courseCycle:courseCycle
+  //   }
+  // }
 
 
   const registerStudentByAdmin = {
@@ -370,7 +372,9 @@ function AdminPage() {
       }
     };
     getUserData();
-  }, [role]);
+  }, [role,getUserUseToken,history]);
+
+  
   return (
     <>
       {role === "Admin" ? (

@@ -1,4 +1,3 @@
-
 import LayoutMain from './layout'
 
 const components = {

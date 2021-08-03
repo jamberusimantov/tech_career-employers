@@ -7,8 +7,6 @@ const { Meta } = Card;
 
 const StudentCard = (student: any) => {
     const history = useHistory();
-    console.log(student.name);
-    console.log(student.pictures);
     
     const readMoreHandler: any = () => {history.push(`/studentPage/${student._id}`)}
     return (

@@ -9,60 +9,64 @@ import { useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state: any) => {return {userData: state.user.userData.data}}
+const mapStateToProps = (state: any) => { return { userData: state.user} }
 
 
- function JobCards(props:any) {
+function JobCards(props: any) {
 
     const { userData } = props
-    console.log(userData);
+    // console.log(userData);
 
     const history = useHistory()
     const [jobOffer, setJobOffer] = useState<any[]>([])
-    const [selcted, setSelcted] = useState({})
-    const [company, setCompany] = useState('')
+    // const [selcted, setSelcted] = useState({})
+    // const [company, setCompany] = useState('')
 
-    
 
-   const getJobData = async () => {
- 
-try {
-    const jobOfferData = (userData.company)? await getManyJobOffers({company:userData.company}): await getManyJobOffers()
-    console.log(userData)
-    console.log(jobOfferData);
-    setJobOffer(jobOfferData.data || [])
-} 
-catch (error) {
-    console.log(error);
-    
-}
-        
+
+    // const getJobData = async () => {
+
+    //     try {
+    //         const jobOfferData = (userData.company) ? await getManyJobOffers({ company: userData.company }) : await getManyJobOffers()
+    //         console.log(userData)
+    //         console.log(jobOfferData);
+    //         setJobOffer(jobOfferData.data || [])
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+
+    //     }
+
+    // }
+
+    function addNewJob() {
+        history.push('/addNewJob')
+
     }
 
-    function addNewJob(){
-    history.push('/addNewJob')
 
+    function historyPushData(currentJob: any) {
+        history.push('/JobEditPage', { jobData: currentJob })
     }
-
-
-function historyPushData(currentJob:any){
-    history.push('/JobEditPage', {jobData:currentJob})
-}
 
     useEffect(() => {
+        const getJobData = async () => {
+            const jobOfferData = await getManyJobOffers(userData?.company && { company: userData.company })
+            setJobOffer(jobOfferData.data || [])
+        }
         getJobData()
     }, [userData])
 
     const menu = (
         <Menu>
             <Menu.Item>
-                <a href="#"> כותרת</a>
+                <a href="/#"> כותרת</a>
             </Menu.Item>
             <Menu.Item>
-                <a href="#"> תאריך</a>
+                <a href="/#"> תאריך</a>
             </Menu.Item>
             <Menu.Item>
-                <a href="#"> מיקום</a>
+                <a href="/#"> מיקום</a>
             </Menu.Item>
         </Menu>
     );
@@ -121,4 +125,4 @@ function historyPushData(currentJob:any){
 
     );
 }
-export default connect(mapStateToProps, null )(JobCards)
+export default connect(mapStateToProps, null)(JobCards)

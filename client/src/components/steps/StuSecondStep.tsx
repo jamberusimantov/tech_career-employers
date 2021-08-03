@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Input, Button, Upload, message, } from 'antd';
+import { Form, Input, Button} from 'antd';
 import FileBase from 'react-file-base64'
 
 const layout = {labelCol: { span: 10 },wrapperCol: { span: 5 }};

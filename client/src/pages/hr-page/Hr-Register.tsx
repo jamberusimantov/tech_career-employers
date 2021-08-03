@@ -39,7 +39,7 @@ export default function HrRegisterForm() {
       console.log(data);
     }
     getHrrById()
-  }, [])
+  }, [hrData,token])
 
   const onFinish = async (values: any) => {
     await updateHrById(hrData, hrData.id, token)

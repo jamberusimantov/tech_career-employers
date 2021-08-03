@@ -10,10 +10,9 @@ import {
   FcEnteringHeavenAlive,
   FcAcceptDatabase,
 } from "react-icons/fc";
-import { Popover, Modal, Button, Tooltip } from "antd";
+import { Popover, Modal, Tooltip } from "antd";
 
 import {
-  fullStackDescription,
   qaDescription,
   devNetDescription,
   socAnalystDescription,
@@ -25,7 +24,7 @@ import {
 } from "./CoursesDescription";
 
 import "./Courses.css";
-import Aos from "aos";
+// import Aos from "aos";
 import "aos/dist/aos.css";
 
 export default function Courses() {
