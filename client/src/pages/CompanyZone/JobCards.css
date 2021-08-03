@@ -1,19 +1,27 @@
 .navBtn{
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
+    justify-content: space-around;
     padding: 20px;
 }
 .ant-card {
-    justify-content: center;
-    align-items:center;
     background-color:  #fafafa;
     border-radius: 15px;
-    border: 1px dotted blue;
+    border: 1px solid black;
 }
 .ant-card-body p {
     text-align: right;
     font-size: 20px;
     line-height: 0.8;
+}
+
+.site-card-border-less-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+   
 }
 
 .site-card-border-less-wrapper .applicans{
@@ -38,3 +46,18 @@
     top: 15px;
     left: 35%;
 }
+
+.jobCardRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; 
+}
+.jobCard{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/* #jobCardsHeader{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+} */
