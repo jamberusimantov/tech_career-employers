@@ -15,7 +15,7 @@
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.4",
     "@types/react-router": "^5.1.15",
-    "antd": "^4.16.1",
+    "antd": "^4.16.8",
     "chalk": "^4.1.0",
     "moment": "^2.29.1",
     "mui-datatables": "^3.7.6",

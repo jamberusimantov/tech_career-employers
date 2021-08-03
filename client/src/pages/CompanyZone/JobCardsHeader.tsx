@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 import './JobCardsHeader.css';
 
 export default function JobCardsHeader() {
-    // const { Title } = Typography;
+     //const { Title } = Typography;
 
     return (
         <div className="headerContainer">

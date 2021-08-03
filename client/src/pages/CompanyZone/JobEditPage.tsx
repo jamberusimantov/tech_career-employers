@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button, Input, Switch, Form } from 'antd';
 import JobCardsHeader from './JobCardsHeader';
 import { Link } from "react-router-dom"
-import { getManyJobOffers } from '../../utils/drafts/jobOffer.utils'
+import { getManyJobOffers, deleteJobOfferById } from '../../utils/drafts/jobOffer.utils'
 import './JobEditPage.css';
 import Login from '../../utils/login.utils'
 import { useLocation } from 'react-router-dom'
@@ -15,7 +15,7 @@ export default function JobEditPage() {
     const [jobData, setJobData] = useState(
         {
             uploadedBy: "",
-            jobTitle:"",
+            minYearsOfExperience:"",
             position:"",
             emailHr: "",
             company: "",
@@ -50,7 +50,10 @@ export default function JobEditPage() {
         else { setCardType(false) }
     };
 
-   
+   function deleteJobOffer(jobId:any){
+    deleteJobOfferById(jobId)
+   }
+
     return (
         (!cardType ) ?
             <div>
@@ -73,6 +76,8 @@ export default function JobEditPage() {
                         </div>
                         <div className="btns">
                             <Button type="primary" onClick={changeCardType}>ערוך</Button>
+                            <Link to="hr/JobCards"><Button type="primary" onClick={()=>{deleteJobOffer(JobObject._id); console.log(JobObject._id);
+                            }}>מחק משרה</Button></Link>
                             <Link to="hr/JobCards"><Button type="primary"> הקודם</Button></Link>
                         </div>
                     </Card>
@@ -109,6 +114,9 @@ export default function JobEditPage() {
                                 </div>
                                 <div className="allInputClass">
                                     <Input placeholder="Work Requirements" onChange={e => setJobData({ ...jobData, workRequirements: e.target.value })}/>
+                                </div>
+                                <div className="allInputClass">
+                                    <Input placeholder="Years Of Experience" onChange={e => setJobData({ ...jobData, minYearsOfExperience: e.target.value })}/>
                                 </div>
                                 <div className="allInputClass">
                                     <Input placeholder="location" onChange={e => setJobData({ ...jobData, location: e.target.value })}/>

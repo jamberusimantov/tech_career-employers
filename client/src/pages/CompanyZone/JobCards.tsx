@@ -72,27 +72,34 @@ function historyPushData(currentJob:any){
             <Spin size="large" />
             :
         <div>
-            <JobCardsHeader />
+            {/* <JobCardsHeader /> */}
             < div className="site-card-border-less-wrapper">
-                <div className="navBtn">
+                <div id="jobCardsHeader" className="navBtn">
+                    <div>1
                     <Button>ערוך</Button>
+                    </div>
+
+                    <div>2
                     <Dropdown overlay={menu}>
-                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                            מיון משרות   <DownOutlined />
-                        </a>
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>מיון משרות<DownOutlined /></a>
                     </Dropdown>
-                    <div className="addNewJobBtn">
+                    </div>
+
+                    <div className="addNewJobBtn">3
                         <Button onClick={addNewJob}>הוסף משרה חדשה</Button>
                     </div>
+
                 </div>
 
                 
                 
             
-            <div >
-                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <div id="mainCardDiv">
+            
+                <Row className='jobCardRow' gutter={{ xs: 8, sm: 16, md: 24, lg: 35 }}>
                 {jobOffer.map((job, index)=>
-                     <Card title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
+                
+                     <Card className="jobCard"  title={jobOffer[index].company} bordered={true} style={{ width: 400 }}>
                     <p>{jobOffer[index].jobDescription}</p>
                     <p>{jobOffer[index].position}</p>
                     <p>{jobOffer[index].location}</p>
@@ -108,7 +115,7 @@ function historyPushData(currentJob:any){
                 
             </div>
                 
-               
+               <div></div>
             </div>
         </div >
 
