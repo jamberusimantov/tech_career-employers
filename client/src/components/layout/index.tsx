@@ -11,10 +11,10 @@ import "antd/dist/antd.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-const { login } = service;
-const { Header, Content } = Layout;
 
 function LayoutMain(props: any) {
+  const { login } = service;
+  const { Header, Content } = Layout;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [role, setRole] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(props.isLoggedIn);
