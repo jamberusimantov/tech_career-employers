@@ -14,7 +14,7 @@ export default function AddJob() {
     const [jobData, setJobData] = useState(
         {
             uploadedBy: "",
-            jobTitle:"",
+            minYearsOfExperience:"",
             position:"",
             emailHr: "",
             company: "",
@@ -70,6 +70,9 @@ export default function AddJob() {
                                 </div>
                                 <div className="allInputClass">
                                     <Input placeholder="Work Requirements" onChange={e => setJobData({ ...jobData, workRequirements: e.target.value })}/>
+                                </div>
+                                <div className="allInputClass">
+                                    <Input placeholder="Years Of Experience" onChange={e => setJobData({ ...jobData, minYearsOfExperience: e.target.value })}/>
                                 </div>
                                 <div className="allInputClass">
                                     <Input placeholder="location" onChange={e => setJobData({ ...jobData, location: e.target.value })}/>

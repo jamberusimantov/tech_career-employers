@@ -87,7 +87,7 @@ export const qaDescription = (
 );
 
 export const devNetDescription = (
-  <div>
+  <div className="courseDescription">
     <ul>
       <h3 className="courseStructure">מבנה הקורס</h3>
 
@@ -148,18 +148,29 @@ export const socAnalystDescription = (
 
 export const salesforceImplementsDescription = (
   <div className="courseDescription">
-
     <ul>
       <h3 className="courseStructure">מבנה הקורס</h3>
-      <li>salesforceImplementsDescription</li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>
+        550 שעות לימוד אקדמיות, מתוכן 50% מעבדות ותרגולים אשר פותחו במיוחד לטובת
+        הקורס על ידי צוות המומחים של סייברפרו (פיזית בכיתה בקמפוס טק-קריירה בלוד
+        / בקפסולות / מרחוק – בהתאם להנחיות הממשלה בכל זמן נתון).
+      </li>
+      <li>
+        5 חודשים, 5 ימי לימוד מלאים בשבוע בתנאי פנימיה (מגורים בדירות של
+        טק-קריירה בלוד)
+      </li>
+      <li>
+        לימודים מביב לשעון: שילוב בין לימודים עם מורה בכיתה, מעבדות, תרגול עצמי
+        ובקבוצות
+      </li>
+      <li>העשרות והרצאות אורח ע"י אנשי מקצוע העובדים בתעשייה</li>
+      <li>סיורים לימודיים בחברות סייבר (בהתאם לנהלי הקורונה במועד הרלווטני)</li>
+      <li>
+        תכנית מקיפה להכנה לקריירה: כתיבת קו"ח מקצועיים באנגלית, כלים לחיפוש
+        עבודה, הכנה לראיונות כולל סימולציות ע"י מראיינים מהתעשייה תכנית
+      </li>
     </ul>
     <ul>
-
       <h3 className="courseStructure">תכנים עיקריים</h3>
       <li></li>
       <li></li>
@@ -241,7 +252,7 @@ export const dataScientistDescription = (
       </li>
     </ul>
     <ul>
-    <h3 className="courseStructure">תכנים עיקריים</h3>
+      <h3 className="courseStructure">תכנים עיקריים</h3>
       <li></li>
       <li></li>
       <li></li>
@@ -250,10 +261,52 @@ export const dataScientistDescription = (
   </div>
 );
 
-export const cPluslanguageDescription=(
+export const cPluslanguageDescription = (
   <div className="courseDescription">
     <ul>
-    <h3 className="courseStructure">מבנה הקורס</h3>
+      <h3 className="courseStructure">מבנה הקורס</h3>
+
+      <li>
+        300 שעות לימוד אקדמיות, מתוכן 50% תרגול מעשי והשלמת פרוייקטי לייב אשר
+        פותחו במיוחד לטובת הקורס (הלמידה תהיה פיזית בכיתה בקמפוס טק-קריירה בלוד
+        / בקפסולות / מרחוק – בהתאם להנחיות הממשלה בכל זמן נתון).
+      </li>
+      <li>3 חודשים, 3 ימי לימוד מלאים בשבוע</li>
+      <li>
+        לימודים מסביב לשעון: שילוב בין לימודים עם מרצה בכיתה, למידה עצמית
+        אונליין, תרגול עצמי ובקבוצות
+      </li>
+      <li>העשרות והרצאות אורח ע"י אנשי מקצוע העובדים בתחום</li>
+      <li>
+        סיורים לימודיים בחברות הייטק (בהתאם לנהלי הקורונה במועד הרלווטני) תכנית
+        מקיפה להכנה לקריירה: כתיבת קו"ח מקצועיים באנגלית, כלים לחיפוש עבודה,
+        הכנה לראיונות כולל סימולציות ע"י מראיינים מהתעשייה
+      </li>
+      <li>
+        תכנית מנטורים המלווים באופן אישי כל סטודנט עד להשתלבות מלאה בעבודה
+      </li>
+    </ul>
+
+    <ul>
+      <h3 className="courseStructure">תכנים עיקריים</h3>
+
+      <li>Introduction to computer science</li>
+      <li>Object-Oriented Fundamentals, Structures and References</li>
+      <li>Classes and Objects</li>
+      <li>Polymorphic Programming</li>
+      <li>Code Reuse in C++</li>
+      <li>Designing with C++</li>
+      <li>Data structure</li>
+      <li>Testing & Debugging & Engineering practices</li>
+      <li>Embedded software</li>
+    </ul>
+  </div>
+);
+
+export const cyberSecurityDescription = (
+  <div className="courseDescription">
+    <ul>
+      <h3 className="courseStructure">מבנה הקורס</h3>
 
       <li></li>
       <li></li>
@@ -264,9 +317,9 @@ export const cPluslanguageDescription=(
       <li></li>
       <li></li>
     </ul>
- 
+
     <ul>
-    <h3 className="courseStructure">תכנים עיקריים</h3>
+      <h3 className="courseStructure">תכנים עיקריים</h3>
 
       <li></li>
       <li></li>
@@ -278,35 +331,4 @@ export const cPluslanguageDescription=(
       <li></li>
     </ul>
   </div>
-)
-
-
-export const cyberSecurityDescription=(
-  <div className="courseDescription">
-    <ul>
-    <h3 className="courseStructure">מבנה הקורס</h3>
-
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
- 
-    <ul>
-    <h3 className="courseStructure">תכנים עיקריים</h3>
-
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-  </div>
-)
+);
